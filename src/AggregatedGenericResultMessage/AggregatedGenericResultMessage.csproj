@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworkss>netstandard2.0;netstandard2.1</TargetFrameworkss>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Authors>RzR</Authors>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIcon>PackageIcon.png</PackageIcon>
+    <NoWarn>$(NoWarn);CS8032</NoWarn>
+    <EnableNETAnalyzers>false</EnableNETAnalyzers>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageTags>Result;Message;Error;Info;ResultMessage;API;ReturnMessage</PackageTags>
+    <RepositoryUrl>https://github.com/I-RzR-I/AggregatedGenericResultMessage</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/I-RzR-I/AggregatedGenericResultMessage</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageDescription>This library is used to aggregate all results from an API or method in one. So as a result of this, you will have control over all responses given to caller</PackageDescription>
+    <PackageTitle>RzR.Shared.ResultMessage (AggregatedGenericResultMessage)</PackageTitle>
+    <Title>RzR.Shared.ResultMessage (AggregatedGenericResultMessage)</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\shared\GeneralAssemblyInfo.cs" Link="Properties\GeneralAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="6.0.5" />
+
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\assets\PackageIcon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties BuildVersion_StartDate="2022/7/1" /></VisualStudio></ProjectExtensions>
+
+</Project>

@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AggregatedGenericResultMessage", "AggregatedGenericResultMessage\AggregatedGenericResultMessage.csproj", "{740FB2DC-744A-48D2-B7DE-87FE8F056C5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1E26CD83-A278-409B-9C3C-59D155DD4FC5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoResultTests", "tests\InfoResultTests\InfoResultTests.csproj", "{06C25984-A2A4-44ED-BB7C-B885A22661A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{27BCDEA8-A84D-4ADC-BCB8-EF957335A4D1}"
+	ProjectSection(SolutionItems) = preProject
+		shared\GeneralAssemblyInfo.cs = shared\GeneralAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{740FB2DC-744A-48D2-B7DE-87FE8F056C5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{740FB2DC-744A-48D2-B7DE-87FE8F056C5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{740FB2DC-744A-48D2-B7DE-87FE8F056C5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{740FB2DC-744A-48D2-B7DE-87FE8F056C5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06C25984-A2A4-44ED-BB7C-B885A22661A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06C25984-A2A4-44ED-BB7C-B885A22661A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06C25984-A2A4-44ED-BB7C-B885A22661A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06C25984-A2A4-44ED-BB7C-B885A22661A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{06C25984-A2A4-44ED-BB7C-B885A22661A7} = {1E26CD83-A278-409B-9C3C-59D155DD4FC5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5145C1B-44A8-4D9A-86C4-4B55AA23C77A}
+		BuildVersion_BuildVersioningStyle = None.None.Increment.TimeStamp
+		BuildVersion_UpdateAssemblyVersion = True
+		BuildVersion_UpdateFileVersion = True
+		BuildVersion_StartDate = 2022/7/2
+		BuildVersion_AssemblyInfoFilename = shared\GeneralAssemblyInfo.cs
+		BuildVersion_ConfigurationName = Release
+		BuildVersion_UseUniversalClock = True
+	EndGlobalSection
+EndGlobal
