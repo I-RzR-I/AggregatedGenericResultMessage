@@ -1,10 +1,8 @@
-# RzR.Shared.ResultMessage
+> **Note** This repository is developed in .netstandard2.0
 
-> **Note** This repository is developed in .netstandard2.1
+The goal of this repository is to offer the possibility to manage and agree on the answers received as a result of the execution of a method or a process.
 
-The goal of this repository is to offer possibility to manage and agree on the answers received as a result of the execution of a menthod or a process.
-
-In other words, it offer the possibility to use a single(general) response , structured and easier parsed model for the executed methods.
+In other words, it offers the possibility to use a single(general) response, structured and easier parsed model for the executed methods.
 As a result, you can have control over the messages and types of messages that will be obtained.
 
 By currently following, 5 general types of messages (`Info`, `Warning`, `Error`, `NotFound`, `AccessDenied`) are implemented that can be returned to the caller.
