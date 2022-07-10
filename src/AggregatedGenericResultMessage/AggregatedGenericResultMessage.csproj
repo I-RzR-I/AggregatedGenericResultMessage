@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <TargetFrameworkss>netstandard2.0;netstandard2.1</TargetFrameworkss>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworkss>netstandard2.0</TargetFrameworkss>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Authors>RzR</Authors>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/I-RzR-I/AggregatedGenericResultMessage</RepositoryUrl>
     <PackageProjectUrl>https://github.com/I-RzR-I/AggregatedGenericResultMessage</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageDescription>This library is used to aggregate all results from an API or method in one. So as a result of this, you will have control over all responses given to caller</PackageDescription>
+    <PackageDescription>This library is used to aggregate all results from an API or method in one. So as a result of this, you will have control over all responses given to the caller</PackageDescription>
     <PackageTitle>RzR.Shared.ResultMessage (AggregatedGenericResultMessage)</PackageTitle>
     <Title>RzR.Shared.ResultMessage (AggregatedGenericResultMessage)</Title>
   </PropertyGroup>
@@ -37,5 +37,8 @@
     </None>
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties BuildVersion_StartDate="2022/7/1" /></VisualStudio></ProjectExtensions>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="PowerShell -NoProfile -ExecutionPolicy unrestricted -file $(SolutionDir)../build/pack.ps1 $(ConfigurationName)" />
+  </Target>
 
 </Project>
