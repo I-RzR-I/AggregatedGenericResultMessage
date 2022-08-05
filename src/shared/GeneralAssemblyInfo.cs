@@ -45,4 +45,4 @@ using System.Resources;
 
 [assembly: AssemblyVersion("1.0.1.1731")]
 [assembly: AssemblyFileVersion("1.0.1.1731")]
-[assembly: AssemblyInformationalVersion("1.0.0.2005")]
+[assembly: AssemblyInformationalVersion("1.0.1.1731")]
