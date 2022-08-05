@@ -10,7 +10,7 @@
     <NoWarn>$(NoWarn);CS8032</NoWarn>
     <EnableNETAnalyzers>false</EnableNETAnalyzers>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <PackageTags>Result;Message;Error;Info;ResultMessage;API;ReturnMessage</PackageTags>
+    <PackageTags>Result;Message;Error;Info;ResultMessage;API;ReturnMessage;Response</PackageTags>
     <RepositoryUrl>https://github.com/I-RzR-I/AggregatedGenericResultMessage</RepositoryUrl>
     <PackageProjectUrl>https://github.com/I-RzR-I/AggregatedGenericResultMessage</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

@@ -31,7 +31,6 @@ using System.Resources;
 [assembly: AssemblyProduct("Result messages")]
 [assembly: AssemblyCopyright("Copyright © 2022 RzR All rights reserved.")]
 [assembly: AssemblyTrademark("® RzR™")]
-[assembly: AssemblyCulture("en-US")]
 [assembly:
     AssemblyDescription(
         "This library is used to aggregate all results from an API or method in one. So as a result of this, you will have control over all responses given to the caller")]
@@ -44,6 +43,6 @@ using System.Resources;
 
 [assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
 
-[assembly: AssemblyVersion("1.0.0.2005")]
-[assembly: AssemblyFileVersion("1.0.0.2005")]
+[assembly: AssemblyVersion("1.0.1.1731")]
+[assembly: AssemblyFileVersion("1.0.1.1731")]
 [assembly: AssemblyInformationalVersion("1.0.0.2005")]
