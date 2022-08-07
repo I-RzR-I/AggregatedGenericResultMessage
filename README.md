@@ -10,6 +10,10 @@ As you can see in the `MessageType` enum, there are 8 types of messages, for all
 
 No additional components or packs are required for use. So, it only needs to be added/installed in the project and can be used instantly.
 
+**In case you wish to use it in your project, u can install the package from <a href="https://www.nuget.org/packages/AggregatedGenericResultMessage" target="_blank">nuget.org</a>** or specify what version you want:
+
+> `Install-Package AggregatedGenericResultMessage -Version x.x.x.x`
+
 ## Content
 1. [USING](docs/usage.md)
 1. [CHANGELOG](docs/CHANGELOG.md)
