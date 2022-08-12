@@ -14,6 +14,8 @@ No additional components or packs are required for use. So, it only needs to be 
 
 > `Install-Package AggregatedGenericResultMessage -Version x.x.x.x`
 
+[![NuGet Version](https://img.shields.io/nuget/v/AggregatedGenericResultMessage.svg?style=flat)](https://www.nuget.org/packages/AggregatedGenericResultMessage/)
+
 ## Content
 1. [USING](docs/usage.md)
 1. [CHANGELOG](docs/CHANGELOG.md)
