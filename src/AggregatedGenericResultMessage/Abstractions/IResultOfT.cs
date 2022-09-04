@@ -4,7 +4,7 @@
 //  Created On       : 2022-07-01 05:24
 // 
 //  Last Modified By : RzR
-//  Last Modified On : 2022-07-10 13:36
+//  Last Modified On : 2022-09-03 19:55
 // ***********************************************************************
 //  <copyright file="IResultOfT.cs" company="">
 //   Copyright (c) RzR. All rights reserved.
@@ -17,7 +17,6 @@
 #region U S A G E S
 
 using System.Xml.Serialization;
-using AggregatedGenericResultMessage.Abstractions.MessageResults;
 using AggregatedGenericResultMessage.Enums;
 
 #endregion
@@ -26,8 +25,7 @@ namespace AggregatedGenericResultMessage.Abstractions
 {
     /// <inheritdoc cref="IResult" />
     [XmlInclude(typeof(Result<>))]
-    public interface IResult<T> : IResult, IInfoMessageResult<T>, IWarningMessageResult<T>, IErrorMessageResult<T>,
-        IAccessDeniedMessageResult<T>, INotFoundMessageResult<T>
+    public interface IResult<T> : IResult
     {
         /// <summary>
         ///     The result of the response, if there is no errors.

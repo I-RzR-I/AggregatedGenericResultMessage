@@ -4,7 +4,7 @@
 //  Created On       : 2022-06-30 10:29
 // 
 //  Last Modified By : RzR
-//  Last Modified On : 2022-07-10 13:36
+//  Last Modified On : 2022-09-03 19:43
 // ***********************************************************************
 //  <copyright file="MessageModel.cs" company="">
 //   Copyright (c) RzR. All rights reserved.
@@ -19,13 +19,14 @@
 using System.Text.Json.Serialization;
 using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions;
 using AggregatedGenericResultMessage.Helpers;
+using DomainCommonExtensions.DataTypeExtensions;
 
 #endregion
 
 namespace AggregatedGenericResultMessage.Models
 {
+    /// <inheritdoc />
     public class MessageModel : IMessageModel
     {
         private const string ToStringFormat = "{0}: {1}";
