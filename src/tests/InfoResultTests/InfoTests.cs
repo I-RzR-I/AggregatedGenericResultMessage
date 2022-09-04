@@ -19,6 +19,7 @@
 using System.Linq;
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Enums;
+using AggregatedGenericResultMessage.Extensions.Messages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion

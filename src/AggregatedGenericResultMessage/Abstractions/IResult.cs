@@ -4,7 +4,7 @@
 //  Created On       : 2022-06-30 18:36
 // 
 //  Last Modified By : RzR
-//  Last Modified On : 2022-07-10 13:36
+//  Last Modified On : 2022-09-03 19:55
 // ***********************************************************************
 //  <copyright file="IResult.cs" company="">
 //   Copyright (c) RzR. All rights reserved.
@@ -24,6 +24,9 @@ using AggregatedGenericResultMessage.Abstractions.Models;
 
 namespace AggregatedGenericResultMessage.Abstractions
 {
+    /// <summary>
+    ///     IResult message
+    /// </summary>
     [XmlInclude(typeof(Result))]
     public interface IResult
     {

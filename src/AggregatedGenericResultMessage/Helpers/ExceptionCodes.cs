@@ -18,6 +18,10 @@
 
 namespace AggregatedGenericResultMessage.Helpers
 {
+    /// <summary>
+    ///     Default error codes
+    /// </summary>
+    /// <remarks></remarks>
     public class ExceptionCodes
     {
         /// <summary>

@@ -4,7 +4,7 @@
 //  Created On       : 2022-06-30 20:17
 // 
 //  Last Modified By : RzR
-//  Last Modified On : 2022-07-10 13:36
+//  Last Modified On : 2022-09-03 19:43
 // ***********************************************************************
 //  <copyright file="ResultOfT.cs" company="">
 //   Copyright (c) RzR. All rights reserved.
@@ -16,7 +16,6 @@
 
 #region U S A G E S
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -26,12 +25,14 @@ using System.Xml.Serialization;
 using AggregatedGenericResultMessage.Abstractions;
 using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
+using AggregatedGenericResultMessage.Extensions.Messages;
 using AggregatedGenericResultMessage.Models;
 
 #endregion
 
 namespace AggregatedGenericResultMessage
 {
+    /// <inheritdoc cref="IResult{T}" />
     public class Result<T> : IResult<T>, IXmlSerializable
     {
 #pragma warning disable IDE0044 // Add readonly modifier
@@ -41,6 +42,7 @@ namespace AggregatedGenericResultMessage
 #pragma warning restore IDE0044 // Add readonly modifier
 
         /// <summary>
+        ///     Instance
         /// </summary>
         public static Result<T> Instance => _instance ?? new Result<T>();
 
@@ -286,180 +288,5 @@ namespace AggregatedGenericResultMessage
         {
             return (Result<T>) new Result<T>().AddNotFound(code, error);
         }
-
-
-        #region ERROR RESULT
-
-        /// <inheritdoc />
-        public IResult<T> AddError(string error)
-        {
-            Messages?.Add(new MessageModel(string.Empty, error));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IResult<T> AddError(string key, string error)
-        {
-            Messages?.Add(new MessageModel(key, error));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IResult<T> AddErrorConfirm(string error)
-        {
-            Messages?.Add(new MessageModel(string.Empty, error, MessageType.ErrorConfirm));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IResult<T> AddErrorConfirm(string key, string error)
-        {
-            Messages?.Add(new MessageModel(key, error, MessageType.ErrorConfirm));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IResult<T> AddError(Exception exception)
-        {
-            Messages?.Add(new MessageModel(string.Empty, exception.Message));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public string GetFirstError()
-        {
-            return Messages?.FirstOrDefault(x => x.MessageType == MessageType.Error)?.Message;
-        }
-
-        /// <inheritdoc />
-        public bool HasErrorCode(string errorCode)
-        {
-            return Messages?.Any(x => x.Key.Equals(errorCode)) ?? false;
-        }
-
-        /// <inheritdoc />
-        public bool HasAnyErrors()
-        {
-            return Messages?.Any(x => x.MessageType.Equals(MessageType.Error)) ?? false;
-        }
-
-        #endregion
-
-        #region INFO
-
-        /// <inheritdoc />
-        public IResult<T> AddInfo(string info)
-        {
-            Messages?.Add(new MessageModel(string.Empty, info, MessageType.Info));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IResult<T> AddInfo(string key, string info)
-        {
-            Messages?.Add(new MessageModel(key, info, MessageType.Info));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IResult<T> AddInfoConfirm(string info)
-        {
-            Messages?.Add(new MessageModel(string.Empty, info, MessageType.InfoConfirm));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IResult<T> AddInfoConfirm(string key, string info)
-        {
-            Messages?.Add(new MessageModel(key, info, MessageType.InfoConfirm));
-
-            return this;
-        }
-
-        #endregion
-
-        #region WARNING
-
-        /// <inheritdoc />
-        public IResult<T> AddWarning(string warning)
-        {
-            Messages?.Add(new MessageModel(string.Empty, warning, MessageType.Warning));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IResult<T> AddWarning(string key, string warning)
-        {
-            Messages?.Add(new MessageModel(key, warning, MessageType.Warning));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IResult<T> AddWarningConfirm(string warning)
-        {
-            Messages?.Add(new MessageModel(string.Empty, warning, MessageType.WarningConfirm));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IResult<T> AddWarningConfirm(string key, string warning)
-        {
-            Messages?.Add(new MessageModel(key, warning, MessageType.WarningConfirm));
-
-            return this;
-        }
-
-        #endregion
-
-        #region ACCESS DENIED
-
-        /// <inheritdoc />
-        public IResult<T> AddAccessDenied(string message)
-        {
-            Messages?.Add(new MessageModel(string.Empty, message, MessageType.AccessDenied));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IResult<T> AddAccessDenied(string key, string message)
-        {
-            Messages?.Add(new MessageModel(key, message, MessageType.AccessDenied));
-
-            return this;
-        }
-
-        #endregion
-
-        #region NOT FOUND
-
-        /// <inheritdoc />
-        public IResult<T> AddNotFound(string message)
-        {
-            Messages?.Add(new MessageModel(string.Empty, message, MessageType.NotFound));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IResult<T> AddNotFound(string key, string message)
-        {
-            Messages?.Add(new MessageModel(key, message, MessageType.NotFound));
-
-            return this;
-        }
-
-        #endregion
     }
 }

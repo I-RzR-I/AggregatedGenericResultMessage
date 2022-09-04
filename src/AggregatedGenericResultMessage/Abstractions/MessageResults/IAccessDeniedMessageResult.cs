@@ -16,6 +16,10 @@
 
 namespace AggregatedGenericResultMessage.Abstractions.MessageResults
 {
+    /// <summary>
+    ///     Access denied result messages
+    /// </summary>
+    /// <typeparam name="T">Type of result/response</typeparam>
     public interface IAccessDeniedMessageResult<T>
     {
         /// <summary>

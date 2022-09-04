@@ -16,6 +16,10 @@
 
 namespace AggregatedGenericResultMessage.Abstractions.MessageResults
 {
+    /// <summary>
+    ///     Not found message result
+    /// </summary>
+    /// <typeparam name="T">Type of result/response</typeparam>
     public interface INotFoundMessageResult<T>
     {
         /// <summary>

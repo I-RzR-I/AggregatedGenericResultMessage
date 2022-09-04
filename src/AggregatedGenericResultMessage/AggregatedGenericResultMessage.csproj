@@ -17,12 +17,18 @@
     <PackageDescription>This library is used to aggregate all results from an API or method in one. So as a result of this, you will have control over all responses given to the caller</PackageDescription>
     <PackageTitle>RzR.Shared.ResultMessage (AggregatedGenericResultMessage)</PackageTitle>
     <Title>RzR.Shared.ResultMessage (AggregatedGenericResultMessage)</Title>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="..\shared\GeneralAssemblyInfo.cs" Link="Properties\GeneralAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DomainCommonExtensions" Version="1.0.1.823" />
     <PackageReference Include="System.Text.Json" Version="6.0.5" />
 
   </ItemGroup>
