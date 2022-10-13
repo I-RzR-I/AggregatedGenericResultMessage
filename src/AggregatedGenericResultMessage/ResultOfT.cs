@@ -16,7 +16,9 @@
 
 #region U S A G E S
 
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Xml;
@@ -26,7 +28,12 @@ using AggregatedGenericResultMessage.Abstractions;
 using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Extensions.Messages;
+using AggregatedGenericResultMessage.Helpers;
 using AggregatedGenericResultMessage.Models;
+using DomainCommonExtensions.CommonExtensions;
+
+// ReSharper disable VirtualMemberCallInConstructor
+#pragma warning disable 8632
 
 #endregion
 
@@ -35,16 +42,25 @@ namespace AggregatedGenericResultMessage
     /// <inheritdoc cref="IResult{T}" />
     public class Result<T> : IResult<T>, IXmlSerializable
     {
-#pragma warning disable IDE0044 // Add readonly modifier
-#pragma warning disable 649
-        private static Result<T> _instance;
-#pragma warning restore 649
-#pragma warning restore IDE0044 // Add readonly modifier
+        #region I N S T A N C E
 
         /// <summary>
-        ///     Instance
+        ///     Gets result instance.
         /// </summary>
-        public static Result<T> Instance => _instance ?? new Result<T>();
+        /// <value></value>
+        /// <remarks></remarks>
+        public static Result<T> Instance => CreateInstance() ?? new Result<T>();
+
+        /// <summary>
+        ///     Create an instance of <see cref="Result{T}"/>
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        private static Result<T> CreateInstance() => new Result<T>();
+
+        #endregion
+
+        #region P R O P s
 
         /// <inheritdoc />
         [JsonPropertyName("isSuccess")]
@@ -57,6 +73,46 @@ namespace AggregatedGenericResultMessage
         /// <inheritdoc />
         [JsonPropertyName("result")]
         public virtual T Response { get; set; }
+
+        #endregion
+
+        #region C T O R s
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result{T}" /> class. 
+        /// </summary>
+        /// <remarks></remarks>
+        public Result() { }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result{T}" /> class. 
+        /// </summary>
+        /// <param name="exception">Exception</param>
+        /// <remarks></remarks>
+        internal Result(Exception? exception)
+        {
+            if (!exception.IsNull())
+                ExceptionHelper.PreserveStackTrace(exception);
+
+            this.IsSuccess = false;
+            this.Messages.Add(new MessageModel(null, exception?.Message ?? ""));
+
+            if (!exception.IsNull())
+                this.Messages.Add(new MessageModel(null, exception));
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result{T}" /> class. 
+        /// </summary>
+        /// <param name="response">Response data</param>
+        /// <remarks></remarks>
+        private Result([Required] T response)
+        {
+            this.Response = response;
+            this.IsSuccess = true;
+        }
+
+        #endregion
 
         /// <inheritdoc />
         public virtual Result ToBase()
@@ -88,7 +144,16 @@ namespace AggregatedGenericResultMessage
         /// <inheritdoc />
         public string GetFirstMessage()
         {
-            return Messages?.FirstOrDefault()?.Message;
+            try
+            {
+                var fMessage = Messages.FirstOrDefault(x => x.MessageType != MessageType.Exception)?.Message;
+
+                return fMessage.IsNull() ? string.Empty : fMessage;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         /// <inheritdoc />
@@ -112,16 +177,21 @@ namespace AggregatedGenericResultMessage
         /// <summary>
         ///     Add error from results
         /// </summary>
-        /// <param name="results"></param>
+        /// <param name="results">List of results</param>
         /// <returns></returns>
-        public virtual IResult<T> JoinResults<TIn>(IEnumerable<Result<TIn>> results)
+        public virtual IResult<T> JoinErrorResults<TIn>(IEnumerable<Result<TIn>> results)
         {
             var collection = results.ToList();
-            var response = new Result<T>
-            {
-                IsSuccess = collection.All(x => x.IsSuccess)
-            };
-            foreach (var error in collection.SelectMany(result => result.Messages)) response.Messages.Add(error);
+            var response = CreateInstance();
+            response.IsSuccess = collection.All(x => x.IsSuccess);
+            foreach (var error in collection
+                .SelectMany(result => result.Messages
+                    .Where(x => new List<MessageType>()
+                    {
+                        MessageType.Error,
+                        MessageType.Exception
+                    }.Contains(x.MessageType))))
+            { response.Messages.Add(error); }
 
             return response;
         }
@@ -129,16 +199,55 @@ namespace AggregatedGenericResultMessage
         /// <summary>
         ///     Add error from results
         /// </summary>
-        /// <param name="results"></param>
+        /// <param name="results">List of results</param>
+        /// <returns></returns>
+        public virtual Result<T> JoinErrorResults(IEnumerable<Result> results)
+        {
+            var collection = results.ToList();
+            var response = CreateInstance();
+            response.IsSuccess = collection.All(x => x.IsSuccess);
+            foreach (var error in collection
+                .SelectMany(result => result.Messages
+                    .Where(x => new List<MessageType>()
+                    {
+                        MessageType.Error,
+                        MessageType.Exception
+                    }.Contains(x.MessageType))))
+            { response.Messages.Add(error); }
+
+            return response;
+        }
+
+        /// <summary>
+        ///     Join all results
+        /// </summary>
+        /// <param name="results">List of results</param>
+        /// <returns></returns>
+        public virtual IResult<T> JoinResults<TIn>(IEnumerable<Result<TIn>> results)
+        {
+            var collection = results.ToList();
+            var response = CreateInstance();
+            response.IsSuccess = collection.All(x => x.IsSuccess);
+            foreach (var res in collection
+                .SelectMany(result => result.Messages))
+            { response.Messages.Add(res); }
+
+            return response;
+        }
+
+        /// <summary>
+        ///     Join all results
+        /// </summary>
+        /// <param name="results">List of results</param>
         /// <returns></returns>
         public virtual Result<T> JoinResults(IEnumerable<Result> results)
         {
             var collection = results.ToList();
-            var response = new Result<T>
-            {
-                IsSuccess = collection.All(x => x.IsSuccess)
-            };
-            foreach (var error in collection.SelectMany(result => result.Messages)) response.Messages.Add(error);
+            var response = CreateInstance();
+            response.IsSuccess = collection.All(x => x.IsSuccess);
+            foreach (var res in collection
+                .SelectMany(result => result.Messages))
+            { response.Messages.Add(res); }
 
             return response;
         }
@@ -152,13 +261,16 @@ namespace AggregatedGenericResultMessage
         public virtual Result<T> JoinErrors(IEnumerable<Result> results)
         {
             var collection = results.ToList();
-            var response = new Result<T>
-            {
-                IsSuccess = IsSuccess
-            };
-            foreach (var error in collection.SelectMany(result => result
-                .Messages
-                .Where(x => x.MessageType == MessageType.Error))) response.Messages.Add(error);
+            var response = CreateInstance();
+            response.IsSuccess = IsSuccess;
+            foreach (var error in collection
+                .SelectMany(result => result.Messages
+                    .Where(x => new List<MessageType>()
+                    {
+                        MessageType.Error,
+                        MessageType.Exception
+                    }.Contains(x.MessageType))))
+            { response.Messages.Add(error); }
 
             return response;
         }
@@ -166,7 +278,7 @@ namespace AggregatedGenericResultMessage
         /// <summary>
         ///     Set result
         /// </summary>
-        /// <param name="result"></param>
+        /// <param name="result">Result</param>
         /// <returns></returns>
         public virtual Result<T> SetResult(T result)
         {
@@ -178,17 +290,17 @@ namespace AggregatedGenericResultMessage
         /// <summary>
         ///     Adapt result model
         /// </summary>
-        /// <typeparam name="TModelOutput"></typeparam>
-        /// <param name="result"></param>
+        /// <typeparam name="TModelOutput">Type of model</typeparam>
+        /// <param name="result">Result</param>
         /// <returns></returns>
         public virtual Result<TModelOutput> Map<TModelOutput>(TModelOutput result = default)
         {
-            return new Result<TModelOutput>
-            {
-                IsSuccess = IsSuccess,
-                Response = result,
-                Messages = Messages
-            };
+            var map = Result<TModelOutput>.CreateInstance();
+            map.IsSuccess = IsSuccess;
+            map.Response = result;
+            map.Messages = Messages;
+
+            return map;
         }
 
         /// <summary>
@@ -198,11 +310,11 @@ namespace AggregatedGenericResultMessage
         /// <returns></returns>
         public static Result<T> Success(T data = default)
         {
-            return new Result<T>
-            {
-                IsSuccess = true,
-                Response = data
-            };
+            var result = CreateInstance();
+            result.IsSuccess = true;
+            result.Response = data;
+
+            return result;
         }
 
         /// <summary>
@@ -212,7 +324,7 @@ namespace AggregatedGenericResultMessage
         /// <returns></returns>
         public static Result<T> Failure(string error)
         {
-            return (Result<T>) new Result<T>().AddError(error);
+            return (Result<T>)CreateInstance().AddError(error);
         }
 
         /// <summary>
@@ -223,7 +335,7 @@ namespace AggregatedGenericResultMessage
         /// <returns></returns>
         public static Result<T> Failure(string code, string error)
         {
-            return (Result<T>) new Result<T>().AddError(code, error);
+            return (Result<T>)CreateInstance().AddError(code, error);
         }
 
         /// <summary>
@@ -233,7 +345,7 @@ namespace AggregatedGenericResultMessage
         /// <returns></returns>
         public static Result<T> Warn(string warn)
         {
-            return (Result<T>) new Result<T>().AddWarning(warn);
+            return (Result<T>)CreateInstance().AddWarning(warn);
         }
 
         /// <summary>
@@ -244,7 +356,7 @@ namespace AggregatedGenericResultMessage
         /// <returns></returns>
         public static Result<T> Warn(string code, string error)
         {
-            return (Result<T>) new Result<T>().AddWarning(code, error);
+            return (Result<T>)CreateInstance().AddWarning(code, error);
         }
 
         /// <summary>
@@ -254,7 +366,7 @@ namespace AggregatedGenericResultMessage
         /// <returns></returns>
         public static Result<T> AccessDenied(string message)
         {
-            return (Result<T>) new Result<T>().AddAccessDenied(message);
+            return (Result<T>)CreateInstance().AddAccessDenied(message);
         }
 
         /// <summary>
@@ -265,7 +377,7 @@ namespace AggregatedGenericResultMessage
         /// <returns></returns>
         public static Result<T> AccessDenied(string code, string error)
         {
-            return (Result<T>) new Result<T>().AddAccessDenied(code, error);
+            return (Result<T>)CreateInstance().AddAccessDenied(code, error);
         }
 
         /// <summary>
@@ -275,7 +387,7 @@ namespace AggregatedGenericResultMessage
         /// <returns></returns>
         public static Result<T> NotFound(string message)
         {
-            return (Result<T>) new Result<T>().AddNotFound(message);
+            return (Result<T>)CreateInstance().AddNotFound(message);
         }
 
         /// <summary>
@@ -286,7 +398,29 @@ namespace AggregatedGenericResultMessage
         /// <returns></returns>
         public static Result<T> NotFound(string code, string error)
         {
-            return (Result<T>) new Result<T>().AddNotFound(code, error);
+            return (Result<T>)CreateInstance().AddNotFound(code, error);
         }
+
+        #region O P E R A T O R S
+
+        /// <summary>
+        ///     Implicit result operator for response of T
+        /// </summary>
+        /// <param name="response">Response data</param>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        public static implicit operator Result<T>(T response) =>
+            new Result<T>(response);
+
+        /// <summary>
+        ///     Implicit result operator for exception
+        /// </summary>
+        /// <param name="exception">Current exceptions</param>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        public static implicit operator Result<T>(Exception? exception) =>
+            new Result<T>(exception);
+
+        #endregion
     }
 }

@@ -101,6 +101,7 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         public static IResult<T> AddError<T>(this IResult<T> result, Exception exception)
         {
             result.Messages?.Add(new MessageModel(string.Empty, exception.Message));
+            result.Messages?.Add(new MessageModel(string.Empty, exception));
 
             return result;
         }
@@ -109,6 +110,7 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         public static IResult<T> AddError<T>(this Result<T> result, Exception exception)
         {
             result.Messages?.Add(new MessageModel(string.Empty, exception.Message));
+            result.Messages?.Add(new MessageModel(string.Empty, exception));
 
             return result;
         }
@@ -116,13 +118,13 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         /// <inheritdoc cref="IErrorMessageResult{T}.GetFirstError" />
         public static string GetFirstError<T>(this IResult<T> result)
         {
-            return result.Messages?.FirstOrDefault(x => x.MessageType == MessageType.Error)?.Message;
+            return result.Messages?.FirstOrDefault(x => x.MessageType == MessageType.Error)?.Message ?? string.Empty;
         }
 
         /// <inheritdoc cref="IErrorMessageResult{T}.GetFirstError" />
         public static string GetFirstError<T>(this Result<T> result)
         {
-            return result.Messages?.FirstOrDefault(x => x.MessageType == MessageType.Error)?.Message;
+            return result.Messages?.FirstOrDefault(x => x.MessageType == MessageType.Error)?.Message ?? string.Empty;
         }
 
         /// <inheritdoc cref="IErrorMessageResult{T}.HasErrorCode(string)" />
@@ -147,6 +149,18 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         public static bool HasAnyErrors<T>(this Result<T> result)
         {
             return result.Messages?.Any(x => x.MessageType.Equals(MessageType.Error)) ?? false;
+        }
+
+        /// <inheritdoc cref="IErrorMessageResult{T}.HasAnyErrorsOrExceptions" />
+        public static bool HasAnyErrorsOrExceptions<T>(this Result<T> result)
+        {
+            return result.Messages?.Any(x => x.MessageType.Equals(MessageType.Error) || x.MessageType.Equals(MessageType.Exception)) ?? false;
+        }
+
+        /// <inheritdoc cref="IErrorMessageResult{T}.HasAnyErrorsOrExceptions" />
+        public static bool HasAnyErrorsOrExceptions<T>(this IResult<T> result)
+        {
+            return result.Messages?.Any(x => x.MessageType.Equals(MessageType.Error) || x.MessageType.Equals(MessageType.Exception)) ?? false;
         }
     }
 }

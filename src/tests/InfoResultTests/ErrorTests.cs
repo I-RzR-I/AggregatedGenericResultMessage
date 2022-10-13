@@ -6,7 +6,7 @@
 //  Last Modified By : RzR
 //  Last Modified On : 2022-07-10 12:16
 // ***********************************************************************
-//  <copyright file="ErrorTests.cs" company="">
+//  <copyright file="WarnTests.cs" company="">
 //   Copyright (c) RzR. All rights reserved.
 //  </copyright>
 // 
@@ -16,10 +16,12 @@
 
 #region U S A G E S
 
+using System;
 using System.Linq;
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Extensions.Messages;
+using InfoResultTests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion
@@ -27,34 +29,52 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace InfoResultTests
 {
     [TestClass]
-    public class WarnTests
+    public class ErrorTests
     {
         [TestMethod]
-        public void AddWarningTest()
+        public void AddErrorTest()
         {
             var res = new Result
             {
                 IsSuccess = false
             };
 
-            res.AddWarning("Warn-01");
-            res.AddWarning("warn-01", "WarnMessage-01");
+            res.AddError("Error-01");
+            res.AddError("error-01", "ErrorMessage-01");
 
-            res.AddWarningConfirm("WarnMessage-Confirm-01");
-            res.AddWarningConfirm("warn-key-Confirm-01", "WarnMessage-01");
+            res.AddErrorConfirm("ErrorMessage-Confirm-01");
+            res.AddErrorConfirm("error-key-Confirm-01", "ErrorMessage-01");
 
             Assert.IsFalse(res.IsSuccess);
             Assert.IsNull(res.Response);
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == string.Empty && x.Message == "Warn-01" && x.MessageType == MessageType.Warning));
+                x.Key == string.Empty && x.Message == "Error-01" && x.MessageType == MessageType.Error));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == "warn-01" && x.Message == "WarnMessage-01" && x.MessageType == MessageType.Warning));
+                x.Key == "error-01" && x.Message == "ErrorMessage-01" && x.MessageType == MessageType.Error));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == string.Empty && x.Message == "WarnMessage-Confirm-01" &&
-                x.MessageType == MessageType.WarningConfirm));
+                x.Key == string.Empty && x.Message == "ErrorMessage-Confirm-01" &&
+                x.MessageType == MessageType.ErrorConfirm));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == "warn-key-Confirm-01" && x.Message == "WarnMessage-01" &&
-                x.MessageType == MessageType.WarningConfirm));
+                x.Key == "error-key-Confirm-01" && x.Message == "ErrorMessage-01" &&
+                x.MessageType == MessageType.ErrorConfirm));
+            
+            Assert.IsTrue(res.HasAnyErrors());
+            Assert.IsFalse(res.HasAnyExceptions());
+            Assert.IsTrue(res.HasAnyErrorsOrExceptions());
+        }
+
+        [TestMethod]
+        public void GetFirstErrorTest()
+        {
+            var res = new Result();
+            res.AddInfo("info message");
+            res.AddError("error message");
+            
+            Assert.IsTrue(res.GetFirstMessage().Equals("info message"));
+            Assert.IsTrue(res.GetFirstError().Equals("error message"));
+            Assert.IsTrue(res.HasAnyErrors());
+            Assert.IsFalse(res.HasAnyExceptions());
+            Assert.IsTrue(res.HasAnyErrorsOrExceptions());
         }
     }
 }

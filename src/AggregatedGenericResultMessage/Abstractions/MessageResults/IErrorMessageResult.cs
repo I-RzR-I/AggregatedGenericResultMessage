@@ -86,5 +86,12 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// <returns></returns>
         /// <remarks></remarks>
         string GetFirstError();
+
+        /// <summary>
+        ///     Check if in response persist any errors or exceptions
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        bool HasAnyErrorsOrExceptions();
     }
 }

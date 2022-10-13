@@ -70,6 +70,12 @@ namespace AggregatedGenericResultMessage.Enums
         ///     Access denied for current resource
         /// </summary>
         /// <remarks></remarks>
-        AccessDenied
+        AccessDenied,
+
+        /// <summary>
+        ///     Exception message
+        /// </summary>
+        /// <remarks></remarks>
+        Exception
     }
 }
