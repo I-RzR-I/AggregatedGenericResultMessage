@@ -6,7 +6,7 @@
 //  Last Modified By : RzR
 //  Last Modified On : 2022-07-10 12:16
 // ***********************************************************************
-//  <copyright file="WarnTests.cs" company="">
+//  <copyright file="ErrorTests.cs" company="">
 //   Copyright (c) RzR. All rights reserved.
 //  </copyright>
 // 
@@ -27,46 +27,34 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace InfoResultTests
 {
     [TestClass]
-    public class ErrorTests
+    public class WarnTests
     {
         [TestMethod]
-        public void AddErrorTest()
+        public void AddWarningTest()
         {
             var res = new Result
             {
                 IsSuccess = false
             };
 
-            res.AddError("Error-01");
-            res.AddError("error-01", "ErrorMessage-01");
+            res.AddWarning("Warn-01");
+            res.AddWarning("warn-01", "WarnMessage-01");
 
-            res.AddErrorConfirm("ErrorMessage-Confirm-01");
-            res.AddErrorConfirm("error-key-Confirm-01", "ErrorMessage-01");
+            res.AddWarningConfirm("WarnMessage-Confirm-01");
+            res.AddWarningConfirm("warn-key-Confirm-01", "WarnMessage-01");
 
             Assert.IsFalse(res.IsSuccess);
             Assert.IsNull(res.Response);
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == string.Empty && x.Message == "Error-01" && x.MessageType == MessageType.Error));
+                x.Key == string.Empty && x.Message == "Warn-01" && x.MessageType == MessageType.Warning));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == "error-01" && x.Message == "ErrorMessage-01" && x.MessageType == MessageType.Error));
+                x.Key == "warn-01" && x.Message == "WarnMessage-01" && x.MessageType == MessageType.Warning));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == string.Empty && x.Message == "ErrorMessage-Confirm-01" &&
-                x.MessageType == MessageType.ErrorConfirm));
+                x.Key == string.Empty && x.Message == "WarnMessage-Confirm-01" &&
+                x.MessageType == MessageType.WarningConfirm));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == "error-key-Confirm-01" && x.Message == "ErrorMessage-01" &&
-                x.MessageType == MessageType.ErrorConfirm));
-        }
-
-        [TestMethod]
-        public void GetFirstErrorTest()
-        {
-            var res = new Result();
-            res.AddInfo("info message");
-            res.AddError("error message");
-
-            var firstError = res.GetFirstError();
-
-            Assert.IsTrue(firstError.Equals("error message"));
+                x.Key == "warn-key-Confirm-01" && x.Message == "WarnMessage-01" &&
+                x.MessageType == MessageType.WarningConfirm));
         }
     }
 }

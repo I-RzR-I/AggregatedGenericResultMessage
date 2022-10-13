@@ -28,7 +28,7 @@
     <Compile Include="..\shared\GeneralAssemblyInfo.cs" Link="Properties\GeneralAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DomainCommonExtensions" Version="1.0.1.823" />
+    <PackageReference Include="DomainCommonExtensions" Version="1.0.2.1107" />
     <PackageReference Include="System.Text.Json" Version="6.0.5" />
 
   </ItemGroup>

@@ -25,6 +25,7 @@ using AggregatedGenericResultMessage.Models;
 namespace AggregatedGenericResultMessage.Abstractions.Models
 {
     /// <summary>
+    ///     Message result model
     /// </summary>
     [XmlInclude(typeof(MessageModel))]
     public interface IMessageModel

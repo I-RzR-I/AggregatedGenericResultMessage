@@ -20,6 +20,8 @@ using System;
 using System.Linq;
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Enums;
+using AggregatedGenericResultMessage.Extensions.Messages;
+using AggregatedGenericResultMessage.Helpers;
 using InfoResultTests.Dtos;
 using InfoResultTests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -53,6 +55,25 @@ namespace InfoResultTests
             Assert.IsFalse(data.IsSuccess);
             Assert.IsFalse(data.Response != null);
             Assert.IsTrue(data.Messages.FirstOrDefault()?.MessageType == MessageType.Warning);
+        }
+
+        [TestMethod]
+        public void ImplicitResultTest()
+        {
+            Result exResult = new Exception("Error message");
+            Result resultTrue = true;
+            Result resultFalse = false;
+
+
+            Assert.IsNotNull(exResult);
+            Assert.IsFalse(exResult.IsSuccess);
+
+            Assert.IsNotNull(resultTrue);
+            Assert.IsTrue(resultTrue.IsSuccess);
+
+            Assert.IsNotNull(resultFalse);
+            Assert.IsFalse(resultFalse.IsSuccess);
+            Assert.AreEqual(ExceptionCodes.UnSuccessfullyReqExec, resultFalse.Messages.FirstOrDefault()?.Key);
         }
     }
 }

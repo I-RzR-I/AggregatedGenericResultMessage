@@ -81,5 +81,17 @@ namespace InfoResultTests.Services
                 return Result<BookDto>.Failure("Error");
             }
         }
+
+        public Result<BookDto> GetBookItemException()
+        {
+            try
+            {
+                throw new Exception("Null data");
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
     }
 }

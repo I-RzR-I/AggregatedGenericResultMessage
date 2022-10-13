@@ -5,8 +5,8 @@ The goal of this repository is to offer the possibility to manage and agree on t
 In other words, it offers the possibility to use a single(general) response, structured and easier parsed model for the executed methods.
 As a result, you can have control over the messages and types of messages that will be obtained.
 
-By currently following, 5 general types of messages (`Info`, `Warning`, `Error`, `NotFound`, `AccessDenied`) are implemented that can be returned to the caller.
-As you can see in the `MessageType` enum, there are 8 types of messages, for all 3 (`Info`, `Warning`, `Error`) types previously specified exists with new ends `Confirm`. The idea of all of them is to inform UI (or caller) that returned message will be parsed/used as a dialog box/popup/modal.
+By currently following, 6 general types of messages (`Info`, `Warning`, `Error`, `NotFound`, `AccessDenied`, `Exception`) are implemented that can be returned to the caller.
+As you can see in the `MessageType` enum, there are 9 types of messages, for all 3 (`Info`, `Warning`, `Error`) types previously specified exists with new ends `Confirm`. The idea of all of them is to inform UI (or caller) that returned message will be parsed/used as a dialog box/popup/modal.
 
 No additional components or packs are required for use. So, it only needs to be added/installed in the project and can be used instantly.
 

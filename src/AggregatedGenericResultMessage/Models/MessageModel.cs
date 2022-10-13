@@ -16,11 +16,14 @@
 
 #region U S A G E S
 
+using System;
 using System.Text.Json.Serialization;
 using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Helpers;
+using DomainCommonExtensions.CommonExtensions;
 using DomainCommonExtensions.DataTypeExtensions;
+#pragma warning disable 8632
 
 #endregion
 
@@ -31,29 +34,7 @@ namespace AggregatedGenericResultMessage.Models
     {
         private const string ToStringFormat = "{0}: {1}";
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="MessageModel" /> class.
-        /// </summary>
-        /// <remarks></remarks>
-        public MessageModel()
-        {
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="MessageModel" /> class.
-        /// </summary>
-        /// <param name="key">Required. Message key</param>
-        /// <param name="message">Optional. The default value is null.</param>
-        /// <param name="messageType">Message type</param>
-        /// <remarks></remarks>
-        public MessageModel(string key, string message = null, MessageType messageType = MessageType.Error)
-        {
-            Key = key;
-            MessageType = messageType;
-
-            if (!string.IsNullOrEmpty(message))
-                Message = message.Trim();
-        }
+        #region P R O P s
 
         /// <inheritdoc />
         [JsonPropertyName("key")]
@@ -67,6 +48,51 @@ namespace AggregatedGenericResultMessage.Models
         [JsonPropertyName("messageType")]
         public MessageType MessageType { get; set; }
 
+        #endregion
+
+        #region C T O R s
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MessageModel" /> class.
+        /// </summary>
+        /// <remarks></remarks>
+        public MessageModel()
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MessageModel" /> class.
+        /// </summary>
+        /// <param name="key">Required. Message key</param>
+        /// <param name="message">Optional(string). The default value is null.</param>
+        /// <param name="messageType">Message type</param>
+        /// <remarks></remarks>
+        public MessageModel(string key, string message = null, MessageType messageType = MessageType.Error)
+        {
+            Key = key;
+            MessageType = messageType;
+
+            if (!message.IsNullOrEmpty())
+                Message = message?.Trim();
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MessageModel" /> class.
+        /// </summary>
+        /// <param name="key">Required. Message key</param>
+        /// <param name="exception">Optional(exception). Current exception. The default value is null.</param>
+        /// <remarks></remarks>
+        public MessageModel(string key, Exception? exception)
+        {
+            Key = key;
+            MessageType = MessageType.Exception;
+
+            if (!exception.IsNull())
+                Message = ExceptionHelper.CreateTraceExceptionString(exception);
+        }
+
+        #endregion
+        
         /// <inheritdoc cref="IMessageModel" />
         public override string ToString()
         {

@@ -33,5 +33,10 @@ namespace AggregatedGenericResultMessage.Helpers
         ///     Bad input data
         /// </summary>
         public const string BadInputData = "BadInputData";
+
+        /// <summary>
+        ///     Unsuccessfully request execution
+        /// </summary>
+        public const string UnSuccessfullyReqExec = "UnSuccessfullyReqExec";
     }
 }
