@@ -17,3 +17,6 @@
 -> Was added a new `operators` for: catch `Exception`, bool or T response on return from methods.<br />
 -> Was adjusted the methods from `ResultOfT` for `JoinResults` and added new method `JoinErrorResults`.<br />
 -> Was update libs, cleaned code, optimized and reorganized.<br />
+
+### **v.1.0.3.1903** 
+-> Libs upgrade and retested some cases.<br />

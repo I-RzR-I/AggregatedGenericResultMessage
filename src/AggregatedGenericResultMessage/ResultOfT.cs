@@ -115,15 +115,12 @@ namespace AggregatedGenericResultMessage
         #endregion
 
         /// <inheritdoc />
-        public virtual Result ToBase()
+        public virtual Result ToBase() => new Result
         {
-            return new Result
-            {
-                IsSuccess = IsSuccess,
-                Response = Response,
-                Messages = Messages
-            };
-        }
+            IsSuccess = IsSuccess,
+            Response = Response,
+            Messages = Messages
+        };
 
         /// <inheritdoc />
         public IResult<T> AddMessage(string key = null, string message = null, MessageType type = MessageType.Error)

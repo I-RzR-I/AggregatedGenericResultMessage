@@ -1,0 +1,35 @@
+﻿@page
+@using WebApplication.Services
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@{
+    var return1 = Newtonsoft.Json.JsonConvert.SerializeObject(LocalService.Instance.GetBook(Guid.NewGuid().ToString()));
+    var return2 = Newtonsoft.Json.JsonConvert.SerializeObject(LocalService.Instance.GetBook("o0"));
+    var return3 = Newtonsoft.Json.JsonConvert.SerializeObject(LocalService.Instance.GetBook2("o0"));
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        @return1
+    </div>
+</div>
+<br />
+<div class="card">
+    <div class="card-body">
+        @return2
+    </div>
+</div>
+<br />
+<br />
+<div class="card">
+    <div class="card-body">
+        @return3
+    </div>
+</div>
+<br />

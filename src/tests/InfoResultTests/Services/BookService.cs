@@ -23,15 +23,20 @@ using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Abstractions;
 using Bogus;
 using InfoResultTests.Dtos;
+// ReSharper disable MemberCanBePrivate.Global
 
 #endregion
 
 namespace InfoResultTests.Services
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class BookService
     {
+#pragma warning disable IDE0090 // Use 'new(...)'
         public static BookService Instance => new BookService();
+#pragma warning restore IDE0090 // Use 'new(...)'
 
+        // ReSharper disable once MemberCanBeMadeStatic.Global
         public IQueryable<BookDto> GetBooks()
         {
             var faker = new Faker();
