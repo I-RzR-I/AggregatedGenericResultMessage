@@ -5,6 +5,7 @@
     <TargetFrameworkss>netstandard2.0</TargetFrameworkss>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Authors>RzR</Authors>
+    <Copyright>RzR</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageIcon>PackageIcon.png</PackageIcon>
     <NoWarn>$(NoWarn);CS8032</NoWarn>
@@ -15,12 +16,19 @@
     <PackageProjectUrl>https://github.com/I-RzR-I/AggregatedGenericResultMessage</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageDescription>This library is used to aggregate all results from an API or method in one. So as a result of this, you will have control over all responses given to the caller</PackageDescription>
+    <Summary>This library is used to aggregate all results from an API or method in one. So as a result of this, you will have control over all responses given to the caller</Summary>
     <PackageTitle>RzR.Shared.ResultMessage (AggregatedGenericResultMessage)</PackageTitle>
     <Title>RzR.Shared.ResultMessage (AggregatedGenericResultMessage)</Title>
     <LangVersion>8.0</LangVersion>
+    <RepositoryType>GIT</RepositoryType>
+    <Language>en-US</Language>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
@@ -28,8 +36,8 @@
     <Compile Include="..\shared\GeneralAssemblyInfo.cs" Link="Properties\GeneralAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DomainCommonExtensions" Version="1.0.2.1107" />
-    <PackageReference Include="System.Text.Json" Version="6.0.5" />
+    <PackageReference Include="DomainCommonExtensions" Version="1.0.3" />
+    <PackageReference Include="System.Text.Json" Version="6.0.7" />
 
   </ItemGroup>
   <ItemGroup>

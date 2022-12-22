@@ -14,6 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{27BCDE
 		shared\GeneralAssemblyInfo.cs = shared\GeneralAssemblyInfo.cs
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "tests\WebApp\WebApp.csproj", "{4B5C951B-7D40-4B2C-84A0-94D83E702738}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "tests\WebApplication\WebApplication.csproj", "{B8147502-483F-4A7C-BCC0-DF1E16216CB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,21 +32,31 @@ Global
 		{06C25984-A2A4-44ED-BB7C-B885A22661A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06C25984-A2A4-44ED-BB7C-B885A22661A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06C25984-A2A4-44ED-BB7C-B885A22661A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B5C951B-7D40-4B2C-84A0-94D83E702738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B5C951B-7D40-4B2C-84A0-94D83E702738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B5C951B-7D40-4B2C-84A0-94D83E702738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B5C951B-7D40-4B2C-84A0-94D83E702738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8147502-483F-4A7C-BCC0-DF1E16216CB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8147502-483F-4A7C-BCC0-DF1E16216CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8147502-483F-4A7C-BCC0-DF1E16216CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8147502-483F-4A7C-BCC0-DF1E16216CB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{06C25984-A2A4-44ED-BB7C-B885A22661A7} = {1E26CD83-A278-409B-9C3C-59D155DD4FC5}
+		{4B5C951B-7D40-4B2C-84A0-94D83E702738} = {1E26CD83-A278-409B-9C3C-59D155DD4FC5}
+		{B8147502-483F-4A7C-BCC0-DF1E16216CB4} = {1E26CD83-A278-409B-9C3C-59D155DD4FC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E5145C1B-44A8-4D9A-86C4-4B55AA23C77A}
-		BuildVersion_BuildVersioningStyle = None.None.Increment.TimeStamp
-		BuildVersion_UpdateAssemblyVersion = True
-		BuildVersion_UpdateFileVersion = True
-		BuildVersion_StartDate = 2022/7/2
-		BuildVersion_AssemblyInfoFilename = shared\GeneralAssemblyInfo.cs
-		BuildVersion_ConfigurationName = Release
 		BuildVersion_UseUniversalClock = True
+		BuildVersion_ConfigurationName = Release
+		BuildVersion_AssemblyInfoFilename = shared\GeneralAssemblyInfo.cs
+		BuildVersion_StartDate = 2022/7/2
+		BuildVersion_UpdateFileVersion = True
+		BuildVersion_UpdateAssemblyVersion = True
+		BuildVersion_BuildVersioningStyle = None.None.Increment.TimeStamp
+		SolutionGuid = {E5145C1B-44A8-4D9A-86C4-4B55AA23C77A}
 	EndGlobalSection
 EndGlobal
