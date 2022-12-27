@@ -98,7 +98,7 @@ public Result<Foo> GetFooById(Guid id)
 ```
 
 ```csharp
-public async Task<IResult> AddFooAsync(Foo request, CancellationToken cancellationToken
+public async Task<Result> AddFooAsync(Foo request, CancellationToken cancellationToken
          = default)
         {
             try
