@@ -2,16 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <TargetFrameworkss>netstandard2.0</TargetFrameworkss>
+    <TargetFrameworks>netstandard2.0;net461;net462;net47;net471;net472;net48</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Authors>RzR</Authors>
     <Copyright>RzR</Copyright>
+    <Owners>RzR</Owners>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageIcon>PackageIcon.png</PackageIcon>
     <NoWarn>$(NoWarn);CS8032</NoWarn>
     <EnableNETAnalyzers>false</EnableNETAnalyzers>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <PackageTags>Result;Message;Error;Info;ResultMessage;API;ReturnMessage;Response</PackageTags>
+    <PackageTags>Result;Message;Error;Info;ResultMessage;API;ReturnMessage;Response;SOAP;Service;net framework</PackageTags>
     <RepositoryUrl>https://github.com/I-RzR-I/AggregatedGenericResultMessage</RepositoryUrl>
     <PackageProjectUrl>https://github.com/I-RzR-I/AggregatedGenericResultMessage</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -19,7 +20,7 @@
     <Summary>This library is used to aggregate all results from an API or method in one. So as a result of this, you will have control over all responses given to the caller</Summary>
     <PackageTitle>RzR.Shared.ResultMessage (AggregatedGenericResultMessage)</PackageTitle>
     <Title>RzR.Shared.ResultMessage (AggregatedGenericResultMessage)</Title>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
     <RepositoryType>GIT</RepositoryType>
     <Language>en-US</Language>
   </PropertyGroup>
@@ -36,10 +37,14 @@
     <Compile Include="..\shared\GeneralAssemblyInfo.cs" Link="Properties\GeneralAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DomainCommonExtensions" Version="1.0.3" />
-    <PackageReference Include="System.Text.Json" Version="6.0.7" />
-
+    <PackageReference Include="DomainCommonExtensions" Version="1.0.3.1101" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
   </ItemGroup>
+  
+  <ItemGroup Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('$(TargetFramework)', '^((?!net[1-4]).)*$'))">
+    <PackageReference Include="System.Text.Json" Version="6.0.7" />
+  </ItemGroup>
+
   <ItemGroup>
     <None Include="..\..\LICENSE">
       <Pack>True</Pack>
@@ -50,7 +55,11 @@
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
-  <ProjectExtensions><VisualStudio><UserProperties BuildVersion_StartDate="2022/7/1" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties BuildVersion_StartDate="2022/7/1" />
+    </VisualStudio>
+  </ProjectExtensions>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="PowerShell -NoProfile -ExecutionPolicy unrestricted -file $(SolutionDir)../build/pack.ps1 $(ConfigurationName)" />
   </Target>

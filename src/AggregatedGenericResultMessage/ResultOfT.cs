@@ -20,13 +20,16 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+#if !NETFRAMEWORK
 using System.Text.Json.Serialization;
+#endif
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using AggregatedGenericResultMessage.Abstractions;
 using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
+using AggregatedGenericResultMessage.Extensions;
 using AggregatedGenericResultMessage.Extensions.Messages;
 using AggregatedGenericResultMessage.Helpers;
 using AggregatedGenericResultMessage.Models;
@@ -63,15 +66,21 @@ namespace AggregatedGenericResultMessage
         #region P R O P s
 
         /// <inheritdoc />
+#if !NETFRAMEWORK
         [JsonPropertyName("isSuccess")]
+#endif
         public virtual bool IsSuccess { get; set; }
 
         /// <inheritdoc />
+#if !NETFRAMEWORK
         [JsonPropertyName("messages")]
+#endif
         public virtual ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>();
 
         /// <inheritdoc />
+#if !NETFRAMEWORK
         [JsonPropertyName("result")]
+#endif
         public virtual T Response { get; set; }
 
         #endregion
@@ -122,6 +131,19 @@ namespace AggregatedGenericResultMessage
             Messages = Messages
         };
 
+        /// <inheritdoc />
+        public virtual SoapResult ToSoapResult() => new SoapResult
+        {
+            IsSuccess = IsSuccess,
+            Messages = Messages?.Select(y => new MessageModel()
+            {
+                Key = y.Key,
+                Message = y.Message,
+                MessageType = y.MessageType
+            }).ToList(),
+            Response = Response.CastToSoapResponse()
+        };
+        
         /// <inheritdoc />
         public IResult<T> AddMessage(string key = null, string message = null, MessageType type = MessageType.Error)
         {
