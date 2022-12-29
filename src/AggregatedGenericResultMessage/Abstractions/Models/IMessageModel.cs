@@ -15,7 +15,9 @@
 // ***********************************************************************
 
 #region U S A G E S
-
+#if !NETFRAMEWORK
+using System.Text.Json.Serialization;
+#endif
 using System.Xml.Serialization;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Models;
@@ -33,11 +35,17 @@ namespace AggregatedGenericResultMessage.Abstractions.Models
         /// <summary>
         ///     Gets or sets error code(key), localization key or Culture id/LCID or culture name like 'en-US', 'en'
         /// </summary>
+#if !NETFRAMEWORK
+        [JsonPropertyName("key")]
+#endif
         string Key { get; set; }
 
         /// <summary>
         ///     Gets or sets detailed message
         /// </summary>
+#if !NETFRAMEWORK
+        [JsonPropertyName("message")]
+#endif
         string Message { get; set; }
 
         /// <summary>
@@ -45,6 +53,9 @@ namespace AggregatedGenericResultMessage.Abstractions.Models
         /// </summary>
         /// <value></value>
         /// <remarks></remarks>
+#if !NETFRAMEWORK
+        [JsonPropertyName("messageType")]
+#endif
         MessageType MessageType { get; set; }
 
         /// <summary>

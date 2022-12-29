@@ -17,7 +17,9 @@
 #region U S A G E S
 
 using System;
+#if !NETFRAMEWORK
 using System.Text.Json.Serialization;
+#endif
 using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Helpers;
@@ -34,23 +36,29 @@ namespace AggregatedGenericResultMessage.Models
     {
         private const string ToStringFormat = "{0}: {1}";
 
-        #region P R O P s
+#region P R O P s
 
-        /// <inheritdoc />
+/// <inheritdoc />
+#if !NETFRAMEWORK
         [JsonPropertyName("key")]
+#endif
         public string Key { get; set; }
 
         /// <inheritdoc />
+#if !NETFRAMEWORK
         [JsonPropertyName("message")]
+#endif
         public string Message { get; set; }
 
         /// <inheritdoc />
+#if !NETFRAMEWORK
         [JsonPropertyName("messageType")]
+#endif
         public MessageType MessageType { get; set; }
 
-        #endregion
+#endregion
 
-        #region C T O R s
+#region C T O R s
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="MessageModel" /> class.
@@ -91,9 +99,9 @@ namespace AggregatedGenericResultMessage.Models
                 Message = ExceptionHelper.CreateTraceExceptionString(exception);
         }
 
-        #endregion
+#endregion
         
-        /// <inheritdoc cref="IMessageModel" />
+        /// <inheritdoc cref="IMessageModel.ToString" />
         public override string ToString()
         {
             return string.Format(ToStringFormat, Key, Message);

@@ -48,5 +48,12 @@ namespace AggregatedGenericResultMessage.Abstractions
         /// </summary>
         /// <returns></returns>
         Result ToBase();
+
+        /// <summary>
+        ///     Get result for SOAP services
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        SoapResult ToSoapResult();
     }
 }

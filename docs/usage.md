@@ -117,3 +117,14 @@ public async Task<Result> AddFooAsync(Foo request, CancellationToken cancellatio
             }
         }
 ```
+
+For SOAP result services
+```csharp
+public SoapResult SoapSuccess()
+        {
+            return Result
+            .Success()
+            //Cast result 'Result' or 'Result<T>' to XML result
+            .ToSoapResult();
+        }
+```
