@@ -18,9 +18,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "tests\WebApp\WebA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication", "tests\WebApplication\WebApplication.csproj", "{B8147502-483F-4A7C-BCC0-DF1E16216CB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebSrv", "tests\TestWebSrv\TestWebSrv.csproj", "{54770121-B1A0-4202-8496-A8ED2BB4817C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebServSvc", "tests\TestWebServSvc\TestWebServSvc.csproj", "{2D092601-7494-48A9-B676-DD5E49E5CC55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebSrv45", "tests\TestWebSrv45\TestWebSrv45.csproj", "{9737387D-3E27-4014-B0CC-F297A17D48F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebSrv461", "tests\TestWebSrv461\TestWebSrv461.csproj", "{38DBA916-19DA-454F-B3BA-3C3C06647F78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,14 +46,18 @@ Global
 		{B8147502-483F-4A7C-BCC0-DF1E16216CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8147502-483F-4A7C-BCC0-DF1E16216CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8147502-483F-4A7C-BCC0-DF1E16216CB4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54770121-B1A0-4202-8496-A8ED2BB4817C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54770121-B1A0-4202-8496-A8ED2BB4817C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54770121-B1A0-4202-8496-A8ED2BB4817C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54770121-B1A0-4202-8496-A8ED2BB4817C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2D092601-7494-48A9-B676-DD5E49E5CC55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2D092601-7494-48A9-B676-DD5E49E5CC55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D092601-7494-48A9-B676-DD5E49E5CC55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D092601-7494-48A9-B676-DD5E49E5CC55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9737387D-3E27-4014-B0CC-F297A17D48F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9737387D-3E27-4014-B0CC-F297A17D48F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9737387D-3E27-4014-B0CC-F297A17D48F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9737387D-3E27-4014-B0CC-F297A17D48F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38DBA916-19DA-454F-B3BA-3C3C06647F78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38DBA916-19DA-454F-B3BA-3C3C06647F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38DBA916-19DA-454F-B3BA-3C3C06647F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38DBA916-19DA-454F-B3BA-3C3C06647F78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,17 +66,18 @@ Global
 		{06C25984-A2A4-44ED-BB7C-B885A22661A7} = {1E26CD83-A278-409B-9C3C-59D155DD4FC5}
 		{4B5C951B-7D40-4B2C-84A0-94D83E702738} = {1E26CD83-A278-409B-9C3C-59D155DD4FC5}
 		{B8147502-483F-4A7C-BCC0-DF1E16216CB4} = {1E26CD83-A278-409B-9C3C-59D155DD4FC5}
-		{54770121-B1A0-4202-8496-A8ED2BB4817C} = {1E26CD83-A278-409B-9C3C-59D155DD4FC5}
 		{2D092601-7494-48A9-B676-DD5E49E5CC55} = {1E26CD83-A278-409B-9C3C-59D155DD4FC5}
+		{9737387D-3E27-4014-B0CC-F297A17D48F9} = {1E26CD83-A278-409B-9C3C-59D155DD4FC5}
+		{38DBA916-19DA-454F-B3BA-3C3C06647F78} = {1E26CD83-A278-409B-9C3C-59D155DD4FC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UseUniversalClock = True
-		BuildVersion_ConfigurationName = Release
-		BuildVersion_AssemblyInfoFilename = shared\GeneralAssemblyInfo.cs
-		BuildVersion_StartDate = 2022/7/2
-		BuildVersion_UpdateFileVersion = True
-		BuildVersion_UpdateAssemblyVersion = True
-		BuildVersion_BuildVersioningStyle = None.None.Increment.TimeStamp
 		SolutionGuid = {E5145C1B-44A8-4D9A-86C4-4B55AA23C77A}
+		BuildVersion_BuildVersioningStyle = None.None.Increment.TimeStamp
+		BuildVersion_UpdateAssemblyVersion = True
+		BuildVersion_UpdateFileVersion = True
+		BuildVersion_StartDate = 2022/7/2
+		BuildVersion_AssemblyInfoFilename = shared\GeneralAssemblyInfo.cs
+		BuildVersion_ConfigurationName = Release
+		BuildVersion_UseUniversalClock = True
 	EndGlobalSection
 EndGlobal

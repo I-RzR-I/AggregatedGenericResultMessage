@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TestWebSrv.Models
+namespace TestWebSrv45.Models
 {
     public class BookModel
     {
