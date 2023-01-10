@@ -25,3 +25,6 @@
 -> Added support for SOAP services result. Cast from `Result` or `Result<T>` to acceptable result for SOAP (to XML result) in particular use in .net framework.<br />
 -> Was added an extension method for SOAP result `ToSoapResult`.<br />
 -> Was added support for .net framework 4.6.1 - 4.8.<br />
+
+### **v.1.0.5.1813** 
+-> Was added support for .net framework 4.5.<br />

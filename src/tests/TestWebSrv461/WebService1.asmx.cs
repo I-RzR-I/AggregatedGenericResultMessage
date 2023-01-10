@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Web.Services;
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Models;
-using TestWebSrv.Models;
+using TestWebSrv461.Models;
 
-namespace TestWebSrv
+namespace TestWebSrv461
 {
     /// <summary>
-    ///     Summary description for Service
+    /// Summary description for WebService1
     /// </summary>
-    [WebService(Namespace = "ResultMessage.SoapResult")]
+    [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-    [ToolboxItem(false)]
+    [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     // [System.Web.Script.Services.ScriptService]
-    public class Service : WebService
+    public class WebService1 : System.Web.Services.WebService
     {
         [WebMethod]
         public string HelloWorld()
@@ -31,7 +30,7 @@ namespace TestWebSrv
         {
             try
             {
-                return (Result) Result.Success();
+                return (Result)Result.Success();
             }
             catch (Exception e)
             {
@@ -59,7 +58,7 @@ namespace TestWebSrv
                 var res = new Result<List<string>>
                 {
                     IsSuccess = true,
-                    Response = new List<string> {"test1", "test2"}
+                    Response = new List<string> { "test1", "test2" }
                 };
 
                 return res.ToSoapResult();
@@ -79,7 +78,7 @@ namespace TestWebSrv
                 var res = new Result<ArrayList>
                 {
                     IsSuccess = true,
-                    Response = new ArrayList {1, "test"}
+                    Response = new ArrayList { 1, "test" }
                 };
 
                 return res.ToSoapResult();
@@ -99,7 +98,7 @@ namespace TestWebSrv
                 var res = new Result<string[]>
                 {
                     IsSuccess = true,
-                    Response = new[] {"test1", "test2"}
+                    Response = new[] { "test1", "test2" }
                 };
 
                 return res.ToSoapResult();
