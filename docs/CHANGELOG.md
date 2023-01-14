@@ -28,3 +28,7 @@
 
 ### **v.1.0.5.1813** 
 -> Was added support for .net framework 4.5.<br />
+
+### **v.1.0.6.1706** 
+-> Was added new custom responses.<br />
+-> Was updated libs.<br />

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <TargetFrameworks>netstandard2.0;net461;net462;net47;net471;net472;net48;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net461;net462;net47;net471;net472;net48;net45</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Authors>RzR</Authors>
     <Copyright>RzR</Copyright>
@@ -37,7 +37,7 @@
     <Compile Include="..\shared\GeneralAssemblyInfo.cs" Link="Properties\GeneralAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DomainCommonExtensions" Version="1.0.4.1925" />
+    <PackageReference Include="DomainCommonExtensions" Version="1.0.5.1849" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
   </ItemGroup>
 

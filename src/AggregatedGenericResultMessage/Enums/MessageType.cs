@@ -33,8 +33,7 @@ namespace AggregatedGenericResultMessage.Enums
         /// </summary>
         /// <remarks></remarks>
         InfoConfirm,
-
-
+        
         /// <summary>
         ///     Warning message
         /// </summary>
@@ -46,7 +45,6 @@ namespace AggregatedGenericResultMessage.Enums
         /// </summary>
         /// <remarks></remarks>
         WarningConfirm,
-
 
         /// <summary>
         ///     Error message

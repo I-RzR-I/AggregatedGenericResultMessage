@@ -1,4 +1,4 @@
-> **Note** This repository is developed in .netstandard2.0 with support for SOAP service results mainly used in the .net framework (current support 4.5, 4.6.1 - 4.8)
+> **Note** This repository is developed in .netstandard2+ with support for SOAP service results mainly used in the .net framework (current support 4.5, 4.6.1 - 4.8)
 
 The goal of this repository is to offer the possibility to manage and agree on the answers received as a result of the execution of a method or a process.
 
