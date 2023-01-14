@@ -29,7 +29,7 @@ using System.Resources;
 
 [assembly: AssemblyCompany("RzR ®")]
 [assembly: AssemblyProduct("Result messages")]
-[assembly: AssemblyCopyright("Copyright © 2022 RzR All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2022-2023 RzR All rights reserved.")]
 [assembly: AssemblyTrademark("® RzR™")]
 [assembly:
     AssemblyDescription(
@@ -43,6 +43,6 @@ using System.Resources;
 
 [assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
 
-[assembly: AssemblyVersion("1.0.5.1813")]
-[assembly: AssemblyFileVersion("1.0.5.1813")]
-[assembly: AssemblyInformationalVersion("1.0.5.x")]
+[assembly: AssemblyVersion("1.0.6.1706")]
+[assembly: AssemblyFileVersion("1.0.6.1706")]
+[assembly: AssemblyInformationalVersion("1.0.6.x")]
