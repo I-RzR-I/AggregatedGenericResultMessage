@@ -26,6 +26,12 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add Warning
         /// </summary>
+        /// <returns></returns>
+        IResult<T> AddWarning();
+
+        /// <summary>
+        ///     Add Warning
+        /// </summary>
         /// <param name="warning"></param>
         /// <returns></returns>
         IResult<T> AddWarning(string warning);

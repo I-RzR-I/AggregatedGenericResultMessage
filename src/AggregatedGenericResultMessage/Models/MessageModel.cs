@@ -23,8 +23,9 @@ using System.Text.Json.Serialization;
 using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Helpers;
-using DomainCommonExtensions.CommonExtensions;
-using DomainCommonExtensions.DataTypeExtensions;
+using AggregatedGenericResultMessage.Extensions;
+using AggregatedGenericResultMessage.Extensions.Common;
+
 #pragma warning disable 8632
 
 #endregion
@@ -36,9 +37,9 @@ namespace AggregatedGenericResultMessage.Models
     {
         private const string ToStringFormat = "{0}: {1}";
 
-#region P R O P s
+        #region P R O P s
 
-/// <inheritdoc />
+        /// <inheritdoc />
 #if !NETFRAMEWORK
         [JsonPropertyName("key")]
 #endif
@@ -56,9 +57,15 @@ namespace AggregatedGenericResultMessage.Models
 #endif
         public MessageType MessageType { get; set; }
 
-#endregion
+        /// <inheritdoc />
+#if !NETFRAMEWORK
+        [JsonPropertyName("logTraceId")]
+#endif
+        public string LogTraceId { get; }
 
-#region C T O R s
+        #endregion
+
+        #region C T O R s
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="MessageModel" /> class.
@@ -79,6 +86,7 @@ namespace AggregatedGenericResultMessage.Models
         {
             Key = key;
             MessageType = messageType;
+            LogTraceId = GetTraceLogId();
 
             if (!message.IsNullOrEmpty())
                 Message = message?.Trim();
@@ -94,13 +102,14 @@ namespace AggregatedGenericResultMessage.Models
         {
             Key = key;
             MessageType = MessageType.Exception;
+            LogTraceId = GetTraceLogId();
 
             if (!exception.IsNull())
                 Message = ExceptionHelper.CreateTraceExceptionString(exception);
         }
 
-#endregion
-        
+        #endregion
+
         /// <inheritdoc cref="IMessageModel.ToString" />
         public override string ToString()
         {
@@ -137,5 +146,11 @@ namespace AggregatedGenericResultMessage.Models
                 return new MessageModel(ExceptionCodes.UnhandledException, formatted[0], messageType);
             }
         }
+
+        /// <summary>
+        ///     Get uniq trace log id
+        /// </summary>
+        /// <returns></returns>
+        private static string GetTraceLogId() => $"{Guid.NewGuid():N}#{DateTime.UtcNow:yyyyMMddHHmmssfff}".Base64Encode();
     }
 }

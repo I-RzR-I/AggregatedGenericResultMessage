@@ -26,7 +26,7 @@ using AggregatedGenericResultMessage.Models;
 namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 {
     /// <inheritdoc />
-    public sealed class NotFoundResult<T> : Result<T>
+    public sealed class NotFoundResult<T> : AggregatedGenericResultMessage.Result<T>
     {
         /// <inheritdoc />
         public NotFoundResult()
@@ -36,18 +36,18 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
         /// <inheritdoc />
         public NotFoundResult(string message)
         {
-            Messages.Add(new MessageModel(string.Empty, message, MessageType.NotFound));
+            Messages.Add(new MessageModel(null, message, MessageType.NotFound));
         }
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(string.Empty, "Entry not found.", MessageType.NotFound)
+            new MessageModel(null, "Entry not found.", MessageType.NotFound)
         };
     }
 
     /// <inheritdoc />
-    public sealed class NotFoundResult : Result
+    public sealed class NotFoundResult : AggregatedGenericResultMessage.Result
     {
         /// <inheritdoc />
         public NotFoundResult()
@@ -57,13 +57,13 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
         /// <inheritdoc />
         public NotFoundResult(string message)
         {
-            Messages.Add(new MessageModel(string.Empty, message, MessageType.NotFound));
+            Messages.Add(new MessageModel(null, message, MessageType.NotFound));
         }
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(string.Empty, "Entry not found.", MessageType.NotFound)
+            new MessageModel(null, "Entry not found.", MessageType.NotFound)
         };
     }
 }

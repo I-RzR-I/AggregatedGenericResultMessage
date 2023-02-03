@@ -18,7 +18,7 @@
 
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions.Messages;
+using AggregatedGenericResultMessage.Extensions.Result.Messages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion

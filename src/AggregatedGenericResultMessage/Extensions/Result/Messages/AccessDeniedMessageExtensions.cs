@@ -23,7 +23,7 @@ using AggregatedGenericResultMessage.Models;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Messages
+namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 {
     /// <summary>
     ///     Access denied messages extensions
@@ -31,10 +31,26 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
     /// <remarks></remarks>
     public static class AccessDeniedMessageExtensions
     {
+        /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied()" />
+        public static IResult<T> AddAccessDenied<T>(this IResult<T> result)
+        {
+            result.Messages?.Add(new MessageModel(null, null, MessageType.AccessDenied));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied()" />
+        public static IResult<T> AddAccessDenied<T>(this Result<T> result)
+        {
+            result.Messages?.Add(new MessageModel(null, null, MessageType.AccessDenied));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string)" />
         public static IResult<T> AddAccessDenied<T>(this IResult<T> result, string message)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, message, MessageType.AccessDenied));
+            result.Messages?.Add(new MessageModel(null, message, MessageType.AccessDenied));
 
             return result;
         }
@@ -42,7 +58,7 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string)" />
         public static IResult<T> AddAccessDenied<T>(this Result<T> result, string message)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, message, MessageType.AccessDenied));
+            result.Messages?.Add(new MessageModel(null, message, MessageType.AccessDenied));
 
             return result;
         }

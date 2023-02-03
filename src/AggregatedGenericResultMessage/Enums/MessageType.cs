@@ -23,6 +23,12 @@ namespace AggregatedGenericResultMessage.Enums
     public enum MessageType
     {
         /// <summary>
+        ///     No message type
+        /// </summary>
+        /// <remarks></remarks>
+        None,
+
+        /// <summary>
         ///     Information message
         /// </summary>
         /// <remarks></remarks>

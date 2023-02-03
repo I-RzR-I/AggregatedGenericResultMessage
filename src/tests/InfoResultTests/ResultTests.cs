@@ -20,7 +20,7 @@ using System;
 using System.Linq;
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions.Messages;
+using AggregatedGenericResultMessage.Extensions.Result.Messages;
 using AggregatedGenericResultMessage.Helpers;
 using InfoResultTests.Dtos;
 using InfoResultTests.Services;

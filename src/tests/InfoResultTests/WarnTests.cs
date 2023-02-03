@@ -19,7 +19,8 @@
 using System.Linq;
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions.Messages;
+using AggregatedGenericResultMessage.Extensions.Common;
+using AggregatedGenericResultMessage.Extensions.Result.Messages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion
@@ -46,11 +47,11 @@ namespace InfoResultTests
             Assert.IsFalse(res.IsSuccess);
             Assert.IsNull(res.Response);
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == string.Empty && x.Message == "Warn-01" && x.MessageType == MessageType.Warning));
+                x.Key.IsNullOrEmpty() && x.Message == "Warn-01" && x.MessageType == MessageType.Warning));
             Assert.IsTrue(res.Messages.Any(x =>
                 x.Key == "warn-01" && x.Message == "WarnMessage-01" && x.MessageType == MessageType.Warning));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == string.Empty && x.Message == "WarnMessage-Confirm-01" &&
+                x.Key.IsNullOrEmpty() && x.Message == "WarnMessage-Confirm-01" &&
                 x.MessageType == MessageType.WarningConfirm));
             Assert.IsTrue(res.Messages.Any(x =>
                 x.Key == "warn-key-Confirm-01" && x.Message == "WarnMessage-01" &&

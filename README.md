@@ -8,6 +8,8 @@ As a result, you can have control over the messages and types of messages that w
 By currently following, 6 general types of messages (`Info`, `Warning`, `Error`, `NotFound`, `AccessDenied`, `Exception`) are implemented that can be returned to the caller.
 As you can see in the `MessageType` enum, there are 9 types of messages, for all 3 (`Info`, `Warning`, `Error`) types previously specified exists with new ends `Confirm`. The idea of all of them is to inform UI (or caller) that returned message will be parsed/used as a dialog box/popup/modal.
 
+For more flexible and intuitive use, in solution persist extension method like fluent access to set message, error, etc (`WithMessage`, `WithKeyCode`, `WithCodeMessage`, `WithError`, `WithErrors`).
+
 No additional components or packs are required for use. So, it only needs to be added/installed in the project and can be used instantly.
 
 **In case you wish to use it in your project, u can install the package from <a href="https://www.nuget.org/packages/AggregatedGenericResultMessage" target="_blank">nuget.org</a>** or specify what version you want:

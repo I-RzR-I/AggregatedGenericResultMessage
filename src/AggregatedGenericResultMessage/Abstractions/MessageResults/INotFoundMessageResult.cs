@@ -25,6 +25,12 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add access denied message
         /// </summary>
+        /// <returns></returns>
+        IResult<T> AddNotFound();
+
+        /// <summary>
+        ///     Add access denied message
+        /// </summary>
         /// <param name="message">Message</param>
         /// <returns></returns>
         IResult<T> AddNotFound(string message);

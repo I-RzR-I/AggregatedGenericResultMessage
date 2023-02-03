@@ -17,7 +17,7 @@
 namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 {
     /// <inheritdoc />
-    public sealed class SuccessResult<T> : Result<T>
+    public sealed class SuccessResult<T> : AggregatedGenericResultMessage.Result<T>
     {
         /// <inheritdoc />
         public SuccessResult()
@@ -35,7 +35,7 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
     }
 
     /// <inheritdoc />
-    public sealed class SuccessResult : Result
+    public sealed class SuccessResult : AggregatedGenericResultMessage.Result
     {
         /// <inheritdoc />
         public SuccessResult()

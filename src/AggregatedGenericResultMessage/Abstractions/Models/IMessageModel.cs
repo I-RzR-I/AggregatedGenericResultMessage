@@ -59,6 +59,14 @@ namespace AggregatedGenericResultMessage.Abstractions.Models
         MessageType MessageType { get; set; }
 
         /// <summary>
+        ///     Gets log trance id
+        /// </summary>
+#if !NETFRAMEWORK
+        [JsonPropertyName("logTraceId")]
+#endif
+        string LogTraceId { get; }
+
+        /// <summary>
         ///     Returns a string that represents the current object.
         /// </summary>
         /// <returns></returns>

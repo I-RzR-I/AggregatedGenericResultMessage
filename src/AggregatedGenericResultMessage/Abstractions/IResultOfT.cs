@@ -31,26 +31,7 @@ namespace AggregatedGenericResultMessage.Abstractions
         ///     The result of the response, if there is no errors.
         /// </summary>
         T Response { get; set; }
-
-        /// <summary>
-        ///     Add message
-        /// </summary>
-        /// <param name="key">Optional. Message key. The default value is null.</param>
-        /// <param name="message">Optional. Message. The default value is null.</param>
-        /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
-        /// <returns></returns>
-        /// <remarks></remarks>
-        IResult<T> AddMessage(string key = null, string message = null, MessageType type = MessageType.Error);
-
-        /// <summary>
-        ///     Add message
-        /// </summary>
-        /// <param name="message">Optional. Message. The default value is null.</param>
-        /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
-        /// <returns></returns>
-        /// <remarks></remarks>
-        IResult<T> AddMessage(string message = null, MessageType type = MessageType.Error);
-
+        
         /// <summary>
         ///     Get first message from response
         /// </summary>

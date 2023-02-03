@@ -32,3 +32,11 @@
 ### **v.1.0.6.1706** 
 -> Was added new custom responses.<br />
 -> Was updated libs.<br />
+
+### **v.1.1.0.0** 
+-> Removed from solution reference `DomainCommonExtensions` to reduce package size and allow more dynamic package use without adding unnecessary components.<br/>
+-> Added reference to `CodeSource` to set the code reference of the methods used from `DomainCommonExtensions`.<br/>
+-> In the `MessageModel` was added a new property named `LogTraceId` as a unique id for the message.<br/>
+-> Added more user-friendly result configuration with methods: `WithMessage`, `WithKeyCode`, `WithCodeMessage`, `WithError`, `WithErrors`.<br/>
+-> Added new model `ResultError` used in `WithError` and `WithErrors`.<br/>
+-> Cleaned up code and reorganization on project structure by extracting functionalities to separate classes.<br/>

@@ -23,7 +23,7 @@ using AggregatedGenericResultMessage.Models;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Messages
+namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 {
     /// <summary>
     /// </summary>
@@ -33,7 +33,7 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string)" />
         public static IResult<T> AddInfo<T>(this Result<T> result, string info)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, info, MessageType.Info));
+            result.Messages?.Add(new MessageModel(null, info, MessageType.Info));
 
             return result;
         }
@@ -41,7 +41,7 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string)" />
         public static IResult<T> AddInfo<T>(this IResult<T> result, string info)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, info, MessageType.Info));
+            result.Messages?.Add(new MessageModel(null, info, MessageType.Info));
 
             return result;
         }
@@ -65,7 +65,7 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string)" />
         public static IResult<T> AddInfoConfirm<T>(this Result<T> result, string info)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, info, MessageType.InfoConfirm));
+            result.Messages?.Add(new MessageModel(null, info, MessageType.InfoConfirm));
 
             return result;
         }
@@ -73,7 +73,7 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string)" />
         public static IResult<T> AddInfoConfirm<T>(this IResult<T> result, string info)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, info, MessageType.InfoConfirm));
+            result.Messages?.Add(new MessageModel(null, info, MessageType.InfoConfirm));
 
             return result;
         }

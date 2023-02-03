@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 #if !NETFRAMEWORK
 using System.Text.Json.Serialization;
@@ -29,11 +28,10 @@ using System.Xml.Serialization;
 using AggregatedGenericResultMessage.Abstractions;
 using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions;
-using AggregatedGenericResultMessage.Extensions.Messages;
+using AggregatedGenericResultMessage.Extensions.Common;
 using AggregatedGenericResultMessage.Helpers;
+using AggregatedGenericResultMessage.Helpers.Result;
 using AggregatedGenericResultMessage.Models;
-using DomainCommonExtensions.CommonExtensions;
 
 // ReSharper disable VirtualMemberCallInConstructor
 #pragma warning disable 8632
@@ -115,7 +113,7 @@ namespace AggregatedGenericResultMessage
         /// </summary>
         /// <param name="response">Response data</param>
         /// <remarks></remarks>
-        private Result([Required] T response)
+        private Result(T response)
         {
             this.Response = response;
             this.IsSuccess = true;
@@ -135,37 +133,24 @@ namespace AggregatedGenericResultMessage
         public virtual SoapResult ToSoapResult() => new SoapResult
         {
             IsSuccess = IsSuccess,
-            Messages = Messages?.Select(y => new MessageModel()
-            {
-                Key = y.Key,
-                Message = y.Message,
-                MessageType = y.MessageType
-            }).ToList(),
+            Messages = Messages
+                ?.Select(y => new MessageModel()
+                {
+                    Key = y.Key,
+                    Message = y.Message,
+                    MessageType = y.MessageType
+                }).ToList(),
             Response = Response.CastToSoapResponse()
         };
-        
-        /// <inheritdoc />
-        public IResult<T> AddMessage(string key = null, string message = null, MessageType type = MessageType.Error)
-        {
-            Messages?.Add(new MessageModel(key, message, type));
-
-            return this;
-        }
-
-        /// <inheritdoc />
-        public IResult<T> AddMessage(string message = null, MessageType type = MessageType.Error)
-        {
-            Messages?.Add(new MessageModel(string.Empty, message, type));
-
-            return this;
-        }
 
         /// <inheritdoc />
         public string GetFirstMessage()
         {
             try
             {
-                var fMessage = Messages.FirstOrDefault(x => x.MessageType != MessageType.Exception)?.Message;
+                var fMessage = Messages
+                    .FirstOrDefault(x => x.MessageType != MessageType.Exception)
+                    ?.Message;
 
                 return fMessage.IsNull() ? string.Empty : fMessage;
             }
@@ -322,103 +307,45 @@ namespace AggregatedGenericResultMessage
             return map;
         }
 
-        /// <summary>
-        ///     Success response
-        /// </summary>
-        /// <param name="data">Response data</param>
-        /// <returns></returns>
-        public static Result<T> Success(T data = default)
-        {
-            var result = CreateInstance();
-            result.IsSuccess = true;
-            result.Response = data;
+        /// <inheritdoc cref="ResultSuccessHelper.Success{T}"/>
+        public static Result<T> Success(T data = default) 
+            => ResultSuccessHelper.Success(data);
 
-            return result;
-        }
+        /// <inheritdoc cref="ResultFailureHelper.Failure{T}()"/>
+        public static Result<T> Failure() 
+            => ResultFailureHelper.Failure<T>();
 
-        /// <summary>
-        ///     Failure
-        /// </summary>
-        /// <param name="error">Error message</param>
-        /// <returns></returns>
+        /// <inheritdoc cref="ResultFailureHelper.Failure{T}(string)"/>
         public static Result<T> Failure(string error)
-        {
-            return (Result<T>)CreateInstance().AddError(error);
-        }
+            => ResultFailureHelper.Failure<T>(error);
 
-        /// <summary>
-        ///     Failure
-        /// </summary>
-        /// <param name="code">Error code</param>
-        /// <param name="error">Message</param>
-        /// <returns></returns>
+        /// <inheritdoc cref="ResultFailureHelper.Failure{T}(string, string)"/>
         public static Result<T> Failure(string code, string error)
-        {
-            return (Result<T>)CreateInstance().AddError(code, error);
-        }
+            => ResultFailureHelper.Failure<T>(code, error);
 
-        /// <summary>
-        ///     Warning
-        /// </summary>
-        /// <param name="warn">Warning message</param>
-        /// <returns></returns>
+        /// <inheritdoc cref="ResultWarnHelper.Warn{T}(string)"/>
         public static Result<T> Warn(string warn)
-        {
-            return (Result<T>)CreateInstance().AddWarning(warn);
-        }
+            => ResultWarnHelper.Warn<T>(warn);
 
-        /// <summary>
-        ///     Warning
-        /// </summary>
-        /// <param name="code">Warning code</param>
-        /// <param name="error">Message</param>
-        /// <returns></returns>
+        /// <inheritdoc cref="ResultWarnHelper.Warn{T}(string, string)"/>
         public static Result<T> Warn(string code, string error)
-        {
-            return (Result<T>)CreateInstance().AddWarning(code, error);
-        }
+            => ResultWarnHelper.Warn<T>(code, error);
 
-        /// <summary>
-        ///     Access denied
-        /// </summary>
-        /// <param name="message">Access denied message</param>
-        /// <returns></returns>
+        /// <inheritdoc cref="ResultAccessDeniedHelper.AccessDenied{T}(string)"/>
         public static Result<T> AccessDenied(string message)
-        {
-            return (Result<T>)CreateInstance().AddAccessDenied(message);
-        }
+            => ResultAccessDeniedHelper.AccessDenied<T>(message);
 
-        /// <summary>
-        ///     Access denied
-        /// </summary>
-        /// <param name="code">Access denied code</param>
-        /// <param name="error">Message</param>
-        /// <returns></returns>
+        /// <inheritdoc cref="ResultAccessDeniedHelper.AccessDenied{T}(string, string)"/>
         public static Result<T> AccessDenied(string code, string error)
-        {
-            return (Result<T>)CreateInstance().AddAccessDenied(code, error);
-        }
+            => ResultAccessDeniedHelper.AccessDenied<T>(code, error);
 
-        /// <summary>
-        ///     Not found
-        /// </summary>
-        /// <param name="message">Not found message</param>
-        /// <returns></returns>
-        public static Result<T> NotFound(string message)
-        {
-            return (Result<T>)CreateInstance().AddNotFound(message);
-        }
+        /// <inheritdoc cref="ResultNotFoundHelper.NotFound{T}(string)"/>
+        public static Result<T> NotFound(string message) 
+            => ResultNotFoundHelper.NotFound<T>(message);
 
-        /// <summary>
-        ///     Not found
-        /// </summary>
-        /// <param name="code">Not found code</param>
-        /// <param name="error">Not found message</param>
-        /// <returns></returns>
+        /// <inheritdoc cref="ResultNotFoundHelper.NotFound{T}(string, string)"/>
         public static Result<T> NotFound(string code, string error)
-        {
-            return (Result<T>)CreateInstance().AddNotFound(code, error);
-        }
+            => ResultNotFoundHelper.NotFound<T>(code, error);
 
         #region O P E R A T O R S
 

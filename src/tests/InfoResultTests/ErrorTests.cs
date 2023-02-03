@@ -20,7 +20,8 @@ using System;
 using System.Linq;
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions.Messages;
+using AggregatedGenericResultMessage.Extensions.Common;
+using AggregatedGenericResultMessage.Extensions.Result.Messages;
 using InfoResultTests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -48,16 +49,16 @@ namespace InfoResultTests
             Assert.IsFalse(res.IsSuccess);
             Assert.IsNull(res.Response);
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == string.Empty && x.Message == "Error-01" && x.MessageType == MessageType.Error));
+                 x.Key.IsNullOrEmpty() && x.Message == "Error-01" && x.MessageType == MessageType.Error));
             Assert.IsTrue(res.Messages.Any(x =>
                 x.Key == "error-01" && x.Message == "ErrorMessage-01" && x.MessageType == MessageType.Error));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == string.Empty && x.Message == "ErrorMessage-Confirm-01" &&
+                x.Key.IsNullOrEmpty() && x.Message == "ErrorMessage-Confirm-01" &&
                 x.MessageType == MessageType.ErrorConfirm));
             Assert.IsTrue(res.Messages.Any(x =>
                 x.Key == "error-key-Confirm-01" && x.Message == "ErrorMessage-01" &&
                 x.MessageType == MessageType.ErrorConfirm));
-            
+
             Assert.IsTrue(res.HasAnyErrors());
             Assert.IsFalse(res.HasAnyExceptions());
             Assert.IsTrue(res.HasAnyErrorsOrExceptions());
@@ -69,7 +70,7 @@ namespace InfoResultTests
             var res = new Result();
             res.AddInfo("info message");
             res.AddError("error message");
-            
+
             Assert.IsTrue(res.GetFirstMessage().Equals("info message"));
             Assert.IsTrue(res.GetFirstError().Equals("error message"));
             Assert.IsTrue(res.HasAnyErrors());

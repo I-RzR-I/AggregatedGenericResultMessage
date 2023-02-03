@@ -32,6 +32,12 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add error
         /// </summary>
+        /// <returns></returns>
+        IResult<T> AddError();
+
+        /// <summary>
+        ///     Add error
+        /// </summary>
         /// <param name="error"></param>
         /// <returns></returns>
         IResult<T> AddError(string error);

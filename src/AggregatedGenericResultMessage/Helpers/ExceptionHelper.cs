@@ -20,7 +20,8 @@ using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Text;
-using DomainCommonExtensions.CommonExtensions;
+using AggregatedGenericResultMessage.Extensions.Common;
+
 // ReSharper disable PossibleNullReferenceException
 
 #endregion
