@@ -25,7 +25,7 @@ using AggregatedGenericResultMessage.Models;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Messages
+namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 {
     /// <summary>
     ///     Exception messages extensions
@@ -36,7 +36,7 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         /// <inheritdoc cref="IExceptionMessageResult{T}.AddException(Exception)" />
         public static IResult<T> AddException<T>(this IResult<T> result, Exception exception)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, exception));
+            result.Messages?.Add(new MessageModel(null, exception));
 
             return result;
         }
@@ -44,7 +44,7 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         /// <inheritdoc cref="IExceptionMessageResult{T}.AddException(Exception)" />
         public static IResult<T> AddException<T>(this Result<T> result, Exception exception)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, exception));
+            result.Messages?.Add(new MessageModel(null, exception));
 
             return result;
         }
@@ -52,13 +52,15 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         /// <inheritdoc cref="IExceptionMessageResult{T}.HasAnyExceptions" />
         public static bool HasAnyExceptions<T>(this Result<T> result)
         {
-            return result.Messages?.Any(x => x.MessageType.Equals(MessageType.Exception)) ?? false;
+            return result.Messages
+                ?.Any(x => x.MessageType.Equals(MessageType.Exception)) ?? false;
         }
 
         /// <inheritdoc cref="IExceptionMessageResult{T}.HasAnyExceptions" />
         public static bool HasAnyExceptions<T>(this IResult<T> result)
         {
-            return result.Messages?.Any(x => x.MessageType.Equals(MessageType.Exception)) ?? false;
+            return result.Messages
+                ?.Any(x => x.MessageType.Equals(MessageType.Exception)) ?? false;
         }
     }
 }

@@ -23,17 +23,33 @@ using AggregatedGenericResultMessage.Models;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Messages
+namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 {
     /// <summary>
     ///     Not found messages extensions
     /// </summary>
     public static class NotFoundMessageExtensions
     {
+        /// <inheritdoc cref="INotFoundMessageResult{T}.AddNotFound()" />
+        public static IResult<T> AddNotFound<T>(this IResult<T> result)
+        {
+            result.Messages?.Add(new MessageModel(null, null, MessageType.NotFound));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="INotFoundMessageResult{T}.AddNotFound()" />
+        public static IResult<T> AddNotFound<T>(this Result<T> result)
+        {
+            result.Messages?.Add(new MessageModel(null, null, MessageType.NotFound));
+
+            return result;
+        }
+
         /// <inheritdoc cref="INotFoundMessageResult{T}.AddNotFound(string)" />
         public static IResult<T> AddNotFound<T>(this IResult<T> result, string message)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, message, MessageType.NotFound));
+            result.Messages?.Add(new MessageModel(null, message, MessageType.NotFound));
 
             return result;
         }
@@ -41,7 +57,7 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         /// <inheritdoc cref="INotFoundMessageResult{T}.AddNotFound(string)" />
         public static IResult<T> AddNotFound<T>(this Result<T> result, string message)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, message, MessageType.NotFound));
+            result.Messages?.Add(new MessageModel(null, message, MessageType.NotFound));
 
             return result;
         }

@@ -25,7 +25,7 @@ using AggregatedGenericResultMessage.Models;
 namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 {
     /// <inheritdoc />
-    public sealed class NullReferenceResult<T> : Result<T>
+    public sealed class NullReferenceResult<T> : AggregatedGenericResultMessage.Result<T>
     {
         /// <inheritdoc />
         public NullReferenceResult()
@@ -35,18 +35,18 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
         /// <inheritdoc />
         public NullReferenceResult(string message)
         {
-            Messages.Add(new MessageModel(string.Empty, message));
+            Messages.Add(new MessageModel(null, message));
         }
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(string.Empty, "A null reference was found.")
+            new MessageModel(null, "A null reference was found.")
         };
     }
 
     /// <inheritdoc />
-    public sealed class NullReferenceResult : Result
+    public sealed class NullReferenceResult : AggregatedGenericResultMessage.Result
     {
         /// <inheritdoc />
         public NullReferenceResult()
@@ -56,13 +56,13 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
         /// <inheritdoc />
         public NullReferenceResult(string message)
         {
-            Messages.Add(new MessageModel(string.Empty, message));
+            Messages.Add(new MessageModel(null, message));
         }
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(string.Empty, "A null reference was found.")
+            new MessageModel(null, "A null reference was found.")
         };
     }
 }

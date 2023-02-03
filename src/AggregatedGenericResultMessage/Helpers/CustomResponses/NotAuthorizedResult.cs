@@ -26,7 +26,7 @@ using AggregatedGenericResultMessage.Models;
 namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 {
     /// <inheritdoc />
-    public sealed class NotAuthorizedResult<T> : Result<T>
+    public sealed class NotAuthorizedResult<T> : AggregatedGenericResultMessage.Result<T>
     {
         /// <inheritdoc />
         public NotAuthorizedResult()
@@ -36,18 +36,18 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
         /// <inheritdoc />
         public NotAuthorizedResult(string message)
         {
-            Messages.Add(new MessageModel(string.Empty, message, MessageType.AccessDenied));
+            Messages.Add(new MessageModel(null, message, MessageType.AccessDenied));
         }
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(string.Empty, "You are not authorized.", MessageType.AccessDenied)
+            new MessageModel(null, "You are not authorized.", MessageType.AccessDenied)
         };
     }
 
     /// <inheritdoc />
-    public sealed class NotAuthorizedResult : Result
+    public sealed class NotAuthorizedResult : AggregatedGenericResultMessage.Result
     {
         /// <inheritdoc />
         public NotAuthorizedResult()
@@ -57,13 +57,13 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
         /// <inheritdoc />
         public NotAuthorizedResult(string message)
         {
-            Messages.Add(new MessageModel(string.Empty, message, MessageType.AccessDenied));
+            Messages.Add(new MessageModel(null, message, MessageType.AccessDenied));
         }
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(string.Empty, "You are not authorized.", MessageType.AccessDenied)
+            new MessageModel(null, "You are not authorized.", MessageType.AccessDenied)
         };
     }
 }

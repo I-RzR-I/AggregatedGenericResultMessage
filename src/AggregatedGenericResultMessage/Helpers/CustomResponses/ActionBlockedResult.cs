@@ -26,7 +26,7 @@ using AggregatedGenericResultMessage.Models;
 namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 {
     /// <inheritdoc />
-    public sealed class ActionBlockedResult<T> : Result<T>
+    public sealed class ActionBlockedResult<T> : AggregatedGenericResultMessage.Result<T>
     {
         /// <inheritdoc />
         public ActionBlockedResult()
@@ -36,19 +36,19 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
         /// <inheritdoc />
         public ActionBlockedResult(string message)
         {
-            Messages.Add(new MessageModel(string.Empty, message, MessageType.AccessDenied));
+            Messages.Add(new MessageModel(null, message, MessageType.AccessDenied));
         }
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(string.Empty, "The action was blocked. You do not have permission to continue.",
+            new MessageModel(null, "The action was blocked. You do not have permission to continue.",
                 MessageType.AccessDenied)
         };
     }
 
     /// <inheritdoc />
-    public sealed class ActionBlockedResult : Result
+    public sealed class ActionBlockedResult : AggregatedGenericResultMessage.Result
     {
         /// <inheritdoc />
         public ActionBlockedResult()
@@ -58,14 +58,14 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
         /// <inheritdoc />
         public ActionBlockedResult(string message)
         {
-            Messages.Add(new MessageModel(string.Empty, message, 
+            Messages.Add(new MessageModel(null, message, 
                 MessageType.AccessDenied));
         }
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(string.Empty, "The action was blocked. You do not have permission to continue.",
+            new MessageModel(null, "The action was blocked. You do not have permission to continue.",
                 MessageType.AccessDenied)
         };
     }

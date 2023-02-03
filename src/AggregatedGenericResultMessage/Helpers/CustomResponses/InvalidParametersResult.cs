@@ -25,7 +25,7 @@ using AggregatedGenericResultMessage.Models;
 namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 {
     /// <inheritdoc />
-    public sealed class InvalidParametersResult<T> : Result<T>
+    public sealed class InvalidParametersResult<T> : AggregatedGenericResultMessage.Result<T>
     {
         /// <inheritdoc />
         public InvalidParametersResult()
@@ -35,18 +35,18 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
         /// <inheritdoc />
         public InvalidParametersResult(string message)
         {
-            Messages.Add(new MessageModel(string.Empty, message));
+            Messages.Add(new MessageModel(null, message));
         }
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(string.Empty, "Invalid parameters.")
+            new MessageModel(null, "Invalid parameters.")
         };
     }
 
     /// <inheritdoc />
-    public sealed class InvalidParametersResult : Result
+    public sealed class InvalidParametersResult : AggregatedGenericResultMessage.Result
     {
         /// <inheritdoc />
         public InvalidParametersResult()
@@ -56,13 +56,13 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
         /// <inheritdoc />
         public InvalidParametersResult(string message)
         {
-            Messages.Add(new MessageModel(string.Empty, message));
+            Messages.Add(new MessageModel(null, message));
         }
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(string.Empty, "Invalid parameters.")
+            new MessageModel(null, "Invalid parameters.")
         };
     }
 }

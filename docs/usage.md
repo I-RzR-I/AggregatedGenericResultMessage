@@ -118,6 +118,14 @@ public async Task<Result> AddFooAsync(Foo request, CancellationToken cancellatio
         }
 ```
 
+For multiple messages on the response from the box are available methods: `AddMessage`, `AddInfo`, `AddInfoConfirm`, `AddNotFound`, `AddWarning`, `AddWarningConfirm`, `AddException`, `AddError`, `AddErrorConfirm`.
+An example of using:
+```csharp
+return Result.Failure()
+                .AddInfo("Message 1")
+                .AddError("Message 2");
+```
+
 For SOAP result services
 ```csharp
 public SoapResult SoapSuccess()
@@ -127,4 +135,22 @@ public SoapResult SoapSuccess()
             //Cast result 'Result' or 'Result<T>' to XML result
             .ToSoapResult();
         }
+```
+
+Below are examples of using fluent configuration access and returning results to the user.
+```csharp
+return Result.Failure()
+                .WithMessage("Message 1")
+                .WithKeyCode("Code 1")
+                .WithCodeMessage("Code", "Message")
+                .WithError("Error message x01")
+                .WithError("Error message", "Error code")
+                .WithError(new ResultError("code", "message"))
+                .WithError(new Exception("Exception"))
+                .WithErrors(new List<ResultError>()
+                {
+                    new ResultError("Error code x1", "Error message x1"),
+                    new ResultError("Error code x2", "Error message x2"),
+                    new ResultError(new Exception("Exception message"))
+                });
 ```

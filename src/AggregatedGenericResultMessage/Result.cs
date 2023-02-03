@@ -17,7 +17,6 @@
 #region U S A G E S
 
 using System;
-using System.ComponentModel.DataAnnotations;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Helpers;
 using AggregatedGenericResultMessage.Models;
@@ -51,11 +50,11 @@ namespace AggregatedGenericResultMessage
         ///     request was executed with errors.
         /// </param>
         /// <remarks></remarks>
-        private Result([Required] bool isSuccess)
+        private Result(bool isSuccess)
         {
             IsSuccess = isSuccess;
             if (isSuccess.Equals(false))
-                Messages.Add(new MessageModel(key: ExceptionCodes.UnSuccessfullyReqExec, (string)null, messageType: MessageType.Error));
+                Messages.Add(new MessageModel(key: ExceptionCodes.UnSuccessfullyReqExec, messageType: MessageType.Error));
         }
 
         /// <inheritdoc />
@@ -84,7 +83,7 @@ namespace AggregatedGenericResultMessage
         /// <param name="isSuccess">Success execution</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static implicit operator Result([Required] bool isSuccess)
+        public static implicit operator Result(bool isSuccess)
         {
             return new Result(isSuccess);
         }

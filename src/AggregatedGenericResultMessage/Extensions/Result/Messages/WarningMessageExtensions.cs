@@ -23,7 +23,7 @@ using AggregatedGenericResultMessage.Models;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Messages
+namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 {
     /// <summary>
     ///     Warning message extensions
@@ -31,10 +31,26 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
     /// <remarks></remarks>
     public static class WarningMessageExtensions
     {
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning()" />
+        public static IResult<T> AddWarning<T>(this IResult<T> result)
+        {
+            result.Messages?.Add(new MessageModel(null, null, MessageType.Warning));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning()" />
+        public static IResult<T> AddWarning<T>(this Result<T> result)
+        {
+            result.Messages?.Add(new MessageModel(null, null, MessageType.Warning));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(string)" />
         public static IResult<T> AddWarning<T>(this IResult<T> result, string warning)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, warning, MessageType.Warning));
+            result.Messages?.Add(new MessageModel(null, warning, MessageType.Warning));
 
             return result;
         }
@@ -42,7 +58,7 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(string)" />
         public static IResult<T> AddWarning<T>(this Result<T> result, string warning)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, warning, MessageType.Warning));
+            result.Messages?.Add(new MessageModel(null, warning, MessageType.Warning));
 
             return result;
         }
@@ -66,7 +82,7 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(string)" />
         public static IResult<T> AddWarningConfirm<T>(this IResult<T> result, string warning)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, warning, MessageType.WarningConfirm));
+            result.Messages?.Add(new MessageModel(null, warning, MessageType.WarningConfirm));
 
             return result;
         }
@@ -74,7 +90,7 @@ namespace AggregatedGenericResultMessage.Extensions.Messages
         /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(string)" />
         public static IResult<T> AddWarningConfirm<T>(this Result<T> result, string warning)
         {
-            result.Messages?.Add(new MessageModel(string.Empty, warning, MessageType.WarningConfirm));
+            result.Messages?.Add(new MessageModel(null, warning, MessageType.WarningConfirm));
 
             return result;
         }

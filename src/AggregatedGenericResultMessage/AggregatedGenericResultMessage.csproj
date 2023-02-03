@@ -37,7 +37,7 @@
     <Compile Include="..\shared\GeneralAssemblyInfo.cs" Link="Properties\GeneralAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DomainCommonExtensions" Version="1.0.5.1849" />
+    <PackageReference Include="CodeSource" Version="1.0.4.1723" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
   </ItemGroup>
 
