@@ -1,5 +1,8 @@
 > **Note** This repository is developed in .netstandard2+ with support for SOAP service results mainly used in the .net framework (current support 4.5, 4.6.1 - 4.8)
 
+[![NuGet Version](https://img.shields.io/nuget/v/AggregatedGenericResultMessage.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/AggregatedGenericResultMessage/)
+[![Nuget Downloads](https://img.shields.io/nuget/dt/AggregatedGenericResultMessage.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/AggregatedGenericResultMessage)
+
 The goal of this repository is to offer the possibility to manage and agree on the answers received as a result of the execution of a method or a process.
 
 In other words, it offers the possibility to use a single(general) response, structured and easier parsed model for the executed methods.
@@ -15,8 +18,6 @@ No additional components or packs are required for use. So, it only needs to be 
 **In case you wish to use it in your project, u can install the package from <a href="https://www.nuget.org/packages/AggregatedGenericResultMessage" target="_blank">nuget.org</a>** or specify what version you want:
 
 > `Install-Package AggregatedGenericResultMessage -Version x.x.x.x`
-
-[![NuGet Version](https://img.shields.io/nuget/v/AggregatedGenericResultMessage.svg?style=flat)](https://www.nuget.org/packages/AggregatedGenericResultMessage/)
 
 ## Content
 1. [USING](docs/usage.md)
