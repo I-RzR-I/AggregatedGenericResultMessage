@@ -154,3 +154,45 @@ return Result.Failure()
                     new ResultError(new Exception("Exception message"))
                 });
 ```
+
+For efficiency and flexibility, you can find the following methods: `ActionOnSuccess`, `ActionOnFailure`, `ActionOn`, and `ExecuteAction` which allow the execution of custom actions.
+-> `ActionOnSuccess` - Execute action only when the Result has success execution;
+-> `ActionOnFailure` - Execute action only when the Result has failed execution;
+-> `ActionOn` - Specify action/s execution for success and failure request execution;
+`ExecuteAction` ->  Execute specified action/s in any case.
+```csharp
+public IResult<Foo> GetFoo(int recordId)
+    {
+        var result = _service.GetRecord(recordId);
+        result.ActionOnFailure(x =>
+            {
+                _logger.LogFailureExecution(result);
+            });
+        
+        return result;
+    }
+    
+public IResult<Foo> GetFooX(int recordId)
+    {
+        return _service
+        .GetRecord(recordId)
+        .ActionOnFailure(x =>
+            {
+                _logger.LogFailureExecution(result);
+            });
+    }
+```
+
+```csharp
+public IResult<Foo> GetFoo(int recordId)
+    {
+        var result = _service.GetRecord(recordId);
+        result.ActionOnSuccess(x =>
+            {
+                _logger.LogExecution($"By user {_identity.UserName} request at the record with id: {recordId} obtained info: {result.Response.ToJson}");
+            });
+        
+        return result;
+    }
+```
+The same situation and implementation can be used for `ActionOn`, `ExecuteAction` with specifying necessary action/s.

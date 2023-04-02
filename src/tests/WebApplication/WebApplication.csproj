@@ -18,4 +18,6 @@
     <ProjectReference Include="..\..\AggregatedGenericResultMessage\AggregatedGenericResultMessage.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties BuildVersion_StartDate="2000/1/1" /></VisualStudio></ProjectExtensions>
+
 </Project>
