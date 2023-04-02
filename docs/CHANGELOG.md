@@ -40,3 +40,6 @@
 -> Added more user-friendly result configuration with methods: `WithMessage`, `WithKeyCode`, `WithCodeMessage`, `WithError`, `WithErrors`.<br/>
 -> Added new model `ResultError` used in `WithError` and `WithErrors`.<br/>
 -> Cleaned up code and reorganization on project structure by extracting functionalities to separate classes.<br/>
+
+### **1.1.1.2048** 
+-> Added extension methods(`ActionOnSuccess`, `ActionOnFailure`, `ActionOn`, `ExecuteAction`) which allow executing custom actions on specific cases or in any case you want or need. 
