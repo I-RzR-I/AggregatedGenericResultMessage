@@ -77,7 +77,7 @@ namespace AggregatedGenericResultMessage
 
         /// <inheritdoc />
 #if !NETFRAMEWORK
-        [JsonPropertyName("result")]
+        [JsonPropertyName("response")]
 #endif
         public virtual T Response { get; set; }
 
