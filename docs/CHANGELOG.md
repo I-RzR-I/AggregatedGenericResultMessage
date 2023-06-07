@@ -43,3 +43,6 @@
 
 ### **1.1.1.2048** 
 -> Added extension methods(`ActionOnSuccess`, `ActionOnFailure`, `ActionOn`, `ExecuteAction`) which allow executing custom actions on specific cases or in any case you want or need. 
+
+### **v.1.2.0.0** 
+-> Adjust JSON result/response property name (`result` => `response`).
