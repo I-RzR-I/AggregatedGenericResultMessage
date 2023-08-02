@@ -29,7 +29,7 @@ namespace AggregatedGenericResultMessage.Extensions.Common
     /// </summary>
     /// <remarks></remarks>
     [CodeSource("DomainCommonExtensions.CommonExtensions", "RzR", "RzR", 1)]
-    public static class StringExtensions
+    internal static class StringExtensions
     {
         /// <summary>
         ///     Is Null or empty snippet
@@ -38,10 +38,7 @@ namespace AggregatedGenericResultMessage.Extensions.Common
         /// <returns></returns>
         [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR",
             "DomainCommonExtensions.CommonExtensions.StringExtensions.IsNullOrEmpty", 1)]
-        public static bool IsNullOrEmpty(this string str)
-        {
-            return string.IsNullOrEmpty(str);
-        }
+        internal static bool IsNullOrEmpty(this string str) => string.IsNullOrEmpty(str);
 
         /// <summary>
         ///     Cast string to enum value
@@ -52,7 +49,7 @@ namespace AggregatedGenericResultMessage.Extensions.Common
         /// <remarks></remarks>
         [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR",
             "DomainCommonExtensions.CommonExtensions.StringExtensions.ToEnum", 1)]
-        public static T ToEnum<T>(this string value)
+        internal static T ToEnum<T>(this string value)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
@@ -73,7 +70,7 @@ namespace AggregatedGenericResultMessage.Extensions.Common
         /// <param name="plainText">Plain text</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static string Base64Encode(this string plainText)
+        internal static string Base64Encode(this string plainText)
         {
             var plainTextBytes = Encoding.UTF7.GetBytes(plainText);
 

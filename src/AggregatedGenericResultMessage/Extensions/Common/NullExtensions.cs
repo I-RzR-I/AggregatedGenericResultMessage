@@ -27,7 +27,7 @@ namespace AggregatedGenericResultMessage.Extensions.Common
     /// </summary>
     /// <remarks></remarks>
     [CodeSource("DomainCommonExtensions.CommonExtensions", "RzR", "RzR", 1)]
-    public static class NullExtensions
+    internal static class NullExtensions
     {
         /// <summary>
         ///     Is null
@@ -36,9 +36,6 @@ namespace AggregatedGenericResultMessage.Extensions.Common
         /// <returns></returns>
         [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR",
             "DomainCommonExtensions.CommonExtensions.NullExtensions.IsNull", 1)]
-        public static bool IsNull(this object obj)
-        {
-            return obj == null;
-        }
+        internal static bool IsNull(this object obj) => obj == null;
     }
 }

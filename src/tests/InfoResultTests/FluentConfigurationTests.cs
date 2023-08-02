@@ -19,10 +19,10 @@ using System.Collections.Generic;
 using System.Linq;
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AggregatedGenericResultMessage.Extensions.Result;
 using AggregatedGenericResultMessage.Models;
+using DomainCommonExtensions.DataTypeExtensions;
 
 namespace InfoResultTests
 {
