@@ -46,3 +46,6 @@
 
 ### **v.1.2.0.0** 
 -> Adjust JSON result/response property name (`result` => `response`).
+
+### **v.1.2.1.0** 
+-> Hide internal used extension.
