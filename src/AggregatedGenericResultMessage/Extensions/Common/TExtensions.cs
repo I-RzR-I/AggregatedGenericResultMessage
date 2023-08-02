@@ -31,7 +31,7 @@ namespace AggregatedGenericResultMessage.Extensions.Common
     /// </summary>
     /// <remarks></remarks>
     [CodeSource("DomainCommonExtensions.CommonExtensions", "RzR", "RzR", 1)]
-    public static class TExtensions
+    internal static class TExtensions
     {
         /// <summary>
         ///     Serialize source data to XML document
@@ -44,7 +44,7 @@ namespace AggregatedGenericResultMessage.Extensions.Common
         /// <remarks></remarks>
         [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR",
             "DomainCommonExtensions.CommonExtensions.TExtensions.SerializeToXmlDoc", 1)]
-        public static XmlDocument SerializeToXmlDoc<T>(this T source, string rootName = null,
+        internal static XmlDocument SerializeToXmlDoc<T>(this T source, string rootName = null,
             string rootNameSpaceName = null)
         {
             if (source.IsNull()) return null;

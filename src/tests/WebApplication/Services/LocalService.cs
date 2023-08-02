@@ -17,8 +17,7 @@
 using System;
 using AggregatedGenericResultMessage;
 using LocalSrv1;
-using AggregatedGenericResultMessage.Extensions;
-using AggregatedGenericResultMessage.Extensions.Common;
+using DomainCommonExtensions.CommonExtensions;
 
 namespace WebApplication.Services
 {
@@ -53,7 +52,7 @@ namespace WebApplication.Services
             }
         }
 
-        public Result<LocalSrv1.Book> GetBook2(string id)
+        public Result<Book> GetBook2(string id)
         {
             try
             {
