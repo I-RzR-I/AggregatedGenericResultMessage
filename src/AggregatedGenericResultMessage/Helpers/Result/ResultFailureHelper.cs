@@ -18,6 +18,8 @@
 
 using AggregatedGenericResultMessage.Extensions.Result.Messages;
 
+// ReSharper disable RedundantCast
+
 #endregion
 
 namespace AggregatedGenericResultMessage.Helpers.Result
@@ -31,20 +33,16 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         ///     Failure
         /// </summary>
         /// <returns></returns>
-        internal static Result<T> Failure<T>()
-        {
-            return (Result<T>) Result<T>.Instance;//.AddError();
-        }
+        internal static Result<T> Failure<T>() 
+            => (Result<T>) Result<T>.Instance; //.AddError();
 
         /// <summary>
         ///     Failure
         /// </summary>
         /// <param name="error">Error message</param>
         /// <returns></returns>
-        internal static Result<T> Failure<T>(string error)
-        {
-            return (Result<T>) Result<T>.Instance.AddError(error);
-        }
+        internal static Result<T> Failure<T>(string error) 
+            => (Result<T>) Result<T>.Instance.AddError(error);
 
         /// <summary>
         ///     Failure
@@ -53,8 +51,6 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <param name="error">Message</param>
         /// <returns></returns>
         internal static Result<T> Failure<T>(string code, string error)
-        {
-            return (Result<T>) Result<T>.Instance.AddError(code, error);
-        }
+            => (Result<T>) Result<T>.Instance.AddError(code, error);
     }
 }

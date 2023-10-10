@@ -18,10 +18,12 @@
 
 using System;
 using AggregatedGenericResultMessage.Enums;
+using AggregatedGenericResultMessage.Extensions.Common;
 using AggregatedGenericResultMessage.Helpers;
 using AggregatedGenericResultMessage.Models;
 
 #pragma warning disable 8632
+#pragma warning disable IDE0090
 
 #endregion
 
@@ -72,10 +74,8 @@ namespace AggregatedGenericResultMessage
         /// <param name="exception">Current exception</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static implicit operator Result(Exception? exception)
-        {
-            return exception != null ? new Result(exception) : new Result(false);
-        }
+        public static implicit operator Result(Exception? exception) 
+            => exception.IsNotNull() ? new Result(exception) : new Result(false);
 
         /// <summary>
         ///     Implicit success result operator
@@ -83,10 +83,8 @@ namespace AggregatedGenericResultMessage
         /// <param name="isSuccess">Success execution</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static implicit operator Result(bool isSuccess)
-        {
-            return new Result(isSuccess);
-        }
+        public static implicit operator Result(bool isSuccess) 
+            => new Result(isSuccess);
 
         #endregion
     }

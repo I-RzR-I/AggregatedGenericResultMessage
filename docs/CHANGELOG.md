@@ -49,3 +49,7 @@
 
 ### **v.1.2.1.0** 
 -> Hide internal used extension.
+
+### **v1.2.2.2040** 
+-> Adjust code to solution code style.
+-> Update lib versions.

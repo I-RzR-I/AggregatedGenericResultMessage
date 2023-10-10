@@ -21,6 +21,8 @@ using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Models;
 
+// ReSharper disable RedundantNameQualifier
+
 #endregion
 
 namespace AggregatedGenericResultMessage.Helpers.CustomResponses
@@ -29,15 +31,11 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
     public sealed class NotAuthorizedResult<T> : AggregatedGenericResultMessage.Result<T>
     {
         /// <inheritdoc />
-        public NotAuthorizedResult()
-        {
-        }
+        public NotAuthorizedResult() { }
 
         /// <inheritdoc />
         public NotAuthorizedResult(string message)
-        {
-            Messages.Add(new MessageModel(null, message, MessageType.AccessDenied));
-        }
+            => Messages.Add(new MessageModel(null, message, MessageType.AccessDenied));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
@@ -50,15 +48,11 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
     public sealed class NotAuthorizedResult : AggregatedGenericResultMessage.Result
     {
         /// <inheritdoc />
-        public NotAuthorizedResult()
-        {
-        }
+        public NotAuthorizedResult() { }
 
         /// <inheritdoc />
         public NotAuthorizedResult(string message)
-        {
-            Messages.Add(new MessageModel(null, message, MessageType.AccessDenied));
-        }
+            => Messages.Add(new MessageModel(null, message, MessageType.AccessDenied));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>

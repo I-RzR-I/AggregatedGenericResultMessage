@@ -21,6 +21,8 @@ using System.Runtime.Serialization;
 using System.Xml;
 using CodeSource;
 
+#pragma warning disable SCS0007
+
 #endregion
 
 namespace AggregatedGenericResultMessage.Extensions.Common

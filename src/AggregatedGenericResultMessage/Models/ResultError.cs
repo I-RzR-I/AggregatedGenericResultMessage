@@ -65,11 +65,8 @@ namespace AggregatedGenericResultMessage.Models
         /// </summary>
         /// <returns>Mapped data</returns>
         /// <remarks></remarks>
-        internal MessageModel MapToMessage()
-        {
-            return Exception != default
-                ? new MessageModel(null, Exception)
-                : new MessageModel(Key, Message);
-        }
+        internal MessageModel MapToMessage() => Exception != default
+            ? new MessageModel(null, Exception)
+            : new MessageModel(Key, Message);
     }
 }

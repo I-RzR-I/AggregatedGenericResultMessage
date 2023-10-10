@@ -18,6 +18,8 @@
 
 using AggregatedGenericResultMessage.Extensions.Result.Messages;
 
+// ReSharper disable RedundantCast
+
 #endregion
 
 namespace AggregatedGenericResultMessage.Helpers.Result
@@ -32,9 +34,7 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// </summary>
         /// <returns></returns>
         public static Result<T> NotFound<T>()
-        {
-            return (Result<T>) Result<T>.Instance;//.AddNotFound();
-        }
+            => (Result<T>)Result<T>.Instance; //.AddNotFound();
 
         /// <summary>
         ///     Not found
@@ -42,9 +42,7 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <param name="message">Not found message</param>
         /// <returns></returns>
         public static Result<T> NotFound<T>(string message)
-        {
-            return (Result<T>) Result<T>.Instance.AddNotFound(message);
-        }
+            => (Result<T>)Result<T>.Instance.AddNotFound(message);
 
         /// <summary>
         ///     Not found
@@ -53,8 +51,6 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <param name="error">Not found message</param>
         /// <returns></returns>
         public static Result<T> NotFound<T>(string code, string error)
-        {
-            return (Result<T>) Result<T>.Instance.AddNotFound(code, error);
-        }
+            => (Result<T>)Result<T>.Instance.AddNotFound(code, error);
     }
 }
