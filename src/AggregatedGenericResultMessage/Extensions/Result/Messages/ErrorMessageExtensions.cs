@@ -23,6 +23,8 @@ using AggregatedGenericResultMessage.Abstractions.MessageResults;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Models;
 
+// ReSharper disable RedundantArgumentDefaultValue
+
 #endregion
 
 namespace AggregatedGenericResultMessage.Extensions.Result.Messages
@@ -133,60 +135,34 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
         /// <inheritdoc cref="IErrorMessageResult{T}.GetFirstError" />
         public static string GetFirstError<T>(this IResult<T> result)
-        {
-            return result.Messages
-                ?.FirstOrDefault(x => x.MessageType == MessageType.Error)
-                ?.Message ?? string.Empty;
-        }
+            => result.Messages?.FirstOrDefault(x => x.MessageType == MessageType.Error)?.Message ?? string.Empty;
 
         /// <inheritdoc cref="IErrorMessageResult{T}.GetFirstError" />
         public static string GetFirstError<T>(this Result<T> result)
-        {
-            return result.Messages
-                ?.FirstOrDefault(x => x.MessageType == MessageType.Error)
-                ?.Message ?? string.Empty;
-        }
+            => result.Messages?.FirstOrDefault(x => x.MessageType == MessageType.Error)?.Message ?? string.Empty;
 
         /// <inheritdoc cref="IErrorMessageResult{T}.HasErrorCode(string)" />
         public static bool HasErrorCode<T>(this IResult<T> result, string errorCode)
-        {
-            return result.Messages
-                ?.Any(x => x.Key.Equals(errorCode)) ?? false;
-        }
+            => result.Messages?.Any(x => x.Key.Equals(errorCode)) ?? false;
 
         /// <inheritdoc cref="IErrorMessageResult{T}.HasErrorCode(string)" />
         public static bool HasErrorCode<T>(this Result<T> result, string errorCode)
-        {
-            return result.Messages
-                ?.Any(x => x.Key.Equals(errorCode)) ?? false;
-        }
+            => result.Messages?.Any(x => x.Key.Equals(errorCode)) ?? false;
 
         /// <inheritdoc cref="IErrorMessageResult{T}.HasAnyErrors" />
         public static bool HasAnyErrors<T>(this IResult<T> result)
-        {
-            return result.Messages
-                ?.Any(x => x.MessageType.Equals(MessageType.Error)) ?? false;
-        }
+            => result.Messages?.Any(x => x.MessageType.Equals(MessageType.Error)) ?? false;
 
         /// <inheritdoc cref="IErrorMessageResult{T}.HasAnyErrors" />
         public static bool HasAnyErrors<T>(this Result<T> result)
-        {
-            return result.Messages
-                ?.Any(x => x.MessageType.Equals(MessageType.Error)) ?? false;
-        }
+            => result.Messages?.Any(x => x.MessageType.Equals(MessageType.Error)) ?? false;
 
         /// <inheritdoc cref="IErrorMessageResult{T}.HasAnyErrorsOrExceptions" />
         public static bool HasAnyErrorsOrExceptions<T>(this Result<T> result)
-        {
-            return result.Messages
-                ?.Any(x => x.MessageType.Equals(MessageType.Error) || x.MessageType.Equals(MessageType.Exception)) ?? false;
-        }
+            => result.Messages?.Any(x => x.MessageType.Equals(MessageType.Error) || x.MessageType.Equals(MessageType.Exception)) ?? false;
 
         /// <inheritdoc cref="IErrorMessageResult{T}.HasAnyErrorsOrExceptions" />
         public static bool HasAnyErrorsOrExceptions<T>(this IResult<T> result)
-        {
-            return result.Messages
-                ?.Any(x => x.MessageType.Equals(MessageType.Error) || x.MessageType.Equals(MessageType.Exception)) ?? false;
-        }
+            => result.Messages?.Any(x => x.MessageType.Equals(MessageType.Error) || x.MessageType.Equals(MessageType.Exception)) ?? false;
     }
 }

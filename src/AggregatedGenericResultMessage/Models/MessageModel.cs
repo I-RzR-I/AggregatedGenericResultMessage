@@ -17,16 +17,21 @@
 #region U S A G E S
 
 using System;
+
 #if !NETFRAMEWORK
 using System.Text.Json.Serialization;
 #endif
+
 using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Helpers;
-using AggregatedGenericResultMessage.Extensions;
 using AggregatedGenericResultMessage.Extensions.Common;
 
+#pragma warning disable IDE0057
 #pragma warning disable 8632
+#pragma warning disable IDE0079
+#pragma warning disable IDE0046
+
 
 #endregion
 
@@ -71,9 +76,7 @@ namespace AggregatedGenericResultMessage.Models
         ///     Initializes a new instance of the <see cref="MessageModel" /> class.
         /// </summary>
         /// <remarks></remarks>
-        public MessageModel()
-        {
-        }
+        public MessageModel() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="MessageModel" /> class.
@@ -104,7 +107,7 @@ namespace AggregatedGenericResultMessage.Models
             MessageType = MessageType.Exception;
             LogTraceId = GetTraceLogId();
 
-            if (!exception.IsNull())
+            if (exception.IsNotNull())
                 Message = ExceptionHelper.CreateTraceExceptionString(exception);
         }
 
@@ -112,9 +115,7 @@ namespace AggregatedGenericResultMessage.Models
 
         /// <inheritdoc cref="IMessageModel.ToString" />
         public override string ToString()
-        {
-            return string.Format(ToStringFormat, Key, Message);
-        }
+            => string.Format(ToStringFormat, Key, Message);
 
         /// <summary>
         ///     Implicit operator
@@ -151,6 +152,7 @@ namespace AggregatedGenericResultMessage.Models
         ///     Get uniq trace log id
         /// </summary>
         /// <returns></returns>
-        private static string GetTraceLogId() => $"{Guid.NewGuid():N}#{DateTime.UtcNow:yyyyMMddHHmmssfff}".Base64Encode();
+        private static string GetTraceLogId() 
+            => $"{Guid.NewGuid():N}#{DateTime.UtcNow:yyyyMMddHHmmssfff}".Base64Encode();
     }
 }

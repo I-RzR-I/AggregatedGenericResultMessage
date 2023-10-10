@@ -14,21 +14,19 @@
 //  </summary>
 // ***********************************************************************
 
+// ReSharper disable RedundantNameQualifier
+// ReSharper disable EmptyConstructor
 namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 {
     /// <inheritdoc />
     public sealed class SuccessResult<T> : AggregatedGenericResultMessage.Result<T>
     {
         /// <inheritdoc />
-        public SuccessResult()
-        {
-        }
+        public SuccessResult() { }
 
         /// <inheritdoc />
         public SuccessResult(T result)
-        {
-            Response = result;
-        }
+            => Response = result;
 
         /// <inheritdoc />
         public override bool IsSuccess { get; set; } = true;
@@ -38,9 +36,7 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
     public sealed class SuccessResult : AggregatedGenericResultMessage.Result
     {
         /// <inheritdoc />
-        public SuccessResult()
-        {
-        }
+        public SuccessResult() { }
 
         /// <inheritdoc />
         public override bool IsSuccess { get; set; } = true;

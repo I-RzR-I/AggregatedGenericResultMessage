@@ -50,17 +50,11 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         }
 
         /// <inheritdoc cref="IExceptionMessageResult{T}.HasAnyExceptions" />
-        public static bool HasAnyExceptions<T>(this Result<T> result)
-        {
-            return result.Messages
-                ?.Any(x => x.MessageType.Equals(MessageType.Exception)) ?? false;
-        }
+        public static bool HasAnyExceptions<T>(this Result<T> result) 
+            => result.Messages?.Any(x => x.MessageType.Equals(MessageType.Exception)) ?? false;
 
         /// <inheritdoc cref="IExceptionMessageResult{T}.HasAnyExceptions" />
         public static bool HasAnyExceptions<T>(this IResult<T> result)
-        {
-            return result.Messages
-                ?.Any(x => x.MessageType.Equals(MessageType.Exception)) ?? false;
-        }
+            => result.Messages?.Any(x => x.MessageType.Equals(MessageType.Exception)) ?? false;
     }
 }

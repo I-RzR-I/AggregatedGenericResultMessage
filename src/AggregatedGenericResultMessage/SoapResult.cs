@@ -23,6 +23,9 @@ using System.Xml;
 using System.Xml.Serialization;
 using AggregatedGenericResultMessage.Models;
 
+// ReSharper disable EmptyConstructor
+#pragma warning disable IDE0090
+
 #endregion
 
 namespace AggregatedGenericResultMessage
@@ -40,9 +43,7 @@ namespace AggregatedGenericResultMessage
         ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.SoapResult" /> class.
         /// </summary>
         /// <remarks></remarks>
-        public SoapResult()
-        {
-        }
+        public SoapResult() { }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance  is successfully executed.
@@ -77,9 +78,6 @@ namespace AggregatedGenericResultMessage
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static SoapResult Instance()
-        {
-            return new SoapResult();
-        }
+        public static SoapResult Instance() => new SoapResult();
     }
 }

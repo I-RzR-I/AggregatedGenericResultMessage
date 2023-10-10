@@ -70,7 +70,7 @@ namespace AggregatedGenericResultMessage.Helpers
             sb.AppendLine("Original Trace: ").Append("\t");
             sb.AppendLine(ex.ToString());
 
-            while (!ex.InnerException.IsNull())
+            while (ex.InnerException.IsNotNull())
             {
                 ex = ex.InnerException;
                 sb.AppendLine("Inner Exception: ");

@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Models;
 
+// ReSharper disable RedundantNameQualifier
+
 #endregion
 
 namespace AggregatedGenericResultMessage.Helpers.CustomResponses
@@ -28,15 +30,11 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
     public sealed class NullReferenceResult<T> : AggregatedGenericResultMessage.Result<T>
     {
         /// <inheritdoc />
-        public NullReferenceResult()
-        {
-        }
+        public NullReferenceResult() { }
 
         /// <inheritdoc />
         public NullReferenceResult(string message)
-        {
-            Messages.Add(new MessageModel(null, message));
-        }
+            => Messages.Add(new MessageModel(null, message));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
@@ -49,15 +47,11 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
     public sealed class NullReferenceResult : AggregatedGenericResultMessage.Result
     {
         /// <inheritdoc />
-        public NullReferenceResult()
-        {
-        }
+        public NullReferenceResult() { }
 
         /// <inheritdoc />
         public NullReferenceResult(string message)
-        {
-            Messages.Add(new MessageModel(null, message));
-        }
+            => Messages.Add(new MessageModel(null, message));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>

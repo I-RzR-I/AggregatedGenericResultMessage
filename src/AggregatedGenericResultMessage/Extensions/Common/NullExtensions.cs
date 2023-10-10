@@ -37,5 +37,12 @@ namespace AggregatedGenericResultMessage.Extensions.Common
         [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR",
             "DomainCommonExtensions.CommonExtensions.NullExtensions.IsNull", 1)]
         internal static bool IsNull(this object obj) => obj == null;
+
+        /// <summary>
+        ///     Is not null
+        /// </summary>
+        /// <param name="obj">Source data</param>
+        /// <returns></returns>
+        internal static bool IsNotNull(this object obj) => obj != null;
     }
 }

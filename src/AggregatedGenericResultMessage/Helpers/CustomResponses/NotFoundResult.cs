@@ -21,6 +21,8 @@ using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Models;
 
+// ReSharper disable RedundantNameQualifier
+
 #endregion
 
 namespace AggregatedGenericResultMessage.Helpers.CustomResponses
@@ -29,15 +31,11 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
     public sealed class NotFoundResult<T> : AggregatedGenericResultMessage.Result<T>
     {
         /// <inheritdoc />
-        public NotFoundResult()
-        {
-        }
+        public NotFoundResult() { }
 
         /// <inheritdoc />
         public NotFoundResult(string message)
-        {
-            Messages.Add(new MessageModel(null, message, MessageType.NotFound));
-        }
+            => Messages.Add(new MessageModel(null, message, MessageType.NotFound));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
@@ -50,15 +48,11 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
     public sealed class NotFoundResult : AggregatedGenericResultMessage.Result
     {
         /// <inheritdoc />
-        public NotFoundResult()
-        {
-        }
+        public NotFoundResult() { }
 
         /// <inheritdoc />
         public NotFoundResult(string message)
-        {
-            Messages.Add(new MessageModel(null, message, MessageType.NotFound));
-        }
+            => Messages.Add(new MessageModel(null, message, MessageType.NotFound));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>

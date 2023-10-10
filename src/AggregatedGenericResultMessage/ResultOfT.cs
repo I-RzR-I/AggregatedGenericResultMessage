@@ -19,9 +19,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 #if !NETFRAMEWORK
 using System.Text.Json.Serialization;
 #endif
+
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -33,8 +35,11 @@ using AggregatedGenericResultMessage.Helpers;
 using AggregatedGenericResultMessage.Helpers.Result;
 using AggregatedGenericResultMessage.Models;
 
+// ReSharper disable ArrangeThisQualifier
 // ReSharper disable VirtualMemberCallInConstructor
 #pragma warning disable 8632
+#pragma warning disable IDE0090
+#pragma warning disable IDE0003
 
 #endregion
 
@@ -50,7 +55,7 @@ namespace AggregatedGenericResultMessage
         /// </summary>
         /// <value></value>
         /// <remarks></remarks>
-        public static Result<T> Instance => CreateInstance() ?? new Result<T>();
+        public static Result<T> Instance => CreateInstance();
 
         /// <summary>
         ///     Create an instance of <see cref="Result{T}"/>
@@ -98,13 +103,13 @@ namespace AggregatedGenericResultMessage
         /// <remarks></remarks>
         internal Result(Exception? exception)
         {
-            if (!exception.IsNull())
+            if (exception.IsNotNull())
                 ExceptionHelper.PreserveStackTrace(exception);
 
             this.IsSuccess = false;
             this.Messages.Add(new MessageModel(null, exception?.Message ?? ""));
 
-            if (!exception.IsNull())
+            if (exception.IsNotNull())
                 this.Messages.Add(new MessageModel(null, exception));
         }
 
@@ -122,26 +127,28 @@ namespace AggregatedGenericResultMessage
         #endregion
 
         /// <inheritdoc />
-        public virtual Result ToBase() => new Result
-        {
-            IsSuccess = IsSuccess,
-            Response = Response,
-            Messages = Messages
-        };
+        public virtual Result ToBase()
+            => new Result()
+            {
+                IsSuccess = IsSuccess,
+                Response = Response,
+                Messages = Messages
+            };
 
         /// <inheritdoc />
-        public virtual SoapResult ToSoapResult() => new SoapResult
-        {
-            IsSuccess = IsSuccess,
-            Messages = Messages
+        public virtual SoapResult ToSoapResult()
+            => new SoapResult()
+            {
+                IsSuccess = IsSuccess,
+                Messages = Messages
                 ?.Select(y => new MessageModel()
                 {
                     Key = y.Key,
                     Message = y.Message,
                     MessageType = y.MessageType
                 }).ToList(),
-            Response = Response.CastToSoapResponse()
-        };
+                Response = Response.CastToSoapResponse()
+            };
 
         /// <inheritdoc />
         public string GetFirstMessage()
@@ -161,10 +168,7 @@ namespace AggregatedGenericResultMessage
         }
 
         /// <inheritdoc />
-        public XmlSchema GetSchema()
-        {
-            return null;
-        }
+        public XmlSchema GetSchema() => null;
 
         /// <inheritdoc />
         public void ReadXml(XmlReader reader)
@@ -308,11 +312,11 @@ namespace AggregatedGenericResultMessage
         }
 
         /// <inheritdoc cref="ResultSuccessHelper.Success{T}"/>
-        public static Result<T> Success(T data = default) 
+        public static Result<T> Success(T data = default)
             => ResultSuccessHelper.Success(data);
 
         /// <inheritdoc cref="ResultFailureHelper.Failure{T}()"/>
-        public static Result<T> Failure() 
+        public static Result<T> Failure()
             => ResultFailureHelper.Failure<T>();
 
         /// <inheritdoc cref="ResultFailureHelper.Failure{T}(string)"/>
@@ -340,7 +344,7 @@ namespace AggregatedGenericResultMessage
             => ResultAccessDeniedHelper.AccessDenied<T>(code, error);
 
         /// <inheritdoc cref="ResultNotFoundHelper.NotFound{T}(string)"/>
-        public static Result<T> NotFound(string message) 
+        public static Result<T> NotFound(string message)
             => ResultNotFoundHelper.NotFound<T>(message);
 
         /// <inheritdoc cref="ResultNotFoundHelper.NotFound{T}(string, string)"/>
@@ -355,8 +359,8 @@ namespace AggregatedGenericResultMessage
         /// <param name="response">Response data</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static implicit operator Result<T>(T response) =>
-            new Result<T>(response);
+        public static implicit operator Result<T>(T response)
+            => new Result<T>(response);
 
         /// <summary>
         ///     Implicit result operator for exception
@@ -364,8 +368,8 @@ namespace AggregatedGenericResultMessage
         /// <param name="exception">Current exceptions</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static implicit operator Result<T>(Exception? exception) =>
-            new Result<T>(exception);
+        public static implicit operator Result<T>(Exception? exception)
+            => new Result<T>(exception);
 
         #endregion
     }

@@ -18,6 +18,8 @@
 
 using AggregatedGenericResultMessage.Extensions.Result.Messages;
 
+// ReSharper disable RedundantCast
+
 #endregion
 
 namespace AggregatedGenericResultMessage.Helpers.Result
@@ -32,9 +34,7 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// </summary>
         /// <returns></returns>
         internal static Result<T> AccessDenied<T>()
-        {
-            return (Result<T>) Result<T>.Instance;//.AddAccessDenied();
-        }
+            => (Result<T>)Result<T>.Instance; //.AddAccessDenied();
 
         /// <summary>
         ///     Access denied
@@ -42,9 +42,7 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <param name="message">Access denied message</param>
         /// <returns></returns>
         internal static Result<T> AccessDenied<T>(string message)
-        {
-            return (Result<T>) Result<T>.Instance.AddAccessDenied(message);
-        }
+            => (Result<T>)Result<T>.Instance.AddAccessDenied(message);
 
         /// <summary>
         ///     Access denied
@@ -53,8 +51,6 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <param name="error">Message</param>
         /// <returns></returns>
         internal static Result<T> AccessDenied<T>(string code, string error)
-        {
-            return (Result<T>) Result<T>.Instance.AddAccessDenied(code, error);
-        }
+            => (Result<T>)Result<T>.Instance.AddAccessDenied(code, error);
     }
 }

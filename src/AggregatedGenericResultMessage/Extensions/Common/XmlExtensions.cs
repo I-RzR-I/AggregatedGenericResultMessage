@@ -36,11 +36,9 @@ namespace AggregatedGenericResultMessage.Extensions.Common
         /// <returns></returns>
         /// <remarks></remarks>
         internal static XmlElement GetXmlElement(this XmlDocument document)
-        {
-            if (!document.IsNull() && !document.DocumentElement.IsNull())
-                return document.DocumentElement;
-            return null;
-        }
+            => document.IsNotNull() && document.DocumentElement.IsNotNull() 
+                ? document.DocumentElement 
+                : null;
 
         /// <summary>
         ///     Cast source data to XmlElement
