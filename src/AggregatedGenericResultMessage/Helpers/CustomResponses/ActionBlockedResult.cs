@@ -35,12 +35,16 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 
         /// <inheritdoc />
         public ActionBlockedResult(string message)
+            => Messages.Add(new MessageModel(null, new MessageDataModel(message), MessageType.AccessDenied));
+
+        /// <inheritdoc />
+        public ActionBlockedResult(MessageDataModel message)
             => Messages.Add(new MessageModel(null, message, MessageType.AccessDenied));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(null, "The action was blocked. You do not have permission to continue.",
+            new MessageModel(null, new MessageDataModel("The action was blocked. You do not have permission to continue."),
                 MessageType.AccessDenied)
         };
     }
@@ -53,12 +57,16 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 
         /// <inheritdoc />
         public ActionBlockedResult(string message)
+            => Messages.Add(new MessageModel(null, new MessageDataModel(message), MessageType.AccessDenied));
+
+        /// <inheritdoc />
+        public ActionBlockedResult(MessageDataModel message)
             => Messages.Add(new MessageModel(null, message, MessageType.AccessDenied));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(null, "The action was blocked. You do not have permission to continue.",
+            new MessageModel(null, new MessageDataModel("The action was blocked. You do not have permission to continue."),
                 MessageType.AccessDenied)
         };
     }

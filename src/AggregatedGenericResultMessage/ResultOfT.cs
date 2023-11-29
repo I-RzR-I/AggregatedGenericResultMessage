@@ -107,7 +107,7 @@ namespace AggregatedGenericResultMessage
                 ExceptionHelper.PreserveStackTrace(exception);
 
             this.IsSuccess = false;
-            this.Messages.Add(new MessageModel(null, exception?.Message ?? ""));
+            this.Messages.Add(new MessageModel(null, new MessageDataModel(exception?.Message ?? "")));
 
             if (exception.IsNotNull())
                 this.Messages.Add(new MessageModel(null, exception));
@@ -137,18 +137,18 @@ namespace AggregatedGenericResultMessage
 
         /// <inheritdoc />
         public virtual SoapResult ToSoapResult()
-            => new SoapResult()
+        {
+            var messages = Messages
+                ?.Select(y => new MessageModel() { Key = y.Key, Message = y.Message, MessageType = y.MessageType }).ToList();
+            var response = Response.CastToSoapResponse();
+
+            return new SoapResult()
             {
                 IsSuccess = IsSuccess,
-                Messages = Messages
-                ?.Select(y => new MessageModel()
-                {
-                    Key = y.Key,
-                    Message = y.Message,
-                    MessageType = y.MessageType
-                }).ToList(),
-                Response = Response.CastToSoapResponse()
+                Messages = messages,
+                Response = response
             };
+        }
 
         /// <inheritdoc />
         public string GetFirstMessage()
@@ -159,11 +159,28 @@ namespace AggregatedGenericResultMessage
                     .FirstOrDefault(x => x.MessageType != MessageType.Exception)
                     ?.Message;
 
-                return fMessage.IsNull() ? string.Empty : fMessage;
+                return fMessage.IsNull() ? string.Empty : fMessage?.Info;
             }
             catch
             {
                 return string.Empty;
+            }
+        }
+
+        /// <inheritdoc />
+        public MessageDataModel GetFirstMessageWithDetails()
+        {
+            try
+            {
+                var fMessage = Messages
+                    .FirstOrDefault(x => x.MessageType != MessageType.Exception)
+                    ?.Message;
+
+                return fMessage.IsNull() ? null : fMessage;
+            }
+            catch
+            {
+                return null;
             }
         }
 

@@ -16,6 +16,7 @@
 
 #region U S A G E S
 
+using AggregatedGenericResultMessage.Models;
 using System;
 
 #endregion
@@ -45,10 +46,25 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add error
         /// </summary>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        IResult<T> AddError(MessageDataModel error);
+
+        /// <summary>
+        ///     Add error
+        /// </summary>
         /// <param name="key"></param>
         /// <param name="error"></param>
         /// <returns></returns>
         IResult<T> AddError(string key, string error);
+
+        /// <summary>
+        ///     Add error
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        IResult<T> AddError(string key, MessageDataModel error);
 
         /// <summary>
         ///     Add error for confirmation result
@@ -60,10 +76,25 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add error for confirmation result
         /// </summary>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        IResult<T> AddErrorConfirm(MessageDataModel error);
+
+        /// <summary>
+        ///     Add error for confirmation result
+        /// </summary>
         /// <param name="key"></param>
         /// <param name="error"></param>
         /// <returns></returns>
         IResult<T> AddErrorConfirm(string key, string error);
+
+        /// <summary>
+        ///     Add error for confirmation result
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        IResult<T> AddErrorConfirm(string key, MessageDataModel error);
 
         /// <summary>
         ///     Add exception error

@@ -17,6 +17,7 @@
 #region U S A G E S
 
 using AggregatedGenericResultMessage.Extensions.Result.Messages;
+using AggregatedGenericResultMessage.Models;
 
 // ReSharper disable RedundantCast
 
@@ -47,10 +48,27 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <summary>
         ///     Failure
         /// </summary>
+        /// <param name="error">Error message</param>
+        /// <returns></returns>
+        internal static Result<T> Failure<T>(MessageDataModel error) 
+            => (Result<T>) Result<T>.Instance.AddError(error);
+
+        /// <summary>
+        ///     Failure
+        /// </summary>
         /// <param name="code">Error code</param>
         /// <param name="error">Message</param>
         /// <returns></returns>
         internal static Result<T> Failure<T>(string code, string error)
+            => (Result<T>) Result<T>.Instance.AddError(code, error);
+
+        /// <summary>
+        ///     Failure
+        /// </summary>
+        /// <param name="code">Error code</param>
+        /// <param name="error">Message</param>
+        /// <returns></returns>
+        internal static Result<T> Failure<T>(string code, MessageDataModel error)
             => (Result<T>) Result<T>.Instance.AddError(code, error);
     }
 }

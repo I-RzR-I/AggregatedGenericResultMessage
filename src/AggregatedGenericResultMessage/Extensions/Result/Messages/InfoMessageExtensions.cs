@@ -33,6 +33,14 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string)" />
         public static IResult<T> AddInfo<T>(this Result<T> result, string info)
         {
+            result.Messages?.Add(new MessageModel(null, new MessageDataModel(info), MessageType.Info));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(MessageDataModel)" />
+        public static IResult<T> AddInfo<T>(this Result<T> result, MessageDataModel info)
+        {
             result.Messages?.Add(new MessageModel(null, info, MessageType.Info));
 
             return result;
@@ -40,6 +48,14 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string)" />
         public static IResult<T> AddInfo<T>(this IResult<T> result, string info)
+        {
+            result.Messages?.Add(new MessageModel(null, new MessageDataModel(info), MessageType.Info));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(MessageDataModel)" />
+        public static IResult<T> AddInfo<T>(this IResult<T> result, MessageDataModel info)
         {
             result.Messages?.Add(new MessageModel(null, info, MessageType.Info));
 
@@ -49,6 +65,14 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string, string)" />
         public static IResult<T> AddInfo<T>(this Result<T> result, string key, string info)
         {
+            result.Messages?.Add(new MessageModel(key, new MessageDataModel(info), MessageType.Info));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string, MessageDataModel)" />
+        public static IResult<T> AddInfo<T>(this Result<T> result, string key, MessageDataModel info)
+        {
             result.Messages?.Add(new MessageModel(key, info, MessageType.Info));
 
             return result;
@@ -56,6 +80,14 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string, string)" />
         public static IResult<T> AddInfo<T>(this IResult<T> result, string key, string info)
+        {
+            result.Messages?.Add(new MessageModel(key, new MessageDataModel(info), MessageType.Info));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string, MessageDataModel)" />
+        public static IResult<T> AddInfo<T>(this IResult<T> result, string key, MessageDataModel info)
         {
             result.Messages?.Add(new MessageModel(key, info, MessageType.Info));
 
@@ -65,6 +97,14 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string)" />
         public static IResult<T> AddInfoConfirm<T>(this Result<T> result, string info)
         {
+            result.Messages?.Add(new MessageModel(null, new MessageDataModel(info), MessageType.InfoConfirm));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(MessageDataModel)" />
+        public static IResult<T> AddInfoConfirm<T>(this Result<T> result, MessageDataModel info)
+        {
             result.Messages?.Add(new MessageModel(null, info, MessageType.InfoConfirm));
 
             return result;
@@ -72,6 +112,14 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string)" />
         public static IResult<T> AddInfoConfirm<T>(this IResult<T> result, string info)
+        {
+            result.Messages?.Add(new MessageModel(null, new MessageDataModel(info), MessageType.InfoConfirm));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(MessageDataModel)" />
+        public static IResult<T> AddInfoConfirm<T>(this IResult<T> result, MessageDataModel info)
         {
             result.Messages?.Add(new MessageModel(null, info, MessageType.InfoConfirm));
 
@@ -81,6 +129,14 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string, string)" />
         public static IResult<T> AddInfoConfirm<T>(this Result<T> result, string key, string info)
         {
+            result.Messages?.Add(new MessageModel(key, new MessageDataModel(info), MessageType.InfoConfirm));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string, MessageDataModel)" />
+        public static IResult<T> AddInfoConfirm<T>(this Result<T> result, string key, MessageDataModel info)
+        {
             result.Messages?.Add(new MessageModel(key, info, MessageType.InfoConfirm));
 
             return result;
@@ -88,6 +144,14 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string, string)" />
         public static IResult<T> AddInfoConfirm<T>(this IResult<T> result, string key, string info)
+        {
+            result.Messages?.Add(new MessageModel(key, new MessageDataModel(info), MessageType.InfoConfirm));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string, MessageDataModel)" />
+        public static IResult<T> AddInfoConfirm<T>(this IResult<T> result, string key, MessageDataModel info)
         {
             result.Messages?.Add(new MessageModel(key, info, MessageType.InfoConfirm));
 

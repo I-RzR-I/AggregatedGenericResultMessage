@@ -48,6 +48,23 @@ namespace AggregatedGenericResultMessage.Extensions.Result
         }
 
         /// <summary>
+        ///     Customize result with message
+        /// </summary>
+        /// <param name="result">Required. Current Result</param>
+        /// <param name="message">Required. Message</param>
+        /// <param name="messageType" cref="MessageType">Optional. Message type. The default value is MessageType.None.</param>
+        /// <returns></returns>
+        /// <typeparam name="T">Type of result</typeparam>
+        /// <remarks></remarks>
+        public static Result<T> WithMessage<T>(this Result<T> result, MessageDataModel message,
+            MessageType messageType = MessageType.None)
+        {
+            result?.Messages.Add(new MessageModel(null, message, messageType));
+
+            return result;
+        }
+
+        /// <summary>
         ///     Customize result with code
         /// </summary>
         /// <param name="result">Required. Current Result</param>
@@ -59,7 +76,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result
         public static Result<T> WithKeyCode<T>(this Result<T> result, string code,
             MessageType messageType = MessageType.None)
         {
-            result?.Messages?.Add(new MessageModel(code, null, messageType));
+            result?.Messages?.Add(new MessageModel(code, (string)null, messageType));
 
             return result;
         }
@@ -75,6 +92,24 @@ namespace AggregatedGenericResultMessage.Extensions.Result
         /// <typeparam name="T">Type of result</typeparam>
         /// <remarks></remarks>
         public static Result<T> WithCodeMessage<T>(this Result<T> result, string code, string message,
+            MessageType messageType = MessageType.None)
+        {
+            result?.Messages?.Add(new MessageModel(code, message, messageType));
+
+            return result;
+        }
+
+        /// <summary>
+        ///     Customize result with message and code
+        /// </summary>
+        /// <param name="result">Required. Current Result</param>
+        /// <param name="code">Required. Code</param>
+        /// <param name="message">Required. Message</param>
+        /// <param name="messageType" cref="MessageType">Optional. Type of message. The default value is MessageType.None.</param>
+        /// <returns></returns>
+        /// <typeparam name="T">Type of result</typeparam>
+        /// <remarks></remarks>
+        public static Result<T> WithCodeMessage<T>(this Result<T> result, string code, MessageDataModel message,
             MessageType messageType = MessageType.None)
         {
             result?.Messages?.Add(new MessageModel(code, message, messageType));
@@ -99,10 +134,26 @@ namespace AggregatedGenericResultMessage.Extensions.Result
         }
 
         /// <summary>
-        ///     Customize result with occured exception
+        ///     Customize result with error message
         /// </summary>
         /// <param name="result">Required. Current Result</param>
-        /// <param name="exception">Required. Occured code exception</param>
+        /// <param name="error">Required. Error message</param>
+        /// <param name="code">Optional. Error code. The default value is "".</param>
+        /// <returns></returns>
+        /// <typeparam name="T">Type of result</typeparam>
+        /// <remarks></remarks>
+        public static Result<T> WithError<T>(this Result<T> result, MessageDataModel error, string code = null)
+        {
+            result?.Messages?.Add(new MessageModel(code, error));
+
+            return result;
+        }
+
+        /// <summary>
+        ///     Customize result with occurred exception
+        /// </summary>
+        /// <param name="result">Required. Current Result</param>
+        /// <param name="exception">Required. occurred code exception</param>
         /// <param name="code">Optional. Exception code. The default value is "".</param>
         /// <returns></returns>
         /// <typeparam name="T">Type of result</typeparam>
@@ -122,7 +173,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result
         /// <returns></returns>
         /// <typeparam name="T">Type of result</typeparam>
         /// <remarks></remarks>
-        public static Result<T> WithError<T>(this Result<T> result, ResultError error)
+        public static Result<T> WithError<T>(this Result<T> result, ResultErrorModel error)
         {
             result?.Messages?.Add(error.MapToMessage());
 
@@ -137,7 +188,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result
         /// <returns></returns>
         /// <typeparam name="T">Type of result</typeparam>
         /// <remarks></remarks>
-        public static Result<T> WithErrors<T>(this Result<T> result, params ResultError[] errors)
+        public static Result<T> WithErrors<T>(this Result<T> result, params ResultErrorModel[] errors)
         {
             foreach (var error in errors)
                 result?.Messages?.Add(error.MapToMessage());
@@ -153,7 +204,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result
         /// <returns></returns>
         /// <typeparam name="T">Type of result</typeparam>
         /// <remarks></remarks>
-        public static Result<T> WithErrors<T>(this Result<T> result, IEnumerable<ResultError> errors)
+        public static Result<T> WithErrors<T>(this Result<T> result, IEnumerable<ResultErrorModel> errors)
         {
             foreach (var error in errors)
                 result?.Messages?.Add(error.MapToMessage());

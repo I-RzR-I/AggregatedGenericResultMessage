@@ -17,7 +17,7 @@
 #region U S A G E S
 
 using System.Xml.Serialization;
-using AggregatedGenericResultMessage.Enums;
+using AggregatedGenericResultMessage.Models;
 
 #endregion
 
@@ -38,5 +38,12 @@ namespace AggregatedGenericResultMessage.Abstractions
         /// <returns></returns>
         /// <remarks></remarks>
         string GetFirstMessage();
+
+        /// <summary>
+        ///     Get first message from response
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        MessageDataModel GetFirstMessageWithDetails();
     }
 }

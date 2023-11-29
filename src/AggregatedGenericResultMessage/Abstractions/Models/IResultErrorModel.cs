@@ -16,6 +16,7 @@
 
 #region U S A G E S
 
+using AggregatedGenericResultMessage.Models;
 using System;
 
 #endregion
@@ -25,7 +26,7 @@ namespace AggregatedGenericResultMessage.Abstractions.Models
     /// <summary>
     ///     Result error
     /// </summary>
-    public interface IResultError
+    public interface IResultErrorModel
     {
         /// <summary>
         ///     Gets error key.
@@ -39,7 +40,7 @@ namespace AggregatedGenericResultMessage.Abstractions.Models
         /// </summary>
         /// <value></value>
         /// <remarks></remarks>
-        string Message { get; }
+        MessageDataModel Message { get; }
 
         /// <summary>
         ///     Gets current execution code exception.

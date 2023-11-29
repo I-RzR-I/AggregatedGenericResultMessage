@@ -56,7 +56,7 @@ namespace AggregatedGenericResultMessage
         {
             IsSuccess = isSuccess;
             if (isSuccess.Equals(false))
-                Messages.Add(new MessageModel(key: ExceptionCodes.UnSuccessfullyReqExec, messageType: MessageType.Error));
+                Messages.Add(new MessageModel(key: ExceptionCodes.UnSuccessfullyReqExec, (string)null, messageType: MessageType.Error));
         }
 
         /// <inheritdoc />
