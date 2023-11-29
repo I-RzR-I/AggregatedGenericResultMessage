@@ -1,8 +1,16 @@
+Param
+(
+	[Parameter(Mandatory = $false)]
+	[string]$ownVersion,
+	[Parameter(Mandatory = $false)]
+	[bool]$runTest
+);
+
 $assemblyPath = "..\src\shared\GeneralAssemblyInfo.cs";
 $defaultVersion = "1.0.0.0";
 $nugetPath = "../nuget";
 $data = ("..\src\AggregatedGenericResultMessage\AggregatedGenericResultMessage.csproj");
-$forceCustomPackVersion = $args[0];
+$testExec = $false;
 
 <#
 	.SYNOPSIS
@@ -188,15 +196,20 @@ function Exec-TestSolution
 	}
 }
 
-Write-Host "Init test solution...`n" -ForegroundColor Green;
-$testExec = Exec-TestSolution;
+If ($runTest -eq $true)
+{
+	Write-Host "Init test solution...`n" -ForegroundColor Green;
+	$testExec = Exec-TestSolution;
+}
+Else { $testExec = $true; }
+
 If ($testExec -eq $true)
 {
 	Write-Host "Path to pack: '$nugetPath'`n" -ForegroundColor Green;
 	
 	$currentVersion = "";
-	If ($forceCustomPackVersion -eq $null -or $forceCustomPackVersion -eq "") { $currentVersion = Get-CurrentAssemblyVersion; }
-	Else { $currentVersion = $forceCustomPackVersion; }
+	If ($ownVersion -eq $null -or $ownVersion -eq "") { $currentVersion = Get-CurrentAssemblyVersion; }
+	Else { $currentVersion = $ownVersion; }
 		
 	$directoryInfo = Get-ChildItem $nugetPath | Where-Object { $_.Name -match '[a-z]*.1.0.0.nupkg$' } | Measure-Object;
 	If ($defaultVersion -eq $currentVersion -and $directoryInfo.count -eq 0)
@@ -218,12 +231,12 @@ If ($testExec -eq $true)
 	Else
 	{
 		$finalVersion = "";
-		If ($forceCustomPackVersion -eq $null -or $forceCustomPackVersion -eq "")
+		If ($ownVersion -eq $null -or $ownVersion -eq "")
 		{
 			$versArray = $currentVersion.Split('.');
 			$finalVersion = $versArray[0].ToString() + "." + $versArray[1].ToString() + "." + (([int]$versArray[2]) + 1).ToString() + "." + (Get-TimeStamp).ToString();
 		}
-		Else { $finalVersion = $forceCustomPackVersion; }
+		Else { $finalVersion = $ownVersion; }
 		
 		Set-VersionAssembly -packVersion $finalVersion;
 		
