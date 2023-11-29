@@ -14,6 +14,8 @@
 //  </summary>
 // ***********************************************************************
 
+using AggregatedGenericResultMessage.Models;
+
 namespace AggregatedGenericResultMessage.Abstractions.MessageResults
 {
     /// <summary>
@@ -33,10 +35,25 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add Info
         /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        IResult<T> AddInfo(MessageDataModel info);
+
+        /// <summary>
+        ///     Add Info
+        /// </summary>
         /// <param name="key"></param>
         /// <param name="info"></param>
         /// <returns></returns>
         IResult<T> AddInfo(string key, string info);
+
+        /// <summary>
+        ///     Add Info
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        IResult<T> AddInfo(string key, MessageDataModel info);
 
         /// <summary>
         ///     Add Info for confirmation result
@@ -48,9 +65,24 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add Info for confirmation result
         /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        IResult<T> AddInfoConfirm(MessageDataModel info);
+
+        /// <summary>
+        ///     Add Info for confirmation result
+        /// </summary>
         /// <param name="key"></param>
         /// <param name="info"></param>
         /// <returns></returns>
         IResult<T> AddInfoConfirm(string key, string info);
+
+        /// <summary>
+        ///     Add Info for confirmation result
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        IResult<T> AddInfoConfirm(string key, MessageDataModel info);
     }
 }

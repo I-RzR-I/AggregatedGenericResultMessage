@@ -46,7 +46,7 @@ namespace AggregatedGenericResultMessage.Abstractions.Models
 #if !NETFRAMEWORK
         [JsonPropertyName("message")]
 #endif
-        string Message { get; set; }
+        MessageDataModel Message { get; set; }
 
         /// <summary>
         ///     Gets or sets Message type.
@@ -64,7 +64,7 @@ namespace AggregatedGenericResultMessage.Abstractions.Models
 #if !NETFRAMEWORK
         [JsonPropertyName("logTraceId")]
 #endif
-        string LogTraceId { get; }
+        string LogTraceId { get; set; }
 
         /// <summary>
         ///     Returns a string that represents the current object.

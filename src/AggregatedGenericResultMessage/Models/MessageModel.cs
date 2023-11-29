@@ -26,6 +26,7 @@ using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Helpers;
 using AggregatedGenericResultMessage.Extensions.Common;
+using System.Xml.Serialization;
 
 #pragma warning disable IDE0057
 #pragma warning disable 8632
@@ -48,25 +49,29 @@ namespace AggregatedGenericResultMessage.Models
 #if !NETFRAMEWORK
         [JsonPropertyName("key")]
 #endif
+        [XmlElement("Key")]
         public string Key { get; set; }
 
         /// <inheritdoc />
 #if !NETFRAMEWORK
-        [JsonPropertyName("message")]
+        [JsonPropertyName("Message")]
 #endif
-        public string Message { get; set; }
+        [XmlElement("Message")]
+        public MessageDataModel Message { get; set; } = new MessageDataModel();
 
         /// <inheritdoc />
 #if !NETFRAMEWORK
         [JsonPropertyName("messageType")]
 #endif
+        [XmlElement("MessageType")]
         public MessageType MessageType { get; set; }
 
         /// <inheritdoc />
 #if !NETFRAMEWORK
         [JsonPropertyName("logTraceId")]
 #endif
-        public string LogTraceId { get; }
+        [XmlElement("LogTraceId")]
+        public string LogTraceId { get; set; } = GetTraceLogId();
 
         #endregion
 
@@ -82,17 +87,32 @@ namespace AggregatedGenericResultMessage.Models
         ///     Initializes a new instance of the <see cref="MessageModel" /> class.
         /// </summary>
         /// <param name="key">Required. Message key</param>
-        /// <param name="message">Optional(string). The default value is null.</param>
+        /// <param name="message">Optional(MessageDataModel). The default value is null.</param>
         /// <param name="messageType">Message type</param>
         /// <remarks></remarks>
         public MessageModel(string key, string message = null, MessageType messageType = MessageType.Error)
         {
             Key = key;
             MessageType = messageType;
-            LogTraceId = GetTraceLogId();
 
-            if (!message.IsNullOrEmpty())
-                Message = message?.Trim();
+            if (message.IsNotNull())
+                Message = new MessageDataModel(message);
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MessageModel" /> class.
+        /// </summary>
+        /// <param name="key">Required. Message key</param>
+        /// <param name="message">Optional(MessageDataModel). The default value is null.</param>
+        /// <param name="messageType">Message type</param>
+        /// <remarks></remarks>
+        public MessageModel(string key, MessageDataModel message = null, MessageType messageType = MessageType.Error)
+        {
+            Key = key;
+            MessageType = messageType;
+
+            if (message.IsNotNull())
+                Message = message;
         }
 
         /// <summary>
@@ -105,10 +125,9 @@ namespace AggregatedGenericResultMessage.Models
         {
             Key = key;
             MessageType = MessageType.Exception;
-            LogTraceId = GetTraceLogId();
 
             if (exception.IsNotNull())
-                Message = ExceptionHelper.CreateTraceExceptionString(exception);
+                Message = ExceptionHelper.CreateTraceExceptionMessage(exception);
         }
 
         #endregion
@@ -133,18 +152,16 @@ namespace AggregatedGenericResultMessage.Models
             {
                 var parts = formatted[0].Split(':');
 
-                if (parts.Length < 2)
-                    return new MessageModel(ExceptionCodes.UnhandledException, formatted[0], messageType);
-
-                if (parts.Length == 2)
-                    return new MessageModel(parts[0], parts[1]);
-
-                return new MessageModel(parts[0], formatted[0].Substring(parts[0].Length).TrimStart(':').Trim(),
-                    messageType);
+                return parts.Length switch
+                {
+                    < 2 => new MessageModel(ExceptionCodes.UnhandledException, new MessageDataModel(formatted[0]), messageType),
+                    2 => new MessageModel(parts[0], new MessageDataModel(parts[1])),
+                    _ => new MessageModel(parts[0], new MessageDataModel(formatted[0].Substring(parts[0].Length).TrimStart(':').Trim()), messageType)
+                };
             }
             catch
             {
-                return new MessageModel(ExceptionCodes.UnhandledException, formatted[0], messageType);
+                return new MessageModel(ExceptionCodes.UnhandledException, new MessageDataModel(formatted[0]), messageType);
             }
         }
 
@@ -152,7 +169,7 @@ namespace AggregatedGenericResultMessage.Models
         ///     Get uniq trace log id
         /// </summary>
         /// <returns></returns>
-        private static string GetTraceLogId() 
+        private static string GetTraceLogId()
             => $"{Guid.NewGuid():N}#{DateTime.UtcNow:yyyyMMddHHmmssfff}".Base64Encode();
     }
 }

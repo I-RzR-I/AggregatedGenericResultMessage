@@ -35,12 +35,16 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 
         /// <inheritdoc />
         public NotFoundResult(string message)
+            => Messages.Add(new MessageModel(null, new MessageDataModel(message), MessageType.NotFound));
+
+        /// <inheritdoc />
+        public NotFoundResult(MessageDataModel message)
             => Messages.Add(new MessageModel(null, message, MessageType.NotFound));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(null, "Entry not found.", MessageType.NotFound)
+            new MessageModel(null, new MessageDataModel("Entry not found."), MessageType.NotFound)
         };
     }
 
@@ -52,12 +56,16 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 
         /// <inheritdoc />
         public NotFoundResult(string message)
+            => Messages.Add(new MessageModel(null, new MessageDataModel(message), MessageType.NotFound));
+
+        /// <inheritdoc />
+        public NotFoundResult(MessageDataModel message)
             => Messages.Add(new MessageModel(null, message, MessageType.NotFound));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(null, "Entry not found.", MessageType.NotFound)
+            new MessageModel(null, new MessageDataModel("Entry not found."), MessageType.NotFound)
         };
     }
 }

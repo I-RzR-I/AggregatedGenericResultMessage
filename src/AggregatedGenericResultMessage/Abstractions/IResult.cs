@@ -40,7 +40,8 @@ namespace AggregatedGenericResultMessage.Abstractions
         /// <summary>
         ///     This property will contain messages keys if any.
         /// </summary>
-        [XmlArray]
+        [XmlArray("Messages")]
+        [XmlArrayItem("Message")]
         ICollection<IMessageModel> Messages { get; set; }
 
         /// <summary>

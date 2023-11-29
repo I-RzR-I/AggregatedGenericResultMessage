@@ -14,6 +14,8 @@
 //  </summary>
 // ***********************************************************************
 
+using AggregatedGenericResultMessage.Models;
+
 namespace AggregatedGenericResultMessage.Abstractions.MessageResults
 {
     /// <summary>
@@ -38,9 +40,24 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add access denied message
         /// </summary>
+        /// <param name="message">Message</param>
+        /// <returns></returns>
+        IResult<T> AddNotFound(MessageDataModel message);
+
+        /// <summary>
+        ///     Add access denied message
+        /// </summary>
         /// <param name="key">Key</param>
         /// <param name="message">Message</param>
         /// <returns></returns>
         IResult<T> AddNotFound(string key, string message);
+
+        /// <summary>
+        ///     Add access denied message
+        /// </summary>
+        /// <param name="key">Key</param>
+        /// <param name="message">Message</param>
+        /// <returns></returns>
+        IResult<T> AddNotFound(string key, MessageDataModel message);
     }
 }

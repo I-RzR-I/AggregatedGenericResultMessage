@@ -14,6 +14,8 @@
 //  </summary>
 // ***********************************************************************
 
+using AggregatedGenericResultMessage.Models;
+
 namespace AggregatedGenericResultMessage.Abstractions.MessageResults
 {
     /// <summary>
@@ -39,10 +41,25 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add Warning
         /// </summary>
+        /// <param name="warning"></param>
+        /// <returns></returns>
+        IResult<T> AddWarning(MessageDataModel warning);
+
+        /// <summary>
+        ///     Add Warning
+        /// </summary>
         /// <param name="key"></param>
         /// <param name="warning"></param>
         /// <returns></returns>
         IResult<T> AddWarning(string key, string warning);
+
+        /// <summary>
+        ///     Add Warning
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="warning"></param>
+        /// <returns></returns>
+        IResult<T> AddWarning(string key, MessageDataModel warning);
 
         /// <summary>
         ///     Add Warning for confirmation result
@@ -54,9 +71,24 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add Warning for confirmation result
         /// </summary>
+        /// <param name="warning"></param>
+        /// <returns></returns>
+        IResult<T> AddWarningConfirm(MessageDataModel warning);
+
+        /// <summary>
+        ///     Add Warning for confirmation result
+        /// </summary>
         /// <param name="key"></param>
         /// <param name="warning"></param>
         /// <returns></returns>
         IResult<T> AddWarningConfirm(string key, string warning);
+
+        /// <summary>
+        ///     Add Warning for confirmation result
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="warning"></param>
+        /// <returns></returns>
+        IResult<T> AddWarningConfirm(string key, MessageDataModel warning);
     }
 }

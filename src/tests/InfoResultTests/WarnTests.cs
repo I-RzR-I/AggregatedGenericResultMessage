@@ -47,14 +47,14 @@ namespace InfoResultTests
             Assert.IsFalse(res.IsSuccess);
             Assert.IsNull(res.Response);
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key.IsNullOrEmpty() && x.Message == "Warn-01" && x.MessageType == MessageType.Warning));
+                x.Key.IsNullOrEmpty() && x.Message.Info == "Warn-01" && x.MessageType == MessageType.Warning));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == "warn-01" && x.Message == "WarnMessage-01" && x.MessageType == MessageType.Warning));
+                x.Key == "warn-01" && x.Message.Info == "WarnMessage-01" && x.MessageType == MessageType.Warning));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key.IsNullOrEmpty() && x.Message == "WarnMessage-Confirm-01" &&
+                x.Key.IsNullOrEmpty() && x.Message.Info == "WarnMessage-Confirm-01" &&
                 x.MessageType == MessageType.WarningConfirm));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == "warn-key-Confirm-01" && x.Message == "WarnMessage-01" &&
+                x.Key == "warn-key-Confirm-01" && x.Message.Info == "WarnMessage-01" &&
                 x.MessageType == MessageType.WarningConfirm));
         }
     }

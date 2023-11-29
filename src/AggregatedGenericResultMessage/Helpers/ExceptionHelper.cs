@@ -21,6 +21,7 @@ using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Text;
 using AggregatedGenericResultMessage.Extensions.Common;
+using AggregatedGenericResultMessage.Models;
 
 // ReSharper disable PossibleNullReferenceException
 
@@ -78,6 +79,36 @@ namespace AggregatedGenericResultMessage.Helpers
             }
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        ///     Create/convert to message model exception
+        /// </summary>
+        /// <param name="ex">Exception</param>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        internal static MessageDataModel CreateTraceExceptionMessage(Exception ex)
+        {
+            if (ex.IsNull())
+                return new MessageDataModel("\tNO EXCEPTION.");
+
+            var sb = new StringBuilder();
+            sb.AppendLine("Exception: ");
+            sb.AppendLine("Message: ").Append("\t");
+            sb.AppendLine(ex.Message);
+            sb.AppendLine("StackTrace: ");
+            sb.AppendLine(GetStackFootprints(ex));
+            sb.AppendLine("Original Trace: ").Append("\t");
+            sb.AppendLine(ex.ToString());
+
+            while (ex.InnerException.IsNotNull())
+            {
+                ex = ex.InnerException;
+                sb.AppendLine("Inner Exception: ");
+                sb.AppendLine(ex?.ToString());
+            }
+
+            return new MessageDataModel(ex.Message, sb.ToString());
         }
 
         /// <summary>

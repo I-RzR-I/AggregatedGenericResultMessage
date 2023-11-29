@@ -23,16 +23,29 @@ using AggregatedGenericResultMessage.Abstractions.Models;
 
 namespace AggregatedGenericResultMessage.Models
 {
-    /// <inheritdoc cref="IResultError" />
-    public class ResultError : IResultError
+    /// <inheritdoc cref="IResultErrorModel" />
+    public class ResultErrorModel : IResultErrorModel
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultError" /> class.
+        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultErrorModel" /> class.
         /// </summary>
         /// <param name="key">Error key</param>
         /// <param name="message">Error message</param>
         /// <remarks></remarks>
-        public ResultError(string key, string message)
+        public ResultErrorModel(string key, string message)
+        {
+            Key = key;
+            Message = new MessageDataModel(message);
+            Exception = default;
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultErrorModel" /> class.
+        /// </summary>
+        /// <param name="key">Error key</param>
+        /// <param name="message">Error message</param>
+        /// <remarks></remarks>
+        public ResultErrorModel(string key, MessageDataModel message)
         {
             Key = key;
             Message = message;
@@ -40,14 +53,14 @@ namespace AggregatedGenericResultMessage.Models
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultError" /> class.
+        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultErrorModel" /> class.
         /// </summary>
         /// <param name="exception">Current execution code exception</param>
         /// <remarks></remarks>
-        public ResultError(Exception exception)
+        public ResultErrorModel(Exception exception)
         {
             Key = null;
-            Message = null;
+            Message = new MessageDataModel();
             Exception = exception;
         }
 
@@ -55,7 +68,7 @@ namespace AggregatedGenericResultMessage.Models
         public string Key { get; }
 
         /// <inheritdoc />
-        public string Message { get; }
+        public MessageDataModel Message { get; }
 
         /// <inheritdoc />
         public Exception Exception { get; }

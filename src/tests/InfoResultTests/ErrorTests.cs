@@ -16,13 +16,11 @@
 
 #region U S A G E S
 
-using System;
 using System.Linq;
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Extensions.Result.Messages;
 using DomainCommonExtensions.DataTypeExtensions;
-using InfoResultTests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion
@@ -49,14 +47,14 @@ namespace InfoResultTests
             Assert.IsFalse(res.IsSuccess);
             Assert.IsNull(res.Response);
             Assert.IsTrue(res.Messages.Any(x =>
-                 x.Key.IsNullOrEmpty() && x.Message == "Error-01" && x.MessageType == MessageType.Error));
+                 x.Key.IsNullOrEmpty() && x.Message.Info == "Error-01" && x.MessageType == MessageType.Error));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == "error-01" && x.Message == "ErrorMessage-01" && x.MessageType == MessageType.Error));
+                x.Key == "error-01" && x.Message.Info == "ErrorMessage-01" && x.MessageType == MessageType.Error));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key.IsNullOrEmpty() && x.Message == "ErrorMessage-Confirm-01" &&
+                x.Key.IsNullOrEmpty() && x.Message.Info == "ErrorMessage-Confirm-01" &&
                 x.MessageType == MessageType.ErrorConfirm));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == "error-key-Confirm-01" && x.Message == "ErrorMessage-01" &&
+                x.Key == "error-key-Confirm-01" && x.Message.Info == "ErrorMessage-01" &&
                 x.MessageType == MessageType.ErrorConfirm));
 
             Assert.IsTrue(res.HasAnyErrors());

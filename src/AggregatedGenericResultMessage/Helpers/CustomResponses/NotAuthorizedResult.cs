@@ -35,12 +35,16 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 
         /// <inheritdoc />
         public NotAuthorizedResult(string message)
+            => Messages.Add(new MessageModel(null, new MessageDataModel(message), MessageType.AccessDenied));
+
+        /// <inheritdoc />
+        public NotAuthorizedResult(MessageDataModel message)
             => Messages.Add(new MessageModel(null, message, MessageType.AccessDenied));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(null, "You are not authorized.", MessageType.AccessDenied)
+            new MessageModel(null, new MessageDataModel("You are not authorized."), MessageType.AccessDenied)
         };
     }
 
@@ -52,12 +56,16 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 
         /// <inheritdoc />
         public NotAuthorizedResult(string message)
+            => Messages.Add(new MessageModel(null, new MessageDataModel(message), MessageType.AccessDenied));
+
+        /// <inheritdoc />
+        public NotAuthorizedResult(MessageDataModel message)
             => Messages.Add(new MessageModel(null, message, MessageType.AccessDenied));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(null, "You are not authorized.", MessageType.AccessDenied)
+            new MessageModel(null, new MessageDataModel("You are not authorized."), MessageType.AccessDenied)
         };
     }
 }

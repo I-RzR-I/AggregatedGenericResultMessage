@@ -34,12 +34,16 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 
         /// <inheritdoc />
         public InvalidParametersResult(string message)
+            => Messages.Add(new MessageModel(null, new MessageDataModel(message)));
+
+        /// <inheritdoc />
+        public InvalidParametersResult(MessageDataModel message)
             => Messages.Add(new MessageModel(null, message));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(null, "Invalid parameters.")
+            new MessageModel(null, new MessageDataModel("Invalid parameters."))
         };
     }
 
@@ -51,12 +55,16 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 
         /// <inheritdoc />
         public InvalidParametersResult(string message)
+            => Messages.Add(new MessageModel(null, new MessageDataModel(message)));
+
+        /// <inheritdoc />
+        public InvalidParametersResult(MessageDataModel message)
             => Messages.Add(new MessageModel(null, message));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(null, "Invalid parameters.")
+            new MessageModel(null, new MessageDataModel("Invalid parameters."))
         };
     }
 }

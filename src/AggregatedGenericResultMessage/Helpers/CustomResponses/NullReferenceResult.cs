@@ -34,12 +34,16 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 
         /// <inheritdoc />
         public NullReferenceResult(string message)
+            => Messages.Add(new MessageModel(null, new MessageDataModel(message)));
+
+        /// <inheritdoc />
+        public NullReferenceResult(MessageDataModel message)
             => Messages.Add(new MessageModel(null, message));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(null, "A null reference was found.")
+            new MessageModel(null, new MessageDataModel("A null reference was found."))
         };
     }
 
@@ -51,12 +55,16 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
 
         /// <inheritdoc />
         public NullReferenceResult(string message)
+            => Messages.Add(new MessageModel(null, new MessageDataModel(message)));
+
+        /// <inheritdoc />
+        public NullReferenceResult(MessageDataModel message)
             => Messages.Add(new MessageModel(null, message));
 
         /// <inheritdoc />
         public override ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>
         {
-            new MessageModel(null, "A null reference was found.")
+            new MessageModel(null, new MessageDataModel("A null reference was found."))
         };
     }
 }
