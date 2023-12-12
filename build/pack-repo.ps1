@@ -84,8 +84,15 @@ function Set-BuildAndPack
 		}
 		
 		Write-Host "Pack in Release '$($_)'!" -ForegroundColor Green;
-		dotnet pack $($_) -p:PackageVersion=$packVersion --no-build -c Release --output $nugetPath;
-				
+		$packResult = dotnet pack $($_) -p:PackageVersion=$packVersion --no-build -c Release --output $nugetPath;
+		if ($LASTEXITCODE -ne 0)
+		{
+			Set-VersionAssembly -packVersion $currentVersion;
+			Write-Host $buildResult;
+			
+			return $false;
+		}
+		
 		return $true;
 	}
 	catch
@@ -218,8 +225,10 @@ If ($testExec -eq $true)
 		
 		$data | ForEach-Object	{
 			$buildResult = Set-BuildAndPack -packVersion $currentVersion;
-			If ($buildResult -eq $false -or $buildResult -ccontains $false)
+			If ($buildResult -eq $false -or $buildResult -contains $false)
 			{
+				Write-Host "`nBuild/pack failed!!!" -ForegroundColor Red;
+				
 				exit;
 			}			
 		}
@@ -242,8 +251,10 @@ If ($testExec -eq $true)
 		
 		$data | ForEach-Object	{
 			$buildResult = Set-BuildAndPack -packVersion $finalVersion -currentVersion $currentVersion;
-			If ($buildResult -eq $false -or $buildResult -ccontains $false)
+			If ($buildResult -eq $false -or $buildResult -contains $false)
 			{
+				Write-Host "`nBuild/pack failed!!!" -ForegroundColor Red;
+				
 				exit;
 			}
 		}
