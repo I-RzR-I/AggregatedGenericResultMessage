@@ -51,5 +51,10 @@
 -> Hide internal used extension.
 
 ### **v1.2.2.2040** 
--> Adjust code to solution code style.
+-> Adjust code to solution code style.<br />
 -> Update lib versions.
+
+### **v1.3.2.469** 
+-> Add `RelatedObject` in code (means related object in code execution, usually used in case of some errors to show method name, stored procedure, table, etc).<br />
+-> Adjust code to solution code style.<br />
+-> Adjust exposed methods and add a few new.

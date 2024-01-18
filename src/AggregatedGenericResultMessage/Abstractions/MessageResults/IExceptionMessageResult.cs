@@ -16,6 +16,7 @@
 
 #region U S A G E S
 
+using AggregatedGenericResultMessage.Models;
 using System;
 
 #endregion
@@ -35,6 +36,13 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// <param name="exception"></param>
         /// <returns></returns>
         IResult<T> AddException(Exception exception);
+        /// <summary>
+        ///     Add exception
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        IResult<T> AddException(Exception exception, params RelatedObjectModel[] relatedObjects);
 
         /// <summary>
         ///     Check if in response persist any exceptions

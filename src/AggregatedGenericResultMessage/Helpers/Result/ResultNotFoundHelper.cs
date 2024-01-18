@@ -49,9 +49,27 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         ///     Not found
         /// </summary>
         /// <param name="message">Not found message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        public static Result<T> NotFound<T>(string message, params RelatedObjectModel[] relatedObjects)
+            => (Result<T>)Result<T>.Instance.AddNotFound(message, relatedObjects);
+
+        /// <summary>
+        ///     Not found
+        /// </summary>
+        /// <param name="message">Not found message</param>
         /// <returns></returns>
         public static Result<T> NotFound<T>(MessageDataModel message)
             => (Result<T>)Result<T>.Instance.AddNotFound(message);
+
+        /// <summary>
+        ///     Not found
+        /// </summary>
+        /// <param name="message">Not found message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        public static Result<T> NotFound<T>(MessageDataModel message, params RelatedObjectModel[] relatedObjects)
+            => (Result<T>)Result<T>.Instance.AddNotFound(message, relatedObjects);
 
         /// <summary>
         ///     Not found
@@ -67,8 +85,28 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// </summary>
         /// <param name="code">Not found code</param>
         /// <param name="error">Not found message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        public static Result<T> NotFound<T>(string code, string error, params RelatedObjectModel[] relatedObjects)
+            => (Result<T>)Result<T>.Instance.AddNotFound(code, error, relatedObjects);
+
+        /// <summary>
+        ///     Not found
+        /// </summary>
+        /// <param name="code">Not found code</param>
+        /// <param name="error">Not found message</param>
         /// <returns></returns>
         public static Result<T> NotFound<T>(string code, MessageDataModel error)
             => (Result<T>)Result<T>.Instance.AddNotFound(code, error);
+
+        /// <summary>
+        ///     Not found
+        /// </summary>
+        /// <param name="code">Not found code</param>
+        /// <param name="error">Not found message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        public static Result<T> NotFound<T>(string code, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
+            => (Result<T>)Result<T>.Instance.AddNotFound(code, error, relatedObjects);
     }
 }

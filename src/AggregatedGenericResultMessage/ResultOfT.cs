@@ -46,7 +46,7 @@ using AggregatedGenericResultMessage.Models;
 namespace AggregatedGenericResultMessage
 {
     /// <inheritdoc cref="IResult{T}" />
-    public class Result<T> : IResult<T>, IXmlSerializable
+    public partial class Result<T> : IResult<T>, IXmlSerializable
     {
         #region I N S T A N C E
 
@@ -327,78 +327,6 @@ namespace AggregatedGenericResultMessage
 
             return map;
         }
-
-        /// <inheritdoc cref="ResultSuccessHelper.Success{T}"/>
-        public static Result<T> Success(T data = default)
-            => ResultSuccessHelper.Success(data);
-
-        /// <inheritdoc cref="ResultFailureHelper.Failure{T}()"/>
-        public static Result<T> Failure()
-            => ResultFailureHelper.Failure<T>();
-
-        /// <inheritdoc cref="ResultFailureHelper.Failure{T}(string)"/>
-        public static Result<T> Failure(string error)
-            => ResultFailureHelper.Failure<T>(error);
-
-        /// <inheritdoc cref="ResultFailureHelper.Failure{T}(MessageDataModel)"/>
-        public static Result<T> Failure(MessageDataModel error)
-            => ResultFailureHelper.Failure<T>(error);
-
-        /// <inheritdoc cref="ResultFailureHelper.Failure{T}(string, string)"/>
-        public static Result<T> Failure(string code, string error)
-            => ResultFailureHelper.Failure<T>(code, error);
-
-        /// <inheritdoc cref="ResultFailureHelper.Failure{T}(string, MessageDataModel)"/>
-        public static Result<T> Failure(string code, MessageDataModel error)
-            => ResultFailureHelper.Failure<T>(code, error);
-
-        /// <inheritdoc cref="ResultWarnHelper.Warn{T}(string)"/>
-        public static Result<T> Warn(string warn)
-            => ResultWarnHelper.Warn<T>(warn);
-
-        /// <inheritdoc cref="ResultWarnHelper.Warn{T}(MessageDataModel)"/>
-        public static Result<T> Warn(MessageDataModel warn)
-            => ResultWarnHelper.Warn<T>(warn);
-
-        /// <inheritdoc cref="ResultWarnHelper.Warn{T}(string, string)"/>
-        public static Result<T> Warn(string code, string error)
-            => ResultWarnHelper.Warn<T>(code, error);
-
-        /// <inheritdoc cref="ResultWarnHelper.Warn{T}(string, MessageDataModel)"/>
-        public static Result<T> Warn(string code, MessageDataModel error)
-            => ResultWarnHelper.Warn<T>(code, error);
-
-        /// <inheritdoc cref="ResultAccessDeniedHelper.AccessDenied{T}(string)"/>
-        public static Result<T> AccessDenied(string message)
-            => ResultAccessDeniedHelper.AccessDenied<T>(message);
-
-        /// <inheritdoc cref="ResultAccessDeniedHelper.AccessDenied{T}(MessageDataModel)"/>
-        public static Result<T> AccessDenied(MessageDataModel message)
-            => ResultAccessDeniedHelper.AccessDenied<T>(message);
-
-        /// <inheritdoc cref="ResultAccessDeniedHelper.AccessDenied{T}(string, string)"/>
-        public static Result<T> AccessDenied(string code, string error)
-            => ResultAccessDeniedHelper.AccessDenied<T>(code, error);
-
-        /// <inheritdoc cref="ResultAccessDeniedHelper.AccessDenied{T}(string, MessageDataModel)"/>
-        public static Result<T> AccessDenied(string code, MessageDataModel error)
-            => ResultAccessDeniedHelper.AccessDenied<T>(code, error);
-
-        /// <inheritdoc cref="ResultNotFoundHelper.NotFound{T}(string)"/>
-        public static Result<T> NotFound(string message)
-            => ResultNotFoundHelper.NotFound<T>(message);
-
-        /// <inheritdoc cref="ResultNotFoundHelper.NotFound{T}(MessageDataModel)"/>
-        public static Result<T> NotFound(MessageDataModel message)
-            => ResultNotFoundHelper.NotFound<T>(message);
-
-        /// <inheritdoc cref="ResultNotFoundHelper.NotFound{T}(string, string)"/>
-        public static Result<T> NotFound(string code, string error)
-            => ResultNotFoundHelper.NotFound<T>(code, error);
-
-        /// <inheritdoc cref="ResultNotFoundHelper.NotFound{T}(string, MessageDataModel)"/>
-        public static Result<T> NotFound(string code, MessageDataModel error)
-            => ResultNotFoundHelper.NotFound<T>(code, error);
 
         #region O P E R A T O R S
 

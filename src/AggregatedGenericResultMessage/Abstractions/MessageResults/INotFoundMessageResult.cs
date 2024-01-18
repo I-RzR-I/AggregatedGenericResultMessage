@@ -41,8 +41,24 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         ///     Add access denied message
         /// </summary>
         /// <param name="message">Message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        IResult<T> AddNotFound(string message, params RelatedObjectModel[] relatedObjects);
+
+        /// <summary>
+        ///     Add access denied message
+        /// </summary>
+        /// <param name="message">Message</param>
         /// <returns></returns>
         IResult<T> AddNotFound(MessageDataModel message);
+
+        /// <summary>
+        ///     Add access denied message
+        /// </summary>
+        /// <param name="message">Message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        IResult<T> AddNotFound(MessageDataModel message, params RelatedObjectModel[] relatedObjects);
 
         /// <summary>
         ///     Add access denied message
@@ -57,7 +73,25 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// </summary>
         /// <param name="key">Key</param>
         /// <param name="message">Message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        IResult<T> AddNotFound(string key, string message, params RelatedObjectModel[] relatedObjects);
+
+        /// <summary>
+        ///     Add access denied message
+        /// </summary>
+        /// <param name="key">Key</param>
+        /// <param name="message">Message</param>
         /// <returns></returns>
         IResult<T> AddNotFound(string key, MessageDataModel message);
+
+        /// <summary>
+        ///     Add access denied message
+        /// </summary>
+        /// <param name="key">Key</param>
+        /// <param name="message">Message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        IResult<T> AddNotFound(string key, MessageDataModel message, params RelatedObjectModel[] relatedObjects);
     }
 }

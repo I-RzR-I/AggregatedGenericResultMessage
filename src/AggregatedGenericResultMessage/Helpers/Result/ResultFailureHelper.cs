@@ -18,6 +18,7 @@
 
 using AggregatedGenericResultMessage.Extensions.Result.Messages;
 using AggregatedGenericResultMessage.Models;
+using System.Collections.Generic;
 
 // ReSharper disable RedundantCast
 
@@ -49,9 +50,35 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         ///     Failure
         /// </summary>
         /// <param name="error">Error message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        internal static Result<T> Failure<T>(string error, params RelatedObjectModel[] relatedObjects) 
+            => (Result<T>) Result<T>.Instance.AddError(error, relatedObjects);
+
+        /// <summary>
+        ///     Failure
+        /// </summary>
+        /// <param name="error">Error message</param>
         /// <returns></returns>
         internal static Result<T> Failure<T>(MessageDataModel error) 
             => (Result<T>) Result<T>.Instance.AddError(error);
+
+        /// <summary>
+        ///     Failure
+        /// </summary>
+        /// <param name="error">Error message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        internal static Result<T> Failure<T>(MessageDataModel error, params RelatedObjectModel[] relatedObjects) 
+            => (Result<T>) Result<T>.Instance.AddError(error, relatedObjects);
+
+        /// <summary>
+        ///     Failure
+        /// </summary>
+        /// <param name="errors">Error message</param>
+        /// <returns></returns>
+        internal static Result<T> Failure<T>(IEnumerable<MessageDataModel> errors) 
+            => (Result<T>) Result<T>.Instance.AddErrors(errors);
 
         /// <summary>
         ///     Failure
@@ -67,8 +94,28 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// </summary>
         /// <param name="code">Error code</param>
         /// <param name="error">Message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        internal static Result<T> Failure<T>(string code, string error, params RelatedObjectModel[] relatedObjects)
+            => (Result<T>) Result<T>.Instance.AddError(code, error, relatedObjects);
+
+        /// <summary>
+        ///     Failure
+        /// </summary>
+        /// <param name="code">Error code</param>
+        /// <param name="error">Message</param>
         /// <returns></returns>
         internal static Result<T> Failure<T>(string code, MessageDataModel error)
             => (Result<T>) Result<T>.Instance.AddError(code, error);
+
+        /// <summary>
+        ///     Failure
+        /// </summary>
+        /// <param name="code">Error code</param>
+        /// <param name="error">Message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        internal static Result<T> Failure<T>(string code, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
+            => (Result<T>) Result<T>.Instance.AddError(code, error, relatedObjects);
     }
 }

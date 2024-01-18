@@ -30,6 +30,7 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// <returns></returns>
         IResult<T> AddAccessDenied();
 
+
         /// <summary>
         ///     Add access denied message
         /// </summary>
@@ -41,8 +42,26 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         ///     Add access denied message
         /// </summary>
         /// <param name="message">Message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        IResult<T> AddAccessDenied(string message, params RelatedObjectModel[] relatedObjects);
+
+
+        /// <summary>
+        ///     Add access denied message
+        /// </summary>
+        /// <param name="message">Message</param>
         /// <returns></returns>
         IResult<T> AddAccessDenied(MessageDataModel message);
+
+        /// <summary>
+        ///     Add access denied message
+        /// </summary>
+        /// <param name="message">Message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        IResult<T> AddAccessDenied(MessageDataModel message, params RelatedObjectModel[] relatedObjects);
+
 
         /// <summary>
         ///     Add access denied message
@@ -57,7 +76,26 @@ namespace AggregatedGenericResultMessage.Abstractions.MessageResults
         /// </summary>
         /// <param name="key">Key</param>
         /// <param name="message">Message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        IResult<T> AddAccessDenied(string key, string message, params RelatedObjectModel[] relatedObjects);
+
+
+        /// <summary>
+        ///     Add access denied message
+        /// </summary>
+        /// <param name="key">Key</param>
+        /// <param name="message">Message</param>
         /// <returns></returns>
         IResult<T> AddAccessDenied(string key, MessageDataModel message);
+
+        /// <summary>
+        ///     Add access denied message
+        /// </summary>
+        /// <param name="key">Key</param>
+        /// <param name="message">Message</param>
+        /// <param name="relatedObjects">Related objects</param>
+        /// <returns></returns>
+        IResult<T> AddAccessDenied(string key, MessageDataModel message, params RelatedObjectModel[] relatedObjects);
     }
 }
