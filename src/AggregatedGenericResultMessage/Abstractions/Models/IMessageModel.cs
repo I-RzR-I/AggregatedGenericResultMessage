@@ -21,6 +21,7 @@ using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Models;
+using System.Collections.Generic;
 
 #endregion
 
@@ -65,6 +66,14 @@ namespace AggregatedGenericResultMessage.Abstractions.Models
         [JsonPropertyName("logTraceId")]
 #endif
         string LogTraceId { get; set; }
+
+        /// <summary>
+        ///     This property will contain related object to current message.
+        /// </summary>
+#if !NETFRAMEWORK
+        [JsonPropertyName("relatedObjects")]
+#endif
+        List<RelatedObjectModel> RelatedObjects { get; set; }
 
         /// <summary>
         ///     Returns a string that represents the current object.

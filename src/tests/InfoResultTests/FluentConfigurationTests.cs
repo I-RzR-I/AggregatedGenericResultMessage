@@ -74,7 +74,11 @@ namespace InfoResultTests
             Assert.IsTrue(res.Messages.Count(x => x.Key == "list_key_2"
                                                   && x.Message.Info == "list_mess_2"
                                                   && x.MessageType == MessageType.Error) == 1);
+        }
 
+        [TestMethod]
+        public void ResultOfTHasMessageSuccess()
+        {
             var resOfT = Result<bool>
                 .Success(true)
                 .WithMessage("bool result")
@@ -166,7 +170,11 @@ namespace InfoResultTests
             Assert.IsTrue(res.Messages.Count(x => x.Key == "list_key_2"
                                                   && x.Message.Info == "list_mess_2"
                                                   && x.MessageType == MessageType.Error) == 1);
-
+        }
+        
+        [TestMethod]
+        public void ResultOfTHasMessageFailure()
+        {
             var resOfT = Result<bool>
                 .Failure()
                 .WithMessage("bool result")

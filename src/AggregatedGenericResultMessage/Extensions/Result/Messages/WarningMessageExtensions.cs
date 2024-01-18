@@ -55,10 +55,26 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(string, RelatedObjectModel[])" />
+        public static IResult<T> AddWarning<T>(this IResult<T> result, string warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, new MessageDataModel(warning), MessageType.Warning, relatedObjects));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(MessageDataModel)" />
         public static IResult<T> AddWarning<T>(this IResult<T> result, MessageDataModel warning)
         {
             result.Messages?.Add(new MessageModel(null, warning, MessageType.Warning));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddWarning<T>(this IResult<T> result, MessageDataModel warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, warning, MessageType.Warning, relatedObjects));
 
             return result;
         }
@@ -71,10 +87,26 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(string, RelatedObjectModel[])" />
+        public static IResult<T> AddWarning<T>(this Result<T> result, string warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, new MessageDataModel(warning), MessageType.Warning, relatedObjects));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(MessageDataModel)" />
         public static IResult<T> AddWarning<T>(this Result<T> result, MessageDataModel warning)
         {
             result.Messages?.Add(new MessageModel(null, warning, MessageType.Warning));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddWarning<T>(this Result<T> result, MessageDataModel warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, warning, MessageType.Warning, relatedObjects));
 
             return result;
         }
@@ -87,10 +119,26 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(string, string, RelatedObjectModel[])" />
+        public static IResult<T> AddWarning<T>(this IResult<T> result, string key, string warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, new MessageDataModel(warning), MessageType.Warning, relatedObjects));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(string, MessageDataModel)" />
         public static IResult<T> AddWarning<T>(this IResult<T> result, string key, MessageDataModel warning)
         {
             result.Messages?.Add(new MessageModel(key, warning, MessageType.Warning));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(string, MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddWarning<T>(this IResult<T> result, string key, MessageDataModel warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, warning, MessageType.Warning, relatedObjects));
 
             return result;
         }
@@ -103,10 +151,26 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(string, string, RelatedObjectModel[])" />
+        public static IResult<T> AddWarning<T>(this Result<T> result, string key, string warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, new MessageDataModel(warning), MessageType.Warning, relatedObjects));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(string, MessageDataModel)" />
         public static IResult<T> AddWarning<T>(this Result<T> result, string key, MessageDataModel warning)
         {
             result.Messages?.Add(new MessageModel(key, warning, MessageType.Warning));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarning(string, MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddWarning<T>(this Result<T> result, string key, MessageDataModel warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, warning, MessageType.Warning, relatedObjects));
 
             return result;
         }
@@ -119,10 +183,26 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(string, RelatedObjectModel[])" />
+        public static IResult<T> AddWarningConfirm<T>(this IResult<T> result, string warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, new MessageDataModel(warning), MessageType.WarningConfirm, relatedObjects));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(MessageDataModel)" />
         public static IResult<T> AddWarningConfirm<T>(this IResult<T> result, MessageDataModel warning)
         {
             result.Messages?.Add(new MessageModel(null, warning, MessageType.WarningConfirm));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddWarningConfirm<T>(this IResult<T> result, MessageDataModel warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, warning, MessageType.WarningConfirm, relatedObjects));
 
             return result;
         }
@@ -135,10 +215,26 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(string, RelatedObjectModel[])" />
+        public static IResult<T> AddWarningConfirm<T>(this Result<T> result, string warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, new MessageDataModel(warning), MessageType.WarningConfirm, relatedObjects));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(MessageDataModel)" />
         public static IResult<T> AddWarningConfirm<T>(this Result<T> result, MessageDataModel warning)
         {
             result.Messages?.Add(new MessageModel(null, warning, MessageType.WarningConfirm));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddWarningConfirm<T>(this Result<T> result, MessageDataModel warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, warning, MessageType.WarningConfirm, relatedObjects));
 
             return result;
         }
@@ -151,10 +247,26 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(string, string, RelatedObjectModel[])" />
+        public static IResult<T> AddWarningConfirm<T>(this IResult<T> result, string key, string warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, new MessageDataModel(warning), MessageType.WarningConfirm, relatedObjects));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(string, MessageDataModel)" />
         public static IResult<T> AddWarningConfirm<T>(this IResult<T> result, string key, MessageDataModel warning)
         {
             result.Messages?.Add(new MessageModel(key, warning, MessageType.WarningConfirm));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(string, MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddWarningConfirm<T>(this IResult<T> result, string key, MessageDataModel warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, warning, MessageType.WarningConfirm, relatedObjects));
 
             return result;
         }
@@ -167,10 +279,26 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(string, string, RelatedObjectModel[])" />
+        public static IResult<T> AddWarningConfirm<T>(this Result<T> result, string key, string warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, new MessageDataModel(warning), MessageType.WarningConfirm, relatedObjects));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(string, MessageDataModel)" />
         public static IResult<T> AddWarningConfirm<T>(this Result<T> result, string key, MessageDataModel warning)
         {
             result.Messages?.Add(new MessageModel(key, warning, MessageType.WarningConfirm));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IWarningMessageResult{T}.AddWarningConfirm(string, MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddWarningConfirm<T>(this Result<T> result, string key, MessageDataModel warning, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, warning, MessageType.WarningConfirm, relatedObjects));
 
             return result;
         }

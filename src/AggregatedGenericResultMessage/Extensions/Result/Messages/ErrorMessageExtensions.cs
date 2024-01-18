@@ -22,6 +22,7 @@ using AggregatedGenericResultMessage.Abstractions;
 using AggregatedGenericResultMessage.Abstractions.MessageResults;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Models;
+using System.Collections.Generic;
 
 // ReSharper disable RedundantArgumentDefaultValue
 
@@ -46,10 +47,11 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError()" />
         public static IResult<T> AddError<T>(this Result<T> result)
         {
-            result.Messages?.Add(new MessageModel(null, null));
+            result.Messages?.Add(new MessageModel(null, (string)null));
 
             return result;
         }
+
 
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string)" />
         public static IResult<T> AddError<T>(this IResult<T> result, string error)
@@ -59,6 +61,15 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string, RelatedObjectModel[])" />
+        public static IResult<T> AddError<T>(this IResult<T> result, string error, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, new MessageDataModel(error), relatedObjects: relatedObjects));
+
+            return result;
+        }
+
+
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(MessageDataModel)" />
         public static IResult<T> AddError<T>(this IResult<T> result, MessageDataModel error)
         {
@@ -66,6 +77,27 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
             return result;
         }
+
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddError(MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddError<T>(this IResult<T> result, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, error, relatedObjects: relatedObjects));
+
+            return result;
+        }
+
+
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddErrors(IEnumerable{MessageDataModel})" />
+        public static IResult<T> AddErrors<T>(this IResult<T> result, IEnumerable<MessageDataModel> errors)
+        {
+            foreach (var error in errors)
+            {
+                result.Messages?.Add(new MessageModel(null, error));
+            }
+
+            return result;
+        }
+
 
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string)" />
         public static IResult<T> AddError<T>(this Result<T> result, string error)
@@ -75,6 +107,15 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string, RelatedObjectModel[])" />
+        public static IResult<T> AddError<T>(this Result<T> result, string error, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, new MessageDataModel(error), relatedObjects: relatedObjects));
+
+            return result;
+        }
+
+
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(MessageDataModel)" />
         public static IResult<T> AddError<T>(this Result<T> result, MessageDataModel error)
         {
@@ -83,10 +124,39 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddError(MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddError<T>(this Result<T> result, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, error, messageType: MessageType.Error, relatedObjects: relatedObjects));
+
+            return result;
+        }
+
+
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddErrors(IEnumerable{MessageDataModel})" />
+        public static IResult<T> AddError<T>(this Result<T> result, IEnumerable<MessageDataModel> errors)
+        {
+            foreach (var error in errors)
+            {
+                result.Messages?.Add(new MessageModel(null, error));
+            }
+
+            return result;
+        }
+
+
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string, string)" />
         public static IResult<T> AddError<T>(this IResult<T> result, string key, string error)
         {
             result.Messages?.Add(new MessageModel(key, new MessageDataModel(error)));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string, string, RelatedObjectModel[])" />
+        public static IResult<T> AddError<T>(this IResult<T> result, string key, string error, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, new MessageDataModel(error), messageType: MessageType.Error, relatedObjects: relatedObjects));
 
             return result;
         }
@@ -99,6 +169,14 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string, MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddError<T>(this Result<T> result, string key, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, error, messageType: MessageType.Error, relatedObjects: relatedObjects));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string)" />
         public static IResult<T> AddErrorConfirm<T>(this IResult<T> result, string error)
         {
@@ -107,10 +185,29 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, RelatedObjectModel[])" />
+        public static IResult<T> AddErrorConfirm<T>(this IResult<T> result, string error, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, new MessageDataModel(error),
+                MessageType.ErrorConfirm, relatedObjects: relatedObjects));
+
+            return result;
+        }
+
+
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(MessageDataModel)" />
         public static IResult<T> AddErrorConfirm<T>(this Result<T> result, MessageDataModel error)
         {
             result.Messages?.Add(new MessageModel(null, error, MessageType.ErrorConfirm));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddErrorConfirm<T>(this Result<T> result, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, error,
+                MessageType.ErrorConfirm, relatedObjects: relatedObjects));
 
             return result;
         }
@@ -123,10 +220,28 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, string, RelatedObjectModel[])" />
+        public static IResult<T> AddErrorConfirm<T>(this IResult<T> result, string key, string error, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, new MessageDataModel(error),
+                MessageType.ErrorConfirm, relatedObjects: relatedObjects));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, MessageDataModel)" />
         public static IResult<T> AddErrorConfirm<T>(this IResult<T> result, string key, MessageDataModel error)
         {
             result.Messages?.Add(new MessageModel(key, error, MessageType.ErrorConfirm));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddErrorConfirm<T>(this IResult<T> result, string key, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, error, MessageType.ErrorConfirm,
+                relatedObjects: relatedObjects));
 
             return result;
         }
@@ -139,10 +254,27 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, string, RelatedObjectModel[])" />
+        public static IResult<T> AddErrorConfirm<T>(this Result<T> result, string key, string error, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, new MessageDataModel(error),
+                MessageType.ErrorConfirm, relatedObjects: relatedObjects));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, MessageDataModel)" />
         public static IResult<T> AddErrorConfirm<T>(this Result<T> result, string key, MessageDataModel error)
         {
             result.Messages?.Add(new MessageModel(key, error, MessageType.ErrorConfirm));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, MessageDataModel, RelatedObjectModel[])" />
+        public static IResult<T> AddErrorConfirm<T>(this Result<T> result, string key, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(key, error, MessageType.ErrorConfirm, relatedObjects: relatedObjects));
 
             return result;
         }
@@ -155,6 +287,14 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
             return result;
         }
 
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddError(Exception, RelatedObjectModel[])" />
+        public static IResult<T> AddError<T>(this IResult<T> result, Exception exception, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, exception, relatedObjects: relatedObjects));
+
+            return result;
+        }
+
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(Exception)" />
         public static IResult<T> AddError<T>(this Result<T> result, Exception exception)
         {
@@ -162,6 +302,15 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
             return result;
         }
+
+        /// <inheritdoc cref="IErrorMessageResult{T}.AddError(Exception, RelatedObjectModel[])" />
+        public static IResult<T> AddError<T>(this Result<T> result, Exception exception, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, exception, relatedObjects: relatedObjects));
+
+            return result;
+        }
+
 
         /// <inheritdoc cref="IErrorMessageResult{T}.GetFirstError" />
         public static string GetFirstError<T>(this IResult<T> result)

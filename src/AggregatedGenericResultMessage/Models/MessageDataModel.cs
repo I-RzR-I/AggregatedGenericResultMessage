@@ -32,6 +32,21 @@ namespace AggregatedGenericResultMessage.Models
     /// <inheritdoc cref="IMessageDataModel"/>
     public class MessageDataModel : IMessageDataModel
     {
+
+        /// <inheritdoc />
+#if !NETFRAMEWORK
+        [JsonPropertyName("info")]
+#endif
+        public string Info { get; set; }
+
+        /// <inheritdoc />
+#if !NETFRAMEWORK
+        [JsonPropertyName("details")]
+#endif
+        [XmlArray(ElementName = "Details")]
+        [XmlArrayItem(ElementName = "Detail")]
+        public List<string> Details { get; set; } = new List<string>();
+
         ///-------------------------------------------------------------------------------------------------
         /// <summary>Default constructor.</summary>
         /// <remarks>RzR, 28-Nov-23.</remarks>
@@ -58,20 +73,6 @@ namespace AggregatedGenericResultMessage.Models
             Info = info;
             Details = (details ?? new string[] { }).ToList();
         }
-
-        /// <inheritdoc />
-#if !NETFRAMEWORK
-        [JsonPropertyName("info")]
-#endif
-        public string Info { get; set; }
-
-        /// <inheritdoc />
-#if !NETFRAMEWORK
-        [JsonPropertyName("details")]
-#endif
-        [XmlArray(ElementName = "Details")]
-        [XmlArrayItem(ElementName = "Detail")]
-        public List<string> Details { get; set; } = new List<string>();
 
         /// <inheritdoc cref="IMessageDataModel" />
         public override string ToString()

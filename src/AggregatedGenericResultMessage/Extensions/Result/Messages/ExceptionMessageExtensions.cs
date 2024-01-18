@@ -40,11 +40,26 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
             return result;
         }
+        /// <inheritdoc cref="IExceptionMessageResult{T}.AddException(Exception, RelatedObjectModel[])" />
+        public static IResult<T> AddException<T>(this IResult<T> result, Exception exception, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, exception, relatedObjects: relatedObjects));
+
+            return result;
+        }
 
         /// <inheritdoc cref="IExceptionMessageResult{T}.AddException(Exception)" />
         public static IResult<T> AddException<T>(this Result<T> result, Exception exception)
         {
             result.Messages?.Add(new MessageModel(null, exception));
+
+            return result;
+        }
+
+        /// <inheritdoc cref="IExceptionMessageResult{T}.AddException(Exception, RelatedObjectModel[])" />
+        public static IResult<T> AddException<T>(this Result<T> result, Exception exception, params RelatedObjectModel[] relatedObjects)
+        {
+            result.Messages?.Add(new MessageModel(null, exception, relatedObjects: relatedObjects));
 
             return result;
         }

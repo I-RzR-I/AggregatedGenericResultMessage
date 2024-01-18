@@ -26,6 +26,7 @@ using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Helpers;
 using AggregatedGenericResultMessage.Extensions.Common;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 #pragma warning disable IDE0057
@@ -73,6 +74,14 @@ namespace AggregatedGenericResultMessage.Models
         [XmlElement("LogTraceId")]
         public string LogTraceId { get; set; } = GetTraceLogId();
 
+#if !NETFRAMEWORK
+        [JsonPropertyName("relatedObjects")]
+#endif
+        /// <inheritdoc />
+        [XmlArray("RelatedObjecs")]
+        [XmlArrayItem("RelatedObject")]
+        public List<RelatedObjectModel> RelatedObjects { get; set; } = new List<RelatedObjectModel>();
+
         #endregion
 
         #region C T O R s
@@ -105,6 +114,26 @@ namespace AggregatedGenericResultMessage.Models
         /// <param name="key">Required. Message key</param>
         /// <param name="message">Optional(MessageDataModel). The default value is null.</param>
         /// <param name="messageType">Message type</param>
+        /// <param name="relatedObjects">Related message objects</param>
+        /// <remarks></remarks>
+        public MessageModel(string key, string message, MessageType messageType, params RelatedObjectModel[] relatedObjects)
+        {
+            Key = key;
+            MessageType = messageType;
+
+            if (message.IsNotNull())
+                Message = new MessageDataModel(message);
+
+            if (relatedObjects.IsNotNull())
+                RelatedObjects?.AddRange(relatedObjects);
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MessageModel" /> class.
+        /// </summary>
+        /// <param name="key">Required. Message key</param>
+        /// <param name="message">Optional(MessageDataModel). The default value is null.</param>
+        /// <param name="messageType">Message type</param>
         /// <remarks></remarks>
         public MessageModel(string key, MessageDataModel message = null, MessageType messageType = MessageType.Error)
         {
@@ -113,6 +142,45 @@ namespace AggregatedGenericResultMessage.Models
 
             if (message.IsNotNull())
                 Message = message;
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MessageModel" /> class.
+        /// </summary>
+        /// <param name="key">Required. Message key</param>
+        /// <param name="message">Optional(MessageDataModel). The default value is null.</param>
+        /// <param name="relatedObjects">Related message objects</param>
+        /// <remarks></remarks>
+        public MessageModel(string key, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
+        {
+            Key = key;
+            Message = message;
+
+            if (message.IsNotNull())
+                Message = message;
+
+            if (relatedObjects.IsNotNull())
+                RelatedObjects?.AddRange(relatedObjects);
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MessageModel" /> class.
+        /// </summary>
+        /// <param name="key">Required. Message key</param>
+        /// <param name="message">Optional(MessageDataModel). The default value is null.</param>
+        /// <param name="messageType">Message type</param>
+        /// <param name="relatedObjects">Related message objects</param>
+        /// <remarks></remarks>
+        public MessageModel(string key, MessageDataModel message, MessageType messageType, params RelatedObjectModel[] relatedObjects)
+        {
+            Key = key;
+            MessageType = messageType;
+
+            if (message.IsNotNull())
+                Message = message;
+
+            if (relatedObjects.IsNotNull())
+                RelatedObjects?.AddRange(relatedObjects);
         }
 
         /// <summary>
@@ -128,6 +196,25 @@ namespace AggregatedGenericResultMessage.Models
 
             if (exception.IsNotNull())
                 Message = ExceptionHelper.CreateTraceExceptionMessage(exception);
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MessageModel" /> class.
+        /// </summary>
+        /// <param name="key">Required. Message key</param>
+        /// <param name="exception">Optional(exception). Current exception. The default value is null.</param>
+        /// <param name="relatedObjects">Related message objects</param>
+        /// <remarks></remarks>
+        public MessageModel(string key, Exception? exception, params RelatedObjectModel[] relatedObjects)
+        {
+            Key = key;
+            MessageType = MessageType.Exception;
+
+            if (exception.IsNotNull())
+                Message = ExceptionHelper.CreateTraceExceptionMessage(exception);
+
+            if (relatedObjects.IsNotNull())
+                RelatedObjects?.AddRange(relatedObjects!);
         }
 
         #endregion
