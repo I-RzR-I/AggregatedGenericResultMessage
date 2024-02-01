@@ -17,7 +17,6 @@
 #region U S A G E S
 
 using System.Xml.Serialization;
-using AggregatedGenericResultMessage.Models;
 
 #endregion
 
@@ -31,19 +30,5 @@ namespace AggregatedGenericResultMessage.Abstractions
         ///     The result of the response, if there is no errors.
         /// </summary>
         T Response { get; set; }
-        
-        /// <summary>
-        ///     Get first message from response
-        /// </summary>
-        /// <returns></returns>
-        /// <remarks></remarks>
-        string GetFirstMessage();
-
-        /// <summary>
-        ///     Get first message from response
-        /// </summary>
-        /// <returns></returns>
-        /// <remarks></remarks>
-        MessageDataModel GetFirstMessageWithDetails();
     }
 }

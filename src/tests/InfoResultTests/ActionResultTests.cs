@@ -14,12 +14,14 @@
 //  </summary>
 // ***********************************************************************
 
-using System;
-using System.Collections.Generic;
+#region U S A G E S
+
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Abstractions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AggregatedGenericResultMessage.Extensions.Result.Actions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+#endregion
 
 namespace InfoResultTests
 {

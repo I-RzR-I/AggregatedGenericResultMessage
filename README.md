@@ -11,9 +11,9 @@ As a result, you can have control over the messages and types of messages that w
 By currently following, 6 general types of messages (`Info`, `Warning`, `Error`, `NotFound`, `AccessDenied`, `Exception`) are implemented that can be returned to the caller.
 As you can see in the `MessageType` enum, there are 9 types of messages, for all 3 (`Info`, `Warning`, `Error`) types previously specified exists with new ends `Confirm`. The idea of all of them is to inform UI (or caller) that returned message will be parsed/used as a dialog box/popup/modal.
 
-For more flexible and intuitive use, in solution persist extension method like fluent access to set message, error, etc (`WithMessage`, `WithKeyCode`, `WithCodeMessage`, `WithError`, `WithErrors`).
+For more flexible and intuitive use, in solution persist extension method like fluent access to set message, error, etc (`WithMessage`, `WithKeyCode`, `WithCodeMessage`, `WithError`, `WithErrors`). In some cases when you may have the necessity to add in the result additional information like the link between the code execution method and data store name: stored procedure, function or table, etc; in code/result is defined object `RelatedObject` where this information can be stored and returned to the caller.
 
-For more efficiently using, when in some cases when you may need to execute some custom actions after a successful or failed execution request. In that case was added extension methods (`ActionOnSuccess`, `ActionOnFailure`, `ActionOn`, `ExecuteAction`) which allow you to execute this action like insert log when execution has a status equal to failure.
+For more efficiently using, when in some cases when you may need to execute some custom actions/functions after a successful or failed execution request. In that case was added extension methods (`ActionOnSuccess`, `ActionOnFailure`, `ActionOn`, `ExecuteAction`, `FunctionOnSuccess`, `FunctionOnFailure`, `FunctionOn`, `ExecuteFunction`) which allow you to execute this action/function like insert log when execution has a status equal to failure.
 
 No additional components or packs are required for use. So, it only needs to be added/installed in the project and can be used instantly.
 

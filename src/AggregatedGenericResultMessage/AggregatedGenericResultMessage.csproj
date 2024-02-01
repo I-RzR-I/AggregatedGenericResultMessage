@@ -58,6 +58,10 @@
     </None>
     <None Include="..\.editorconfig" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\Result\Functions\" />
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties BuildVersion_StartDate="2022/7/1" />

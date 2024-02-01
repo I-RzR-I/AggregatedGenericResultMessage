@@ -19,6 +19,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using AggregatedGenericResultMessage.Abstractions.Models;
+using AggregatedGenericResultMessage.Models;
 
 #endregion
 
@@ -56,5 +57,19 @@ namespace AggregatedGenericResultMessage.Abstractions
         /// <returns></returns>
         /// <remarks></remarks>
         SoapResult ToSoapResult();
+
+        /// <summary>
+        ///     Get first message from response
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        string GetFirstMessage();
+        
+        /// <summary>
+        ///     Get first message from response
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        MessageDataModel GetFirstMessageWithDetails();
     }
 }
