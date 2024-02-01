@@ -75,8 +75,8 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
         /// <param name="onFailure">Action on failure</param>
         /// <typeparam name="TResult">Type of result</typeparam>
         /// <remarks></remarks>
-        public static TResult ActionOn<TResult>(this TResult result, Action<TResult> onSuccess, Action<TResult> onFailure)
-            where TResult : IResult
+        public static TResult ActionOn<TResult>(this TResult result, Action<TResult> onSuccess, 
+            Action<TResult> onFailure) where TResult : IResult
         {
             if (!result.IsSuccess)
             {
@@ -102,8 +102,8 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
         /// <param name="onFailure">Action on failure</param>
         /// <typeparam name="TResult">Type of result</typeparam>
         /// <remarks></remarks>
-        public static TResult ActionOn<TResult>(this TResult result, Action<TResult> onSuccess, IEnumerable<Action<TResult>> onFailure)
-            where TResult : IResult
+        public static TResult ActionOn<TResult>(this TResult result, Action<TResult> onSuccess, 
+            IEnumerable<Action<TResult>> onFailure) where TResult : IResult
         {
             if (!result.IsSuccess)
             {
@@ -130,8 +130,8 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
         /// <param name="onFailure">Action on failure</param>
         /// <typeparam name="TResult">Type of result</typeparam>
         /// <remarks></remarks>
-        public static TResult ActionOn<TResult>(this TResult result, IEnumerable<Action<TResult>> onSuccess, Action<TResult> onFailure)
-            where TResult : IResult
+        public static TResult ActionOn<TResult>(this TResult result, IEnumerable<Action<TResult>> onSuccess,
+            Action<TResult> onFailure) where TResult : IResult
         {
             if (!result.IsSuccess)
             {
@@ -158,8 +158,8 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
         /// <param name="onFailure">Action on failure</param>
         /// <typeparam name="TResult">Type of result</typeparam>
         /// <remarks></remarks>
-        public static TResult ActionOn<TResult>(this TResult result, IEnumerable<Action<TResult>> onSuccess, IEnumerable<Action<TResult>> onFailure)
-            where TResult : IResult
+        public static TResult ActionOn<TResult>(this TResult result, IEnumerable<Action<TResult>> onSuccess,
+            IEnumerable<Action<TResult>> onFailure) where TResult : IResult
         {
             if (!result.IsSuccess)
             {

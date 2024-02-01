@@ -32,7 +32,6 @@ using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Enums;
 using AggregatedGenericResultMessage.Extensions.Common;
 using AggregatedGenericResultMessage.Helpers;
-using AggregatedGenericResultMessage.Helpers.Result;
 using AggregatedGenericResultMessage.Models;
 
 // ReSharper disable ArrangeThisQualifier

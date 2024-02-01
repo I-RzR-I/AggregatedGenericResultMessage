@@ -74,10 +74,10 @@ namespace AggregatedGenericResultMessage.Models
         [XmlElement("LogTraceId")]
         public string LogTraceId { get; set; } = GetTraceLogId();
 
+        /// <inheritdoc />
 #if !NETFRAMEWORK
         [JsonPropertyName("relatedObjects")]
 #endif
-        /// <inheritdoc />
         [XmlArray("RelatedObjecs")]
         [XmlArrayItem("RelatedObject")]
         public List<RelatedObjectModel> RelatedObjects { get; set; } = new List<RelatedObjectModel>();

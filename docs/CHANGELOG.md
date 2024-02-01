@@ -58,3 +58,8 @@
 -> Add `RelatedObject` in code (means related object in code execution, usually used in case of some errors to show method name, stored procedure, table, etc).<br />
 -> Adjust code to solution code style.<br />
 -> Adjust exposed methods and add a few new.
+
+
+### **v1.3.3.6068** 
+-> Adjust the location for methods: `GetFirstMessage`, `GetFirstMessageWithDetails`.<br />
+-> Add a new extension for result execution `FunctionExtensions` (`FunctionOnSuccess`, `FunctionOnFailure`, `FunctionOn`, `ExecuteFunction`), which allows to execute of one or more functions.<br />

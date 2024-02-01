@@ -268,3 +268,5 @@ wwwroot/lib/
 # Coverlet
 Report/
 coverage.*
+
+*.ncrunchsolution

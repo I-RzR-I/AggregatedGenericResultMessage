@@ -196,3 +196,27 @@ public IResult<Foo> GetFoo(int recordId)
     }
 ```
 The same situation and implementation can be used for `ActionOn`, `ExecuteAction` with specifying necessary action/s.
+
+An example how to user `RelatedObject` in result:
+```csharp
+public async Task<Result> AddFooAsync(Foo request, CancellationToken cancellationToken
+         = default)
+        {
+            try
+            {
+                await _ctx.Foos.AddAsync(request, cancellationToken);
+                await _ctx.SaveChangesAsync(cancellationToken);
+                
+                //return success message with data
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Internal error on add foo");
+
+                return Result.
+                .Failure("Internal error on add new foo", relatedObjects: new RelatedObjectModel(nameof(AddFooAsync), "Foos"))
+                .AddError(e);
+            }
+        }
+```
