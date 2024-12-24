@@ -64,6 +64,8 @@
 -> Adjust the location for methods: `GetFirstMessage`, `GetFirstMessageWithDetails`.<br />
 -> Add a new extension for result execution `FunctionExtensions` (`FunctionOnSuccess`, `FunctionOnFailure`, `FunctionOn`, `ExecuteFunction`), which allows to execute of one or more functions.<br />
 
-
 ### **v1.3.4.6865**
 -> Upgrade minimum `System.Text.Json` package required version to `6.0.10`, fixing CVE (`CVE-2024-43485`).<br />
+
+### **v1.3.5.4696**
+-> Upgrade version for the 'CodeSource' package.<br />
