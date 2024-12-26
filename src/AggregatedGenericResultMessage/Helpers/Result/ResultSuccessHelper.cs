@@ -14,12 +14,16 @@
 //  </summary>
 // ***********************************************************************
 
-// ReSharper disable ClassNeverInstantiated.Global
+#region U S A G E S
 
 using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Models;
 using System.Collections.Generic;
 using System.Linq;
+
+// ReSharper disable ClassNeverInstantiated.Global
+
+#endregion
 
 namespace AggregatedGenericResultMessage.Helpers.Result
 {

@@ -20,6 +20,8 @@ using AggregatedGenericResultMessage.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using AggregatedGenericResultMessage.Enums;
+using DomainCommonExtensions.CommonExtensions;
+// ReSharper disable PossibleMultipleEnumeration
 
 namespace InfoResultTests
 {
@@ -31,16 +33,23 @@ namespace InfoResultTests
         {
             var result = Result
                 .Failure("Failure_Code_1", new MessageDataModel("Failure_Info_1", "Failure_D_1", "Failure_D_2"))
-                .AddError("Error_1", new MessageDataModel("Error_Info_1", "Error_D_1"), new RelatedObjectModel("R_Obj_InCode_1", new[] { "R_Obj_InDs_1", "R_Obj_InDs_2" }));
+                .AddError("Error_1", new MessageDataModel("Error_Info_1", "Error_D_1"), 
+                    new RelatedObjectModel("R_Obj_InCode_1", new[] { "R_Obj_InDs_1", "R_Obj_InDs_2" }));
 
             Assert.IsFalse(result.IsSuccess);
             Assert.IsNull(result.Response);
 
-            Assert.IsTrue(result.Messages.Count(x => x.Key == "Failure_Code_1"
-                                                     && x.MessageType == MessageType.Error) == 1);
+            var failureCode1Result = result.Messages.Where(x => x.Key == "Failure_Code_1" && x.MessageType == MessageType.Error);
+            var failureGetFirstMessageWithDetailsResult = result.GetFirstMessageWithDetails();
 
-            Assert.IsTrue(result.Messages.Where(x => x.Key == "Failure_Code_1"
-                                                     && x.MessageType == MessageType.Error).Select(x => x.Message.Details).Count() == 1);
+            Assert.IsTrue(failureCode1Result.Count() == 1);
+            Assert.IsTrue(failureCode1Result.Select(x => x.Message.Details).Count() == 1);
+            Assert.IsTrue(failureCode1Result.First().Message.Details.Count() == 2);
+
+            Assert.IsTrue(!failureGetFirstMessageWithDetailsResult.IsNull());
+            Assert.AreEqual("Failure_Info_1", failureGetFirstMessageWithDetailsResult.Info);
+            Assert.IsTrue(failureGetFirstMessageWithDetailsResult.Details.Count() == 2);
+            Assert.AreEqual("Message: Failure_Info_1; Details: Failure_D_1#Failure_D_2", failureGetFirstMessageWithDetailsResult.ToString());
 
             Assert.IsTrue(result.Messages.Count(x => x.Key == "Error_1"
                                                      && x.Message.Info == "Error_Info_1"

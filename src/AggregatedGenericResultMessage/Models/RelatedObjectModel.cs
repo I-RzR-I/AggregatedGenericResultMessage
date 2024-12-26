@@ -14,6 +14,8 @@
 //  </summary>
 // ***********************************************************************
 
+#region U S A G E S
+
 #if !NETFRAMEWORK
 using System.Text.Json.Serialization;
 #endif
@@ -21,6 +23,8 @@ using System.Text.Json.Serialization;
 using AggregatedGenericResultMessage.Abstractions.Models;
 using AggregatedGenericResultMessage.Extensions.Common;
 using System.Xml.Serialization;
+
+#endregion
 
 namespace AggregatedGenericResultMessage.Models
 {

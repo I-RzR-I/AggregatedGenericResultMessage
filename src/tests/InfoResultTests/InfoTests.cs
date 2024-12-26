@@ -20,7 +20,10 @@ using System.Linq;
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Abstractions;
 using AggregatedGenericResultMessage.Enums;
+using AggregatedGenericResultMessage.Extensions.Result;
 using AggregatedGenericResultMessage.Extensions.Result.Messages;
+using AggregatedGenericResultMessage.Models;
+using DomainCommonExtensions.CommonExtensions;
 using DomainCommonExtensions.DataTypeExtensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -87,6 +90,60 @@ namespace InfoResultTests
                 x.MessageType == MessageType.InfoConfirm));
             Assert.IsTrue(res1.Messages.Any(x =>
                 x.Key == "key-Confirm-01" && x.Message.Info == "InfoMessage-1" && x.MessageType == MessageType.InfoConfirm));
+        }
+
+        [TestMethod]
+        public void AddInfoAndGetFirstMessageWithDetails_NullDetails_Test()
+        {
+            var res = new Result() { IsSuccess = false };
+            res.WithError("Error-Info-Message-1", "Error-Info-Code-1")
+                .WithMessage(new MessageDataModel("Message info", "Message detail"), MessageType.Error);
+
+            Assert.IsFalse(res.IsSuccess);
+            Assert.AreEqual("Error-Info-Message-1", res.GetFirstMessage());
+
+            var fistMessageWithDetails = res.GetFirstMessageWithDetails();
+            Assert.IsTrue(!fistMessageWithDetails.IsNull());
+            Assert.AreEqual("Error-Info-Message-1", fistMessageWithDetails.Info);
+            Assert.AreEqual(null, fistMessageWithDetails.Details.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void AddInfoAndGetFirstMessageWithDetails_Test()
+        {
+            var res = new Result() { IsSuccess = false };
+            res.WithError(new MessageDataModel("Error-Info-Message-1", "Error-Info-Code-1"))
+                .WithMessage(new MessageDataModel("Message info", "Message detail"), MessageType.Error);
+
+            Assert.IsFalse(res.IsSuccess);
+            Assert.AreEqual("Error-Info-Message-1", res.GetFirstMessage());
+
+            var fistMessageWithDetails = res.GetFirstMessageWithDetails();
+            Assert.IsTrue(!fistMessageWithDetails.IsNull());
+            Assert.AreEqual("Error-Info-Message-1", fistMessageWithDetails.Info);
+            Assert.AreEqual("Error-Info-Code-1", fistMessageWithDetails.Details.FirstOrDefault());
+            Assert.AreEqual("Message: Error-Info-Message-1; Details: Error-Info-Code-1", fistMessageWithDetails.ToString());
+        }
+
+        [TestMethod]
+        public void AddInfoAndGetFirstMessageWithDetails_InFailure_Test()
+        {
+            var res = MockFailure();
+
+            Assert.IsFalse(res.IsSuccess);
+            Assert.AreEqual("Error-Info-Message-1", res.GetFirstMessage());
+
+            var fistMessageWithDetails = res.GetFirstMessageWithDetails();
+            Assert.IsTrue(!fistMessageWithDetails.IsNull());
+            Assert.AreEqual("Error-Info-Message-1", fistMessageWithDetails.Info);
+            Assert.AreEqual("Error-Info-Code-1", fistMessageWithDetails.Details.FirstOrDefault());
+            Assert.AreEqual("Message: Error-Info-Message-1; Details: Error-Info-Code-1", fistMessageWithDetails.ToString());
+        }
+
+        private static IResult MockFailure()
+        {
+            return Result.Failure(new MessageDataModel("Error-Info-Message-1", "Error-Info-Code-1"))
+                .WithMessage(new MessageDataModel("Message info", "Message detail"), MessageType.Error);
         }
     }
 }
