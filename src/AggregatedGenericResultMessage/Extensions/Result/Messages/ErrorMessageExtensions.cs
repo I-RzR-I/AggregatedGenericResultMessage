@@ -51,8 +51,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
             return result;
         }
-
-
+        
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string)" />
         public static IResult<T> AddError<T>(this IResult<T> result, string error)
         {
@@ -68,8 +67,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
             return result;
         }
-
-
+        
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(MessageDataModel)" />
         public static IResult<T> AddError<T>(this IResult<T> result, MessageDataModel error)
         {
@@ -85,8 +83,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
             return result;
         }
-
-
+        
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrors(IEnumerable{MessageDataModel})" />
         public static IResult<T> AddErrors<T>(this IResult<T> result, IEnumerable<MessageDataModel> errors)
         {
@@ -97,8 +94,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
             return result;
         }
-
-
+        
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string)" />
         public static IResult<T> AddError<T>(this Result<T> result, string error)
         {
@@ -114,8 +110,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
             return result;
         }
-
-
+        
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(MessageDataModel)" />
         public static IResult<T> AddError<T>(this Result<T> result, MessageDataModel error)
         {
@@ -131,8 +126,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
             return result;
         }
-
-
+        
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrors(IEnumerable{MessageDataModel})" />
         public static IResult<T> AddError<T>(this Result<T> result, IEnumerable<MessageDataModel> errors)
         {
@@ -143,8 +137,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
             return result;
         }
-
-
+        
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string, string)" />
         public static IResult<T> AddError<T>(this IResult<T> result, string key, string error)
         {
@@ -193,8 +186,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
             return result;
         }
-
-
+        
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(MessageDataModel)" />
         public static IResult<T> AddErrorConfirm<T>(this Result<T> result, MessageDataModel error)
         {
@@ -310,8 +302,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
 
             return result;
         }
-
-
+        
         /// <inheritdoc cref="IErrorMessageResult{T}.GetFirstError" />
         public static string GetFirstError<T>(this IResult<T> result)
             => result.Messages?.FirstOrDefault(x => x.MessageType == MessageType.Error)?.Message?.Info ?? string.Empty;
