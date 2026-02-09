@@ -33,10 +33,18 @@ namespace AggregatedGenericResultMessage.Abstractions
     {
         /// <summary>
         ///     Bool indicating that the request resulted with success.
-        ///     If False than the <see cref="Messages" /> will
-        ///     contain a Error message that produced this error.
+        ///     If 'False', then the <see cref="Messages" /> will
+        ///     contain an Error message that produced this error.
         /// </summary>
         bool IsSuccess { get; set; }
+
+        /// <summary>
+        ///     Gets a value indicating whether this object is failure.
+        /// </summary>
+        /// <value>
+        ///     True if this object is failure, false if not.
+        /// </value>
+        bool IsFailure { get; }
 
         /// <summary>
         ///     This property will contain messages keys if any.

@@ -39,6 +39,7 @@ namespace InfoResultTests
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccess);
+            Assert.IsTrue(result.IsFailure);
             Assert.AreEqual(result.Messages.Count, 2);
             Assert.AreEqual("test message", result.GetFirstMessage());
             Assert.AreEqual("test message", result.GetFirstError());
@@ -54,6 +55,7 @@ namespace InfoResultTests
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccess);
+            Assert.IsTrue(result.IsFailure);
             Assert.AreEqual(result.Messages.Count, 2);
             Assert.AreEqual("test message", result.GetFirstMessage());
             Assert.AreEqual("test message", result.GetFirstError());
@@ -69,6 +71,7 @@ namespace InfoResultTests
 
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccess);
+            Assert.IsTrue(result.IsFailure);
             Assert.AreEqual(result.Messages.Count, 2);
             Assert.AreEqual("Null data", result.GetFirstMessage());
             Assert.AreEqual("Null data", result.GetFirstError());
@@ -81,13 +84,19 @@ namespace InfoResultTests
         public void ResultAddExceptionTest()
         {
             var result = new Result();
+            Assert.IsFalse(result.IsSuccess);
+            Assert.IsTrue(result.IsFailure);
+
             var resultOfT = new Result<bool>();
+            Assert.IsFalse(resultOfT.IsSuccess);
+            Assert.IsTrue(resultOfT.IsFailure);
 
             result.AddException(new Exception("Message"));
             resultOfT.AddException(new Exception("MessageOfT"));
             resultOfT.Messages.Add(new MessageModel(string.Empty, new Exception("MessageOfT-2")));
 
             Assert.IsFalse(result.IsSuccess);
+            Assert.IsTrue(result.IsFailure);
             Assert.AreEqual(result.GetFirstMessage(), string.Empty);
             Assert.AreEqual(result.GetFirstError(), string.Empty);
             Assert.IsTrue(result.HasAnyErrorsOrExceptions());
@@ -96,6 +105,7 @@ namespace InfoResultTests
             Assert.AreEqual(result.Messages.Count(x => x.MessageType == MessageType.Exception), 1);
 
             Assert.IsFalse(resultOfT.IsSuccess);
+            Assert.IsTrue(resultOfT.IsFailure);
             Assert.AreEqual(resultOfT.GetFirstMessage(), string.Empty);
             Assert.AreEqual(resultOfT.GetFirstError(), string.Empty);
             Assert.IsTrue(resultOfT.HasAnyErrorsOrExceptions());

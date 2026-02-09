@@ -39,7 +39,7 @@
     <Compile Include="..\shared\GeneralAssemblyInfo.cs" Link="Properties\GeneralAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CodeSource" Version="2.0.0.0" />
+    <PackageReference Include="CodeSource" Version="4.0.2.4672" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
   </ItemGroup>
 
