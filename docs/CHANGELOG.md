@@ -1,3 +1,8 @@
+### **v1.4.0.7788** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 09-02-2026
+* [f68e0f7] (RzR) -> Auto commit uncommited files
+* [1d311f9] (RzR) -> Add new script for version gen.
+* [c438299] (RzR) -> Add `IsFailure` in result. Add new extension methods: `WithMessages`, `ReturnAutoSuccessOrFailure`
+
 ### **v1.3.5.4696**
 -> Upgrade version for the 'CodeSource' package.<br />
 
