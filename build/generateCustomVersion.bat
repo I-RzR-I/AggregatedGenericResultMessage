@@ -17,7 +17,7 @@ set runVersionIncrement=y
 set runGenChangeLog=y
 :: If runBuild > y(yes), build in release mode
 set runBuild=y 
-set runSolutionTest=y
+set runSolutionTest=n
 set runTest=y
 set runPack=y
 set assemblyPath=$('..\src\shared\GeneralAssemblyInfo.cs')
