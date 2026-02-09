@@ -46,7 +46,7 @@ namespace AggregatedGenericResultMessage
         public SoapResult() { }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether this instance  is successfully executed.
+        ///     Gets or sets a value indicating whether this instance is successfully executed.
         /// </summary>
         /// <value>
         ///     <see langword="true" /> if this instance ; otherwise, <see langword="false" />.
@@ -54,6 +54,16 @@ namespace AggregatedGenericResultMessage
         /// <remarks></remarks>
         [DataMember(Name = "IsSuccess", IsRequired = true)]
         public bool IsSuccess { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether this instance is fail on execution.
+        /// </summary>
+        /// <value>
+        ///     <see langword="true" /> if this instance ; otherwise, <see langword="false" />.
+        /// </value>
+        /// <remarks></remarks>
+        [DataMember(Name = "IsFailure", IsRequired = true)]
+        public bool IsFailure { get; set; }
 
         /// <summary>
         ///     Gets or sets result messages.

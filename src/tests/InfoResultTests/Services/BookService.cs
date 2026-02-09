@@ -21,6 +21,8 @@ using System.Collections.Generic;
 using System.Linq;
 using AggregatedGenericResultMessage;
 using AggregatedGenericResultMessage.Abstractions;
+using AggregatedGenericResultMessage.Abstractions.Models;
+using AggregatedGenericResultMessage.Extensions.Result;
 using Bogus;
 using InfoResultTests.Dtos;
 // ReSharper disable MemberCanBePrivate.Global
@@ -88,6 +90,30 @@ namespace InfoResultTests.Services
         }
 
         public Result<BookDto> GetBookItemException()
+        {
+            try
+            {
+                throw new Exception("Null data");
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
+
+        public IResult Execute_IResult_WithEx()
+        {
+            try
+            {
+                throw new Exception("Null data");
+            }
+            catch (Exception e)
+            {
+                return Result.Failure().WithError(e);
+            }
+        }
+
+        public Result Execute_Result_WithEx()
         {
             try
             {

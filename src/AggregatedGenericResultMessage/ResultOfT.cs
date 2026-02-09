@@ -75,6 +75,12 @@ namespace AggregatedGenericResultMessage
 
         /// <inheritdoc />
 #if !NETFRAMEWORK
+        [JsonPropertyName("isFailure")]
+#endif
+        public virtual bool IsFailure { get; private protected set; }
+
+        /// <inheritdoc />
+#if !NETFRAMEWORK
         [JsonPropertyName("messages")]
 #endif
         public virtual ICollection<IMessageModel> Messages { get; set; } = new List<IMessageModel>();
@@ -93,7 +99,10 @@ namespace AggregatedGenericResultMessage
         ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result{T}" /> class. 
         /// </summary>
         /// <remarks></remarks>
-        public Result() { }
+        public Result()
+        {
+            IsFailure = !this.IsSuccess;
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result{T}" /> class. 
@@ -106,6 +115,8 @@ namespace AggregatedGenericResultMessage
                 ExceptionHelper.PreserveStackTrace(exception);
 
             this.IsSuccess = false;
+            this.IsFailure = !this.IsSuccess;
+
             this.Messages.Add(new MessageModel(null, new MessageDataModel(exception?.Message ?? "")));
 
             if (exception.IsNotNull())
@@ -120,7 +131,9 @@ namespace AggregatedGenericResultMessage
         private Result(T response)
         {
             this.Response = response;
+
             this.IsSuccess = true;
+            this.IsFailure = !this.IsSuccess;
         }
 
         #endregion
@@ -130,6 +143,7 @@ namespace AggregatedGenericResultMessage
             => new Result()
             {
                 IsSuccess = IsSuccess,
+                IsFailure = IsFailure,
                 Response = Response,
                 Messages = Messages
             };
@@ -138,12 +152,19 @@ namespace AggregatedGenericResultMessage
         public virtual SoapResult ToSoapResult()
         {
             var messages = Messages
-                ?.Select(y => new MessageModel() { Key = y.Key, Message = y.Message, MessageType = y.MessageType }).ToList();
+                ?.Select(y => new MessageModel()
+                {
+                    Key = y.Key,
+                    Message = y.Message,
+                    MessageType = y.MessageType
+                }).ToList();
+
             var response = Response.CastToSoapResponse();
 
             return new SoapResult()
             {
                 IsSuccess = IsSuccess,
+                IsFailure = IsFailure,
                 Messages = messages,
                 Response = response
             };
@@ -321,6 +342,7 @@ namespace AggregatedGenericResultMessage
         {
             var map = Result<TModelOutput>.CreateInstance();
             map.IsSuccess = IsSuccess;
+            map.IsFailure = IsFailure;
             map.Response = result;
             map.Messages = Messages;
 

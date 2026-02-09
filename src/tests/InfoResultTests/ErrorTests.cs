@@ -37,6 +37,8 @@ namespace InfoResultTests
             {
                 IsSuccess = false
             };
+            Assert.IsFalse(res.IsSuccess);
+            Assert.IsTrue(res.IsFailure);
 
             res.AddError("Error-01");
             res.AddError("error-01", "ErrorMessage-01");
@@ -45,6 +47,7 @@ namespace InfoResultTests
             res.AddErrorConfirm("error-key-Confirm-01", "ErrorMessage-01");
 
             Assert.IsFalse(res.IsSuccess);
+            Assert.IsTrue(res.IsFailure);
             Assert.IsNull(res.Response);
             Assert.IsTrue(res.Messages.Any(x =>
                  x.Key.IsNullOrEmpty() && x.Message.Info == "Error-01" && x.MessageType == MessageType.Error));
@@ -66,6 +69,9 @@ namespace InfoResultTests
         public void GetFirstErrorTest()
         {
             var res = new Result();
+            Assert.IsFalse(res.IsSuccess);
+            Assert.IsTrue(res.IsFailure);
+
             res.AddInfo("info message");
             res.AddError("error message");
 
@@ -74,6 +80,8 @@ namespace InfoResultTests
             Assert.IsTrue(res.HasAnyErrors());
             Assert.IsFalse(res.HasAnyExceptions());
             Assert.IsTrue(res.HasAnyErrorsOrExceptions());
+            Assert.IsFalse(res.IsSuccess);
+            Assert.IsTrue(res.IsFailure);
         }
     }
 }

@@ -185,10 +185,12 @@ namespace AggregatedGenericResultMessage.Models
             Exception = exception;
 
             if (relatedObjects.IsNotNull())
+            {
                 foreach (var obj in relatedObjects)
                 {
                     RelatedObjects?.Add(obj!);
                 }
+            }
         }
 
         /// <summary>
