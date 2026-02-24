@@ -77,7 +77,7 @@ namespace AggregatedGenericResultMessage
 #if !NETFRAMEWORK
         [JsonPropertyName("isFailure")]
 #endif
-        public virtual bool IsFailure { get; private protected set; }
+        public virtual bool IsFailure { get => !IsSuccess; }
 
         /// <inheritdoc />
 #if !NETFRAMEWORK
@@ -99,10 +99,7 @@ namespace AggregatedGenericResultMessage
         ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result{T}" /> class. 
         /// </summary>
         /// <remarks></remarks>
-        public Result()
-        {
-            IsFailure = !this.IsSuccess;
-        }
+        public Result() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result{T}" /> class. 
@@ -115,7 +112,6 @@ namespace AggregatedGenericResultMessage
                 ExceptionHelper.PreserveStackTrace(exception);
 
             this.IsSuccess = false;
-            this.IsFailure = !this.IsSuccess;
 
             this.Messages.Add(new MessageModel(null, new MessageDataModel(exception?.Message ?? "")));
 
@@ -133,7 +129,6 @@ namespace AggregatedGenericResultMessage
             this.Response = response;
 
             this.IsSuccess = true;
-            this.IsFailure = !this.IsSuccess;
         }
 
         #endregion
@@ -143,7 +138,6 @@ namespace AggregatedGenericResultMessage
             => new Result()
             {
                 IsSuccess = IsSuccess,
-                IsFailure = IsFailure,
                 Response = Response,
                 Messages = Messages
             };
@@ -342,7 +336,6 @@ namespace AggregatedGenericResultMessage
         {
             var map = Result<TModelOutput>.CreateInstance();
             map.IsSuccess = IsSuccess;
-            map.IsFailure = IsFailure;
             map.Response = result;
             map.Messages = Messages;
 
