@@ -1,3 +1,7 @@
+### **v1.4.1.8497** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 24-02-2026
+* [f47b134] (RzR) -> Auto commit uncommited files
+* [6a0d48a] (RzR) -> Fix the `IsFailure` flag value.
+
 ### **v1.4.0.7788** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 09-02-2026
 * [f68e0f7] (RzR) -> Auto commit uncommited files
 * [1d311f9] (RzR) -> Add new script for version gen.
