@@ -17,6 +17,7 @@
 #region U S A G E S
 
 using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Extensions.Common;
 using RzR.ResultMessage.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,17 @@ namespace RzR.ResultMessage.Helpers.Result
             var result = Result<T>.Instance;
             result.IsSuccess = true;
             result.Response = data;
-            result.Messages = new List<IMessageModel>() { new MessageModel() { RelatedObjects = relatedObjects.ToList() } };
+
+            if (relatedObjects.IsNull() || relatedObjects.Length == 0)
+                return result;
+
+            result.Messages = new List<IMessageModel>()
+            {
+                new MessageModel()
+                {
+                    RelatedObjects = relatedObjects.ToList()
+                }
+            };
 
             return result;
         }

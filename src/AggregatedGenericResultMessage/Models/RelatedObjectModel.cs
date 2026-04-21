@@ -64,7 +64,7 @@ namespace RzR.ResultMessage.Models
         {
             InCodeName = inCodeName;
 
-            if (inDataSourceNames.IsNull())
+            if (inDataSourceNames.IsNotNull())
                 InDataSourceNames = inDataSourceNames;
         }
 
