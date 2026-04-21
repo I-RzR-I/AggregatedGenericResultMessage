@@ -23,6 +23,8 @@ using RzR.ResultMessage.Extensions.Result.Actions;
 
 #endregion
 
+#pragma warning disable CS0618
+
 namespace InfoResultTests
 {
     [TestClass]
