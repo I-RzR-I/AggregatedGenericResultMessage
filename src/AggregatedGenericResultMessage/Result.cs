@@ -72,10 +72,17 @@ namespace RzR.ResultMessage
         ///     Implicit exception result operator
         /// </summary>
         /// <param name="exception">Current exception</param>
-        /// <returns></returns>
-        /// <remarks></remarks>
-        public static implicit operator Result(Exception? exception) 
-            => exception.IsNotNull() ? new Result(exception) : new Result(false);
+        /// <returns>A failed <see cref="Result"/> wrapping <paramref name="exception"/>.</returns>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when <paramref name="exception"/> is <c>null</c>. Converting a missing exception
+        ///     into a result is meaningless; use <c>Result.Failure(...)</c> or the implicit <c>bool</c>
+        ///     operator (<c>Result r = false;</c>) when no exception is available.
+        /// </exception>
+        public static implicit operator Result(Exception exception)
+            => exception.IsNotNull()
+                ? new Result(exception)
+                : throw new ArgumentNullException(nameof(exception),
+                    "Cannot implicitly convert a null Exception to a Result. Use Result.Failure(...) instead.");
 
         /// <summary>
         ///     Implicit success result operator

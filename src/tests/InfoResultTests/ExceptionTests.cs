@@ -115,15 +115,17 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void ExceptionImplicit_NullException_DoesNotAddGhostMessage()
+        public void ExceptionImplicit_NullException_ThrowsArgumentNullException()
         {
-            Result<int> result = (Exception)null;
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                Result<int> _ = (Exception)null;
+            }, "Implicit conversion from a null Exception to Result<T> must throw ArgumentNullException.");
 
-            Assert.IsNotNull(result);
-            Assert.IsFalse(result.IsSuccess);
-            Assert.IsTrue(result.IsFailure);
-            Assert.AreEqual(0, result.Messages.Count,
-                "Implicit conversion from a null Exception must not append any message.");
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                Result _ = (Exception)null;
+            }, "Implicit conversion from a null Exception to Result must throw ArgumentNullException.");
         }
     }
 }
