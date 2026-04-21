@@ -16,7 +16,7 @@
 
 #region U S A G E S
 
-using CodeSource;
+using RzR.Core.CodeSource;
 using System.Xml;
 
 #endregion
@@ -49,7 +49,7 @@ namespace RzR.ResultMessage.Extensions.Common
         /// <remarks></remarks>
         [CodeSource(
             "https://github.com/I-RzR-I/DomainCommonExtensions/blob/a53b1fc04cd73ff6bdd5ac817f0a5e723aa7db1a/src/DomainCommonExtensions/CommonExtensions/TExtensions.cs#L131",
-            "RzR", "RzR", 1.0)]
+            "RzR", "RzR", "1.0")]
         internal static XmlElement CastToSoapResponse<T>(this T source)
         {
             var doc = source.SerializeToXmlDoc("SoapResultResponse", "AggregatedGenericResultMessage.SoapResult");

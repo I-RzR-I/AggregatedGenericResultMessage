@@ -16,7 +16,7 @@
 
 #region U S A G E S
 
-using CodeSource;
+using RzR.Core.CodeSource;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Xml;
@@ -32,7 +32,7 @@ namespace RzR.ResultMessage.Extensions.Common
     ///     T type extensions
     /// </summary>
     /// <remarks></remarks>
-    [CodeSource("DomainCommonExtensions.CommonExtensions", "RzR", "RzR", 1)]
+    [CodeSource("DomainCommonExtensions.CommonExtensions", "RzR", "RzR", "1.0")]
     internal static class TExtensions
     {
         /// <summary>
@@ -45,7 +45,7 @@ namespace RzR.ResultMessage.Extensions.Common
         /// <typeparam name="T">Source data type</typeparam>
         /// <remarks></remarks>
         [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR",
-            "DomainCommonExtensions.CommonExtensions.TExtensions.SerializeToXmlDoc", 1)]
+            "DomainCommonExtensions.CommonExtensions.TExtensions.SerializeToXmlDoc", "1.0")]
         internal static XmlDocument SerializeToXmlDoc<T>(this T source, string rootName = null,
             string rootNameSpaceName = null)
         {

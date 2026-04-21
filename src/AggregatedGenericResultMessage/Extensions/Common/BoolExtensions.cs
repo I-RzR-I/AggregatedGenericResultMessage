@@ -16,7 +16,7 @@
 
 #region U S A G E S
 
-using CodeSource;
+using RzR.Core.CodeSource;
 
 #endregion
 
@@ -34,7 +34,7 @@ namespace RzR.ResultMessage.Extensions.Common
         /// <param name="source">Source object to be checked.</param>
         /// <returns>True if true, false if not.</returns>
         /// =================================================================================================
-        [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR", 1D)]
+        [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR", "1.0")]
         internal static bool IsTrue(this bool source)
             => source.IsNotNull() && source.Equals(true);
 
@@ -44,7 +44,7 @@ namespace RzR.ResultMessage.Extensions.Common
         /// <param name="source">Source object to be checked.</param>
         /// <returns>True if false, false if not.</returns>
         /// =================================================================================================
-        [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR", 1D)]
+        [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR", "1.0")]
         internal static bool IsFalse(this bool source)
             => source.IsNull() || source.Equals(false);
     }
