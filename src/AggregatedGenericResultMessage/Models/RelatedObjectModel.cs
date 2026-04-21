@@ -85,6 +85,6 @@ namespace RzR.ResultMessage.Models
 
         /// <inheritdoc cref="IRelatedObjectModel"/>
         public override string ToString()
-            => $"InCodeName: {InCodeName} <-> InDataSourceName: {string.Join("#", InDataSourceNames)}";
+            => $"InCodeName: {InCodeName} <-> InDataSourceName: {string.Join("#", InDataSourceNames ?? new string[0])}";
     }
 }
