@@ -295,12 +295,16 @@ namespace RzR.ResultMessage
         /// </summary>
         /// <param name="results">All results</param>
         /// <returns></returns>
-        /// <remarks></remarks>
+        /// <remarks>
+        ///     <see cref="IResult.IsSuccess"/> of the returned result is <c>true</c> only when every result
+        ///     in <paramref name="results"/> is successful; this matches the semantics of
+        ///     <see cref="JoinResults(IEnumerable{Result})"/> and <see cref="JoinErrorResults(IEnumerable{Result})"/>.
+        /// </remarks>
         public virtual Result<T> JoinErrors(IEnumerable<Result> results)
         {
             var collection = results.ToList();
             var response = CreateInstance();
-            response.IsSuccess = IsSuccess;
+            response.IsSuccess = collection.All(x => x.IsSuccess);
             foreach (var error in collection
                 .SelectMany(result => result.Messages
                     .Where(x => new List<MessageType>()
