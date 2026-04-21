@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage;
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Models;
 using TestWebServSvc.Models;
 
 namespace TestWebServSvc

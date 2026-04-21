@@ -16,18 +16,18 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Extensions.Common;
+using RzR.ResultMessage.Models;
 using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Text;
-using AggregatedGenericResultMessage.Extensions.Common;
-using AggregatedGenericResultMessage.Models;
 
 // ReSharper disable PossibleNullReferenceException
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Helpers
+namespace RzR.ResultMessage.Helpers
 {
     /// <summary>
     ///     Exception helper

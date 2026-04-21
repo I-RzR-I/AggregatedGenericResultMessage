@@ -16,14 +16,14 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Models;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Models;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Abstractions
+namespace RzR.ResultMessage.Abstractions
 {
     /// <summary>
     ///     IResult message

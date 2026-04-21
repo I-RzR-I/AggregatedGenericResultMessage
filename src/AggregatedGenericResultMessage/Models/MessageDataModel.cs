@@ -16,18 +16,19 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Extensions.Common;
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Extensions.Common;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
+
 #if !NETFRAMEWORK
 using System.Text.Json.Serialization;
 #endif
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Models
+namespace RzR.ResultMessage.Models
 {
     /// <inheritdoc cref="IMessageDataModel"/>
     public class MessageDataModel : IMessageDataModel

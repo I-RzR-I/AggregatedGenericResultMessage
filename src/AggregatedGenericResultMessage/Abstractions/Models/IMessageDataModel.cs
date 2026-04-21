@@ -16,13 +16,13 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage.Models;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Abstractions.Models
+namespace RzR.ResultMessage.Abstractions.Models
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>Interface for message data model.</summary>

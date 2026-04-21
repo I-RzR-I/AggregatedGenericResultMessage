@@ -16,12 +16,12 @@
 
 #region U S A G E S
 
-using System.Xml;
 using CodeSource;
+using System.Xml;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Common
+namespace RzR.ResultMessage.Extensions.Common
 {
     /// <summary>
     ///     Xml extensions

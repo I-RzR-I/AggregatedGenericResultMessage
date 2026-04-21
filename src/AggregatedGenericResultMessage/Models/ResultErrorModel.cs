@@ -16,10 +16,10 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Extensions.Common;
 using System;
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions.Common;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -27,7 +27,7 @@ using System.Linq;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Models
+namespace RzR.ResultMessage.Models
 {
     /// <inheritdoc cref="IResultErrorModel" />
     public class ResultErrorModel : IResultErrorModel
@@ -45,7 +45,7 @@ namespace AggregatedGenericResultMessage.Models
         public ICollection<RelatedObjectModel> RelatedObjects { get; set; } = new List<RelatedObjectModel>();
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultErrorModel" /> class.
+        ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
         /// <param name="key">Error key</param>
         /// <param name="message">Error message</param>
@@ -58,7 +58,7 @@ namespace AggregatedGenericResultMessage.Models
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultErrorModel" /> class.
+        ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
         /// <param name="key">Error key</param>
         /// <param name="message">Error message</param>
@@ -75,7 +75,7 @@ namespace AggregatedGenericResultMessage.Models
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultErrorModel" /> class.
+        ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
         /// <param name="key">Error key</param>
         /// <param name="message">Error message</param>
@@ -95,7 +95,7 @@ namespace AggregatedGenericResultMessage.Models
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultErrorModel" /> class.
+        ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
         /// <param name="key">Error key</param>
         /// <param name="message">Error message</param>
@@ -108,7 +108,7 @@ namespace AggregatedGenericResultMessage.Models
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultErrorModel" /> class.
+        ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
         /// <param name="key">Error key</param>
         /// <param name="message">Error message</param>
@@ -125,7 +125,7 @@ namespace AggregatedGenericResultMessage.Models
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultErrorModel" /> class.
+        ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
         /// <param name="key">Error key</param>
         /// <param name="message">Error message</param>
@@ -145,7 +145,7 @@ namespace AggregatedGenericResultMessage.Models
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultErrorModel" /> class.
+        ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
         /// <param name="exception">Current execution code exception</param>
         /// <remarks></remarks>
@@ -157,7 +157,7 @@ namespace AggregatedGenericResultMessage.Models
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultErrorModel" /> class.
+        ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
         /// <param name="exception">Current execution code exception</param>
         /// <param name="relatedObject">Related message object</param>
@@ -173,7 +173,7 @@ namespace AggregatedGenericResultMessage.Models
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Models.ResultErrorModel" /> class.
+        ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
         /// <param name="exception">Current execution code exception</param>
         /// <param name="relatedObjects">Related message object</param>

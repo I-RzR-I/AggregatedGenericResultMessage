@@ -1,5 +1,5 @@
 ﻿using System.ServiceModel;
-using AggregatedGenericResultMessage;
+using RzR.ResultMessage;
 
 namespace TestWebServSvc
 {

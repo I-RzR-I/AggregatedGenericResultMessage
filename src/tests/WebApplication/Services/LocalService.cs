@@ -15,9 +15,9 @@
 // ***********************************************************************
 
 using System;
-using AggregatedGenericResultMessage;
 using LocalSrv1;
 using DomainCommonExtensions.CommonExtensions;
+using RzR.ResultMessage;
 
 namespace WebApplication.Services
 {

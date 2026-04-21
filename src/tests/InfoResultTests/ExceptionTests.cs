@@ -18,12 +18,12 @@
 
 using System;
 using System.Linq;
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions.Result.Messages;
-using AggregatedGenericResultMessage.Models;
 using InfoResultTests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RzR.ResultMessage;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Extensions.Result.Messages;
+using RzR.ResultMessage.Models;
 
 #endregion
 
@@ -70,13 +70,13 @@ namespace InfoResultTests
             var result = BookService.Instance.GetBookItemException();
 
             Assert.IsNotNull(result);
-            Assert.IsFalse(result.IsSuccess);
-            Assert.IsTrue(result.IsFailure);
-            Assert.AreEqual(result.Messages.Count, 2);
-            Assert.AreEqual("Null data", result.GetFirstMessage());
-            Assert.AreEqual("Null data", result.GetFirstError());
-            Assert.IsTrue(result.HasAnyErrors());
-            Assert.IsTrue(result.HasAnyExceptions());
+            Assert.IsFalse((bool)result.IsSuccess);
+            Assert.IsTrue((bool)result.IsFailure);
+            Assert.AreEqual<int>(result.Messages.Count, 2);
+            Assert.AreEqual<string>("Null data", result.GetFirstMessage());
+            Assert.AreEqual<string>("Null data", result.GetFirstError());
+            Assert.IsTrue((bool)result.HasAnyErrors());
+            Assert.IsTrue((bool)result.HasAnyExceptions());
             Assert.IsTrue(result.HasAnyErrorsOrExceptions());
         }
 

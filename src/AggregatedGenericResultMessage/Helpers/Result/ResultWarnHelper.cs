@@ -16,14 +16,14 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Extensions.Result.Messages;
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage.Extensions.Result.Messages;
+using RzR.ResultMessage.Models;
 
 // ReSharper disable RedundantCast
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Helpers.Result
+namespace RzR.ResultMessage.Helpers.Result
 {
     /// <summary>
     ///     Result warning helper

@@ -16,7 +16,7 @@
 
 // ReSharper disable ClassNeverInstantiated.Global
 
-namespace AggregatedGenericResultMessage.Helpers
+namespace RzR.ResultMessage.Helpers
 {
     /// <summary>
     ///     Default error codes

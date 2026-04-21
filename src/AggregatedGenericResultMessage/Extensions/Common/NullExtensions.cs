@@ -20,7 +20,7 @@ using CodeSource;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Common
+namespace RzR.ResultMessage.Extensions.Common
 {
     /// <summary>
     ///     Null extensions

@@ -14,9 +14,9 @@
 //  </summary>
 // ***********************************************************************
 
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage.Models;
 
-namespace AggregatedGenericResultMessage.Abstractions.MessageResults
+namespace RzR.ResultMessage.Abstractions.MessageResults
 {
     /// <summary>
     ///     Information message result

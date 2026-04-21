@@ -14,7 +14,7 @@
 //  </summary>
 // ***********************************************************************
 
-namespace AggregatedGenericResultMessage.Enums
+namespace RzR.ResultMessage.Enums
 {
     /// <summary>
     ///     Result message type

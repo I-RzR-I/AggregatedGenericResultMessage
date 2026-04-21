@@ -17,11 +17,11 @@
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Extensions.Result.Messages;
-using AggregatedGenericResultMessage.Models;
 using DomainCommonExtensions.DataTypeExtensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RzR.ResultMessage;
+using RzR.ResultMessage.Extensions.Result.Messages;
+using RzR.ResultMessage.Models;
 
 namespace InfoResultTests
 {

@@ -17,12 +17,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AggregatedGenericResultMessage.Extensions.Result;
-using AggregatedGenericResultMessage.Models;
 using DomainCommonExtensions.DataTypeExtensions;
+using RzR.ResultMessage;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Extensions.Result;
+using RzR.ResultMessage.Models;
 
 namespace InfoResultTests
 {

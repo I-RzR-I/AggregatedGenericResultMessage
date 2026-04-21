@@ -16,19 +16,19 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Models;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Serialization;
-using AggregatedGenericResultMessage.Models;
 
 // ReSharper disable EmptyConstructor
 #pragma warning disable IDE0090
 
 #endregion
 
-namespace AggregatedGenericResultMessage
+namespace RzR.ResultMessage
 {
     /// <summary>
     ///     SOAP result
@@ -40,7 +40,7 @@ namespace AggregatedGenericResultMessage
     public class SoapResult
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.SoapResult" /> class.
+        ///     Initializes a new instance of the <see cref="SoapResult" /> class.
         /// </summary>
         /// <remarks></remarks>
         public SoapResult() { }
@@ -72,7 +72,7 @@ namespace AggregatedGenericResultMessage
         /// <remarks></remarks>
         [DataMember(Name = "Messages", IsRequired = false)]
         [XmlArray(ElementName = "Messages", IsNullable = true)]
-        [XmlArrayItemAttribute("Message", IsNullable = true, Type = typeof(MessageModel))]
+        [XmlArrayItem("Message", IsNullable = true, Type = typeof(MessageModel))]
         public List<MessageModel> Messages { get; set; } = new List<MessageModel>();
 
         /// <summary>

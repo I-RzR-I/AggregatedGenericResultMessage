@@ -16,8 +16,8 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,7 +25,7 @@ using System.Linq;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Helpers.Result
+namespace RzR.ResultMessage.Helpers.Result
 {
     /// <summary>
     ///     Result success helper

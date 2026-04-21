@@ -16,11 +16,11 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Extensions.Common;
+using RzR.ResultMessage.Helpers;
+using RzR.ResultMessage.Models;
 using System;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions.Common;
-using AggregatedGenericResultMessage.Helpers;
-using AggregatedGenericResultMessage.Models;
 
 #pragma warning disable 8632
 #pragma warning disable IDE0090
@@ -29,7 +29,7 @@ using AggregatedGenericResultMessage.Models;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
-namespace AggregatedGenericResultMessage
+namespace RzR.ResultMessage
 {
     /// <inheritdoc />
     public class Result : Result<object>
@@ -37,7 +37,7 @@ namespace AggregatedGenericResultMessage
         #region C T O R s
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result" /> class.
+        ///     Initializes a new instance of the <see cref="Result" /> class.
         /// </summary>
         /// <remarks></remarks>
         public Result()
@@ -45,7 +45,7 @@ namespace AggregatedGenericResultMessage
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result" /> class.
+        ///     Initializes a new instance of the <see cref="Result" /> class.
         /// </summary>
         /// <param name="isSuccess">
         ///     If set to <see langword="true" />, then current request was executed with success; otherwise,

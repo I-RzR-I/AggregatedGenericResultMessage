@@ -16,13 +16,13 @@
 
 #region U S A G E S
 
+using CodeSource;
 using System;
 using System.Text;
-using CodeSource;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Common
+namespace RzR.ResultMessage.Extensions.Common
 {
     /// <summary>
     ///     String extensions

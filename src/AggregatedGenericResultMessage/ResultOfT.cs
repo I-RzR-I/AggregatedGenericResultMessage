@@ -16,23 +16,22 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Extensions.Common;
+using RzR.ResultMessage.Helpers;
+using RzR.ResultMessage.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 #if !NETFRAMEWORK
 using System.Text.Json.Serialization;
 #endif
-
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions.Common;
-using AggregatedGenericResultMessage.Helpers;
-using AggregatedGenericResultMessage.Models;
 
 // ReSharper disable ArrangeThisQualifier
 // ReSharper disable VirtualMemberCallInConstructor
@@ -42,7 +41,7 @@ using AggregatedGenericResultMessage.Models;
 
 #endregion
 
-namespace AggregatedGenericResultMessage
+namespace RzR.ResultMessage
 {
     /// <inheritdoc cref="IResult{T}" />
     public partial class Result<T> : IResult<T>, IXmlSerializable
@@ -96,13 +95,13 @@ namespace AggregatedGenericResultMessage
         #region C T O R s
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result{T}" /> class. 
+        ///     Initializes a new instance of the <see cref="Result{T}" /> class. 
         /// </summary>
         /// <remarks></remarks>
         public Result() { }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result{T}" /> class. 
+        ///     Initializes a new instance of the <see cref="Result{T}" /> class. 
         /// </summary>
         /// <param name="exception">Exception</param>
         /// <remarks></remarks>
@@ -120,7 +119,7 @@ namespace AggregatedGenericResultMessage
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result{T}" /> class. 
+        ///     Initializes a new instance of the <see cref="Result{T}" /> class. 
         /// </summary>
         /// <param name="response">Response data</param>
         /// <remarks></remarks>

@@ -16,15 +16,15 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Extensions.Common;
+using RzR.ResultMessage.Models;
 using System;
 using System.Collections.Generic;
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Extensions.Common;
-using AggregatedGenericResultMessage.Models;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Result.Actions
+namespace RzR.ResultMessage.Extensions.Result.Actions
 {
     /// <summary>
     ///     Result action extensions

@@ -16,11 +16,11 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Abstractions.MessageResults;
+using RzR.ResultMessage.Abstractions.MessageResults;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Abstractions
+namespace RzR.ResultMessage.Abstractions
 {
     /// <summary>
     ///     Available result messages

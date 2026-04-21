@@ -16,16 +16,16 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Extensions.Common;
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Extensions.Common;
+using RzR.ResultMessage.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Result.Functions
+namespace RzR.ResultMessage.Extensions.Result.Functions
 {
     /// -------------------------------------------------------------------------------------------------
     /// <summary>A function extensions.</summary>

@@ -14,13 +14,14 @@
 //  </summary>
 // ***********************************************************************
 
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Extensions.Result.Messages;
-using AggregatedGenericResultMessage.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using AggregatedGenericResultMessage.Enums;
 using DomainCommonExtensions.CommonExtensions;
+using RzR.ResultMessage;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Extensions.Result.Messages;
+using RzR.ResultMessage.Models;
+
 // ReSharper disable PossibleMultipleEnumeration
 
 namespace InfoResultTests

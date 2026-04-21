@@ -16,16 +16,16 @@
 
 #region U S A G E S
 
+using CodeSource;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Xml;
-using CodeSource;
 
 #pragma warning disable SCS0007
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Common
+namespace RzR.ResultMessage.Extensions.Common
 {
     // ReSharper disable once InconsistentNaming
     /// <summary>

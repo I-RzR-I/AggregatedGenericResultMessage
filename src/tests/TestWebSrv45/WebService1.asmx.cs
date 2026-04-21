@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage;
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Models;
 using TestWebSrv45.Models;
 
 namespace TestWebSrv45

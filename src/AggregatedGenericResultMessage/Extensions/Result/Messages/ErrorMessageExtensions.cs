@@ -16,19 +16,19 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Abstractions.MessageResults;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Models;
 using System;
-using System.Linq;
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Abstractions.MessageResults;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 // ReSharper disable RedundantArgumentDefaultValue
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Result.Messages
+namespace RzR.ResultMessage.Extensions.Result.Messages
 {
     /// <summary>
     ///     Error result messages extensions

@@ -18,12 +18,12 @@
 
 using System;
 using System.Linq;
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Helpers;
 using InfoResultTests.Dtos;
 using InfoResultTests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RzR.ResultMessage;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Helpers;
 
 #endregion
 
@@ -51,8 +51,8 @@ namespace InfoResultTests
             var date = DateTime.Now.Date.AddDays(-1);
             var data = BookService.Instance.GetBookByRegDate(date);
 
-            Assert.IsFalse(data.IsSuccess);
-            Assert.IsFalse(data.Response != null);
+            Assert.IsFalse((bool)data.IsSuccess);
+            Assert.IsFalse((bool)(data.Response != null));
             Assert.IsTrue(data.Messages.FirstOrDefault()?.MessageType == MessageType.Warning);
         }
 
