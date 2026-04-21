@@ -305,11 +305,15 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         
         /// <inheritdoc cref="IErrorMessageResult{T}.GetFirstError" />
         public static string GetFirstError<T>(this IResult<T> result)
-            => result.Messages?.FirstOrDefault(x => x.MessageType == MessageType.Error)?.Message?.Info ?? string.Empty;
+            => (result.Messages?.FirstOrDefault(x => x.MessageType == MessageType.Error)
+                ?? result.Messages?.FirstOrDefault(x => x.MessageType == MessageType.Exception))
+                ?.Message?.Info ?? string.Empty;
 
         /// <inheritdoc cref="IErrorMessageResult{T}.GetFirstError" />
         public static string GetFirstError<T>(this Result<T> result)
-            => result.Messages?.FirstOrDefault(x => x.MessageType == MessageType.Error)?.Message?.Info ?? string.Empty;
+            => (result.Messages?.FirstOrDefault(x => x.MessageType == MessageType.Error)
+                ?? result.Messages?.FirstOrDefault(x => x.MessageType == MessageType.Exception))
+                ?.Message?.Info ?? string.Empty;
 
         /// <inheritdoc cref="IErrorMessageResult{T}.HasErrorCode(string)" />
         public static bool HasErrorCode<T>(this IResult<T> result, string errorCode)

@@ -104,18 +104,19 @@ namespace RzR.ResultMessage
         ///     Initializes a new instance of the <see cref="Result{T}" /> class. 
         /// </summary>
         /// <param name="exception">Exception</param>
-        /// <remarks></remarks>
+        /// <remarks>
+        ///     Adds a single <see cref="MessageType.Exception"/> message containing the exception trace.
+        ///     When <paramref name="exception"/> is <c>null</c>, no message is appended.
+        /// </remarks>
         internal Result(Exception? exception)
         {
-            if (exception.IsNotNull())
-                ExceptionHelper.PreserveStackTrace(exception);
-
             this.IsSuccess = false;
 
-            this.Messages.Add(new MessageModel(null, new MessageDataModel(exception?.Message ?? "")));
+            if (exception.IsNull())
+                return;
 
-            if (exception.IsNotNull())
-                this.Messages.Add(new MessageModel(null, exception));
+            ExceptionHelper.PreserveStackTrace(exception);
+            this.Messages.Add(new MessageModel(null, exception));
         }
 
         /// <summary>
@@ -168,8 +169,8 @@ namespace RzR.ResultMessage
         {
             try
             {
-                var fMessage = Messages
-                    .FirstOrDefault(x => x.MessageType != MessageType.Exception)
+                var fMessage = (Messages.FirstOrDefault(x => x.MessageType != MessageType.Exception)
+                                ?? Messages.FirstOrDefault())
                     ?.Message;
 
                 return fMessage.IsNull() ? string.Empty : fMessage?.Info;
@@ -185,8 +186,8 @@ namespace RzR.ResultMessage
         {
             try
             {
-                var fMessage = Messages
-                    .FirstOrDefault(x => x.MessageType != MessageType.Exception)
+                var fMessage = (Messages.FirstOrDefault(x => x.MessageType != MessageType.Exception)
+                                ?? Messages.FirstOrDefault())
                     ?.Message;
 
                 return fMessage.IsNull() ? null : fMessage;

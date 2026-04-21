@@ -40,10 +40,10 @@ namespace InfoResultTests
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccess);
             Assert.IsTrue(result.IsFailure);
-            Assert.AreEqual(result.Messages.Count, 2);
+            Assert.AreEqual(1, result.Messages.Count);
             Assert.AreEqual("test message", result.GetFirstMessage());
             Assert.AreEqual("test message", result.GetFirstError());
-            Assert.IsTrue(result.HasAnyErrors());
+            Assert.IsFalse(result.HasAnyErrors());
             Assert.IsTrue(result.HasAnyExceptions());
             Assert.IsTrue(result.HasAnyErrorsOrExceptions());
         }
@@ -56,10 +56,10 @@ namespace InfoResultTests
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccess);
             Assert.IsTrue(result.IsFailure);
-            Assert.AreEqual(result.Messages.Count, 2);
+            Assert.AreEqual(1, result.Messages.Count);
             Assert.AreEqual("test message", result.GetFirstMessage());
             Assert.AreEqual("test message", result.GetFirstError());
-            Assert.IsTrue(result.HasAnyErrors());
+            Assert.IsFalse(result.HasAnyErrors());
             Assert.IsTrue(result.HasAnyExceptions());
             Assert.IsTrue(result.HasAnyErrorsOrExceptions());
         }
@@ -72,10 +72,10 @@ namespace InfoResultTests
             Assert.IsNotNull(result);
             Assert.IsFalse((bool)result.IsSuccess);
             Assert.IsTrue((bool)result.IsFailure);
-            Assert.AreEqual<int>(result.Messages.Count, 2);
+            Assert.AreEqual<int>(1, result.Messages.Count);
             Assert.AreEqual<string>("Null data", result.GetFirstMessage());
             Assert.AreEqual<string>("Null data", result.GetFirstError());
-            Assert.IsTrue((bool)result.HasAnyErrors());
+            Assert.IsFalse((bool)result.HasAnyErrors());
             Assert.IsTrue((bool)result.HasAnyExceptions());
             Assert.IsTrue(result.HasAnyErrorsOrExceptions());
         }
@@ -97,8 +97,8 @@ namespace InfoResultTests
 
             Assert.IsFalse(result.IsSuccess);
             Assert.IsTrue(result.IsFailure);
-            Assert.AreEqual(result.GetFirstMessage(), string.Empty);
-            Assert.AreEqual(result.GetFirstError(), string.Empty);
+            Assert.AreEqual("Message", result.GetFirstMessage());
+            Assert.AreEqual("Message", result.GetFirstError());
             Assert.IsTrue(result.HasAnyErrorsOrExceptions());
             Assert.IsFalse(result.HasAnyErrors());
             Assert.IsTrue(result.HasAnyExceptions());
@@ -106,12 +106,24 @@ namespace InfoResultTests
 
             Assert.IsFalse(resultOfT.IsSuccess);
             Assert.IsTrue(resultOfT.IsFailure);
-            Assert.AreEqual(resultOfT.GetFirstMessage(), string.Empty);
-            Assert.AreEqual(resultOfT.GetFirstError(), string.Empty);
+            Assert.AreEqual("MessageOfT", resultOfT.GetFirstMessage());
+            Assert.AreEqual("MessageOfT", resultOfT.GetFirstError());
             Assert.IsTrue(resultOfT.HasAnyErrorsOrExceptions());
             Assert.IsFalse(resultOfT.HasAnyErrors());
             Assert.IsTrue(resultOfT.HasAnyExceptions());
             Assert.AreEqual(resultOfT.Messages.Count(x=>x.MessageType == MessageType.Exception), 2);
+        }
+
+        [TestMethod]
+        public void ExceptionImplicit_NullException_DoesNotAddGhostMessage()
+        {
+            Result<int> result = (Exception)null;
+
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.IsSuccess);
+            Assert.IsTrue(result.IsFailure);
+            Assert.AreEqual(0, result.Messages.Count,
+                "Implicit conversion from a null Exception must not append any message.");
         }
     }
 }
