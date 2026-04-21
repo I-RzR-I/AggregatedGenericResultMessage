@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 //  Assembly         : RzR.Shared.ResultMessage.AggregatedGenericResultMessage
 //  Author           : RzR
 //  Created On       : 2023-02-03 18:25
@@ -40,7 +40,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <returns></returns>
         internal static Result<T> Success<T>(T data = default)
         {
-            var result = Result<T>.Instance;
+            var result = Result<T>.Create();
             result.IsSuccess = true;
             result.Response = data;
 
@@ -55,7 +55,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <returns></returns>
         internal static Result<T> Success<T>(T data = default, params RelatedObjectModel[] relatedObjects)
         {
-            var result = Result<T>.Instance;
+            var result = Result<T>.Create();
             result.IsSuccess = true;
             result.Response = data;
 

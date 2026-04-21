@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 //  Assembly         : RzR.Shared.ResultMessage.AggregatedGenericResultMessage
 //  Author           : RzR
 //  Created On       : 2023-02-03 19:38
@@ -35,7 +35,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// </summary>
         /// <returns></returns>
         public static Result<T> NotFound<T>()
-            => (Result<T>)Result<T>.Instance; //.AddNotFound();
+            => (Result<T>)Result<T>.Create(); //.AddNotFound();
 
         /// <summary>
         ///     Not found
@@ -43,7 +43,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="message">Not found message</param>
         /// <returns></returns>
         public static Result<T> NotFound<T>(string message)
-            => (Result<T>)Result<T>.Instance.AddNotFound(message);
+            => (Result<T>)Result<T>.Create().AddNotFound(message);
 
         /// <summary>
         ///     Not found
@@ -52,7 +52,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         public static Result<T> NotFound<T>(string message, params RelatedObjectModel[] relatedObjects)
-            => (Result<T>)Result<T>.Instance.AddNotFound(message, relatedObjects);
+            => (Result<T>)Result<T>.Create().AddNotFound(message, relatedObjects);
 
         /// <summary>
         ///     Not found
@@ -60,7 +60,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="message">Not found message</param>
         /// <returns></returns>
         public static Result<T> NotFound<T>(MessageDataModel message)
-            => (Result<T>)Result<T>.Instance.AddNotFound(message);
+            => (Result<T>)Result<T>.Create().AddNotFound(message);
 
         /// <summary>
         ///     Not found
@@ -69,7 +69,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         public static Result<T> NotFound<T>(MessageDataModel message, params RelatedObjectModel[] relatedObjects)
-            => (Result<T>)Result<T>.Instance.AddNotFound(message, relatedObjects);
+            => (Result<T>)Result<T>.Create().AddNotFound(message, relatedObjects);
 
         /// <summary>
         ///     Not found
@@ -78,7 +78,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="error">Not found message</param>
         /// <returns></returns>
         public static Result<T> NotFound<T>(string code, string error)
-            => (Result<T>)Result<T>.Instance.AddNotFound(code, error);
+            => (Result<T>)Result<T>.Create().AddNotFound(code, error);
 
         /// <summary>
         ///     Not found
@@ -88,7 +88,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         public static Result<T> NotFound<T>(string code, string error, params RelatedObjectModel[] relatedObjects)
-            => (Result<T>)Result<T>.Instance.AddNotFound(code, error, relatedObjects);
+            => (Result<T>)Result<T>.Create().AddNotFound(code, error, relatedObjects);
 
         /// <summary>
         ///     Not found
@@ -97,7 +97,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="error">Not found message</param>
         /// <returns></returns>
         public static Result<T> NotFound<T>(string code, MessageDataModel error)
-            => (Result<T>)Result<T>.Instance.AddNotFound(code, error);
+            => (Result<T>)Result<T>.Create().AddNotFound(code, error);
 
         /// <summary>
         ///     Not found
@@ -107,6 +107,6 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         public static Result<T> NotFound<T>(string code, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
-            => (Result<T>)Result<T>.Instance.AddNotFound(code, error, relatedObjects);
+            => (Result<T>)Result<T>.Create().AddNotFound(code, error, relatedObjects);
     }
 }

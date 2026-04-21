@@ -49,10 +49,23 @@ namespace RzR.ResultMessage
         #region I N S T A N C E
 
         /// <summary>
-        ///     Gets result instance.
+        ///     Creates a new <see cref="Result{T}"/> instance.
         /// </summary>
-        /// <value></value>
-        /// <remarks></remarks>
+        /// <returns>A new, empty <see cref="Result{T}"/>.</returns>
+        /// <remarks>
+        ///     Each call returns a fresh instance — this is a factory.
+        /// </remarks>
+        public static Result<T> Create() => CreateInstance();
+
+        /// <summary>
+        ///     Gets a new result instance.
+        /// </summary>
+        /// <value>A new <see cref="Result{T}"/> on every access.</value>
+        /// <remarks>
+        ///     Misnamed legacy accessor: each access returns a fresh instance, not a singleton.
+        ///     Use <see cref="Create"/> instead.
+        /// </remarks>
+        [Obsolete("Misleading name: each access returns a NEW instance. Use Result<T>.Create() instead.")]
         public static Result<T> Instance => CreateInstance();
 
         /// <summary>

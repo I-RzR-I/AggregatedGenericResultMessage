@@ -4,10 +4,10 @@
 //  Created On       : 2026-04-21 19:04
 // 
 //  Last Modified By : RzR
-//  Last Modified On : 2026-04-21 20:00
+//  Last Modified On : 2026-04-21 23:00
 // ***********************************************************************
 //  <copyright file="JoinResultsTests.cs" company="RzR SOFT & TECH">
-//   Copyright © RzR. All rights reserved.
+//   Copyright Â© RzR. All rights reserved.
 //  </copyright>
 // 
 //  <summary>
@@ -34,7 +34,7 @@ namespace InfoResultTests
         [TestMethod]
         public void JoinErrors_AllSuccess_ReturnsSuccess()
         {
-            var joined = Result<object>.Instance.JoinErrors(new List<Result>
+            var joined = Result<object>.Create().JoinErrors(new List<Result>
             {
                 new Result { IsSuccess = true },
                 new Result { IsSuccess = true }
@@ -54,7 +54,7 @@ namespace InfoResultTests
 
             var succeeded = new Result { IsSuccess = true };
 
-            var joined = Result<object>.Instance.JoinErrors(new List<Result> { failed, succeeded });
+            var joined = Result<object>.Create().JoinErrors(new List<Result> { failed, succeeded });
 
             Assert.IsFalse(joined.IsSuccess,
                 "JoinErrors must report failure when any input result has failed.");

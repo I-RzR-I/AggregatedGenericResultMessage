@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 //  Assembly         : RzR.Shared.ResultMessage.AggregatedGenericResultMessage
 //  Author           : RzR
 //  Created On       : 2023-02-03 19:09
@@ -36,7 +36,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// </summary>
         /// <returns></returns>
         internal static Result<T> Failure<T>() 
-            => (Result<T>) Result<T>.Instance; //.AddError();
+            => (Result<T>) Result<T>.Create(); //.AddError();
 
         /// <summary>
         ///     Failure
@@ -44,7 +44,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="error">Error message</param>
         /// <returns></returns>
         internal static Result<T> Failure<T>(string error) 
-            => (Result<T>) Result<T>.Instance.AddError(error);
+            => (Result<T>) Result<T>.Create().AddError(error);
 
         /// <summary>
         ///     Failure
@@ -53,7 +53,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         internal static Result<T> Failure<T>(string error, params RelatedObjectModel[] relatedObjects) 
-            => (Result<T>) Result<T>.Instance.AddError(error, relatedObjects);
+            => (Result<T>) Result<T>.Create().AddError(error, relatedObjects);
 
         /// <summary>
         ///     Failure
@@ -61,7 +61,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="error">Error message</param>
         /// <returns></returns>
         internal static Result<T> Failure<T>(MessageDataModel error) 
-            => (Result<T>) Result<T>.Instance.AddError(error);
+            => (Result<T>) Result<T>.Create().AddError(error);
 
         /// <summary>
         ///     Failure
@@ -70,7 +70,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         internal static Result<T> Failure<T>(MessageDataModel error, params RelatedObjectModel[] relatedObjects) 
-            => (Result<T>) Result<T>.Instance.AddError(error, relatedObjects);
+            => (Result<T>) Result<T>.Create().AddError(error, relatedObjects);
 
         /// <summary>
         ///     Failure
@@ -78,7 +78,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="errors">Error message</param>
         /// <returns></returns>
         internal static Result<T> Failure<T>(IEnumerable<MessageDataModel> errors) 
-            => (Result<T>) Result<T>.Instance.AddErrors(errors);
+            => (Result<T>) Result<T>.Create().AddErrors(errors);
 
         /// <summary>
         ///     Failure
@@ -87,7 +87,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="error">Message</param>
         /// <returns></returns>
         internal static Result<T> Failure<T>(string code, string error)
-            => (Result<T>) Result<T>.Instance.AddError(code, error);
+            => (Result<T>) Result<T>.Create().AddError(code, error);
 
         /// <summary>
         ///     Failure
@@ -97,7 +97,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         internal static Result<T> Failure<T>(string code, string error, params RelatedObjectModel[] relatedObjects)
-            => (Result<T>) Result<T>.Instance.AddError(code, error, relatedObjects);
+            => (Result<T>) Result<T>.Create().AddError(code, error, relatedObjects);
 
         /// <summary>
         ///     Failure
@@ -106,7 +106,7 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="error">Message</param>
         /// <returns></returns>
         internal static Result<T> Failure<T>(string code, MessageDataModel error)
-            => (Result<T>) Result<T>.Instance.AddError(code, error);
+            => (Result<T>) Result<T>.Create().AddError(code, error);
 
         /// <summary>
         ///     Failure
@@ -116,6 +116,6 @@ namespace RzR.ResultMessage.Helpers.Result
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         internal static Result<T> Failure<T>(string code, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
-            => (Result<T>) Result<T>.Instance.AddError(code, error, relatedObjects);
+            => (Result<T>) Result<T>.Create().AddError(code, error, relatedObjects);
     }
 }

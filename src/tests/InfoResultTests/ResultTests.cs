@@ -130,5 +130,20 @@ namespace InfoResultTests
             Assert.AreEqual(1, result.Messages.First().RelatedObjects.Count);
             Assert.AreEqual("BookDto", result.Messages.First().RelatedObjects.First().InCodeName);
         }
+
+        [TestMethod]
+        public void Create_ReturnsDistinctInstances()
+        {
+            // Result<T>.Create() (and its legacy alias .Instance) must return a fresh instance every call
+            var a = Result<int>.Create();
+            var b = Result<int>.Create();
+
+            Assert.IsNotNull(a);
+            Assert.IsNotNull(b);
+            Assert.AreNotSame(a, b);
+
+            a.IsSuccess = true;
+            Assert.IsFalse(b.IsSuccess);
+        }
     }
 }
