@@ -15,17 +15,19 @@
 // ***********************************************************************
 
 #region U S A G E S
+
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Models;
+using System.Collections.Generic;
+using System.Xml.Serialization;
+
 #if !NETFRAMEWORK
 using System.Text.Json.Serialization;
 #endif
-using System.Xml.Serialization;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Models;
-using System.Collections.Generic;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Abstractions.Models
+namespace RzR.ResultMessage.Abstractions.Models
 {
     /// <summary>
     ///     Message result model

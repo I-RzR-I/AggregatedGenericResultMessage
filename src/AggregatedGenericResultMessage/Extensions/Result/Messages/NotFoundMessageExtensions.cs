@@ -16,14 +16,14 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Abstractions.MessageResults;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Abstractions.MessageResults;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Models;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Result.Messages
+namespace RzR.ResultMessage.Extensions.Result.Messages
 {
     /// <summary>
     ///     Not found messages extensions

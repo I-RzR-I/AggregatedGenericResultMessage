@@ -20,7 +20,7 @@ using System.Xml.Serialization;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Abstractions
+namespace RzR.ResultMessage.Abstractions
 {
     /// <inheritdoc cref="IResult" />
     [XmlInclude(typeof(Result<>))]

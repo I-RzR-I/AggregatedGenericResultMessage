@@ -15,6 +15,16 @@ For more flexible and intuitive use, in solution persist extension method like f
 
 For more efficiently using, when in some cases when you may need to execute some custom actions/functions after a successful or failed execution request. In that case was added extension methods (`ActionOnSuccess`, `ActionOnFailure`, `ActionOn`, `ExecuteAction`, `FunctionOnSuccess`, `FunctionOnFailure`, `FunctionOn`, `ExecuteFunction`) which allow you to execute this action/function like insert log when execution has a status equal to failure.
 
+> **Note:** As of the latest version, the legacy `ActionOn*` and `Func<Task<TResult>>`-taking `Function*` overloads are marked `[Obsolete]`. Prefer the modern combinators below — they return values, fail fast on null arguments, and use `ConfigureAwait(false)`:
+>
+> | Replace | With |
+> |---|---|
+> | `ActionOnSuccess` (side-effect) | `Result<T>.Tap(Action<T>)` |
+> | `ActionOnFailure` / `ActionOn` | `Match(onSuccess, onFailure)` |
+> | `FunctionOnSuccess(... Task<TResult>)` | `FunctionOnSuccessAsync` (in `RzR.ResultMessage.Extensions.Result.Functions.FunctionExtensionsAsync`) |
+>
+> The new monadic / async combinators are: `Map`, `Bind`, `Match`, `Tap`, `MapAsync`, `BindAsync`, `TapAsync`, `MatchAsync`, plus fluent `Validate` / `Ensure` validation aggregation. See [USING](docs/usage.md) for details.
+
 No additional components or packs are required for use. So, it only needs to be added/installed in the project and can be used instantly.
 
 **In case you wish to use it in your project, u can install the package from <a href="https://www.nuget.org/packages/AggregatedGenericResultMessage" target="_blank">nuget.org</a>** or specify what version you want:
@@ -23,5 +33,6 @@ No additional components or packs are required for use. So, it only needs to be 
 
 ## Content
 1. [USING](docs/usage.md)
+1. [MIGRATION GUIDE](docs/migration-guide.md)
 1. [CHANGELOG](docs/CHANGELOG.md)
 1. [BRANCH-GUIDE](docs/branch-guide.md)

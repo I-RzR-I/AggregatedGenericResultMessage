@@ -16,12 +16,12 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage.Models;
 using System;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Abstractions.MessageResults
+namespace RzR.ResultMessage.Abstractions.MessageResults
 {
     /// <summary>
     ///     Exception message extensions

@@ -16,23 +16,23 @@
 
 #region U S A G E S
 
+using RzR.Core.CodeSource;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Xml;
-using CodeSource;
 
 #pragma warning disable SCS0007
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Common
+namespace RzR.ResultMessage.Extensions.Common
 {
     // ReSharper disable once InconsistentNaming
     /// <summary>
     ///     T type extensions
     /// </summary>
     /// <remarks></remarks>
-    [CodeSource("DomainCommonExtensions.CommonExtensions", "RzR", "RzR", 1)]
+    [CodeSource("DomainCommonExtensions.CommonExtensions", "RzR", "RzR", "1.0")]
     internal static class TExtensions
     {
         /// <summary>
@@ -45,7 +45,7 @@ namespace AggregatedGenericResultMessage.Extensions.Common
         /// <typeparam name="T">Source data type</typeparam>
         /// <remarks></remarks>
         [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR",
-            "DomainCommonExtensions.CommonExtensions.TExtensions.SerializeToXmlDoc", 1)]
+            "DomainCommonExtensions.CommonExtensions.TExtensions.SerializeToXmlDoc", "1.0")]
         internal static XmlDocument SerializeToXmlDoc<T>(this T source, string rootName = null,
             string rootNameSpaceName = null)
         {

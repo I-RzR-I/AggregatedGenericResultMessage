@@ -16,16 +16,16 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Helpers.Result;
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Helpers.Result;
+using RzR.ResultMessage.Models;
 using System.Collections.Generic;
 
 #endregion
 
 #pragma warning disable CS1574
 
-namespace AggregatedGenericResultMessage
+namespace RzR.ResultMessage
 {
     public partial class Result<T> : IResult<T>
     {

@@ -16,18 +16,18 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Models;
 using System.Collections.Generic;
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Models;
 
 // ReSharper disable RedundantNameQualifier
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Helpers.CustomResponses
+namespace RzR.ResultMessage.Helpers.CustomResponses
 {
     /// <inheritdoc />
-    public sealed class NullReferenceResult<T> : AggregatedGenericResultMessage.Result<T>
+    public sealed class NullReferenceResult<T> : Result<T>
     {
         /// <inheritdoc />
         public NullReferenceResult() { }
@@ -48,7 +48,7 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
     }
 
     /// <inheritdoc />
-    public sealed class NullReferenceResult : AggregatedGenericResultMessage.Result
+    public sealed class NullReferenceResult : ResultMessage.Result
     {
         /// <inheritdoc />
         public NullReferenceResult() { }

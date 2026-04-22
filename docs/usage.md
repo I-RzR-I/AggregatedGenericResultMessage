@@ -220,3 +220,107 @@ public async Task<Result> AddFooAsync(Foo request, CancellationToken cancellatio
             }
         }
 ```
+
+---
+
+## Modern combinators (recommended)
+
+The legacy `ActionOnSuccess` / `ActionOnFailure` / `ActionOn` helpers and the `Func<Task<TResult>>`-taking `Function*` overloads are now `[Obsolete]`. The combinators below are the recommended replacements, they return values, fail fast on null arguments, and (for async) consistently use `ConfigureAwait(false)`.
+
+### Map / Bind / Match / Tap (synchronous)
+
+These live as instance methods on `Result<T>`.
+
+```csharp
+// Map: project Response on success; failure (and its messages) propagate unchanged.
+Result<int> length = Result<string>.Success("hello").Map(s => s.Length); // length.Response == 5
+
+// Bind: flat-map. The binder may return a successful or failed Result<TOut>.
+//       Returning null from the binder throws InvalidOperationException — return Failure(...) instead.
+Result<Order> order = Result<int>.Success(orderId)
+    .Bind(id => _orderService.GetOrder(id));   // returns Result<Order>
+
+// Match: fold both branches into a single value (e.g. an HTTP status, a DTO, etc.).
+int httpStatus = result.Match(
+    onSuccess: _   => 200,
+    onFailure: r   => r.HasAnyErrors() ? 400 : 500);
+
+// Tap: side-effect only on success; returns the same instance for chaining.
+result.Tap(value => _logger.LogInformation("Loaded {Value}", value));
+```
+
+Composition:
+
+```csharp
+var pipeline = Result<int>.Success(2)
+    .Map(x => x * 5)                          // Result<int>(10)
+    .Tap(x => _logger.LogDebug("step={X}", x))
+    .Bind(x => Result<string>.Success($"n={x}")); // Result<string>("n=10")
+```
+
+### MapAsync / BindAsync / TapAsync (async)
+
+Available as extension methods in `RzR.ResultMessage.Extensions.Result`. Every async overload exists in two source forms; on `Result<T>` and on `Task<Result<T>>` and accepts both sync and async delegates, so an entire async pipeline can be expressed as a single fluent chain:
+
+```csharp
+using RzR.ResultMessage.Extensions.Result;
+
+var dto = await _repo.GetOrderByIdAsync(id)             // Task<Result<Order>>
+    .MapAsync(o => o.ToSummary())                       // sync projection
+    .BindAsync(async s => await _enricher.EnrichAsync(s))  // async bind
+    .TapAsync(async s => await _audit.WriteAsync(s))    // async side-effect on success
+    .MatchAsync(
+        onSuccess: s => OrderResponse.From(s),
+        onFailure: r => OrderResponse.Error(r.GetFirstError()));
+```
+
+For sync-only callers, the new `FunctionExtensionsAsync` static class also exposes typed async equivalents of the legacy `FunctionOn*` helpers: `FunctionOnSuccessAsync`, `FunctionOnFailureAsync`, `FunctionOnAsync`, `ExecuteFunctionAsync`.
+
+### Validation aggregation: `Validate` / `Ensure`
+
+Two complementary modes for input/business-rule validation, both fluent on `Result<T>`:
+
+| Method | Behavior |
+|---|---|
+| `Validate(predicate, error)` | **Always** evaluates the predicate. On `false` it appends an error and flips `IsSuccess` to `false`, chain calls to **accumulate every violation** in one pass. Overloads: `(predicate, key, error)`, `(predicate, MessageDataModel)`. |
+| `Ensure(predicate, error)`   | **Short-circuits**: skips the predicate once `IsSuccess` is already `false`. |
+
+Accumulating example:
+
+```csharp
+var result = Result<Order>.Success(order)
+    .Validate(o => o.Items.Count > 0, "Order must contain at least one item")
+    .Validate(o => o.Total > 0, "Order total must be positive")
+    .Validate(o => o.Customer != null, "Order must have a customer");
+
+// If all three rules fail, result.Messages contains all three errors and IsSuccess == false.
+```
+
+Short-circuit guard chain:
+
+```csharp
+var result = Result<User>.Success(user)
+    .Ensure(u => u != null, "user is required")
+    .Ensure(u => !string.IsNullOrEmpty(u.Email), "email is required") // safe: skipped if u == null
+    .Ensure(u => u.Email.Contains("@"), "email must be valid");
+```
+
+Async variants (`ValidateAsync`) are available on both `Result<T>` and `Task<Result<T>>` and accept either a sync or async predicate.
+
+### `Result<T>.Create()` factory
+
+`Result<T>.Instance` is now `[Obsolete]` because each access returned a *new* instance — a misleading name. Use the explicit factory:
+
+```csharp
+var r = Result<Foo>.Create();   // identical behavior, clearer intent
+```
+
+### Other behavior changes worth noting
+
+- **Implicit `Exception` -> `Result` / `Result<T>` operators** now throw `ArgumentNullException` when given a `null` exception (previously silently produced an empty failure).
+- **`Result<T>(Exception)` constructor** now adds a single `MessageType.Exception` message (previously two messages: an empty info plus the trace).
+- **`GetFirstMessage` / `GetFirstError`** fall back to the first `Exception` message when no plain message is present, so exception-only failures no longer surface as empty strings.
+- **`JoinErrors`** correctly sets `IsSuccess` from the joined collection (previously inherited it from the calling instance).
+- **`Success<T>(T, params RelatedObjectModel[])`** no longer adds a ghost `MessageType.None` message when no related objects are supplied.
+- **`ExceptionHelper.PreserveStackTrace`** has been rewritten on top of `ExceptionDispatchInfo.Capture` — AOT-friendly and free of the `SYSLIB0050` warning.
+- **`RelatedObjectModel.ToString()`** is now null-safe when `InDataSourceNames` is `null`.

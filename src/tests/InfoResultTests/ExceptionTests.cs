@@ -18,12 +18,12 @@
 
 using System;
 using System.Linq;
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions.Result.Messages;
-using AggregatedGenericResultMessage.Models;
 using InfoResultTests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RzR.ResultMessage;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Extensions.Result.Messages;
+using RzR.ResultMessage.Models;
 
 #endregion
 
@@ -40,10 +40,10 @@ namespace InfoResultTests
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccess);
             Assert.IsTrue(result.IsFailure);
-            Assert.AreEqual(result.Messages.Count, 2);
+            Assert.AreEqual(1, result.Messages.Count);
             Assert.AreEqual("test message", result.GetFirstMessage());
             Assert.AreEqual("test message", result.GetFirstError());
-            Assert.IsTrue(result.HasAnyErrors());
+            Assert.IsFalse(result.HasAnyErrors());
             Assert.IsTrue(result.HasAnyExceptions());
             Assert.IsTrue(result.HasAnyErrorsOrExceptions());
         }
@@ -56,10 +56,10 @@ namespace InfoResultTests
             Assert.IsNotNull(result);
             Assert.IsFalse(result.IsSuccess);
             Assert.IsTrue(result.IsFailure);
-            Assert.AreEqual(result.Messages.Count, 2);
+            Assert.AreEqual(1, result.Messages.Count);
             Assert.AreEqual("test message", result.GetFirstMessage());
             Assert.AreEqual("test message", result.GetFirstError());
-            Assert.IsTrue(result.HasAnyErrors());
+            Assert.IsFalse(result.HasAnyErrors());
             Assert.IsTrue(result.HasAnyExceptions());
             Assert.IsTrue(result.HasAnyErrorsOrExceptions());
         }
@@ -70,13 +70,13 @@ namespace InfoResultTests
             var result = BookService.Instance.GetBookItemException();
 
             Assert.IsNotNull(result);
-            Assert.IsFalse(result.IsSuccess);
-            Assert.IsTrue(result.IsFailure);
-            Assert.AreEqual(result.Messages.Count, 2);
-            Assert.AreEqual("Null data", result.GetFirstMessage());
-            Assert.AreEqual("Null data", result.GetFirstError());
-            Assert.IsTrue(result.HasAnyErrors());
-            Assert.IsTrue(result.HasAnyExceptions());
+            Assert.IsFalse((bool)result.IsSuccess);
+            Assert.IsTrue((bool)result.IsFailure);
+            Assert.AreEqual<int>(1, result.Messages.Count);
+            Assert.AreEqual<string>("Null data", result.GetFirstMessage());
+            Assert.AreEqual<string>("Null data", result.GetFirstError());
+            Assert.IsFalse((bool)result.HasAnyErrors());
+            Assert.IsTrue((bool)result.HasAnyExceptions());
             Assert.IsTrue(result.HasAnyErrorsOrExceptions());
         }
 
@@ -97,8 +97,8 @@ namespace InfoResultTests
 
             Assert.IsFalse(result.IsSuccess);
             Assert.IsTrue(result.IsFailure);
-            Assert.AreEqual(result.GetFirstMessage(), string.Empty);
-            Assert.AreEqual(result.GetFirstError(), string.Empty);
+            Assert.AreEqual("Message", result.GetFirstMessage());
+            Assert.AreEqual("Message", result.GetFirstError());
             Assert.IsTrue(result.HasAnyErrorsOrExceptions());
             Assert.IsFalse(result.HasAnyErrors());
             Assert.IsTrue(result.HasAnyExceptions());
@@ -106,12 +106,26 @@ namespace InfoResultTests
 
             Assert.IsFalse(resultOfT.IsSuccess);
             Assert.IsTrue(resultOfT.IsFailure);
-            Assert.AreEqual(resultOfT.GetFirstMessage(), string.Empty);
-            Assert.AreEqual(resultOfT.GetFirstError(), string.Empty);
+            Assert.AreEqual("MessageOfT", resultOfT.GetFirstMessage());
+            Assert.AreEqual("MessageOfT", resultOfT.GetFirstError());
             Assert.IsTrue(resultOfT.HasAnyErrorsOrExceptions());
             Assert.IsFalse(resultOfT.HasAnyErrors());
             Assert.IsTrue(resultOfT.HasAnyExceptions());
             Assert.AreEqual(resultOfT.Messages.Count(x=>x.MessageType == MessageType.Exception), 2);
+        }
+
+        [TestMethod]
+        public void ExceptionImplicit_NullException_ThrowsArgumentNullException()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                Result<int> _ = (Exception)null;
+            }, "Implicit conversion from a null Exception to Result<T> must throw ArgumentNullException.");
+
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                Result _ = (Exception)null;
+            }, "Implicit conversion from a null Exception to Result must throw ArgumentNullException.");
         }
     }
 }

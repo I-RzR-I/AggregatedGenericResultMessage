@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 //  Assembly         : RzR.Shared.ResultMessage.AggregatedGenericResultMessage
 //  Author           : RzR
 //  Created On       : 2023-02-03 19:31
@@ -16,14 +16,14 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Extensions.Result.Messages;
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage.Extensions.Result.Messages;
+using RzR.ResultMessage.Models;
 
 // ReSharper disable RedundantCast
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Helpers.Result
+namespace RzR.ResultMessage.Helpers.Result
 {
     /// <summary>
     ///     Access denied result helper
@@ -35,7 +35,7 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// </summary>
         /// <returns></returns>
         internal static Result<T> AccessDenied<T>()
-            => (Result<T>)Result<T>.Instance; //.AddAccessDenied();
+            => (Result<T>)Result<T>.Create(); //.AddAccessDenied();
 
         /// <summary>
         ///     Access denied
@@ -43,7 +43,7 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <param name="message">Access denied message</param>
         /// <returns></returns>
         internal static Result<T> AccessDenied<T>(string message)
-            => (Result<T>)Result<T>.Instance.AddAccessDenied(message);
+            => (Result<T>)Result<T>.Create().AddAccessDenied(message);
 
         /// <summary>
         ///     Access denied
@@ -52,7 +52,7 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         internal static Result<T> AccessDenied<T>(string message, params RelatedObjectModel[] relatedObjects)
-            => (Result<T>)Result<T>.Instance.AddAccessDenied(message, relatedObjects);
+            => (Result<T>)Result<T>.Create().AddAccessDenied(message, relatedObjects);
 
         /// <summary>
         ///     Access denied
@@ -60,7 +60,7 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <param name="message">Access denied message</param>
         /// <returns></returns>
         internal static Result<T> AccessDenied<T>(MessageDataModel message)
-            => (Result<T>)Result<T>.Instance.AddAccessDenied(message);
+            => (Result<T>)Result<T>.Create().AddAccessDenied(message);
 
         /// <summary>
         ///     Access denied
@@ -69,7 +69,7 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         internal static Result<T> AccessDenied<T>(MessageDataModel message, params RelatedObjectModel[] relatedObjects)
-            => (Result<T>)Result<T>.Instance.AddAccessDenied(message, relatedObjects);
+            => (Result<T>)Result<T>.Create().AddAccessDenied(message, relatedObjects);
 
         /// <summary>
         ///     Access denied
@@ -78,7 +78,7 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <param name="error">Message</param>
         /// <returns></returns>
         internal static Result<T> AccessDenied<T>(string code, string error)
-            => (Result<T>)Result<T>.Instance.AddAccessDenied(code, error);
+            => (Result<T>)Result<T>.Create().AddAccessDenied(code, error);
 
         /// <summary>
         ///     Access denied
@@ -88,7 +88,7 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         internal static Result<T> AccessDenied<T>(string code, string error, params RelatedObjectModel[] relatedObjects)
-            => (Result<T>)Result<T>.Instance.AddAccessDenied(code, error, relatedObjects);
+            => (Result<T>)Result<T>.Create().AddAccessDenied(code, error, relatedObjects);
 
         /// <summary>
         ///     Access denied
@@ -97,7 +97,7 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <param name="error">Message</param>
         /// <returns></returns>
         internal static Result<T> AccessDenied<T>(string code, MessageDataModel error)
-            => (Result<T>)Result<T>.Instance.AddAccessDenied(code, error);
+            => (Result<T>)Result<T>.Create().AddAccessDenied(code, error);
 
         /// <summary>
         ///     Access denied
@@ -107,6 +107,6 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         internal static Result<T> AccessDenied<T>(string code, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
-            => (Result<T>)Result<T>.Instance.AddAccessDenied(code, error, relatedObjects);
+            => (Result<T>)Result<T>.Create().AddAccessDenied(code, error, relatedObjects);
     }
 }

@@ -4,10 +4,10 @@
 //  Created On       : 2023-04-02 18:49
 // 
 //  Last Modified By : RzR
-//  Last Modified On : 2023-04-02 22:09
+//  Last Modified On : 2026-04-22 00:18
 // ***********************************************************************
-//  <copyright file="ActionExtensions.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
+//  <copyright file="ActionExtensions.cs" company="RzR SOFT & TECH">
+//   Copyright © RzR. All rights reserved.
 //  </copyright>
 // 
 //  <summary>
@@ -16,15 +16,15 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Extensions.Common;
+using RzR.ResultMessage.Models;
 using System;
 using System.Collections.Generic;
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Extensions.Common;
-using AggregatedGenericResultMessage.Models;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Result.Actions
+namespace RzR.ResultMessage.Extensions.Result.Actions
 {
     /// <summary>
     ///     Result action extensions
@@ -37,11 +37,13 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
         /// <typeparam name="TResult">Type of result</typeparam>
         /// <param name="result">Result</param>
         /// <param name="onSuccess">Success action</param>
+        [Obsolete("Use Result<T>.Tap(Action<T>) for side-effects on success, or Match(onSuccess, onFailure) when you need to fold into a value.")]
         public static TResult ActionOnSuccess<TResult>(this TResult result, params Action<TResult>[] onSuccess)
             where TResult : IResult
         {
-            if (!result.IsSuccess)
+            if (result.IsSuccess.IsFalse())
                 return result;
+
             foreach (var action in onSuccess)
                 action?.Invoke(result);
 
@@ -54,13 +56,16 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
         /// <typeparam name="TResult">Type of result</typeparam>
         /// <param name="result">Result</param>
         /// <param name="onFailure">Failure action</param>
+        [Obsolete("Use Match(onSuccess, onFailure) which returns a value and makes both branches explicit.")]
         public static TResult ActionOnFailure<TResult>(this TResult result, params Action<TResult>[] onFailure)
             where TResult : IResult
         {
             if (result.IsSuccess)
                 return result;
+
             if (onFailure.IsNull())
                 return result;
+
             foreach (var action in onFailure)
                 action?.Invoke(result);
 
@@ -75,13 +80,16 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
         /// <param name="onFailure">Action on failure</param>
         /// <typeparam name="TResult">Type of result</typeparam>
         /// <remarks></remarks>
-        public static TResult ActionOn<TResult>(this TResult result, Action<TResult> onSuccess, 
+        [Obsolete("Use Match(onSuccess, onFailure) which returns a value and makes both branches explicit.")]
+        public static TResult ActionOn<TResult>(
+            this TResult result, Action<TResult> onSuccess,
             Action<TResult> onFailure) where TResult : IResult
         {
-            if (!result.IsSuccess)
+            if (result.IsSuccess.IsFalse())
             {
                 if (onFailure.IsNull())
                     return result;
+
                 onFailure?.Invoke(result);
 
                 return result;
@@ -102,13 +110,16 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
         /// <param name="onFailure">Action on failure</param>
         /// <typeparam name="TResult">Type of result</typeparam>
         /// <remarks></remarks>
-        public static TResult ActionOn<TResult>(this TResult result, Action<TResult> onSuccess, 
+        [Obsolete("Use Match(onSuccess, onFailure) which returns a value and makes both branches explicit.")]
+        public static TResult ActionOn<TResult>(
+            this TResult result, Action<TResult> onSuccess,
             IEnumerable<Action<TResult>> onFailure) where TResult : IResult
         {
             if (!result.IsSuccess)
             {
                 if (onFailure.IsNull())
                     return result;
+
                 foreach (var action in onFailure)
                     action?.Invoke(result);
 
@@ -117,6 +128,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
 
             if (onSuccess.IsNull())
                 return result;
+
             onSuccess?.Invoke(result);
 
             return result;
@@ -130,13 +142,16 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
         /// <param name="onFailure">Action on failure</param>
         /// <typeparam name="TResult">Type of result</typeparam>
         /// <remarks></remarks>
-        public static TResult ActionOn<TResult>(this TResult result, IEnumerable<Action<TResult>> onSuccess,
+        [Obsolete("Use Match(onSuccess, onFailure) which returns a value and makes both branches explicit.")]
+        public static TResult ActionOn<TResult>(
+            this TResult result, IEnumerable<Action<TResult>> onSuccess,
             Action<TResult> onFailure) where TResult : IResult
         {
             if (!result.IsSuccess)
             {
                 if (onFailure.IsNull())
                     return result;
+
                 onFailure?.Invoke(result);
 
                 return result;
@@ -144,6 +159,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
 
             if (onSuccess.IsNull())
                 return result;
+
             foreach (var action in onSuccess)
                 action?.Invoke(result);
 
@@ -158,13 +174,16 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
         /// <param name="onFailure">Action on failure</param>
         /// <typeparam name="TResult">Type of result</typeparam>
         /// <remarks></remarks>
-        public static TResult ActionOn<TResult>(this TResult result, IEnumerable<Action<TResult>> onSuccess,
+        [Obsolete("Use Match(onSuccess, onFailure) which returns a value and makes both branches explicit.")]
+        public static TResult ActionOn<TResult>(
+            this TResult result, IEnumerable<Action<TResult>> onSuccess,
             IEnumerable<Action<TResult>> onFailure) where TResult : IResult
         {
-            if (!result.IsSuccess)
+            if (result.IsSuccess.IsFalse())
             {
                 if (onFailure.IsNull())
                     return result;
+
                 foreach (var action in onFailure)
                     action?.Invoke(result);
 
@@ -173,6 +192,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
 
             if (onSuccess.IsNull())
                 return result;
+
             foreach (var action in onSuccess)
                 action?.Invoke(result);
 
@@ -193,6 +213,7 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Actions
             {
                 if (actions.IsNull())
                     return result;
+
                 foreach (var action in actions)
                     action.Invoke(result);
 

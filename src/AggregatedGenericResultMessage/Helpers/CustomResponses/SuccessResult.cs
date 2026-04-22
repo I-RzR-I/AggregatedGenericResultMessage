@@ -16,10 +16,10 @@
 
 // ReSharper disable RedundantNameQualifier
 // ReSharper disable EmptyConstructor
-namespace AggregatedGenericResultMessage.Helpers.CustomResponses
+namespace RzR.ResultMessage.Helpers.CustomResponses
 {
     /// <inheritdoc />
-    public sealed class SuccessResult<T> : AggregatedGenericResultMessage.Result<T>
+    public sealed class SuccessResult<T> : Result<T>
     {
         /// <inheritdoc />
         public SuccessResult() { }
@@ -33,7 +33,7 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
     }
 
     /// <inheritdoc />
-    public sealed class SuccessResult : AggregatedGenericResultMessage.Result
+    public sealed class SuccessResult : ResultMessage.Result
     {
         /// <inheritdoc />
         public SuccessResult() { }

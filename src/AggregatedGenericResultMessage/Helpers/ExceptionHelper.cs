@@ -16,18 +16,18 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Extensions.Common;
+using RzR.ResultMessage.Models;
 using System;
 using System.Diagnostics;
-using System.Runtime.Serialization;
+using System.Runtime.ExceptionServices;
 using System.Text;
-using AggregatedGenericResultMessage.Extensions.Common;
-using AggregatedGenericResultMessage.Models;
 
 // ReSharper disable PossibleNullReferenceException
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Helpers
+namespace RzR.ResultMessage.Helpers
 {
     /// <summary>
     ///     Exception helper
@@ -36,19 +36,25 @@ namespace AggregatedGenericResultMessage.Helpers
     internal static class ExceptionHelper
     {
         /// <summary>
-        ///     Preserves the Exception StackTrace, so that it can be caught and re-thrown over layers
+        ///     Captures the exception's current state (including stack trace) so that callers may
+        ///     later re-throw it without losing the original trace via
+        ///     <see cref="ExceptionDispatchInfo.Throw()"/>.
         /// </summary>
         /// <param name="exception">Current exception</param>
-        /// <remarks></remarks>
-        internal static void PreserveStackTrace(Exception exception)
+        /// <returns>
+        ///     The captured <see cref="ExceptionDispatchInfo"/>, or <c>null</c> when
+        ///     <paramref name="exception"/> is <c>null</c>.
+        /// </returns>
+        /// <remarks>
+        ///     Replaces the legacy <c>SerializationInfo</c>/<c>ObjectManager</c> approach which is
+        ///     obsolete (<c>SYSLIB0050</c>) and incompatible with NativeAOT.
+        /// </remarks>
+        internal static ExceptionDispatchInfo PreserveStackTrace(Exception exception)
         {
-            var streamingContext = new StreamingContext(StreamingContextStates.CrossAppDomain);
-            var objectManager = new ObjectManager(null, streamingContext);
-            var serializationInfo = new SerializationInfo(exception.GetType(), new FormatterConverter());
+            if (exception.IsNull())
+                return null;
 
-            exception.GetObjectData(serializationInfo, streamingContext);
-            objectManager.RegisterObject(exception, 1, serializationInfo);
-            objectManager.DoFixups();
+            return ExceptionDispatchInfo.Capture(exception);
         }
 
         /// <summary>

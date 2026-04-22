@@ -16,17 +16,17 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Extensions.Common;
+using System.Xml.Serialization;
+
 #if !NETFRAMEWORK
 using System.Text.Json.Serialization;
 #endif
 
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Extensions.Common;
-using System.Xml.Serialization;
-
 #endregion
 
-namespace AggregatedGenericResultMessage.Models
+namespace RzR.ResultMessage.Models
 {
     /// <inheritdoc cref="IRelatedObjectModel"/>
     [XmlInclude(typeof(RelatedObjectModel))]
@@ -64,7 +64,7 @@ namespace AggregatedGenericResultMessage.Models
         {
             InCodeName = inCodeName;
 
-            if (inDataSourceNames.IsNull())
+            if (inDataSourceNames.IsNotNull())
                 InDataSourceNames = inDataSourceNames;
         }
 
@@ -85,6 +85,6 @@ namespace AggregatedGenericResultMessage.Models
 
         /// <inheritdoc cref="IRelatedObjectModel"/>
         public override string ToString()
-            => $"InCodeName: {InCodeName} <-> InDataSourceName: {string.Join("#", InDataSourceNames)}";
+            => $"InCodeName: {InCodeName} <-> InDataSourceName: {string.Join("#", InDataSourceNames ?? new string[0])}";
     }
 }

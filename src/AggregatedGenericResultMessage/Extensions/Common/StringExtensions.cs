@@ -16,19 +16,19 @@
 
 #region U S A G E S
 
+using RzR.Core.CodeSource;
 using System;
 using System.Text;
-using CodeSource;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Common
+namespace RzR.ResultMessage.Extensions.Common
 {
     /// <summary>
     ///     String extensions
     /// </summary>
     /// <remarks></remarks>
-    [CodeSource("DomainCommonExtensions.CommonExtensions", "RzR", "RzR", 1)]
+    [CodeSource("DomainCommonExtensions.CommonExtensions", "RzR", "RzR", "1.0")]
     internal static class StringExtensions
     {
         /// <summary>
@@ -37,7 +37,7 @@ namespace AggregatedGenericResultMessage.Extensions.Common
         /// <param name="str"></param>
         /// <returns></returns>
         [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR",
-            "DomainCommonExtensions.CommonExtensions.StringExtensions.IsNullOrEmpty", 1)]
+            "DomainCommonExtensions.CommonExtensions.StringExtensions.IsNullOrEmpty", "1.0")]
         internal static bool IsNullOrEmpty(this string str) => string.IsNullOrEmpty(str);
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace AggregatedGenericResultMessage.Extensions.Common
         /// <typeparam name="T">Type of Enum</typeparam>
         /// <remarks></remarks>
         [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR",
-            "DomainCommonExtensions.CommonExtensions.StringExtensions.ToEnum", 1)]
+            "DomainCommonExtensions.CommonExtensions.StringExtensions.ToEnum", "1.0")]
         internal static T ToEnum<T>(this string value)
         {
             if (value == null)

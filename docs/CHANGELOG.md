@@ -1,3 +1,33 @@
+### **v2.0.0.4127** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 22-04-2026
+> **Major release — contains breaking changes.** See [migration-guide.md](migration-guide.md) for full before/after porting steps.
+
+**Breaking changes**
+* [DEV] - (RzR) -> Change namespace from `AggregatedGenericResultMessage` to `RzR.ResultMessage`.
+* [FIX] - (RzR) -> Implicit `Exception -> Result` / `Result<T>` operators now throw `ArgumentNullException` on `null` (was: silent empty failure).
+* [FIX] - (RzR) -> `Result<T>(Exception)` constructor now adds **one** `MessageType.Exception` message (was: two: empty info + trace).
+* [FIX] - (RzR) -> `JoinErrors(IEnumerable<Result>)` now derives `IsSuccess` from the joined collection (was: inherited from caller).
+* [FIX] - (RzR) -> `Success<T>(T, params RelatedObjectModel[])` no longer adds a ghost `MessageType.None` message when `relatedObjects` is empty/null.
+* [DEV] - (RzR) -> `ExceptionHelper.PreserveStackTrace` signature changed: `void` -> `ExceptionDispatchInfo`
+* [DEV] - (RzR) -> `GetFirstMessage` / `GetFirstError` now fall back to the first exception message when no plain message exists (was: empty string).
+
+**Obsoletions** (compile warnings; will fail with `TreatWarningsAsErrors`)
+* [DEV] - (RzR) -> `Result<T>.Instance` -> use `Result<T>.Create()`.
+* [DEV] - (RzR) -> `ActionOnSuccess` / `ActionOnFailure` / `ActionOn` (4 overloads) -> use `Tap` / `Match`.
+* [DEV] - (RzR) -> All 7 `FunctionOn*` / `ExecuteFunction` overloads taking `Func<Task<TResult>>` -> use `FunctionExtensionsAsync.*Async` (avoids sync-over-async deadlock).
+
+---
+
+* [DEV] - (RzR) -> `Map<TOut>(Func<T,TOut>)`, `Bind<TOut>(Func<T,Result<TOut>>)`, `Match<TOut>(Func<T,TOut>, Func<Result<T>,TOut>)`, `Tap(Action<T>)`.
+* [DEV] - (RzR) -> `MapAsync`, `BindAsync`, `TapAsync`, `MatchAsync`, overloads on both `Result<T>` and `Task<Result<T>>`, accepting sync and async delegates. All `ConfigureAwait(false)`.
+* [DEV] - (RzR) -> `Tap(this Task<Result<T>>, Action<T>)` for sync side-effect on awaited results.
+* [DEV] - (RzR) -> New static class `FunctionExtensionsAsync` exposing `FunctionOnSuccessAsync`, `FunctionOnFailureAsync`, `FunctionOnAsync` (4 overloads), `ExecuteFunctionAsync`.
+* [DEV] - (RzR) -> `Validate(Func<T,bool>, error)`- accumulates every violation in one chain pass; overloads for `(predicate, key, error)` and `(predicate, MessageDataModel)`.
+* [DEV] - (RzR) -> `Ensure(Func<T,bool>, error)` — short-circuits once `IsSuccess == false`.
+* [DEV] - (RzR) -> `ValidateAsync` — async predicate on both `Result<T>` and `Task<Result<T>>`.
+* [DEV] - (RzR) -> Match<TOut>(Func<IResult,TOut>, Func<IResult,TOut>)` and parameterless / `Action`-based overloads.
+* [DEV] - (RzR) -> `MatchAsync<TOut>(Func<IResult,Task<TOut>>, Func<IResult,Task<TOut>>)`.
+* [FIX] - (RzR) -> `RelatedObjectModel.ToString()` is now null-safe when `InDataSourceNames` is `null`
+
 ### **v1.4.1.8497** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 24-02-2026
 * [f47b134] (RzR) -> Auto commit uncommited files
 * [6a0d48a] (RzR) -> Fix the `IsFailure` flag value.

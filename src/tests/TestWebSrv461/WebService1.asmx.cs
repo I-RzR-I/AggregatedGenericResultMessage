@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Web.Services;
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage;
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Models;
 using TestWebSrv461.Models;
 
 namespace TestWebSrv461

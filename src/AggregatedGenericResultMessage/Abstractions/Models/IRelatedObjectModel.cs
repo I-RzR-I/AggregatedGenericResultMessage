@@ -14,14 +14,15 @@
 //  </summary>
 // ***********************************************************************
 
+
+using RzR.ResultMessage.Models;
+using System.Xml.Serialization;
+
 #if !NETFRAMEWORK
 using System.Text.Json.Serialization;
 #endif
 
-using AggregatedGenericResultMessage.Models;
-using System.Xml.Serialization;
-
-namespace AggregatedGenericResultMessage.Abstractions.Models
+namespace RzR.ResultMessage.Abstractions.Models
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Interface for related object model.</summary>

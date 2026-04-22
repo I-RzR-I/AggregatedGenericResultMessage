@@ -16,10 +16,10 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions.Result.Messages;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RzR.ResultMessage;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Extensions.Result.Messages;
 
 #endregion
 

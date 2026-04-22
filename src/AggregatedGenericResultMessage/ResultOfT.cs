@@ -16,23 +16,22 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Extensions.Common;
+using RzR.ResultMessage.Helpers;
+using RzR.ResultMessage.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 #if !NETFRAMEWORK
 using System.Text.Json.Serialization;
 #endif
-
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions.Common;
-using AggregatedGenericResultMessage.Helpers;
-using AggregatedGenericResultMessage.Models;
 
 // ReSharper disable ArrangeThisQualifier
 // ReSharper disable VirtualMemberCallInConstructor
@@ -42,7 +41,7 @@ using AggregatedGenericResultMessage.Models;
 
 #endregion
 
-namespace AggregatedGenericResultMessage
+namespace RzR.ResultMessage
 {
     /// <inheritdoc cref="IResult{T}" />
     public partial class Result<T> : IResult<T>, IXmlSerializable
@@ -50,10 +49,23 @@ namespace AggregatedGenericResultMessage
         #region I N S T A N C E
 
         /// <summary>
-        ///     Gets result instance.
+        ///     Creates a new <see cref="Result{T}"/> instance.
         /// </summary>
-        /// <value></value>
-        /// <remarks></remarks>
+        /// <returns>A new, empty <see cref="Result{T}"/>.</returns>
+        /// <remarks>
+        ///     Each call returns a fresh instance — this is a factory.
+        /// </remarks>
+        public static Result<T> Create() => CreateInstance();
+
+        /// <summary>
+        ///     Gets a new result instance.
+        /// </summary>
+        /// <value>A new <see cref="Result{T}"/> on every access.</value>
+        /// <remarks>
+        ///     Misnamed legacy accessor: each access returns a fresh instance, not a singleton.
+        ///     Use <see cref="Create"/> instead.
+        /// </remarks>
+        [Obsolete("Misleading name: each access returns a NEW instance. Use Result<T>.Create() instead.")]
         public static Result<T> Instance => CreateInstance();
 
         /// <summary>
@@ -96,31 +108,32 @@ namespace AggregatedGenericResultMessage
         #region C T O R s
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result{T}" /> class. 
+        ///     Initializes a new instance of the <see cref="Result{T}" /> class. 
         /// </summary>
         /// <remarks></remarks>
         public Result() { }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result{T}" /> class. 
+        ///     Initializes a new instance of the <see cref="Result{T}" /> class. 
         /// </summary>
         /// <param name="exception">Exception</param>
-        /// <remarks></remarks>
+        /// <remarks>
+        ///     Adds a single <see cref="MessageType.Exception"/> message containing the exception trace.
+        ///     When <paramref name="exception"/> is <c>null</c>, no message is appended.
+        /// </remarks>
         internal Result(Exception? exception)
         {
-            if (exception.IsNotNull())
-                ExceptionHelper.PreserveStackTrace(exception);
-
             this.IsSuccess = false;
 
-            this.Messages.Add(new MessageModel(null, new MessageDataModel(exception?.Message ?? "")));
+            if (exception.IsNull())
+                return;
 
-            if (exception.IsNotNull())
-                this.Messages.Add(new MessageModel(null, exception));
+            ExceptionHelper.PreserveStackTrace(exception);
+            this.Messages.Add(new MessageModel(null, exception));
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result{T}" /> class. 
+        ///     Initializes a new instance of the <see cref="Result{T}" /> class. 
         /// </summary>
         /// <param name="response">Response data</param>
         /// <remarks></remarks>
@@ -169,8 +182,8 @@ namespace AggregatedGenericResultMessage
         {
             try
             {
-                var fMessage = Messages
-                    .FirstOrDefault(x => x.MessageType != MessageType.Exception)
+                var fMessage = (Messages.FirstOrDefault(x => x.MessageType != MessageType.Exception)
+                                ?? Messages.FirstOrDefault())
                     ?.Message;
 
                 return fMessage.IsNull() ? string.Empty : fMessage?.Info;
@@ -186,8 +199,8 @@ namespace AggregatedGenericResultMessage
         {
             try
             {
-                var fMessage = Messages
-                    .FirstOrDefault(x => x.MessageType != MessageType.Exception)
+                var fMessage = (Messages.FirstOrDefault(x => x.MessageType != MessageType.Exception)
+                                ?? Messages.FirstOrDefault())
                     ?.Message;
 
                 return fMessage.IsNull() ? null : fMessage;
@@ -296,12 +309,16 @@ namespace AggregatedGenericResultMessage
         /// </summary>
         /// <param name="results">All results</param>
         /// <returns></returns>
-        /// <remarks></remarks>
+        /// <remarks>
+        ///     <see cref="IResult.IsSuccess"/> of the returned result is <c>true</c> only when every result
+        ///     in <paramref name="results"/> is successful; this matches the semantics of
+        ///     <see cref="JoinResults(IEnumerable{Result})"/> and <see cref="JoinErrorResults(IEnumerable{Result})"/>.
+        /// </remarks>
         public virtual Result<T> JoinErrors(IEnumerable<Result> results)
         {
             var collection = results.ToList();
             var response = CreateInstance();
-            response.IsSuccess = IsSuccess;
+            response.IsSuccess = collection.All(x => x.IsSuccess);
             foreach (var error in collection
                 .SelectMany(result => result.Messages
                     .Where(x => new List<MessageType>()
@@ -357,10 +374,16 @@ namespace AggregatedGenericResultMessage
         ///     Implicit result operator for exception
         /// </summary>
         /// <param name="exception">Current exceptions</param>
-        /// <returns></returns>
-        /// <remarks></remarks>
-        public static implicit operator Result<T>(Exception? exception)
-            => new Result<T>(exception);
+        /// <returns>A failed <see cref="Result{T}"/> wrapping <paramref name="exception"/>.</returns>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when <paramref name="exception"/> is <c>null</c>. Use <c>Result&lt;T&gt;.Failure(...)</c>
+        ///     when no exception is available.
+        /// </exception>
+        public static implicit operator Result<T>(Exception exception)
+            => exception.IsNotNull()
+                ? new Result<T>(exception)
+                : throw new ArgumentNullException(nameof(exception),
+                    "Cannot implicitly convert a null Exception to a Result<T>. Use Result<T>.Failure(...) instead.");
 
         #endregion
     }

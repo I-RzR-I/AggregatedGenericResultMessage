@@ -16,17 +16,16 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Models;
 using System;
 using System.Collections.Generic;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Models;
-using System.Linq;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Result
+namespace RzR.ResultMessage.Extensions.Result
 {
     /// <summary>
     ///     Result extensions
@@ -391,8 +390,8 @@ namespace AggregatedGenericResultMessage.Extensions.Result
         /// <returns>
         ///     An IResult.
         /// </returns>
-        public static AggregatedGenericResultMessage.Result WithMessages(
-            this AggregatedGenericResultMessage.Result result, 
+        public static ResultMessage.Result WithMessages(
+            this ResultMessage.Result result, 
             IEnumerable<IMessageModel> messages)
         {
             foreach (var message in messages)
@@ -454,18 +453,18 @@ namespace AggregatedGenericResultMessage.Extensions.Result
         ///     The automatic success or failure.
         /// </returns>
         /// =================================================================================================
-        public static AggregatedGenericResultMessage.Result ReturnAutoSuccessOrFailure<T>(this Result<T> result)
+        public static ResultMessage.Result ReturnAutoSuccessOrFailure<T>(this Result<T> result)
         {
             if (result.IsSuccess)
             {
-                return AggregatedGenericResultMessage.Result
+                return ResultMessage.Result
                     .Success()
                     .WithMessages(result.Messages)
                     .ToBase();
             }
             else
             {
-                return AggregatedGenericResultMessage.Result
+                return ResultMessage.Result
                     .Failure()
                     .WithMessages(result.Messages)
                     .ToBase();
@@ -481,19 +480,19 @@ namespace AggregatedGenericResultMessage.Extensions.Result
         ///     The automatic success or failure.
         /// </returns>
         /// =================================================================================================
-        public static AggregatedGenericResultMessage.Result ReturnAutoSuccessOrFailure(
-            this AggregatedGenericResultMessage.Result result)
+        public static ResultMessage.Result ReturnAutoSuccessOrFailure(
+            this ResultMessage.Result result)
         {
             if (result.IsSuccess)
             {
-                return AggregatedGenericResultMessage.Result
+                return ResultMessage.Result
                     .Success()
                     .WithMessages(result.Messages)
                     .ToBase();
             }
             else
             {
-                return AggregatedGenericResultMessage.Result
+                return ResultMessage.Result
                     .Failure()
                     .WithMessages(result.Messages)
                     .ToBase();
@@ -510,18 +509,18 @@ namespace AggregatedGenericResultMessage.Extensions.Result
         ///     The automatic success or failure.
         /// </returns>
         /// =================================================================================================
-        public static AggregatedGenericResultMessage.Result ReturnAutoSuccessOrFailure<T>(this IResult<T> result)
+        public static ResultMessage.Result ReturnAutoSuccessOrFailure<T>(this IResult<T> result)
         {
             if (result.IsSuccess)
             {
-                return AggregatedGenericResultMessage.Result
+                return ResultMessage.Result
                     .Success()
                     .WithMessages(result.Messages)
                     .ToBase();
             }
             else
             {
-                return AggregatedGenericResultMessage.Result
+                return ResultMessage.Result
                     .Failure()
                     .WithMessages(result.Messages)
                     .ToBase();
@@ -537,18 +536,18 @@ namespace AggregatedGenericResultMessage.Extensions.Result
         ///     The automatic success or failure.
         /// </returns>
         /// =================================================================================================
-        public static AggregatedGenericResultMessage.Result ReturnAutoSuccessOrFailure(this IResult result)
+        public static ResultMessage.Result ReturnAutoSuccessOrFailure(this IResult result)
         {
             if (result.IsSuccess)
             {
-                return AggregatedGenericResultMessage.Result
+                return ResultMessage.Result
                     .Success()
                     .WithMessages(result.Messages)
                     .ToBase();
             }
             else
             {
-                return AggregatedGenericResultMessage.Result
+                return ResultMessage.Result
                     .Failure()
                     .WithMessages(result.Messages)
                     .ToBase();

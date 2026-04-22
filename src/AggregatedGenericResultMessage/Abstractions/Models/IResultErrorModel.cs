@@ -16,13 +16,13 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage.Models;
 using System;
 using System.Collections.Generic;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Abstractions.Models
+namespace RzR.ResultMessage.Abstractions.Models
 {
     ///-------------------------------------------------------------------------------------------------
     /// <summary>Result error.</summary>

@@ -16,11 +16,11 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Extensions.Common;
+using RzR.ResultMessage.Helpers;
+using RzR.ResultMessage.Models;
 using System;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Extensions.Common;
-using AggregatedGenericResultMessage.Helpers;
-using AggregatedGenericResultMessage.Models;
 
 #pragma warning disable 8632
 #pragma warning disable IDE0090
@@ -29,7 +29,7 @@ using AggregatedGenericResultMessage.Models;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
-namespace AggregatedGenericResultMessage
+namespace RzR.ResultMessage
 {
     /// <inheritdoc />
     public class Result : Result<object>
@@ -37,7 +37,7 @@ namespace AggregatedGenericResultMessage
         #region C T O R s
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result" /> class.
+        ///     Initializes a new instance of the <see cref="Result" /> class.
         /// </summary>
         /// <remarks></remarks>
         public Result()
@@ -45,7 +45,7 @@ namespace AggregatedGenericResultMessage
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregatedGenericResultMessage.Result" /> class.
+        ///     Initializes a new instance of the <see cref="Result" /> class.
         /// </summary>
         /// <param name="isSuccess">
         ///     If set to <see langword="true" />, then current request was executed with success; otherwise,
@@ -72,10 +72,17 @@ namespace AggregatedGenericResultMessage
         ///     Implicit exception result operator
         /// </summary>
         /// <param name="exception">Current exception</param>
-        /// <returns></returns>
-        /// <remarks></remarks>
-        public static implicit operator Result(Exception? exception) 
-            => exception.IsNotNull() ? new Result(exception) : new Result(false);
+        /// <returns>A failed <see cref="Result"/> wrapping <paramref name="exception"/>.</returns>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when <paramref name="exception"/> is <c>null</c>. Converting a missing exception
+        ///     into a result is meaningless; use <c>Result.Failure(...)</c> or the implicit <c>bool</c>
+        ///     operator (<c>Result r = false;</c>) when no exception is available.
+        /// </exception>
+        public static implicit operator Result(Exception exception)
+            => exception.IsNotNull()
+                ? new Result(exception)
+                : throw new ArgumentNullException(nameof(exception),
+                    "Cannot implicitly convert a null Exception to a Result. Use Result.Failure(...) instead.");
 
         /// <summary>
         ///     Implicit success result operator

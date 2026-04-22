@@ -16,18 +16,17 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Extensions.Common;
+using RzR.ResultMessage.Helpers;
 using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 
 #if !NETFRAMEWORK
 using System.Text.Json.Serialization;
 #endif
-
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Helpers;
-using AggregatedGenericResultMessage.Extensions.Common;
-using System.Collections.Generic;
-using System.Xml.Serialization;
 
 #pragma warning disable IDE0057
 #pragma warning disable 8632
@@ -37,7 +36,7 @@ using System.Xml.Serialization;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Models
+namespace RzR.ResultMessage.Models
 {
     /// <inheritdoc />
     public class MessageModel : IMessageModel

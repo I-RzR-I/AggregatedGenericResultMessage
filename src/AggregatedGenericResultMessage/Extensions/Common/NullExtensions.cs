@@ -16,17 +16,17 @@
 
 #region U S A G E S
 
-using CodeSource;
+using RzR.Core.CodeSource;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Common
+namespace RzR.ResultMessage.Extensions.Common
 {
     /// <summary>
     ///     Null extensions
     /// </summary>
     /// <remarks></remarks>
-    [CodeSource("DomainCommonExtensions.CommonExtensions", "RzR", "RzR", 1)]
+    [CodeSource("DomainCommonExtensions.CommonExtensions", "RzR", "RzR", "1.0")]
     internal static class NullExtensions
     {
         /// <summary>
@@ -35,7 +35,7 @@ namespace AggregatedGenericResultMessage.Extensions.Common
         /// <param name="obj">Source data</param>
         /// <returns></returns>
         [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR",
-            "DomainCommonExtensions.CommonExtensions.NullExtensions.IsNull", 1)]
+            "DomainCommonExtensions.CommonExtensions.NullExtensions.IsNull", "1.0")]
         internal static bool IsNull(this object obj) => obj == null;
 
         /// <summary>

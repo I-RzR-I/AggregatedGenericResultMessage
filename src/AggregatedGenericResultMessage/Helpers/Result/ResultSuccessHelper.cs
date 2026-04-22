@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 //  Assembly         : RzR.Shared.ResultMessage.AggregatedGenericResultMessage
 //  Author           : RzR
 //  Created On       : 2023-02-03 18:25
@@ -16,8 +16,9 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Extensions.Common;
+using RzR.ResultMessage.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,7 +26,7 @@ using System.Linq;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Helpers.Result
+namespace RzR.ResultMessage.Helpers.Result
 {
     /// <summary>
     ///     Result success helper
@@ -39,7 +40,7 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <returns></returns>
         internal static Result<T> Success<T>(T data = default)
         {
-            var result = Result<T>.Instance;
+            var result = Result<T>.Create();
             result.IsSuccess = true;
             result.Response = data;
 
@@ -54,10 +55,20 @@ namespace AggregatedGenericResultMessage.Helpers.Result
         /// <returns></returns>
         internal static Result<T> Success<T>(T data = default, params RelatedObjectModel[] relatedObjects)
         {
-            var result = Result<T>.Instance;
+            var result = Result<T>.Create();
             result.IsSuccess = true;
             result.Response = data;
-            result.Messages = new List<IMessageModel>() { new MessageModel() { RelatedObjects = relatedObjects.ToList() } };
+
+            if (relatedObjects.IsNull() || relatedObjects.Length == 0)
+                return result;
+
+            result.Messages = new List<IMessageModel>()
+            {
+                new MessageModel()
+                {
+                    RelatedObjects = relatedObjects.ToList()
+                }
+            };
 
             return result;
         }

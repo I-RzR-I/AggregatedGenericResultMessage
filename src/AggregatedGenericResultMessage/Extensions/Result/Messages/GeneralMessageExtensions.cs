@@ -16,13 +16,13 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Models;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Models;
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Extensions.Result.Messages
+namespace RzR.ResultMessage.Extensions.Result.Messages
 {
     /// <summary>
     ///     General message extension
@@ -310,8 +310,8 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static AggregatedGenericResultMessage.Result AddMessage(
-            this AggregatedGenericResultMessage.Result result, string key = null, string message = null,
+        public static ResultMessage.Result AddMessage(
+            this ResultMessage.Result result, string key = null, string message = null,
             MessageType type = MessageType.Error)
         {
             result?.Messages?.Add(new MessageModel(key, new MessageDataModel(message), type));
@@ -329,8 +329,8 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static AggregatedGenericResultMessage.Result AddMessage(
-            this AggregatedGenericResultMessage.Result result, string key = null, string message = null,
+        public static ResultMessage.Result AddMessage(
+            this ResultMessage.Result result, string key = null, string message = null,
             MessageType type = MessageType.Error, params RelatedObjectModel[] relatedObjects)
         {
             result?.Messages?.Add(new MessageModel(key, new MessageDataModel(message), type, relatedObjects: relatedObjects));
@@ -347,8 +347,8 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static AggregatedGenericResultMessage.Result AddMessage(
-            this AggregatedGenericResultMessage.Result result, string key = null, MessageDataModel message = null,
+        public static ResultMessage.Result AddMessage(
+            this ResultMessage.Result result, string key = null, MessageDataModel message = null,
             MessageType type = MessageType.Error)
         {
             result?.Messages?.Add(new MessageModel(key, message, type));
@@ -366,8 +366,8 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static AggregatedGenericResultMessage.Result AddMessage(
-            this AggregatedGenericResultMessage.Result result, string key = null, MessageDataModel message = null,
+        public static ResultMessage.Result AddMessage(
+            this ResultMessage.Result result, string key = null, MessageDataModel message = null,
             MessageType type = MessageType.Error, params RelatedObjectModel[] relatedObjects)
         {
             result?.Messages?.Add(new MessageModel(key, message, type, relatedObjects: relatedObjects));
@@ -383,8 +383,8 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static AggregatedGenericResultMessage.Result AddMessage(
-            this AggregatedGenericResultMessage.Result result, string message = null,
+        public static ResultMessage.Result AddMessage(
+            this ResultMessage.Result result, string message = null,
             MessageType type = MessageType.Error)
         {
             result?.Messages?.Add(new MessageModel(null, new MessageDataModel(message), type));
@@ -401,8 +401,8 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static AggregatedGenericResultMessage.Result AddMessage(
-            this AggregatedGenericResultMessage.Result result, string message = null,
+        public static ResultMessage.Result AddMessage(
+            this ResultMessage.Result result, string message = null,
             MessageType type = MessageType.Error, params RelatedObjectModel[] relatedObjects)
         {
             result?.Messages?.Add(new MessageModel(null, new MessageDataModel(message), 
@@ -419,8 +419,8 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static AggregatedGenericResultMessage.Result AddMessage(
-            this AggregatedGenericResultMessage.Result result, MessageDataModel message = null,
+        public static ResultMessage.Result AddMessage(
+            this ResultMessage.Result result, MessageDataModel message = null,
             MessageType type = MessageType.Error)
         {
             result?.Messages?.Add(new MessageModel(null, message, type));
@@ -437,8 +437,8 @@ namespace AggregatedGenericResultMessage.Extensions.Result.Messages
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static AggregatedGenericResultMessage.Result AddMessage(
-            this AggregatedGenericResultMessage.Result result, MessageDataModel message = null,
+        public static ResultMessage.Result AddMessage(
+            this ResultMessage.Result result, MessageDataModel message = null,
             MessageType type = MessageType.Error, params RelatedObjectModel[] relatedObjects)
         {
             result?.Messages?.Add(new MessageModel(null, message, type, relatedObjects: relatedObjects));

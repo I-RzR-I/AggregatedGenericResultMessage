@@ -16,12 +16,14 @@
 
 #region U S A G E S
 
-using AggregatedGenericResultMessage;
-using AggregatedGenericResultMessage.Abstractions;
-using AggregatedGenericResultMessage.Extensions.Result.Actions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RzR.ResultMessage;
+using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Extensions.Result.Actions;
 
 #endregion
+
+#pragma warning disable CS0618
 
 namespace InfoResultTests
 {

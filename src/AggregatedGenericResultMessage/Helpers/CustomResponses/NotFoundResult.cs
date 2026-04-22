@@ -16,19 +16,19 @@
 
 #region U S A G E S
 
+using RzR.ResultMessage.Abstractions.Models;
+using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Models;
 using System.Collections.Generic;
-using AggregatedGenericResultMessage.Abstractions.Models;
-using AggregatedGenericResultMessage.Enums;
-using AggregatedGenericResultMessage.Models;
 
 // ReSharper disable RedundantNameQualifier
 
 #endregion
 
-namespace AggregatedGenericResultMessage.Helpers.CustomResponses
+namespace RzR.ResultMessage.Helpers.CustomResponses
 {
     /// <inheritdoc />
-    public sealed class NotFoundResult<T> : AggregatedGenericResultMessage.Result<T>
+    public sealed class NotFoundResult<T> : Result<T>
     {
         /// <inheritdoc />
         public NotFoundResult() { }
@@ -49,7 +49,7 @@ namespace AggregatedGenericResultMessage.Helpers.CustomResponses
     }
 
     /// <inheritdoc />
-    public sealed class NotFoundResult : AggregatedGenericResultMessage.Result
+    public sealed class NotFoundResult : ResultMessage.Result
     {
         /// <inheritdoc />
         public NotFoundResult() { }
