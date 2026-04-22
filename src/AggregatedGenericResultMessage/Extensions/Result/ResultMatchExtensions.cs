@@ -188,10 +188,10 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <typeparam name="TOut">Type of the out.</typeparam>
         /// <param name="resultTask">The resultTask to act on.</param>
         /// <param name="onSuccess">
-        ///     Selector invoked when <paramref name="result" /> is successful.
+        ///     Selector invoked when the awaited result is successful.
         /// </param>
         /// <param name="onFailure">
-        ///     Selector invoked when <paramref name="result" /> is a failure.
+        ///     Selector invoked when the awaited result is a failure.
         /// </param>
         /// <returns>
         ///     A TOut.
@@ -225,10 +225,10 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <typeparam name="TOut">Type of the out.</typeparam>
         /// <param name="resultTask">The resultTask to act on.</param>
         /// <param name="onSuccess">
-        ///     Selector invoked when <paramref name="result" /> is successful.
+        ///     Selector invoked when the awaited result is successful.
         /// </param>
         /// <param name="onFailure">
-        ///     Selector invoked when <paramref name="result" /> is a failure.
+        ///     Selector invoked when the awaited result is a failure.
         /// </param>
         /// <returns>
         ///     A TOut.
