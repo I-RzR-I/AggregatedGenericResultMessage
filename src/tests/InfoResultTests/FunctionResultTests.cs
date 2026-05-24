@@ -52,36 +52,10 @@ namespace InfoResultTests
         [TestMethod]
         [DataRow(false, true)]
         [DataRow(true, true)]
-        public void ExecuteFunctionTest_2_Success(bool ignoreError, bool exceptedResult)
-        {
-#pragma warning disable CS0618 // legacy sync-over-async overload, intentionally exercised
-            var result = new Result() { IsSuccess = true }
-                .ExecuteFunction(ignoreError, async () => await FuncTestSuccessTask());
-#pragma warning restore CS0618
-
-            Assert.AreEqual(exceptedResult, result.IsSuccess);
-        }
-
-        [TestMethod]
-        [DataRow(false, false)]
-        [DataRow(true, true)]
-        public void ExecuteFunctionTest_2_Failure(bool ignoreError, bool exceptedResult)
-        {
-#pragma warning disable CS0618 // legacy sync-over-async overload, intentionally exercised
-            var result = new Result() { IsSuccess = true }
-                .ExecuteFunction(ignoreError, async () => await FuncTestFailureTask());
-#pragma warning restore CS0618
-
-            Assert.AreEqual(exceptedResult, result.IsSuccess);
-        }
-
-        [TestMethod]
-        [DataRow(false, true)]
-        [DataRow(true, true)]
         public async Task ExecuteFunctionAsyncTest_2_Success(bool ignoreError, bool exceptedResult)
         {
             var result = await new Result() { IsSuccess = true }
-                .ExecuteFunctionAsync(ignoreError, FuncTestSuccessTask);
+                .ExecuteFunctionAsync(ignoreError, functions: FuncTestSuccessTask);
 
             Assert.AreEqual(exceptedResult, result.IsSuccess);
         }
@@ -92,7 +66,7 @@ namespace InfoResultTests
         public async Task ExecuteFunctionAsyncTest_2_Failure(bool ignoreError, bool exceptedResult)
         {
             var result = await new Result() { IsSuccess = true }
-                .ExecuteFunctionAsync(ignoreError, FuncTestFailureTask);
+                .ExecuteFunctionAsync(ignoreError, functions: FuncTestFailureTask);
 
             Assert.AreEqual(exceptedResult, result.IsSuccess);
         }
@@ -103,7 +77,7 @@ namespace InfoResultTests
             var calls = 0;
 
             var result = await Result.Success()
-                .FunctionOnSuccessAsync(true, async () =>
+                .FunctionOnSuccessAsync(true, onSuccess: async () =>
                 {
                     calls++;
                     return await Task.FromResult(Result.Success());
@@ -114,7 +88,7 @@ namespace InfoResultTests
 
             calls = 0;
             result = await Result.Failure()
-                .FunctionOnSuccessAsync(true, async () =>
+                .FunctionOnSuccessAsync(true, onSuccess: async () =>
                 {
                     calls++;
                     return await Task.FromResult(Result.Success());
@@ -130,7 +104,7 @@ namespace InfoResultTests
             var calls = 0;
 
             var result = await Result.Failure()
-                .FunctionOnFailureAsync(true, async () =>
+                .FunctionOnFailureAsync(true, onFailure: async () =>
                 {
                     calls++;
                     return await Task.FromResult(Result.Failure());
@@ -140,7 +114,7 @@ namespace InfoResultTests
 
             calls = 0;
             result = await Result.Success()
-                .FunctionOnFailureAsync(true, async () =>
+                .FunctionOnFailureAsync(true, onFailure: async () =>
                 {
                     calls++;
                     return await Task.FromResult(Result.Failure());

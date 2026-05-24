@@ -24,6 +24,7 @@
 		<Language>en-US</Language>
 
 		<RootNamespace>RzR.ResultMessage</RootNamespace>
+		<AssemblyName>RzR.ResultMessage</AssemblyName>
 		<PackageReleaseNotes>
 
 		</PackageReleaseNotes>
@@ -41,7 +42,7 @@
 		<Compile Include="..\shared\GeneralAssemblyInfo.cs" Link="Properties\GeneralAssemblyInfo.cs" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="CodeSource" Version="5.0.0.7373" />
+		<PackageReference Include="RzR.Core.CodeSource" Version="6.0.0.94" />
 		<PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
 	</ItemGroup>
 

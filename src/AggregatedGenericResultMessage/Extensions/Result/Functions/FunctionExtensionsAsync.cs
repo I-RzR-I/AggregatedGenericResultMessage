@@ -21,6 +21,7 @@ using RzR.ResultMessage.Extensions.Common;
 using RzR.ResultMessage.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 #endregion
@@ -45,6 +46,9 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// <typeparam name="TResult">Type of the result.</typeparam>
         /// <param name="result">The result to act on.</param>
         /// <param name="ignoreError">(Optional) True to ignore error.</param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
         /// <param name="onSuccess">The on success.</param>
         /// <returns>
         ///     A TResult.
@@ -52,7 +56,9 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// =================================================================================================
         public static async Task<TResult> FunctionOnSuccessAsync<TResult>(
             this TResult result,
-            bool ignoreError = true, params Func<Task<TResult>>[] onSuccess) where TResult : IResult
+            bool ignoreError = true,
+            CancellationToken cancellationToken = default,
+            params Func<Task<TResult>>[] onSuccess) where TResult : IResult
         {
             if (result.IsSuccess.IsFalse())
                 return result;
@@ -62,6 +68,7 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
 
             foreach (var func in onSuccess)
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 var invoke = await func.Invoke().ConfigureAwait(false);
                 if (ignoreError.IsFalse() && invoke.IsSuccess.IsFalse())
                     return invoke;
@@ -77,6 +84,9 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// <typeparam name="TResult">Type of the result.</typeparam>
         /// <param name="result">The result to act on.</param>
         /// <param name="ignoreError">(Optional) True to ignore error.</param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
         /// <param name="onFailure">The on failure.</param>
         /// <returns>
         ///     A TResult.
@@ -84,7 +94,9 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// =================================================================================================
         public static async Task<TResult> FunctionOnFailureAsync<TResult>(
             this TResult result,
-            bool ignoreError = true, params Func<Task<TResult>>[] onFailure) where TResult : IResult
+            bool ignoreError = true,
+            CancellationToken cancellationToken = default,
+            params Func<Task<TResult>>[] onFailure) where TResult : IResult
         {
             if (result.IsSuccess)
                 return result;
@@ -94,6 +106,7 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
 
             foreach (var func in onFailure)
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 var invoke = await func.Invoke().ConfigureAwait(false);
                 if (ignoreError.IsFalse() && invoke.IsSuccess.IsFalse())
                     return invoke;
@@ -111,19 +124,24 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// <param name="onSuccess">The on success.</param>
         /// <param name="onFailure">The on failure.</param>
         /// <param name="ignoreError">(Optional) True to ignore error.</param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
         /// <returns>
         ///     A TResult.
         /// </returns>
         /// =================================================================================================
         public static async Task<TResult> FunctionOnAsync<TResult>(
             this TResult result, Func<Task<TResult>> onSuccess,
-            Func<Task<TResult>> onFailure, bool ignoreError = true) where TResult : IResult
+            Func<Task<TResult>> onFailure, bool ignoreError = true,
+            CancellationToken cancellationToken = default) where TResult : IResult
         {
             if (result.IsSuccess.IsFalse())
             {
                 if (onFailure.IsNull())
                     return result;
 
+                cancellationToken.ThrowIfCancellationRequested();
                 var invokeFailure = await onFailure.Invoke().ConfigureAwait(false);
                 if (ignoreError.IsFalse() && invokeFailure.IsSuccess.IsFalse())
                     return invokeFailure;
@@ -134,6 +152,7 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             if (onSuccess.IsNull())
                 return result;
 
+            cancellationToken.ThrowIfCancellationRequested();
             var invokeSuccess = await onSuccess.Invoke().ConfigureAwait(false);
             if (ignoreError.IsFalse() && invokeSuccess.IsSuccess.IsFalse())
                 return invokeSuccess;
@@ -150,13 +169,17 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// <param name="onSuccess">The on success.</param>
         /// <param name="onFailure">The on failure.</param>
         /// <param name="ignoreError">(Optional) True to ignore error.</param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
         /// <returns>
         ///     A TResult.
         /// </returns>
         /// =================================================================================================
         public static async Task<TResult> FunctionOnAsync<TResult>(
             this TResult result, Func<Task<TResult>> onSuccess,
-            IEnumerable<Func<Task<TResult>>> onFailure, bool ignoreError = true) where TResult : IResult
+            IEnumerable<Func<Task<TResult>>> onFailure, bool ignoreError = true,
+            CancellationToken cancellationToken = default) where TResult : IResult
         {
             if (result.IsSuccess.IsFalse())
             {
@@ -165,6 +188,7 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
 
                 foreach (var func in onFailure)
                 {
+                    cancellationToken.ThrowIfCancellationRequested();
                     var invokeFailure = await func.Invoke().ConfigureAwait(false);
                     if (ignoreError.IsFalse() && invokeFailure.IsSuccess.IsFalse())
                         return invokeFailure;
@@ -176,6 +200,7 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             if (onSuccess.IsNull())
                 return result;
 
+            cancellationToken.ThrowIfCancellationRequested();
             var invokeSuccess = await onSuccess.Invoke().ConfigureAwait(false);
             if (ignoreError.IsFalse() && invokeSuccess.IsSuccess.IsFalse())
                 return invokeSuccess;
@@ -192,19 +217,24 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// <param name="onSuccess">The on success.</param>
         /// <param name="onFailure">The on failure.</param>
         /// <param name="ignoreError">(Optional) True to ignore error.</param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
         /// <returns>
         ///     A TResult.
         /// </returns>
         /// =================================================================================================
         public static async Task<TResult> FunctionOnAsync<TResult>(
             this TResult result, IEnumerable<Func<Task<TResult>>> onSuccess,
-            Func<Task<TResult>> onFailure, bool ignoreError = true) where TResult : IResult
+            Func<Task<TResult>> onFailure, bool ignoreError = true,
+            CancellationToken cancellationToken = default) where TResult : IResult
         {
             if (result.IsSuccess.IsFalse())
             {
                 if (onFailure.IsNull())
                     return result;
 
+                cancellationToken.ThrowIfCancellationRequested();
                 var invokeFailure = await onFailure.Invoke().ConfigureAwait(false);
                 if (ignoreError.IsFalse() && invokeFailure.IsSuccess.IsFalse())
                     return invokeFailure;
@@ -217,6 +247,7 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
 
             foreach (var func in onSuccess)
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 var invokeSuccess = await func.Invoke().ConfigureAwait(false);
                 if (ignoreError.IsFalse() && invokeSuccess.IsSuccess.IsFalse())
                     return invokeSuccess;
@@ -234,13 +265,17 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// <param name="onSuccess">The on success.</param>
         /// <param name="onFailure">The on failure.</param>
         /// <param name="ignoreError">(Optional) True to ignore error.</param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
         /// <returns>
         ///     A TResult.
         /// </returns>
         /// =================================================================================================
         public static async Task<TResult> FunctionOnAsync<TResult>(
             this TResult result, IEnumerable<Func<Task<TResult>>> onSuccess,
-            IEnumerable<Func<Task<TResult>>> onFailure, bool ignoreError = true) where TResult : IResult
+            IEnumerable<Func<Task<TResult>>> onFailure, bool ignoreError = true,
+            CancellationToken cancellationToken = default) where TResult : IResult
         {
             if (result.IsSuccess.IsFalse())
             {
@@ -249,6 +284,7 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
 
                 foreach (var func in onFailure)
                 {
+                    cancellationToken.ThrowIfCancellationRequested();
                     var invokeFailure = await func.Invoke().ConfigureAwait(false);
                     if (ignoreError.IsFalse() && invokeFailure.IsSuccess.IsFalse())
                         return invokeFailure;
@@ -262,6 +298,7 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
 
             foreach (var func in onSuccess)
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 var invokeSuccess = await func.Invoke().ConfigureAwait(false);
                 if (ignoreError.IsFalse() && invokeSuccess.IsSuccess.IsFalse())
                     return invokeSuccess;
@@ -280,9 +317,15 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         ///     <see cref="FunctionExtensions.ExecuteFunction{TResult}(TResult, bool, Func{TResult}[])" />
         ///     .
         /// </remarks>
+        /// <exception cref="OperationCanceledException">
+        ///     Thrown when a thread cancels a running operation.
+        /// </exception>
         /// <typeparam name="TResult">Type of the result.</typeparam>
         /// <param name="result">The result to act on.</param>
         /// <param name="ignoreError">(Optional) True to ignore error.</param>
+        /// <param name="cancellationToken">
+        ///     (Optional) A token that allows processing to be cancelled.
+        /// </param>
         /// <param name="functions">A variable-length parameters list containing functions.</param>
         /// <returns>
         ///     A TResult.
@@ -290,7 +333,9 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// =================================================================================================
         public static async Task<TResult> ExecuteFunctionAsync<TResult>(
             this TResult result,
-            bool ignoreError = true, params Func<Task<TResult>>[] functions) where TResult : IResult
+            bool ignoreError = true,
+            CancellationToken cancellationToken = default,
+            params Func<Task<TResult>>[] functions) where TResult : IResult
         {
             try
             {
@@ -299,12 +344,17 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
 
                 foreach (var func in functions)
                 {
+                    cancellationToken.ThrowIfCancellationRequested();
                     var invoke = await func.Invoke().ConfigureAwait(false);
                     if (ignoreError.IsFalse() && invoke.IsSuccess.IsFalse())
                         return invoke;
                 }
 
                 return result;
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
             }
             catch (Exception e)
             {

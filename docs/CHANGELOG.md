@@ -1,3 +1,7 @@
+### **v3.0.0.6928** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 24-05-2026
+* [063f7e3] (RzR) -> Cleanup for obsolete methods.
+* [709b9b2] (RzR) -> Add `CancellationToken` support to all async pipeline methods from `FunctionExtensionsAsync`.
+
 ### **v2.0.0.4127** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 22-04-2026
 > **Major release — contains breaking changes.** See [migration-guide.md](migration-guide.md) for full before/after porting steps.
 

@@ -19,11 +19,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RzR.ResultMessage;
 using RzR.ResultMessage.Abstractions;
+using RzR.ResultMessage.Extensions.Result;
 using RzR.ResultMessage.Extensions.Result.Actions;
 
 #endregion
-
-#pragma warning disable CS0618
 
 namespace InfoResultTests
 {
@@ -43,25 +42,13 @@ namespace InfoResultTests
             var resultOfT = new Result<bool> { IsSuccess = true, Response = true };
             IResult<bool> resultOfT1 = new Result<bool> { IsSuccess = true, Response = true };
 
-            result.ActionOnSuccess(x =>
-            {
-                isSuccess = true;
-            });
+            result.Match(x => { isSuccess = true; }, _ => { });
 
-            result1.ActionOnSuccess(x =>
-            {
-                isSuccess1 = true;
-            });
+            result1.Match(x => { isSuccess1 = true; }, _ => { });
 
-            resultOfT.ActionOnSuccess(x =>
-            {
-                isSuccessOfT = true;
-            });
+            resultOfT.Match(x => { isSuccessOfT = true; }, _ => { });
 
-            resultOfT1.ActionOnSuccess(x =>
-            {
-                isSuccessOfT1 = true;
-            });
+            resultOfT1.Match(x => { isSuccessOfT1 = true; }, _ => { });
 
             Assert.IsTrue(isSuccess);
             Assert.IsTrue(isSuccess1);
@@ -82,22 +69,10 @@ namespace InfoResultTests
             IResult result1 = new Result { IsSuccess = false };
             IResult<bool> resultOfT1 = new Result<bool> { IsSuccess = false, Response = false };
 
-            result.ActionOnFailure(x =>
-            {
-                isSuccess = false;
-            });
-            resultOfT.ActionOnFailure(x =>
-            {
-                isSuccessOfT = false;
-            });
-            result1.ActionOnFailure(x =>
-            {
-                isSuccess1 = false;
-            });
-            resultOfT1.ActionOnFailure(x =>
-            {
-                isSuccessOfT1 = false;
-            });
+            result.Match(_ => { }, x => { isSuccess = false; });
+            resultOfT.Match(_ => { }, x => { isSuccessOfT = false; });
+            result1.Match(_ => { }, x => { isSuccess1 = false; });
+            resultOfT1.Match(_ => { }, x => { isSuccessOfT1 = false; });
 
             Assert.IsFalse(isSuccess);
             Assert.IsFalse(isSuccessOfT);
