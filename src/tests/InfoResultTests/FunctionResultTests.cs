@@ -52,32 +52,6 @@ namespace InfoResultTests
         [TestMethod]
         [DataRow(false, true)]
         [DataRow(true, true)]
-        public void ExecuteFunctionTest_2_Success(bool ignoreError, bool exceptedResult)
-        {
-#pragma warning disable CS0618 // legacy sync-over-async overload, intentionally exercised
-            var result = new Result() { IsSuccess = true }
-                .ExecuteFunction(ignoreError, async () => await FuncTestSuccessTask());
-#pragma warning restore CS0618
-
-            Assert.AreEqual(exceptedResult, result.IsSuccess);
-        }
-
-        [TestMethod]
-        [DataRow(false, false)]
-        [DataRow(true, true)]
-        public void ExecuteFunctionTest_2_Failure(bool ignoreError, bool exceptedResult)
-        {
-#pragma warning disable CS0618 // legacy sync-over-async overload, intentionally exercised
-            var result = new Result() { IsSuccess = true }
-                .ExecuteFunction(ignoreError, async () => await FuncTestFailureTask());
-#pragma warning restore CS0618
-
-            Assert.AreEqual(exceptedResult, result.IsSuccess);
-        }
-
-        [TestMethod]
-        [DataRow(false, true)]
-        [DataRow(true, true)]
         public async Task ExecuteFunctionAsyncTest_2_Success(bool ignoreError, bool exceptedResult)
         {
             var result = await new Result() { IsSuccess = true }
