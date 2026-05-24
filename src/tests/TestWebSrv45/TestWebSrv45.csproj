@@ -43,9 +43,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AggregatedGenericResultMessage">
-      <HintPath>..\..\AggregatedGenericResultMessage\bin\Debug\net45\AggregatedGenericResultMessage.dll</HintPath>
-    </Reference>
     <Reference Include="CodeSource">
       <HintPath>..\..\AggregatedGenericResultMessage\bin\Debug\net45\CodeSource.dll</HintPath>
     </Reference>
@@ -53,6 +50,9 @@
       <HintPath>..\..\AggregatedGenericResultMessage\bin\Debug\net45\DomainCommonExtensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RzR.ResultMessage">
+      <HintPath>..\..\AggregatedGenericResultMessage\bin\Debug\net45\RzR.ResultMessage.dll</HintPath>
+    </Reference>
     <Reference Include="System.Linq.Dynamic.Core">
       <HintPath>..\..\AggregatedGenericResultMessage\bin\Debug\net45\System.Linq.Dynamic.Core.dll</HintPath>
     </Reference>

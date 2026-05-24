@@ -44,9 +44,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AggregatedGenericResultMessage">
-      <HintPath>..\..\AggregatedGenericResultMessage\bin\Debug\net461\AggregatedGenericResultMessage.dll</HintPath>
-    </Reference>
     <Reference Include="CodeSource, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CodeSource.2.0.0\lib\net45\CodeSource.dll</HintPath>
     </Reference>
@@ -82,6 +79,9 @@
       <HintPath>..\..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="RzR.ResultMessage">
+      <HintPath>..\..\AggregatedGenericResultMessage\bin\Debug\net461\RzR.ResultMessage.dll</HintPath>
     </Reference>
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>

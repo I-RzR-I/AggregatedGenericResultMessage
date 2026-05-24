@@ -1,7 +1,18 @@
 > **Note** This repository is developed in .netstandard2+ with support for SOAP service results mainly used in the .net framework (current support 4.5, 4.6.1 - 4.8)
 
+[![NuGet Version](https://img.shields.io/nuget/v/RzR.ResultMessage.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/RzR.ResultMessage/)
+[![Nuget Downloads](https://img.shields.io/nuget/dt/RzR.ResultMessage.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/RzR.ResultMessage)
+
+<details>
+
+  <summary>Old version</summary>
+  
 [![NuGet Version](https://img.shields.io/nuget/v/AggregatedGenericResultMessage.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/AggregatedGenericResultMessage/)
 [![Nuget Downloads](https://img.shields.io/nuget/dt/AggregatedGenericResultMessage.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/AggregatedGenericResultMessage)
+
+</details>
+
+<br />
 
 The goal of this repository is to offer the possibility to manage and agree on the answers received as a result of the execution of a method or a process.
 
@@ -27,9 +38,9 @@ For more efficiently using, when in some cases when you may need to execute some
 
 No additional components or packs are required for use. So, it only needs to be added/installed in the project and can be used instantly.
 
-**In case you wish to use it in your project, u can install the package from <a href="https://www.nuget.org/packages/AggregatedGenericResultMessage" target="_blank">nuget.org</a>** or specify what version you want:
+**In case you wish to use it in your project, u can install the package from <a href="https://www.nuget.org/packages/RzR.ResultMessage" target="_blank">nuget.org</a>** or specify what version you want:
 
-> `Install-Package AggregatedGenericResultMessage -Version x.x.x.x`
+> `Install-Package RzR.ResultMessage -Version x.x.x.x`
 
 ## Content
 1. [USING](docs/usage.md)

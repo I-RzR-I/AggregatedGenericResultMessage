@@ -81,7 +81,7 @@ namespace InfoResultTests
         public async Task ExecuteFunctionAsyncTest_2_Success(bool ignoreError, bool exceptedResult)
         {
             var result = await new Result() { IsSuccess = true }
-                .ExecuteFunctionAsync(ignoreError, FuncTestSuccessTask);
+                .ExecuteFunctionAsync(ignoreError, functions: FuncTestSuccessTask);
 
             Assert.AreEqual(exceptedResult, result.IsSuccess);
         }
@@ -92,7 +92,7 @@ namespace InfoResultTests
         public async Task ExecuteFunctionAsyncTest_2_Failure(bool ignoreError, bool exceptedResult)
         {
             var result = await new Result() { IsSuccess = true }
-                .ExecuteFunctionAsync(ignoreError, FuncTestFailureTask);
+                .ExecuteFunctionAsync(ignoreError, functions: FuncTestFailureTask);
 
             Assert.AreEqual(exceptedResult, result.IsSuccess);
         }
@@ -103,7 +103,7 @@ namespace InfoResultTests
             var calls = 0;
 
             var result = await Result.Success()
-                .FunctionOnSuccessAsync(true, async () =>
+                .FunctionOnSuccessAsync(true, onSuccess: async () =>
                 {
                     calls++;
                     return await Task.FromResult(Result.Success());
@@ -114,7 +114,7 @@ namespace InfoResultTests
 
             calls = 0;
             result = await Result.Failure()
-                .FunctionOnSuccessAsync(true, async () =>
+                .FunctionOnSuccessAsync(true, onSuccess: async () =>
                 {
                     calls++;
                     return await Task.FromResult(Result.Success());
@@ -130,7 +130,7 @@ namespace InfoResultTests
             var calls = 0;
 
             var result = await Result.Failure()
-                .FunctionOnFailureAsync(true, async () =>
+                .FunctionOnFailureAsync(true, onFailure: async () =>
                 {
                     calls++;
                     return await Task.FromResult(Result.Failure());
@@ -140,7 +140,7 @@ namespace InfoResultTests
 
             calls = 0;
             result = await Result.Success()
-                .FunctionOnFailureAsync(true, async () =>
+                .FunctionOnFailureAsync(true, onFailure: async () =>
                 {
                     calls++;
                     return await Task.FromResult(Result.Failure());
