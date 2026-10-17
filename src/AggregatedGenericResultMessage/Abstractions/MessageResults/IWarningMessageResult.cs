@@ -64,36 +64,36 @@ namespace RzR.ResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add Warning
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="warning"></param>
         /// <returns></returns>
-        IResult<T> AddWarning(string key, string warning);
+        IResult<T> AddWarning(string code, string warning);
 
         /// <summary>
         ///     Add Warning
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="warning"></param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddWarning(string key, string warning, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddWarning(string code, string warning, params RelatedObjectModel[] relatedObjects);
 
         /// <summary>
         ///     Add Warning
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="warning"></param>
         /// <returns></returns>
-        IResult<T> AddWarning(string key, MessageDataModel warning);
+        IResult<T> AddWarning(string code, MessageDataModel warning);
 
         /// <summary>
         ///     Add Warning
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="warning"></param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddWarning(string key, MessageDataModel warning, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddWarning(string code, MessageDataModel warning, params RelatedObjectModel[] relatedObjects);
 
         /// <summary>
         ///     Add Warning for confirmation result
@@ -128,35 +128,35 @@ namespace RzR.ResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add Warning for confirmation result
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="warning"></param>
         /// <returns></returns>
-        IResult<T> AddWarningConfirm(string key, string warning);
+        IResult<T> AddWarningConfirm(string code, string warning);
 
         /// <summary>
         ///     Add Warning for confirmation result
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="warning"></param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddWarningConfirm(string key, string warning, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddWarningConfirm(string code, string warning, params RelatedObjectModel[] relatedObjects);
 
         /// <summary>
         ///     Add Warning for confirmation result
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="warning"></param>
         /// <returns></returns>
-        IResult<T> AddWarningConfirm(string key, MessageDataModel warning);
+        IResult<T> AddWarningConfirm(string code, MessageDataModel warning);
 
         /// <summary>
         ///     Add Warning for confirmation result
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="warning"></param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddWarningConfirm(string key, MessageDataModel warning, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddWarningConfirm(string code, MessageDataModel warning, params RelatedObjectModel[] relatedObjects);
     }
 }

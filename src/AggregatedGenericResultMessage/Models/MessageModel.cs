@@ -22,6 +22,8 @@ using RzR.ResultMessage.Extensions.Common;
 using RzR.ResultMessage.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 #if !NETFRAMEWORK
@@ -47,10 +49,20 @@ namespace RzR.ResultMessage.Models
 
         /// <inheritdoc />
 #if !NETFRAMEWORK
-        [JsonPropertyName("key")]
+        [JsonPropertyName("code")]
 #endif
-        [XmlElement("Key")]
-        public string Key { get; set; }
+        [XmlElement("Code")]
+        public string Code { get; set; }
+
+        /// <inheritdoc />
+        [Obsolete(ObsoleteMessages.KeyToCode)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [XmlIgnore]
+        [IgnoreDataMember]
+#if !NETFRAMEWORK
+        [JsonIgnore]
+#endif
+        public string Key { get => Code; set => Code = value; }
 
         /// <inheritdoc />
 #if !NETFRAMEWORK
@@ -94,13 +106,13 @@ namespace RzR.ResultMessage.Models
         /// <summary>
         ///     Initializes a new instance of the <see cref="MessageModel" /> class.
         /// </summary>
-        /// <param name="key">Required. Message key</param>
+        /// <param name="code">Required. Message code</param>
         /// <param name="message">Optional(MessageDataModel). The default value is null.</param>
         /// <param name="messageType">Message type</param>
         /// <remarks></remarks>
-        public MessageModel(string key, string message = null, MessageType messageType = MessageType.Error)
+        public MessageModel(string code, string message = null, MessageType messageType = MessageType.Error)
         {
-            Key = key;
+            Code = code;
             MessageType = messageType;
 
             if (message.IsNotNull())
@@ -110,14 +122,14 @@ namespace RzR.ResultMessage.Models
         /// <summary>
         ///     Initializes a new instance of the <see cref="MessageModel" /> class.
         /// </summary>
-        /// <param name="key">Required. Message key</param>
+        /// <param name="code">Required. Message code</param>
         /// <param name="message">Optional(MessageDataModel). The default value is null.</param>
         /// <param name="messageType">Message type</param>
         /// <param name="relatedObjects">Related message objects</param>
         /// <remarks></remarks>
-        public MessageModel(string key, string message, MessageType messageType, params RelatedObjectModel[] relatedObjects)
+        public MessageModel(string code, string message, MessageType messageType, params RelatedObjectModel[] relatedObjects)
         {
-            Key = key;
+            Code = code;
             MessageType = messageType;
 
             if (message.IsNotNull())
@@ -130,13 +142,13 @@ namespace RzR.ResultMessage.Models
         /// <summary>
         ///     Initializes a new instance of the <see cref="MessageModel" /> class.
         /// </summary>
-        /// <param name="key">Required. Message key</param>
+        /// <param name="code">Required. Message code</param>
         /// <param name="message">Optional(MessageDataModel). The default value is null.</param>
         /// <param name="messageType">Message type</param>
         /// <remarks></remarks>
-        public MessageModel(string key, MessageDataModel message = null, MessageType messageType = MessageType.Error)
+        public MessageModel(string code, MessageDataModel message = null, MessageType messageType = MessageType.Error)
         {
-            Key = key;
+            Code = code;
             MessageType = messageType;
 
             if (message.IsNotNull())
@@ -146,13 +158,13 @@ namespace RzR.ResultMessage.Models
         /// <summary>
         ///     Initializes a new instance of the <see cref="MessageModel" /> class.
         /// </summary>
-        /// <param name="key">Required. Message key</param>
+        /// <param name="code">Required. Message code</param>
         /// <param name="message">Optional(MessageDataModel). The default value is null.</param>
         /// <param name="relatedObjects">Related message objects</param>
         /// <remarks></remarks>
-        public MessageModel(string key, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
+        public MessageModel(string code, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
         {
-            Key = key;
+            Code = code;
             Message = message;
 
             if (message.IsNotNull())
@@ -165,14 +177,14 @@ namespace RzR.ResultMessage.Models
         /// <summary>
         ///     Initializes a new instance of the <see cref="MessageModel" /> class.
         /// </summary>
-        /// <param name="key">Required. Message key</param>
+        /// <param name="code">Required. Message code</param>
         /// <param name="message">Optional(MessageDataModel). The default value is null.</param>
         /// <param name="messageType">Message type</param>
         /// <param name="relatedObjects">Related message objects</param>
         /// <remarks></remarks>
-        public MessageModel(string key, MessageDataModel message, MessageType messageType, params RelatedObjectModel[] relatedObjects)
+        public MessageModel(string code, MessageDataModel message, MessageType messageType, params RelatedObjectModel[] relatedObjects)
         {
-            Key = key;
+            Code = code;
             MessageType = messageType;
 
             if (message.IsNotNull())
@@ -185,12 +197,12 @@ namespace RzR.ResultMessage.Models
         /// <summary>
         ///     Initializes a new instance of the <see cref="MessageModel" /> class.
         /// </summary>
-        /// <param name="key">Required. Message key</param>
+        /// <param name="code">Required. Message code</param>
         /// <param name="exception">Optional(exception). Current exception. The default value is null.</param>
         /// <remarks></remarks>
-        public MessageModel(string key, Exception? exception)
+        public MessageModel(string code, Exception? exception)
         {
-            Key = key;
+            Code = code;
             MessageType = MessageType.Exception;
 
             if (exception.IsNotNull())
@@ -200,13 +212,13 @@ namespace RzR.ResultMessage.Models
         /// <summary>
         ///     Initializes a new instance of the <see cref="MessageModel" /> class.
         /// </summary>
-        /// <param name="key">Required. Message key</param>
+        /// <param name="code">Required. Message code</param>
         /// <param name="exception">Optional(exception). Current exception. The default value is null.</param>
         /// <param name="relatedObjects">Related message objects</param>
         /// <remarks></remarks>
-        public MessageModel(string key, Exception? exception, params RelatedObjectModel[] relatedObjects)
+        public MessageModel(string code, Exception? exception, params RelatedObjectModel[] relatedObjects)
         {
-            Key = key;
+            Code = code;
             MessageType = MessageType.Exception;
 
             if (exception.IsNotNull())
@@ -220,14 +232,14 @@ namespace RzR.ResultMessage.Models
 
         /// <inheritdoc cref="IMessageModel.ToString" />
         public override string ToString()
-            => string.Format(ToStringFormat, Key, Message);
+            => string.Format(ToStringFormat, Code, Message);
 
         /// <summary>
         ///     Implicit operator
         /// </summary>
         /// <param name="formatted">Input message</param>
         /// <returns></returns>
-        /// <remarks>formatted[0] => Message, formatted[1] => Message type</remarks>
+        /// <remarks>formatted[0] => "code:message", formatted[1] => Message type</remarks>
         public static implicit operator MessageModel(string[] formatted)
         {
             var messageType = formatted.Length > 1

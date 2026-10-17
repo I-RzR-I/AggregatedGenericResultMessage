@@ -139,33 +139,33 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         }
         
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string, string)" />
-        public static IResult<T> AddError<T>(this IResult<T> result, string key, string error)
+        public static IResult<T> AddError<T>(this IResult<T> result, string code, string error)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(error)));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(error)));
 
             return result;
         }
 
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string, string, RelatedObjectModel[])" />
-        public static IResult<T> AddError<T>(this IResult<T> result, string key, string error, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddError<T>(this IResult<T> result, string code, string error, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(error), messageType: MessageType.Error, relatedObjects: relatedObjects));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(error), messageType: MessageType.Error, relatedObjects: relatedObjects));
 
             return result;
         }
 
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string, MessageDataModel)" />
-        public static IResult<T> AddError<T>(this Result<T> result, string key, MessageDataModel error)
+        public static IResult<T> AddError<T>(this Result<T> result, string code, MessageDataModel error)
         {
-            result.Messages?.Add(new MessageModel(key, error));
+            result.Messages?.Add(new MessageModel(code, error));
 
             return result;
         }
 
         /// <inheritdoc cref="IErrorMessageResult{T}.AddError(string, MessageDataModel, RelatedObjectModel[])" />
-        public static IResult<T> AddError<T>(this Result<T> result, string key, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddError<T>(this Result<T> result, string code, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, error, messageType: MessageType.Error, relatedObjects: relatedObjects));
+            result.Messages?.Add(new MessageModel(code, error, messageType: MessageType.Error, relatedObjects: relatedObjects));
 
             return result;
         }
@@ -205,68 +205,68 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         }
 
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, string)" />
-        public static IResult<T> AddErrorConfirm<T>(this IResult<T> result, string key, string error)
+        public static IResult<T> AddErrorConfirm<T>(this IResult<T> result, string code, string error)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(error), MessageType.ErrorConfirm));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(error), MessageType.ErrorConfirm));
 
             return result;
         }
 
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, string, RelatedObjectModel[])" />
-        public static IResult<T> AddErrorConfirm<T>(this IResult<T> result, string key, string error, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddErrorConfirm<T>(this IResult<T> result, string code, string error, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(error),
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(error),
                 MessageType.ErrorConfirm, relatedObjects: relatedObjects));
 
             return result;
         }
 
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, MessageDataModel)" />
-        public static IResult<T> AddErrorConfirm<T>(this IResult<T> result, string key, MessageDataModel error)
+        public static IResult<T> AddErrorConfirm<T>(this IResult<T> result, string code, MessageDataModel error)
         {
-            result.Messages?.Add(new MessageModel(key, error, MessageType.ErrorConfirm));
+            result.Messages?.Add(new MessageModel(code, error, MessageType.ErrorConfirm));
 
             return result;
         }
 
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, MessageDataModel, RelatedObjectModel[])" />
-        public static IResult<T> AddErrorConfirm<T>(this IResult<T> result, string key, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddErrorConfirm<T>(this IResult<T> result, string code, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, error, MessageType.ErrorConfirm,
+            result.Messages?.Add(new MessageModel(code, error, MessageType.ErrorConfirm,
                 relatedObjects: relatedObjects));
 
             return result;
         }
 
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, string)" />
-        public static IResult<T> AddErrorConfirm<T>(this Result<T> result, string key, string error)
+        public static IResult<T> AddErrorConfirm<T>(this Result<T> result, string code, string error)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(error), MessageType.ErrorConfirm));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(error), MessageType.ErrorConfirm));
 
             return result;
         }
 
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, string, RelatedObjectModel[])" />
-        public static IResult<T> AddErrorConfirm<T>(this Result<T> result, string key, string error, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddErrorConfirm<T>(this Result<T> result, string code, string error, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(error),
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(error),
                 MessageType.ErrorConfirm, relatedObjects: relatedObjects));
 
             return result;
         }
 
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, MessageDataModel)" />
-        public static IResult<T> AddErrorConfirm<T>(this Result<T> result, string key, MessageDataModel error)
+        public static IResult<T> AddErrorConfirm<T>(this Result<T> result, string code, MessageDataModel error)
         {
-            result.Messages?.Add(new MessageModel(key, error, MessageType.ErrorConfirm));
+            result.Messages?.Add(new MessageModel(code, error, MessageType.ErrorConfirm));
 
             return result;
         }
 
         /// <inheritdoc cref="IErrorMessageResult{T}.AddErrorConfirm(string, MessageDataModel, RelatedObjectModel[])" />
-        public static IResult<T> AddErrorConfirm<T>(this Result<T> result, string key, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddErrorConfirm<T>(this Result<T> result, string code, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, error, MessageType.ErrorConfirm, relatedObjects: relatedObjects));
+            result.Messages?.Add(new MessageModel(code, error, MessageType.ErrorConfirm, relatedObjects: relatedObjects));
 
             return result;
         }
@@ -317,11 +317,11 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
 
         /// <inheritdoc cref="IErrorMessageResult{T}.HasErrorCode(string)" />
         public static bool HasErrorCode<T>(this IResult<T> result, string errorCode)
-            => result.Messages?.Any(x => x.Key.Equals(errorCode)) ?? false;
+            => result.Messages?.Any(x => x.Code.Equals(errorCode)) ?? false;
 
         /// <inheritdoc cref="IErrorMessageResult{T}.HasErrorCode(string)" />
         public static bool HasErrorCode<T>(this Result<T> result, string errorCode)
-            => result.Messages?.Any(x => x.Key.Equals(errorCode)) ?? false;
+            => result.Messages?.Any(x => x.Code.Equals(errorCode)) ?? false;
 
         /// <inheritdoc cref="IErrorMessageResult{T}.HasAnyErrors" />
         public static bool HasAnyErrors<T>(this IResult<T> result)

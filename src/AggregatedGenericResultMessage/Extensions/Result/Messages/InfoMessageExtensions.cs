@@ -95,65 +95,65 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         }
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string, string)" />
-        public static IResult<T> AddInfo<T>(this Result<T> result, string key, string info)
+        public static IResult<T> AddInfo<T>(this Result<T> result, string code, string info)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(info), MessageType.Info));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(info), MessageType.Info));
 
             return result;
         }
         
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string, string, RelatedObjectModel[])" />
-        public static IResult<T> AddInfo<T>(this Result<T> result, string key, string info, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddInfo<T>(this Result<T> result, string code, string info, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(info), MessageType.Info, relatedObjects));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(info), MessageType.Info, relatedObjects));
 
             return result;
         }
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string, MessageDataModel)" />
-        public static IResult<T> AddInfo<T>(this Result<T> result, string key, MessageDataModel info)
+        public static IResult<T> AddInfo<T>(this Result<T> result, string code, MessageDataModel info)
         {
-            result.Messages?.Add(new MessageModel(key, info, MessageType.Info));
+            result.Messages?.Add(new MessageModel(code, info, MessageType.Info));
 
             return result;
         }
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string, MessageDataModel, RelatedObjectModel[])" />
-        public static IResult<T> AddInfo<T>(this Result<T> result, string key, MessageDataModel info, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddInfo<T>(this Result<T> result, string code, MessageDataModel info, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, info, MessageType.Info, relatedObjects));
+            result.Messages?.Add(new MessageModel(code, info, MessageType.Info, relatedObjects));
 
             return result;
         }
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string, string)" />
-        public static IResult<T> AddInfo<T>(this IResult<T> result, string key, string info)
+        public static IResult<T> AddInfo<T>(this IResult<T> result, string code, string info)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(info), MessageType.Info));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(info), MessageType.Info));
 
             return result;
         }
         
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string, string, RelatedObjectModel[])" />
-        public static IResult<T> AddInfo<T>(this IResult<T> result, string key, string info, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddInfo<T>(this IResult<T> result, string code, string info, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(info), MessageType.Info, relatedObjects));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(info), MessageType.Info, relatedObjects));
 
             return result;
         }
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string, MessageDataModel)" />
-        public static IResult<T> AddInfo<T>(this IResult<T> result, string key, MessageDataModel info)
+        public static IResult<T> AddInfo<T>(this IResult<T> result, string code, MessageDataModel info)
         {
-            result.Messages?.Add(new MessageModel(key, info, MessageType.Info));
+            result.Messages?.Add(new MessageModel(code, info, MessageType.Info));
 
             return result;
         }
         
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfo(string, MessageDataModel, RelatedObjectModel[])" />
-        public static IResult<T> AddInfo<T>(this IResult<T> result, string key, MessageDataModel info, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddInfo<T>(this IResult<T> result, string code, MessageDataModel info, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, info, MessageType.Info, relatedObjects));
+            result.Messages?.Add(new MessageModel(code, info, MessageType.Info, relatedObjects));
 
             return result;
         }
@@ -223,65 +223,65 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         }
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string, string)" />
-        public static IResult<T> AddInfoConfirm<T>(this Result<T> result, string key, string info)
+        public static IResult<T> AddInfoConfirm<T>(this Result<T> result, string code, string info)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(info), MessageType.InfoConfirm));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(info), MessageType.InfoConfirm));
 
             return result;
         }
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string, string, RelatedObjectModel[])" />
-        public static IResult<T> AddInfoConfirm<T>(this Result<T> result, string key, string info, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddInfoConfirm<T>(this Result<T> result, string code, string info, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(info), MessageType.InfoConfirm, relatedObjects));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(info), MessageType.InfoConfirm, relatedObjects));
 
             return result;
         }
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string, MessageDataModel)" />
-        public static IResult<T> AddInfoConfirm<T>(this Result<T> result, string key, MessageDataModel info)
+        public static IResult<T> AddInfoConfirm<T>(this Result<T> result, string code, MessageDataModel info)
         {
-            result.Messages?.Add(new MessageModel(key, info, MessageType.InfoConfirm));
+            result.Messages?.Add(new MessageModel(code, info, MessageType.InfoConfirm));
 
             return result;
         }
         
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string, MessageDataModel, RelatedObjectModel[])" />
-        public static IResult<T> AddInfoConfirm<T>(this Result<T> result, string key, MessageDataModel info, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddInfoConfirm<T>(this Result<T> result, string code, MessageDataModel info, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, info, MessageType.InfoConfirm, relatedObjects));
+            result.Messages?.Add(new MessageModel(code, info, MessageType.InfoConfirm, relatedObjects));
 
             return result;
         }
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string, string)" />
-        public static IResult<T> AddInfoConfirm<T>(this IResult<T> result, string key, string info)
+        public static IResult<T> AddInfoConfirm<T>(this IResult<T> result, string code, string info)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(info), MessageType.InfoConfirm));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(info), MessageType.InfoConfirm));
 
             return result;
         }
         
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string, string, RelatedObjectModel[])" />
-        public static IResult<T> AddInfoConfirm<T>(this IResult<T> result, string key, string info, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddInfoConfirm<T>(this IResult<T> result, string code, string info, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(info), MessageType.InfoConfirm, relatedObjects));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(info), MessageType.InfoConfirm, relatedObjects));
 
             return result;
         }
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string, MessageDataModel)" />
-        public static IResult<T> AddInfoConfirm<T>(this IResult<T> result, string key, MessageDataModel info)
+        public static IResult<T> AddInfoConfirm<T>(this IResult<T> result, string code, MessageDataModel info)
         {
-            result.Messages?.Add(new MessageModel(key, info, MessageType.InfoConfirm));
+            result.Messages?.Add(new MessageModel(code, info, MessageType.InfoConfirm));
 
             return result;
         }
 
         /// <inheritdoc cref="IInfoMessageResult{T}.AddInfoConfirm(string, MessageDataModel, RelatedObjectModel[])" />
-        public static IResult<T> AddInfoConfirm<T>(this IResult<T> result, string key, MessageDataModel info, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddInfoConfirm<T>(this IResult<T> result, string code, MessageDataModel info, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, info, MessageType.InfoConfirm, relatedObjects));
+            result.Messages?.Add(new MessageModel(code, info, MessageType.InfoConfirm, relatedObjects));
 
             return result;
         }

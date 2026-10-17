@@ -89,7 +89,7 @@ namespace RzR.ResultMessage.Extensions.Result
 
         /// -------------------------------------------------------------------------------------------------
         /// <summary>
-        ///     Same as <see cref="Validate{T}(Result{T}, Func{T,bool}, string)" /> but using a key and
+        ///     Same as <see cref="Validate{T}(Result{T}, Func{T,bool}, string)" /> but using a code and
         ///     message string.
         /// </summary>
         /// <exception cref="ArgumentNullException">
@@ -98,13 +98,13 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <typeparam name="T">Generic type parameter.</typeparam>
         /// <param name="result">The result to act on.</param>
         /// <param name="predicate">The predicate.</param>
-        /// <param name="key">The key.</param>
+        /// <param name="code">Message code.</param>
         /// <param name="error">The error.</param>
         /// <returns>
         ///     A Result&lt;T&gt;
         /// </returns>
         /// =================================================================================================
-        public static Result<T> Validate<T>(this Result<T> result, Func<T, bool> predicate, string key, string error)
+        public static Result<T> Validate<T>(this Result<T> result, Func<T, bool> predicate, string code, string error)
         {
             if (result.IsNull())
                 throw new ArgumentNullException(nameof(result));
@@ -113,7 +113,7 @@ namespace RzR.ResultMessage.Extensions.Result
 
             if (predicate(result.Response).IsFalse())
             {
-                result.AddError(key, error);
+                result.AddError(code, error);
                 result.IsSuccess = false;
             }
 

@@ -150,7 +150,7 @@ namespace RzR.ResultMessage
             var messages = Messages
                 ?.Select(y => new MessageModel()
                 {
-                    Key = y.Key,
+                    Code = y.Code,
                     Message = y.Message,
                     MessageType = y.MessageType
                 }).ToList();

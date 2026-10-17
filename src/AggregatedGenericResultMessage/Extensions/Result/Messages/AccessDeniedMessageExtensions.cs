@@ -34,7 +34,7 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied()" />
         public static IResult<T> AddAccessDenied<T>(this IResult<T> result)
         {
-            result.Messages?.Add(new MessageModel(key: null, message: (string)null, messageType: MessageType.AccessDenied));
+            result.Messages?.Add(new MessageModel(code: null, message: (string)null, messageType: MessageType.AccessDenied));
 
             return result;
         }
@@ -42,7 +42,7 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied()" />
         public static IResult<T> AddAccessDenied<T>(this Result<T> result)
         {
-            result.Messages?.Add(new MessageModel(key: null, message: (string)null, messageType: MessageType.AccessDenied));
+            result.Messages?.Add(new MessageModel(code: null, message: (string)null, messageType: MessageType.AccessDenied));
 
             return result;
         }
@@ -51,7 +51,7 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string)" />
         public static IResult<T> AddAccessDenied<T>(this IResult<T> result, string message)
         {
-            result.Messages?.Add(new MessageModel(key: null, message: new MessageDataModel(message), messageType: MessageType.AccessDenied));
+            result.Messages?.Add(new MessageModel(code: null, message: new MessageDataModel(message), messageType: MessageType.AccessDenied));
 
             return result;
         }
@@ -59,7 +59,7 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string, RelatedObjectModel[])" />
         public static IResult<T> AddAccessDenied<T>(this IResult<T> result, string message, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key: null, message: new MessageDataModel(message), 
+            result.Messages?.Add(new MessageModel(code: null, message: new MessageDataModel(message), 
                 messageType: MessageType.AccessDenied, relatedObjects: relatedObjects));
 
             return result;
@@ -69,7 +69,7 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(MessageDataModel)" />
         public static IResult<T> AddAccessDenied<T>(this IResult<T> result, MessageDataModel message)
         {
-            result.Messages?.Add(new MessageModel(key: null, message: message, messageType: MessageType.AccessDenied));
+            result.Messages?.Add(new MessageModel(code: null, message: message, messageType: MessageType.AccessDenied));
 
             return result;
         }
@@ -77,7 +77,7 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(MessageDataModel, RelatedObjectModel[])" />
         public static IResult<T> AddAccessDenied<T>(this IResult<T> result, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key: null, message: message, 
+            result.Messages?.Add(new MessageModel(code: null, message: message, 
                 messageType: MessageType.AccessDenied, relatedObjects: relatedObjects));
 
             return result;
@@ -85,18 +85,18 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
 
 
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string, string)" />
-        public static IResult<T> AddAccessDenied<T>(this IResult<T> result, string key, string message)
+        public static IResult<T> AddAccessDenied<T>(this IResult<T> result, string code, string message)
         {
-            result.Messages?.Add(new MessageModel(key: key, message: new MessageDataModel(message), 
+            result.Messages?.Add(new MessageModel(code: code, message: new MessageDataModel(message), 
                 messageType: MessageType.AccessDenied));
 
             return result;
         }
         
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string, string, RelatedObjectModel[])" />
-        public static IResult<T> AddAccessDenied<T>(this IResult<T> result, string key, string message, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddAccessDenied<T>(this IResult<T> result, string code, string message, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key: key, message: new MessageDataModel(message), 
+            result.Messages?.Add(new MessageModel(code: code, message: new MessageDataModel(message), 
                 messageType: MessageType.AccessDenied, relatedObjects: relatedObjects));
 
             return result;
@@ -104,17 +104,17 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
 
 
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string, MessageDataModel)" />
-        public static IResult<T> AddAccessDenied<T>(this IResult<T> result, string key, MessageDataModel message)
+        public static IResult<T> AddAccessDenied<T>(this IResult<T> result, string code, MessageDataModel message)
         {
-            result.Messages?.Add(new MessageModel(key: key, message: message, messageType: MessageType.AccessDenied));
+            result.Messages?.Add(new MessageModel(code: code, message: message, messageType: MessageType.AccessDenied));
 
             return result;
         }
         
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string, MessageDataModel, RelatedObjectModel[])" />
-        public static IResult<T> AddAccessDenied<T>(this IResult<T> result, string key, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddAccessDenied<T>(this IResult<T> result, string code, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key: key, message: message,
+            result.Messages?.Add(new MessageModel(code: code, message: message,
                 messageType: MessageType.AccessDenied, relatedObjects: relatedObjects));
 
             return result;
@@ -124,7 +124,7 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string)" />
         public static IResult<T> AddAccessDenied<T>(this Result<T> result, string message)
         {
-            result.Messages?.Add(new MessageModel(key: null, message: new MessageDataModel(message), messageType: MessageType.AccessDenied));
+            result.Messages?.Add(new MessageModel(code: null, message: new MessageDataModel(message), messageType: MessageType.AccessDenied));
 
             return result;
         }
@@ -132,7 +132,7 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string, RelatedObjectModel[])" />
         public static IResult<T> AddAccessDenied<T>(this Result<T> result, string message, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key: null, message: new MessageDataModel(message),
+            result.Messages?.Add(new MessageModel(code: null, message: new MessageDataModel(message),
                 messageType: MessageType.AccessDenied, relatedObjects: relatedObjects));
 
             return result;
@@ -142,7 +142,7 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(MessageDataModel)" />
         public static IResult<T> AddAccessDenied<T>(this Result<T> result, MessageDataModel message)
         {
-            result.Messages?.Add(new MessageModel(key: null, message: message, messageType: MessageType.AccessDenied));
+            result.Messages?.Add(new MessageModel(code: null, message: message, messageType: MessageType.AccessDenied));
 
             return result;
         }
@@ -150,7 +150,7 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(MessageDataModel, RelatedObjectModel[])" />
         public static IResult<T> AddAccessDenied<T>(this Result<T> result, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key: null, message: message, 
+            result.Messages?.Add(new MessageModel(code: null, message: message, 
                 messageType: MessageType.AccessDenied, relatedObjects: relatedObjects));
 
             return result;
@@ -158,17 +158,17 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
 
 
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string, string)" />
-        public static IResult<T> AddAccessDenied<T>(this Result<T> result, string key, string message)
+        public static IResult<T> AddAccessDenied<T>(this Result<T> result, string code, string message)
         {
-            result.Messages?.Add(new MessageModel(key: key, message: new MessageDataModel(message), messageType: MessageType.AccessDenied));
+            result.Messages?.Add(new MessageModel(code: code, message: new MessageDataModel(message), messageType: MessageType.AccessDenied));
 
             return result;
         }
         
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string, string, RelatedObjectModel[])" />
-        public static IResult<T> AddAccessDenied<T>(this Result<T> result, string key, string message, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddAccessDenied<T>(this Result<T> result, string code, string message, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key: key, message: new MessageDataModel(message), 
+            result.Messages?.Add(new MessageModel(code: code, message: new MessageDataModel(message), 
                 messageType: MessageType.AccessDenied, relatedObjects: relatedObjects));
 
             return result;
@@ -176,17 +176,17 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         
 
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string, MessageDataModel)" />
-        public static IResult<T> AddAccessDenied<T>(this Result<T> result, string key, MessageDataModel message)
+        public static IResult<T> AddAccessDenied<T>(this Result<T> result, string code, MessageDataModel message)
         {
-            result.Messages?.Add(new MessageModel(key: key, message: message, messageType: MessageType.AccessDenied));
+            result.Messages?.Add(new MessageModel(code: code, message: message, messageType: MessageType.AccessDenied));
 
             return result;
         }
         
         /// <inheritdoc cref="IAccessDeniedMessageResult{T}.AddAccessDenied(string, MessageDataModel, RelatedObjectModel[])" />
-        public static IResult<T> AddAccessDenied<T>(this Result<T> result, string key, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddAccessDenied<T>(this Result<T> result, string code, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key: key, message: message, 
+            result.Messages?.Add(new MessageModel(code: code, message: message, 
                 messageType: MessageType.AccessDenied, relatedObjects: relatedObjects));
 
             return result;

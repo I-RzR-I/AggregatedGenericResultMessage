@@ -81,37 +81,37 @@ namespace RzR.ResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add error
         /// </summary>
-        /// <param name="key">Error key</param>
+        /// <param name="code">Message code</param>
         /// <param name="error">Error message</param>
         /// <returns></returns>
-        IResult<T> AddError(string key, string error);
+        IResult<T> AddError(string code, string error);
 
         /// <summary>
         ///     Add error
         /// </summary>
-        /// <param name="key">Error key</param>
+        /// <param name="code">Message code</param>
         /// <param name="error">Error message</param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddError(string key, string error, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddError(string code, string error, params RelatedObjectModel[] relatedObjects);
 
 
         /// <summary>
         ///     Add error
         /// </summary>
-        /// <param name="key">Error key</param>
+        /// <param name="code">Message code</param>
         /// <param name="error">Error message</param>
         /// <returns></returns>
-        IResult<T> AddError(string key, MessageDataModel error);
+        IResult<T> AddError(string code, MessageDataModel error);
 
         /// <summary>
         ///     Add error
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="error"></param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddError(string key, MessageDataModel error, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddError(string code, MessageDataModel error, params RelatedObjectModel[] relatedObjects);
 
 
         /// <summary>
@@ -149,37 +149,37 @@ namespace RzR.ResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add error for confirmation result
         /// </summary>
-        /// <param name="key">Error key</param>
+        /// <param name="code">Message code</param>
         /// <param name="error">Error message</param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddErrorConfirm(string key, string error, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddErrorConfirm(string code, string error, params RelatedObjectModel[] relatedObjects);
 
         /// <summary>
         ///     Add error for confirmation result
         /// </summary>
-        /// <param name="key">Error key</param>
+        /// <param name="code">Message code</param>
         /// <param name="error">Error message</param>
         /// <returns></returns>
-        IResult<T> AddErrorConfirm(string key, string error);
+        IResult<T> AddErrorConfirm(string code, string error);
 
 
         /// <summary>
         ///     Add error for confirmation result
         /// </summary>
-        /// <param name="key">Error key</param>
+        /// <param name="code">Message code</param>
         /// <param name="error">Error message</param>
         /// <returns></returns>
-        IResult<T> AddErrorConfirm(string key, MessageDataModel error);
+        IResult<T> AddErrorConfirm(string code, MessageDataModel error);
 
         /// <summary>
         ///     Add error for confirmation result
         /// </summary>
-        /// <param name="key">Error key</param>
+        /// <param name="code">Message code</param>
         /// <param name="error">Error message</param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddErrorConfirm(string key, MessageDataModel error, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddErrorConfirm(string code, MessageDataModel error, params RelatedObjectModel[] relatedObjects);
 
 
         /// <summary>
