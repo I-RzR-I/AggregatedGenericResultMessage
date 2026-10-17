@@ -46,20 +46,16 @@ namespace RzR.ResultMessage.Models
 #endif
         public string[] InDataSourceNames { get; set; }
 
-        ///-------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Initializes a new instance of the <see cref="RelatedObjectModel"/> class.
         /// </summary>
-        /// <remarks>17-Jan-24.</remarks>
-        ///=================================================================================================
         public RelatedObjectModel() { }
 
-        ///-------------------------------------------------------------------------------------------------
-        /// <summary>Initializes a new instance of the <see cref="RelatedObjectModel"/> class.</summary>
-        /// <remarks>17-Jan-24.</remarks>
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="RelatedObjectModel"/> class.
+        /// </summary>
         /// <param name="inCodeName">Name of the in code.</param>
-        /// <param name="inDataSourceNames">(Optional) List of names of the in data sources.</param>
-        ///=================================================================================================
+        /// <param name="inDataSourceNames">List of names of the in data sources.</param>
         public RelatedObjectModel(string inCodeName, params string[] inDataSourceNames)
         {
             InCodeName = inCodeName;
@@ -68,13 +64,10 @@ namespace RzR.ResultMessage.Models
                 InDataSourceNames = inDataSourceNames;
         }
 
-        ///-------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Initializes a new instance of the <see cref="RelatedObjectModel"/> class.
         /// </summary>
-        /// <remarks>17-Jan-24.</remarks>
         /// <param name="inDataSourceNames">List of names of the in data sources.</param>
-        ///=================================================================================================
         public RelatedObjectModel(params string[] inDataSourceNames)
         {
             InCodeName = default;

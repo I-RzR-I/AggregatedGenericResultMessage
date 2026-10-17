@@ -30,10 +30,12 @@ namespace RzR.ResultMessage.Extensions.Common
     internal static class NullExtensions
     {
         /// <summary>
-        ///     Is null
+        ///     Is null.
         /// </summary>
-        /// <param name="obj">Source data</param>
-        /// <returns></returns>
+        /// <param name="obj">Source data.</param>
+        /// <returns>
+        ///     True if null, false if not.
+        /// </returns>
         [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR",
             "DomainCommonExtensions.CommonExtensions.NullExtensions.IsNull", "1.0")]
         internal static bool IsNull(this object obj) => obj == null;

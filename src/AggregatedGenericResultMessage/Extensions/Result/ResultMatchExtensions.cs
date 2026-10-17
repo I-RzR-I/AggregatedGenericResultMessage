@@ -25,14 +25,11 @@ using System.Threading.Tasks;
 
 namespace RzR.ResultMessage.Extensions.Result
 {
-    /// -------------------------------------------------------------------------------------------------
     /// <summary>
     ///     Fold/branch combinators for result pipelines.
     /// </summary>
-    /// =================================================================================================
     public static class ResultMatchExtensions
     {
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Folds an <see cref="IResult" /> into a <typeparamref name="TOut" /> value.
         /// </summary>
@@ -50,7 +47,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A TOut.
         /// </returns>
-        /// =================================================================================================
         public static TOut Match<TOut>(
             this IResult result,
             Func<IResult, TOut> onSuccess,
@@ -66,7 +62,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result.IsSuccess ? onSuccess(result) : onFailure(result);
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Folds an <see cref="IResult" /> into a <typeparamref name="TOut" /> value using
         ///     parameterless selectors.
@@ -85,7 +80,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A TOut.
         /// </returns>
-        /// =================================================================================================
         public static TOut Match<TOut>(
             this IResult result,
             Func<TOut> onSuccess,
@@ -101,7 +95,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result.IsSuccess ? onSuccess() : onFailure();
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Runs one of two side-effecting branches depending on <see cref="IResult.IsSuccess" />.
         ///     Prefer this over <c>ActionOn</c> when you do not need the source result back.
@@ -119,7 +112,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     The same <paramref name="result" /> instance for chaining.
         /// </returns>
-        /// =================================================================================================
         public static IResult Match(
             this IResult result,
             Action<IResult> onSuccess,
@@ -140,7 +132,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Asynchronous fold of a <see cref="Result{T}" />.
         /// </summary>
@@ -159,7 +150,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A TOut.
         /// </returns>
-        /// =================================================================================================
         public static async Task<TOut> MatchAsync<T, TOut>(
             this Result<T> result,
             Func<T, Task<TOut>> onSuccess,
@@ -177,7 +167,6 @@ namespace RzR.ResultMessage.Extensions.Result
                 : await onFailure(result).ConfigureAwait(false);
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Awaits <paramref name="resultTask" />, then folds synchronously.
         /// </summary>
@@ -187,16 +176,11 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <typeparam name="T">Generic type parameter.</typeparam>
         /// <typeparam name="TOut">Type of the out.</typeparam>
         /// <param name="resultTask">The resultTask to act on.</param>
-        /// <param name="onSuccess">
-        ///     Selector invoked when the awaited result is successful.
-        /// </param>
-        /// <param name="onFailure">
-        ///     Selector invoked when the awaited result is a failure.
-        /// </param>
+        /// <param name="onSuccess">Selector invoked when the awaited result is successful.</param>
+        /// <param name="onFailure">Selector invoked when the awaited result is a failure.</param>
         /// <returns>
         ///     A TOut.
         /// </returns>
-        /// =================================================================================================
         public static async Task<TOut> MatchAsync<T, TOut>(
             this Task<Result<T>> resultTask,
             Func<T, TOut> onSuccess,
@@ -214,7 +198,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result.Match(onSuccess, onFailure);
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Awaits <paramref name="resultTask" />, then folds asynchronously.
         /// </summary>
@@ -224,16 +207,11 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <typeparam name="T">Generic type parameter.</typeparam>
         /// <typeparam name="TOut">Type of the out.</typeparam>
         /// <param name="resultTask">The resultTask to act on.</param>
-        /// <param name="onSuccess">
-        ///     Selector invoked when the awaited result is successful.
-        /// </param>
-        /// <param name="onFailure">
-        ///     Selector invoked when the awaited result is a failure.
-        /// </param>
+        /// <param name="onSuccess">Selector invoked when the awaited result is successful.</param>
+        /// <param name="onFailure">Selector invoked when the awaited result is a failure.</param>
         /// <returns>
         ///     A TOut.
         /// </returns>
-        /// =================================================================================================
         public static async Task<TOut> MatchAsync<T, TOut>(
             this Task<Result<T>> resultTask,
             Func<T, Task<TOut>> onSuccess,
@@ -251,7 +229,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return await result.MatchAsync(onSuccess, onFailure).ConfigureAwait(false);
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Asynchronous fold of an <see cref="IResult" />.
         /// </summary>
@@ -269,7 +246,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A TOut.
         /// </returns>
-        /// =================================================================================================
         public static async Task<TOut> MatchAsync<TOut>(
             this IResult result,
             Func<IResult, Task<TOut>> onSuccess,

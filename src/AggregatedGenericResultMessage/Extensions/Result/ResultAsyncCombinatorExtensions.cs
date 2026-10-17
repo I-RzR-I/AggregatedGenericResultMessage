@@ -24,23 +24,19 @@ using System.Threading.Tasks;
 
 namespace RzR.ResultMessage.Extensions.Result
 {
-    /// -------------------------------------------------------------------------------------------------
     /// <summary>Async monadic combinators for <see cref="Result{T}" /> pipelines.</summary>
+    /// <summary>
+    ///     The <b>source</b> may be a <see cref="Task{TResult}" /> of <see cref="Result{T}" />.
+    /// </summary>
+    /// <summary>
+    ///     The <b>selector / binder / action</b> may be async (return a <see cref="Task" />).
+    /// </summary>
     /// <remarks>
-    /// <list type="bullet">
-    ///         <item>
-    ///             <description>The <b>source</b> may be a <see cref="Task{TResult}" /> of <see cref="Result{T}" />.</description>
-    ///         </item>
-    ///         <item>
-    ///             <description>The <b>selector / binder / action</b> may be async (return a <see cref="Task" />).</description>
-    ///         </item>
-    ///     </list>
-    ///     All awaits use <c>ConfigureAwait(false)</c> so these helpers are safe in library code.
+    ///     &lt;list type="bullet"&gt;
+    ///             &lt;item&gt;
     /// </remarks>
-    /// =================================================================================================
     public static class ResultAsyncCombinatorExtensions
     {
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Asynchronously projects <see cref="Result{T}.Response" /> through <paramref name="selector" />
         ///     when the result is successful; otherwise propagates the failure unchanged.
@@ -55,7 +51,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A new <see cref="Result{TOut}" />.
         /// </returns>
-        /// =================================================================================================
         public static async Task<Result<TOut>> MapAsync<T, TOut>(
             this Result<T> result,
             Func<T, Task<TOut>> selector)
@@ -73,7 +68,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result.Map(_ => projected);
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Awaits <paramref name="resultTask" />, then synchronously applies <paramref name="selector" />
         ///     via <see cref="Result{T}.Map{TOut}(Func{T,TOut})" />.
@@ -88,7 +82,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A new <see cref="Result{TOut}" />.
         /// </returns>
-        /// =================================================================================================
         public static async Task<Result<TOut>> MapAsync<T, TOut>(
             this Task<Result<T>> resultTask,
             Func<T, TOut> selector)
@@ -103,7 +96,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result.Map(selector);
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Awaits <paramref name="resultTask" />, then asynchronously projects via <paramref name="selector" />
         ///     .
@@ -118,7 +110,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A new <see cref="Result{TOut}" />.
         /// </returns>
-        /// =================================================================================================
         public static async Task<Result<TOut>> MapAsync<T, TOut>(
             this Task<Result<T>> resultTask,
             Func<T, Task<TOut>> selector)
@@ -133,7 +124,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return await result.MapAsync(selector).ConfigureAwait(false);
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Asynchronously flat-maps <see cref="Result{T}.Response" /> through <paramref name="binder" />
         ///     when the result is successful; otherwise propagates the failure unchanged.
@@ -151,7 +141,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A Result&lt;TOut&gt;
         /// </returns>
-        /// =================================================================================================
         public static async Task<Result<TOut>> BindAsync<T, TOut>(
             this Result<T> result,
             Func<T, Task<Result<TOut>>> binder)
@@ -174,7 +163,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return bound;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Awaits <paramref name="resultTask" />, then synchronously binds via <paramref name="binder" />
         ///     .
@@ -189,7 +177,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A Result&lt;TOut&gt;
         /// </returns>
-        /// =================================================================================================
         public static async Task<Result<TOut>> BindAsync<T, TOut>(
             this Task<Result<T>> resultTask,
             Func<T, Result<TOut>> binder)
@@ -204,7 +191,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result.Bind(binder);
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Awaits <paramref name="resultTask" />, then asynchronously binds via <paramref name="binder" />
         ///     .
@@ -219,7 +205,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A Result&lt;TOut&gt;
         /// </returns>
-        /// =================================================================================================
         public static async Task<Result<TOut>> BindAsync<T, TOut>(
             this Task<Result<T>> resultTask,
             Func<T, Task<Result<TOut>>> binder)
@@ -234,7 +219,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return await result.BindAsync(binder).ConfigureAwait(false);
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Awaits <paramref name="resultTask" />, then synchronously applies <see cref="Result{T}.Tap(Action{T})" />
         ///     .
@@ -248,7 +232,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A Result&lt;T&gt;
         /// </returns>
-        /// =================================================================================================
         public static async Task<Result<T>> Tap<T>(
             this Task<Result<T>> resultTask,
             Action<T> action)
@@ -263,7 +246,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result.Tap(action);
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Asynchronously invokes <paramref name="action" /> on <see cref="Result{T}.Response" />
         ///     when the result is successful, then returns the same result.
@@ -277,7 +259,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A Result&lt;T&gt;
         /// </returns>
-        /// =================================================================================================
         public static async Task<Result<T>> TapAsync<T>(
             this Result<T> result,
             Func<T, Task> action)
@@ -293,7 +274,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Awaits <paramref name="resultTask" />, then runs the synchronous <paramref name="action" />
         ///     on success.
@@ -307,7 +287,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A Result&lt;T&gt;
         /// </returns>
-        /// =================================================================================================
         public static async Task<Result<T>> TapAsync<T>(
             this Task<Result<T>> resultTask,
             Action<T> action)
@@ -322,7 +301,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result.Tap(action);
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Awaits <paramref name="resultTask" />, then runs the async <paramref name="action" /> on
         ///     success.
@@ -336,7 +314,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A Result&lt;T&gt;
         /// </returns>
-        /// =================================================================================================
         public static async Task<Result<T>> TapAsync<T>(
             this Task<Result<T>> resultTask,
             Func<T, Task> action)

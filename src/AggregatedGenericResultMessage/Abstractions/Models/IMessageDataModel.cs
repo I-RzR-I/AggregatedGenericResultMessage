@@ -24,29 +24,34 @@ using System.Xml.Serialization;
 
 namespace RzR.ResultMessage.Abstractions.Models
 {
-    /// -------------------------------------------------------------------------------------------------
-    /// <summary>Interface for message data model.</summary>
-    /// <remarks>RzR, 28-Nov-23.</remarks>
-    /// =================================================================================================
+    /// <summary>
+    ///     Interface for message data model.
+    /// </summary>
     [XmlInclude(typeof(MessageDataModel))]
     public interface IMessageDataModel
     {
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>Gets or sets the message. The main result message</summary>
-        /// <value>The message.</value>
-        /// =================================================================================================
+        /// <summary>
+        ///     Gets or sets the message. The main result message.
+        /// </summary>
+        /// <value>
+        ///     The message.
+        /// </value>
         public string Info { get; set; }
 
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>Gets or sets the message details.</summary>
-        /// <value>The details.</value>
-        /// =================================================================================================
+        /// <summary>
+        ///     Gets or sets the message details.
+        /// </summary>
+        /// <value>
+        ///     The details.
+        /// </value>
         public List<string> Details { get; set; }
 
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>Convert this object into a string representation.</summary>
-        /// <returns>A string that represents this object.</returns>
-        /// =================================================================================================
+        /// <summary>
+        ///     Convert this object into a string representation.
+        /// </summary>
+        /// <returns>
+        ///     A string that represents this object.
+        /// </returns>
         string ToString();
     }
 }

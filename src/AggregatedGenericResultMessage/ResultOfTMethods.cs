@@ -172,6 +172,5 @@ namespace RzR.ResultMessage
         /// <inheritdoc cref="ResultNotFoundHelper.NotFound{T}(string, MessageDataModel, RelatedObjectModel[])"/>
         public static Result<T> NotFound(string code, MessageDataModel error, params RelatedObjectModel[] relatedObjects)
             => ResultNotFoundHelper.NotFound<T>(code, error, relatedObjects);
-
     }
 }

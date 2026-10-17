@@ -24,10 +24,9 @@ using System.Text.Json.Serialization;
 
 namespace RzR.ResultMessage.Abstractions.Models
 {
-    ///-------------------------------------------------------------------------------------------------
-    /// <summary>Interface for related object model.</summary>
-    /// <remarks>17-Jan-24.</remarks>
-    ///=================================================================================================
+    /// <summary>
+    ///     Interface for related object model.
+    /// </summary>
     [XmlInclude(typeof(RelatedObjectModel))]
     public interface IRelatedObjectModel
     {
@@ -49,10 +48,12 @@ namespace RzR.ResultMessage.Abstractions.Models
 #endif
         public string[] InDataSourceNames { get; set; }
 
-        ///-------------------------------------------------------------------------------------------------
-        /// <summary>Returns a string that represents the current object.</summary>
-        /// <returns>A string that represents this object.</returns>
-        ///=================================================================================================
+        /// <summary>
+        ///     Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        ///     A string that represents this object.
+        /// </returns>
         string ToString();
     }
 }

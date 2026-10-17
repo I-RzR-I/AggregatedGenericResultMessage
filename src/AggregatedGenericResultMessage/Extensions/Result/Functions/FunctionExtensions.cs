@@ -26,21 +26,21 @@ using System.Collections.Generic;
 
 namespace RzR.ResultMessage.Extensions.Result.Functions
 {
-    /// -------------------------------------------------------------------------------------------------
-    /// <summary>A function extensions.</summary>
-    /// <remarks></remarks>
-    /// =================================================================================================
+    /// <summary>
+    ///     A function extensions.
+    /// </summary>
     public static class FunctionExtensions
     {
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>Function on success.</summary>
-        /// <remarks></remarks>
+        /// <summary>
+        ///     Function on success.
+        /// </summary>
         /// <typeparam name="TResult">Type of result.</typeparam>
         /// <param name="result">Result.</param>
         /// <param name="ignoreError">(Optional)</param>
         /// <param name="onSuccess">Success function.</param>
-        /// <returns>A TResult.</returns>
-        /// =================================================================================================
+        /// <returns>
+        ///     A TResult.
+        /// </returns>
         public static TResult FunctionOnSuccess<TResult>(
             this TResult result,
             bool ignoreError = true, params Func<TResult>[] onSuccess)
@@ -59,15 +59,16 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>Function on failure.</summary>
-        /// <remarks></remarks>
+        /// <summary>
+        ///     Function on failure.
+        /// </summary>
         /// <typeparam name="TResult">Type of result.</typeparam>
         /// <param name="result">Result.</param>
         /// <param name="ignoreError">(Optional)</param>
         /// <param name="onFailure">Failure function.</param>
-        /// <returns>A TResult.</returns>
-        /// =================================================================================================
+        /// <returns>
+        ///     A TResult.
+        /// </returns>
         public static TResult FunctionOnFailure<TResult>(
             this TResult result,
             bool ignoreError = true, params Func<TResult>[] onFailure) where TResult : IResult
@@ -88,16 +89,17 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>Function on success or failure.</summary>
-        /// <remarks></remarks>
+        /// <summary>
+        ///     Function on success or failure.
+        /// </summary>
         /// <typeparam name="TResult">Type of result.</typeparam>
         /// <param name="result">Result.</param>
         /// <param name="onSuccess">Function on success.</param>
         /// <param name="onFailure">Function on failure.</param>
         /// <param name="ignoreError">(Optional)</param>
-        /// <returns>A TResult.</returns>
-        /// =================================================================================================
+        /// <returns>
+        ///     A TResult.
+        /// </returns>
         public static TResult FunctionOn<TResult>(
             this TResult result, Func<TResult> onSuccess,
             Func<TResult> onFailure, bool ignoreError = true) where TResult : IResult
@@ -124,16 +126,17 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>Function on success or failure.</summary>
-        /// <remarks></remarks>
+        /// <summary>
+        ///     Function on success or failure.
+        /// </summary>
         /// <typeparam name="TResult">Type of result.</typeparam>
         /// <param name="result">Result.</param>
         /// <param name="onSuccess">Function on success.</param>
         /// <param name="onFailure">Function on failure.</param>
         /// <param name="ignoreError">(Optional)</param>
-        /// <returns>A TResult.</returns>
-        /// =================================================================================================
+        /// <returns>
+        ///     A TResult.
+        /// </returns>
         public static TResult FunctionOn<TResult>(
             this TResult result, Func<TResult> onSuccess,
             IEnumerable<Func<TResult>> onFailure, bool ignoreError = true) where TResult : IResult
@@ -163,16 +166,17 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>Function on success or failure.</summary>
-        /// <remarks></remarks>
+        /// <summary>
+        ///     Function on success or failure.
+        /// </summary>
         /// <typeparam name="TResult">Type of result.</typeparam>
         /// <param name="result">Result.</param>
         /// <param name="onSuccess">Function on success.</param>
         /// <param name="onFailure">Function on failure.</param>
         /// <param name="ignoreError">(Optional)</param>
-        /// <returns>A TResult.</returns>
-        /// =================================================================================================
+        /// <returns>
+        ///     A TResult.
+        /// </returns>
         public static TResult FunctionOn<TResult>(
             this TResult result, IEnumerable<Func<TResult>> onSuccess,
             Func<TResult> onFailure, bool ignoreError = true) where TResult : IResult
@@ -202,16 +206,17 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>Function on success or failure.</summary>
-        /// <remarks></remarks>
+        /// <summary>
+        ///     Function on success or failure.
+        /// </summary>
         /// <typeparam name="TResult">Type of result.</typeparam>
         /// <param name="result">Result.</param>
         /// <param name="onSuccess">Function on success.</param>
         /// <param name="onFailure">Function on failure.</param>
         /// <param name="ignoreError">(Optional)</param>
-        /// <returns>A TResult.</returns>
-        /// =================================================================================================
+        /// <returns>
+        ///     A TResult.
+        /// </returns>
         public static TResult FunctionOn<TResult>(
             this TResult result, IEnumerable<Func<TResult>> onSuccess,
             IEnumerable<Func<TResult>> onFailure, bool ignoreError = true) where TResult : IResult
@@ -244,15 +249,16 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>Execute function.</summary>
-        /// <remarks></remarks>
+        /// <summary>
+        ///     Execute function.
+        /// </summary>
         /// <typeparam name="TResult">Type result.</typeparam>
         /// <param name="result">Result.</param>
         /// <param name="ignoreError">(Optional)</param>
         /// <param name="functions">Functions to execute.</param>
-        /// <returns>A TResult.</returns>
-        /// =================================================================================================
+        /// <returns>
+        ///     A TResult.
+        /// </returns>
         public static TResult ExecuteFunction<TResult>(
             this TResult result,
             bool ignoreError = true, params Func<TResult>[] functions) where TResult : IResult
@@ -279,6 +285,5 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
                 return result;
             }
         }
-
     }
 }
