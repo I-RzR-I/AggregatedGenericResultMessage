@@ -145,13 +145,13 @@ return Result.Failure()
                 .WithCodeMessage("Code", "Message")
                 .WithError("Error message x01")
                 .WithError("Error message", "Error code")
-                .WithError(new ResultError("code", "message"))
+                .WithError(new ResultErrorModel("code", "message"))
                 .WithError(new Exception("Exception"))
-                .WithErrors(new List<ResultError>()
+                .WithErrors(new List<ResultErrorModel>()
                 {
-                    new ResultError("Error code x1", "Error message x1"),
-                    new ResultError("Error code x2", "Error message x2"),
-                    new ResultError(new Exception("Exception message"))
+                    new ResultErrorModel("Error code x1", "Error message x1"),
+                    new ResultErrorModel("Error code x2", "Error message x2"),
+                    new ResultErrorModel(new Exception("Exception message"))
                 });
 ```
 
@@ -282,7 +282,7 @@ Two complementary modes for input/business-rule validation, both fluent on `Resu
 
 | Method | Behavior |
 |---|---|
-| `Validate(predicate, error)` | **Always** evaluates the predicate. On `false` it appends an error and flips `IsSuccess` to `false`, chain calls to **accumulate every violation** in one pass. Overloads: `(predicate, key, error)`, `(predicate, MessageDataModel)`. |
+| `Validate(predicate, error)` | **Always** evaluates the predicate. On `false` it appends an error and flips `IsSuccess` to `false`, chain calls to **accumulate every violation** in one pass. Overloads: `(predicate, code, error)`, `(predicate, MessageDataModel)`. |
 | `Ensure(predicate, error)`   | **Short-circuits**: skips the predicate once `IsSuccess` is already `false`. |
 
 Accumulating example:

@@ -1,3 +1,176 @@
+# Migration guide — 3.0.x -> next major version (4.0.0): `Key` to `Code`
+
+The message identifier is renamed from `Key` to `Code` in the object model, in method parameters and in every serialized payload. It holds the same thing as before: an error code, a localization key, or a culture id or name such as `en-US`.
+
+> **TL;DR**
+> - Use `.Code` instead of `.Key` on `MessageModel`, `IMessageModel`, `ResultErrorModel` and `IResultErrorModel`. `Key` stays as an `[Obsolete]` alias (`CS0618`).
+> - Named `key:` arguments become `code:` and fail with `CS1739` until renamed. Positional calls and already-compiled callers keep working.
+> - The wire format changes: JSON writes `"code"` / `"Code"`, XML writes `<Code>`. Old payloads still deserialize, but `Code` is `null`.
+> - If you implement `IMessageModel` or `IResultErrorModel` yourself, add `Code` and recompile.
+> - While old and new versions run side by side, codes can arrive as `null`. Do not use a code as the only security or flow gate.
+
+---
+
+## 1. `Key` to `Code` on the message models
+
+`MessageModel`, `IMessageModel`, `ResultErrorModel` and `IResultErrorModel` expose `Code` instead of `Key`.
+
+```csharp
+// Before
+string code = result.Messages.First().Key;
+if (error.Key == "E404") { /* ... */ }
+
+// After
+string code = result.Messages.First().Code;
+if (error.Code == "E404") { /* ... */ }
+```
+
+`Key` stays as an alias, so existing code still compiles:
+
+- It forwards to `Code`. On `MessageModel` and `IMessageModel` you can read and write it. On `ResultErrorModel` and `IResultErrorModel` it is read-only.
+- It carries `[Obsolete("Use Code instead. Key will be removed in a future major version.")]`, so every use raises `CS0618`. Builds with `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` fail until you migrate. To postpone, suppress the warning locally with `#pragma warning disable CS0618`.
+- `[EditorBrowsable(EditorBrowsableState.Never)]` hides it from IntelliSense when you reference the package or the assembly. Project references still list it.
+- No serializer writes it: XmlSerializer, DataContractSerializer, Newtonsoft.Json, and System.Text.Json on the netstandard builds. The exception is the .NET Framework builds, see [.NET Framework](#net-framework-net45-to-net48).
+- Reflection-based tools (AutoMapper configuration validation, exporters, property scanners) see both `Code` and `Key` as public properties. Exclude `Key` in their configuration.
+
+## 2. Named argument `key:` to `code:`
+
+The parameter that carries the identifier is renamed from `key` to `code` on:
+
+- `AddError`, `AddErrorConfirm`, `AddInfo`, `AddInfoConfirm`, `AddWarning`, `AddWarningConfirm`, `AddNotFound`, `AddAccessDenied`, `AddMessage` and `Validate`
+- the `MessageModel` and `ResultErrorModel` constructors
+
+```csharp
+// Before
+result.AddError(key: "E001", error: "Order not found");
+result.AddMessage(key: "E002", message: "Invalid state", type: MessageType.Error);
+result.Validate(o => o.Total > 0, key: "TOTAL", error: "total > 0");
+var m = new MessageModel(key: "E003", message: "Timeout");
+
+// After
+result.AddError(code: "E001", error: "Order not found");
+result.AddMessage(code: "E002", message: "Invalid state", type: MessageType.Error);
+result.Validate(o => o.Total > 0, code: "TOTAL", error: "total > 0");
+var m = new MessageModel(code: "E003", message: "Timeout");
+```
+
+Only calls that name the argument `key:` break. They fail with `CS1739: The best overload for '...' does not have a parameter named 'key'`. It is a compile error and cannot be suppressed, so rename the argument.
+
+Not affected:
+
+- Positional calls, for example `result.AddError("E001", "Order not found")`.
+- Callers already compiled against 3.0.x. Parameter names are not part of the binary call signature.
+
+Custom implementations of the interfaces do break, see [section 4](#4-custom-implementations-of-imessagemodel--iresulterrormodel).
+
+## 3. Wire format: `key` / `<Key>` to `code` / `<Code>`
+
+Every serializer now writes `Code` and leaves `Key` out. The exception is .NET Framework builds, see [below](#net-framework-net45-to-net48).
+
+| Serializer                                       | Type                                    | Before       | After         |
+| ------------------------------------------------ | --------------------------------------- | ------------ | ------------- |
+| System.Text.Json                                 | `MessageModel` / `IMessageModel`        | `"key"`      | `"code"`      |
+| System.Text.Json                                 | `ResultErrorModel` (no name attribute)  | `"Key"`      | `"Code"` (default options) |
+| Newtonsoft.Json                                  | `MessageModel`, `ResultErrorModel`      | `"Key"`      | `"Code"`      |
+| XmlSerializer                                    | `MessageModel`                          | `<Key>`      | `<Code>`      |
+| DataContractSerializer / SOAP (`ToSoapResult`)   | `MessageModel`                          | `<Key>`      | `<Code>`      |
+
+```text
+Before (System.Text.Json):  { "key": "E001", ... }
+After:                      { "code": "E001", ... }
+```
+
+```xml
+<!-- Before (XmlSerializer) -->
+<MessageModel><Key>E001</Key>...</MessageModel>
+
+<!-- After -->
+<MessageModel><Code>E001</Code>...</MessageModel>
+```
+
+> Old payloads fail silently: a payload that still carries `"key"` or `<Key>` deserializes without error, but `Code` is `null`.
+
+If you have data or consumers in the old format:
+
+- Stored payloads (databases, caches, queues, files): re-serialize them with the new version, or rename the field before the new version reads them (`key` to `code`, `<Key>` to `<Code>`).
+- Producers or consumers you do not control: map `key` to `code` at the boundary. An API gateway, a custom converter, or a DTO that you translate into `MessageModel` all work.
+- Tests and contracts that assert on the raw payload (JSON schemas, OpenAPI specs, WSDL consumers, snapshot tests): update the property or element name.
+- Serializers generated ahead of time against 3.0.x: regenerate them. This covers System.Text.Json source generation (`JsonSerializerContext`) and sgen `*.XmlSerializers.dll`.
+
+### .NET Framework (net45 to net48)
+
+The library references System.Text.Json only for its netstandard targets, so the .NET Framework builds carry no System.Text.Json attributes. That includes `[JsonPropertyName("code")]` and `[JsonIgnore]`. If a .NET Framework app serializes the models with the System.Text.Json NuGet package or with `JavaScriptSerializer` (MVC 5 `Json()`, for example), both `Code` and `Key` are written, in PascalCase. `MessageModel` also binds `Key` on input. `ResultErrorModel.Key` is get-only, so it is never bound.
+
+To avoid this, serialize with Newtonsoft.Json, DataContractSerializer or XmlSerializer, which honor the ignore attributes. Otherwise drop or ignore `Key` at the boundary.
+
+## 4. Custom implementations of `IMessageModel` / `IResultErrorModel`
+
+Both interfaces gain a `Code` member. If you implement them yourself, add it, otherwise the compiler reports `CS0535`.
+
+A type compiled against 3.0.x that implements either interface throws `TypeLoadException` (missing `get_Code`) when it is loaded against the new version. There is no binary-compatible way around this, so recompile it.
+
+```csharp
+// Before
+public sealed class MyMessage : IMessageModel
+{
+    public string Key { get; set; }
+    // ...
+}
+
+// After
+public sealed class MyMessage : IMessageModel
+{
+#if !NETFRAMEWORK
+    [JsonPropertyName("code")]
+#endif
+    [XmlElement("Code")]
+    public string Code { get; set; }
+
+    // Keep while the interface still declares the alias. Every attribute is required.
+    [Obsolete("Use Code instead. Key will be removed in a future major version.")]
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    [XmlIgnore]
+    [IgnoreDataMember]
+#if !NETFRAMEWORK
+    [JsonIgnore]
+#endif
+    public string Key { get => Code; set => Code = value; }
+    // ...
+}
+```
+
+Copy the whole attribute stack. Interface attributes are not inherited by implementing classes, so a bare `Key` on your class, serialized as that class, is a second serializable and bindable name for the same value. (Through `Result<T>.Messages`, whose declared type is the interface, the interface's `[JsonIgnore]` does apply.) `[IgnoreDataMember]` is the only one of these attributes that Newtonsoft.Json honors.
+
+The sample needs `System`, `System.ComponentModel`, `System.Runtime.Serialization`, `System.Xml.Serialization` and, outside .NET Framework, `System.Text.Json.Serialization`. If your .NET Framework project references System.Text.Json, drop the `#if` so `[JsonIgnore]` applies there too. Only SDK-style projects define `NETFRAMEWORK`. In a legacy (non-SDK) .NET Framework csproj the symbol is not defined, so remove the `#if` blocks there or reference System.Text.Json.
+
+`IResultErrorModel` needs a read-only `string Code { get; }`. While the alias is on the interface, also keep `string Key { get; }` with the same ignore attributes.
+
+## 5. Mixed-version rollout
+
+While services on 3.0.x and on the new version exchange payloads, the code is lost in both directions:
+
+- A new reader gets `"key"` / `<Key>` from an old writer, so `Code == null`.
+- An old reader gets `"code"` / `<Code>` from a new writer, so `Key == null`. SOAP clients that validate against the schema (JAX-WS, for example) may fault on the unexpected `<Code>` element instead.
+
+Anything that matches on a code stops working: `result.HasErrorCode("AUTH_DENIED")`, a `switch` on `Code`, a lookup of localized text by code. `HasErrorCode` compares with `Code.Equals(...)`, so it throws `NullReferenceException` on the first message with a null code. It returns `false` only when no message matches and none has a null code. That null handling is unchanged in this release.
+
+Null-safe comparisons fail open instead. `IsSuccess` and `MessageType` are not affected and keep working across versions. Gate on them, and treat the code as extra detail:
+
+```csharp
+// Fails open while old writers are still around: the code is null, the
+// comparison is false, nothing is denied. HasErrorCode would throw here.
+if (!result.Messages.Any(m => m.Code == "AUTH_DENIED"))
+    Proceed();
+
+// Safer
+if (result.IsSuccess)
+    Proceed();
+```
+
+Upgrade every reader and writer of a payload together. If that is not possible, map `key` to `code` at the boundary until every party runs the new version.
+
+---
+
 # Migration guide — next major version (1.4.1.* -> 2.0.0.*)
 
 This guide collects every source- or behavior-breaking change introduced in the
@@ -219,7 +392,7 @@ var dto = await _repo.GetOrderByIdAsync(id) // Task<Result<Order>>
 
 | Method                          | Behavior                                                                                            |
 | ------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `Validate(predicate, error)`    | Always evaluates; chain to **accumulate** every violation. Overloads for `(key, error)` and `MessageDataModel`. |
+| `Validate(predicate, error)`    | Always evaluates; chain to **accumulate** every violation. Overloads for `(code, error)` and `MessageDataModel`. |
 | `Ensure(predicate, error)`      | **Short-circuits** once `IsSuccess == false`, safe for guard chains where later predicates would NRE. |
 | `ValidateAsync(...)`            | Async predicate, on both `Result<T>` and `Task<Result<T>>`.                                          |
 
