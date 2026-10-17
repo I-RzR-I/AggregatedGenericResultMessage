@@ -1,21 +1,3 @@
-// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2026-04-22 00:04
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2026-04-22 00:23
-// ***********************************************************************
-//  <copyright file="MatchExtensionsTests.cs" company="RzR SOFT & TECH">
-//   Copyright © RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-#region U S A G E S
-
 using System;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,15 +5,13 @@ using RzR.ResultMessage;
 using RzR.ResultMessage.Abstractions;
 using RzR.ResultMessage.Extensions.Result;
 
-#endregion
-
 namespace InfoResultTests
 {
     [TestClass]
     public class MatchExtensionsTests
     {
         [TestMethod]
-        public void Match_OnIResult_Success_ReturnsOnSuccessValue()
+        public void Match_OnIResult_Success_ReturnsOnSuccessValue_Test()
         {
             IResult result = Result.Success();
 
@@ -41,7 +21,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Match_OnIResult_Failure_ReturnsOnFailureValue()
+        public void Match_OnIResult_Failure_ReturnsOnFailureValue_Test()
         {
             IResult result = Result.Failure("boom");
 
@@ -51,7 +31,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Match_OnIResult_Parameterless_Success_ReturnsOnSuccess()
+        public void Match_OnIResult_Parameterless_Success_ReturnsOnSuccess_Test()
         {
             IResult result = Result.Success();
 
@@ -61,7 +41,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Match_OnIResult_ActionOverload_ReturnsSameInstanceAndRunsCorrectBranch()
+        public void Match_OnIResult_ActionOverload_ReturnsSameInstanceAndRunsCorrectBranch_Test()
         {
             IResult result = Result.Success();
             var ranSuccess = false;
@@ -78,7 +58,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Match_OnIResult_NullArgs_Throw()
+        public void Match_OnIResult_NullArgs_Throw_Test()
         {
             IResult result = Result.Success();
 
@@ -88,7 +68,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task MatchAsync_OnResultOfT_Success_InvokesOnSuccessAsync()
+        public async Task MatchAsync_OnResultOfT_Success_InvokesOnSuccessAsync_Test()
         {
             var result = Result<int>.Success(9);
 
@@ -108,7 +88,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task MatchAsync_OnResultOfT_Failure_InvokesOnFailureAsync()
+        public async Task MatchAsync_OnResultOfT_Failure_InvokesOnFailureAsync_Test()
         {
             var result = Result<int>.Failure("bad");
 
@@ -128,7 +108,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task MatchAsync_OnTask_SyncSelectors_Fold()
+        public async Task MatchAsync_OnTask_SyncSelectors_Fold_Test()
         {
             var source = Task.FromResult(Result<int>.Success(4));
 
@@ -138,7 +118,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task MatchAsync_OnTask_AsyncSelectors_Fold_OnFailure()
+        public async Task MatchAsync_OnTask_AsyncSelectors_Fold_OnFailure_Test()
         {
             var source = Task.FromResult(Result<int>.Failure("x"));
 
@@ -158,7 +138,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task MatchAsync_OnIResult_SelectsCorrectBranch()
+        public async Task MatchAsync_OnIResult_SelectsCorrectBranch_Test()
         {
             IResult success = Result.Success();
             IResult failure = Result.Failure("e");
@@ -191,7 +171,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task MatchAsync_NullArgs_Throw()
+        public async Task MatchAsync_NullArgs_Throw_Test()
         {
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(() =>
                 ((Task<Result<int>>)null).MatchAsync(x => x, _ => 0));

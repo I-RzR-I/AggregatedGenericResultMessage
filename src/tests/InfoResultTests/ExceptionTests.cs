@@ -1,22 +1,4 @@
-﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2022-07-02 14:11
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2022-07-10 12:16
-// ***********************************************************************
-//  <copyright file="WarnTests.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-#region U S A G E S
-
-using System;
+﻿using System;
 using System.Linq;
 using InfoResultTests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -25,15 +7,13 @@ using RzR.ResultMessage.Enums;
 using RzR.ResultMessage.Extensions.Result.Messages;
 using RzR.ResultMessage.Models;
 
-#endregion
-
 namespace InfoResultTests
 {
     [TestClass]
     public class ExceptionTests
     {
         [TestMethod]
-        public void ExceptionReturnTest()
+        public void ExceptionReturn_Test()
         {
             Result result = new Exception("test message");
 
@@ -49,7 +29,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void ExceptionReturnOfTypeTest()
+        public void ExceptionReturnOfType_Test()
         {
             Result<bool> result = new Exception("test message");
 
@@ -65,7 +45,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void ExceptionReturnResultTest()
+        public void ExceptionReturnResult_Test()
         {
             var result = BookService.Instance.GetBookItemException();
 
@@ -81,7 +61,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void ResultAddExceptionTest()
+        public void ResultAddException_Test()
         {
             var result = new Result();
             Assert.IsFalse(result.IsSuccess);
@@ -115,7 +95,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void ExceptionImplicit_NullException_ThrowsArgumentNullException()
+        public void ExceptionImplicit_NullException_ThrowsArgumentNullException_Test()
         {
             Assert.ThrowsException<ArgumentNullException>(() =>
             {

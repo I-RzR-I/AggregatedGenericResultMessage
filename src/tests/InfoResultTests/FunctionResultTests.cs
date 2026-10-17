@@ -1,20 +1,4 @@
-﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2024-01-31 21:08
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2024-01-31 21:08
-// ***********************************************************************
-//  <copyright file="FunctionResultTests.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RzR.ResultMessage;
 using RzR.ResultMessage.Abstractions;
@@ -28,10 +12,9 @@ namespace InfoResultTests
         [TestMethod]
         [DataRow(false, true)]
         [DataRow(true, true)]
-        public void ExecuteFunctionTest_1_Success(bool ignoreError, bool exceptedResult)
+        public void ExecuteFunctionTest_1_Success_Test(bool ignoreError, bool exceptedResult)
         {
             var result = new Result() { IsSuccess = true }
-                //.ExecuteFunction(() => { return FuncTest();});
                 .ExecuteFunction(ignoreError, FuncTestSuccess);
 
             Assert.AreEqual(exceptedResult, result.IsSuccess);
@@ -40,10 +23,9 @@ namespace InfoResultTests
         [TestMethod]
         [DataRow(false, false)]
         [DataRow(true, true)]
-        public void ExecuteFunctionTest_1_Failure(bool ignoreError, bool exceptedResult)
+        public void ExecuteFunctionTest_1_Failure_Test(bool ignoreError, bool exceptedResult)
         {
             var result = new Result() { IsSuccess = true }
-                //.ExecuteFunction(() => { return FuncTest();});
                 .ExecuteFunction(ignoreError, FuncTestFailure);
 
             Assert.AreEqual(exceptedResult, result.IsSuccess);
@@ -52,7 +34,7 @@ namespace InfoResultTests
         [TestMethod]
         [DataRow(false, true)]
         [DataRow(true, true)]
-        public async Task ExecuteFunctionAsyncTest_2_Success(bool ignoreError, bool exceptedResult)
+        public async Task ExecuteFunctionAsyncTest_2_Success_Test(bool ignoreError, bool exceptedResult)
         {
             var result = await new Result() { IsSuccess = true }
                 .ExecuteFunctionAsync(ignoreError, functions: FuncTestSuccessTask);
@@ -63,7 +45,7 @@ namespace InfoResultTests
         [TestMethod]
         [DataRow(false, false)]
         [DataRow(true, true)]
-        public async Task ExecuteFunctionAsyncTest_2_Failure(bool ignoreError, bool exceptedResult)
+        public async Task ExecuteFunctionAsyncTest_2_Failure_Test(bool ignoreError, bool exceptedResult)
         {
             var result = await new Result() { IsSuccess = true }
                 .ExecuteFunctionAsync(ignoreError, functions: FuncTestFailureTask);
@@ -72,7 +54,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task FunctionOnSuccessAsync_RunsOnlyWhenSuccess()
+        public async Task FunctionOnSuccessAsync_RunsOnlyWhenSuccess_Test()
         {
             var calls = 0;
 
@@ -99,7 +81,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task FunctionOnFailureAsync_RunsOnlyWhenFailure()
+        public async Task FunctionOnFailureAsync_RunsOnlyWhenFailure_Test()
         {
             var calls = 0;
 
@@ -124,7 +106,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task FunctionOnAsync_DispatchesOnSuccessOrFailure()
+        public async Task FunctionOnAsync_DispatchesOnSuccessOrFailure_Test()
         {
             var successCalls = 0;
             var failureCalls = 0;

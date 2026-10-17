@@ -1,22 +1,4 @@
-﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2022-07-02 14:07
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2022-07-10 12:16
-// ***********************************************************************
-//  <copyright file="ResultTests.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-#region U S A G E S
-
-using System;
+﻿using System;
 using System.Linq;
 using InfoResultTests.Dtos;
 using InfoResultTests.Services;
@@ -26,15 +8,13 @@ using RzR.ResultMessage.Enums;
 using RzR.ResultMessage.Helpers;
 using RzR.ResultMessage.Models;
 
-#endregion
-
 namespace InfoResultTests
 {
     [TestClass]
     public class ResultTests
     {
         [TestMethod]
-        public void SimpleInfoResultTest()
+        public void SimpleInfoResult_Test()
         {
             var date = DateTime.Now.Date;
             var data = BookService.Instance.GetBookByRegDate(date);
@@ -47,7 +27,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void NotFoundBookTest()
+        public void NotFoundBook_Test()
         {
             var date = DateTime.Now.Date.AddDays(-1);
             var data = BookService.Instance.GetBookByRegDate(date);
@@ -58,7 +38,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void ImplicitResultTest()
+        public void ImplicitResult_Test()
         {
             Result exResult = new Exception("Error message");
             Result resultTrue = true;
@@ -73,11 +53,11 @@ namespace InfoResultTests
 
             Assert.IsNotNull(resultFalse);
             Assert.IsFalse(resultFalse.IsSuccess);
-            Assert.AreEqual(ExceptionCodes.UnSuccessfullyReqExec, resultFalse.Messages.FirstOrDefault()?.Key);
+            Assert.AreEqual(ExceptionCodes.UnSuccessfullyReqExec, resultFalse.Messages.FirstOrDefault()?.Code);
         }
 
         [TestMethod]
-        public void Success_WithoutRelatedObjects_DoesNotAddGhostMessage()
+        public void Success_WithoutRelatedObjects_DoesNotAddGhostMessage_Test()
         {
             var data = BookService.Instance.GetBookByRegDate(DateTime.Now.Date).Response;
 
@@ -90,11 +70,10 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Success_WithEmptyRelatedObjects_DoesNotAddGhostMessage()
+        public void Success_WithEmptyRelatedObjects_DoesNotAddGhostMessage_Test()
         {
             var data = BookService.Instance.GetBookByRegDate(DateTime.Now.Date).Response;
 
-            // Calls the params overload with an explicitly empty array.
             var result = Result<BookDto>.Success(data, new RelatedObjectModel[0]);
 
             Assert.IsTrue(result.IsSuccess);
@@ -104,11 +83,10 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Success_WithNullRelatedObjects_DoesNotAddGhostMessage()
+        public void Success_WithNullRelatedObjects_DoesNotAddGhostMessage_Test()
         {
             var data = BookService.Instance.GetBookByRegDate(DateTime.Now.Date).Response;
 
-            // Explicit null for the params array.
             var result = Result<BookDto>.Success(data, (RelatedObjectModel[])null);
 
             Assert.IsTrue(result.IsSuccess);
@@ -118,7 +96,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Success_WithRelatedObjects_AddsSingleMessageWithRelatedObjects()
+        public void Success_WithRelatedObjects_AddsSingleMessageWithRelatedObjects_Test()
         {
             var data = BookService.Instance.GetBookByRegDate(DateTime.Now.Date).Response;
             var related = new RelatedObjectModel("BookDto", "books");
@@ -132,9 +110,8 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Create_ReturnsDistinctInstances()
+        public void Create_ReturnsDistinctInstances_Test()
         {
-            // Result<T>.Create() (and its legacy alias .Instance) must return a fresh instance every call
             var a = Result<int>.Create();
             var b = Result<int>.Create();
 

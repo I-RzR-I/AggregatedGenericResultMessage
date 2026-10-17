@@ -1,27 +1,7 @@
-﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2022-07-02 15:20
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2022-07-10 12:16
-// ***********************************************************************
-//  <copyright file="MessageTests.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-#region U S A G E S
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RzR.ResultMessage;
 using RzR.ResultMessage.Enums;
 using RzR.ResultMessage.Extensions.Result.Messages;
-
-#endregion
 
 namespace InfoResultTests
 {
@@ -45,7 +25,7 @@ namespace InfoResultTests
 
 
         [TestMethod]
-        public void GeneralMessageResultTest()
+        public void GeneralMessageResult_Test()
         {
             Assert.IsFalse(_res.IsSuccess);
             Assert.IsNull(_res.Response);

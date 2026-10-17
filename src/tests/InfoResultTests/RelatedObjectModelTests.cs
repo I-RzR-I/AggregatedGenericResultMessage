@@ -1,25 +1,5 @@
-// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2026-04-21 23:04
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2026-04-21 23:45
-// ***********************************************************************
-//  <copyright file="RelatedObjectModelTests.cs" company="RzR SOFT & TECH">
-//   Copyright © RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-#region U S A G E S
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RzR.ResultMessage.Models;
-
-#endregion
 
 namespace InfoResultTests
 {
@@ -27,7 +7,7 @@ namespace InfoResultTests
     public class RelatedObjectModelTests
     {
         [TestMethod]
-        public void Ctor_InCodeNameAndDataSourceNames_AssignsBoth()
+        public void Ctor_InCodeNameAndDataSourceNames_AssignsBoth_Test()
         {
             var sut = new RelatedObjectModel("Book", "books", "book_v2");
 
@@ -36,9 +16,8 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Ctor_InCodeNameOnly_DataSourceNamesIsEmptyArray()
+        public void Ctor_InCodeNameOnly_DataSourceNamesIsEmptyArray_Test()
         {
-            // params string[] resolves to an empty array when no values are supplied.
             var sut = new RelatedObjectModel("Book");
 
             Assert.AreEqual("Book", sut.InCodeName);
@@ -47,7 +26,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Ctor_InCodeName_NullDataSourceNames_LeavesPropertyNull()
+        public void Ctor_InCodeName_NullDataSourceNames_LeavesPropertyNull_Test()
         {
             var sut = new RelatedObjectModel("Book", (string[])null);
 
@@ -57,7 +36,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Ctor_DataSourceNamesOnly_InCodeNameIsNull()
+        public void Ctor_DataSourceNamesOnly_InCodeNameIsNull_Test()
         {
             var sut = new RelatedObjectModel("books", "book_v2");
 
@@ -66,7 +45,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Ctor_Parameterless_ToString_DoesNotThrow()
+        public void Ctor_Parameterless_ToString_DoesNotThrow_Test()
         {
             var sut = new RelatedObjectModel();
 
@@ -78,7 +57,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void ToString_JoinsDataSourceNamesWithHash()
+        public void ToString_JoinsDataSourceNamesWithHash_Test()
         {
             var sut = new RelatedObjectModel("Book", "books", "book_v2", "book_v3");
 

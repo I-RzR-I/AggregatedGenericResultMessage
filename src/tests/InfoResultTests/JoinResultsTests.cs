@@ -1,21 +1,3 @@
-// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2026-04-21 19:04
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2026-04-21 23:00
-// ***********************************************************************
-//  <copyright file="JoinResultsTests.cs" company="RzR SOFT & TECH">
-//   Copyright © RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-#region U S A G E S
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,15 +6,13 @@ using RzR.ResultMessage;
 using RzR.ResultMessage.Enums;
 using RzR.ResultMessage.Extensions.Result.Messages;
 
-#endregion
-
 namespace InfoResultTests
 {
     [TestClass]
     public class JoinResultsTests
     {
         [TestMethod]
-        public void JoinErrors_AllSuccess_ReturnsSuccess()
+        public void JoinErrors_AllSuccess_ReturnsSuccess_Test()
         {
             var joined = Result<object>.Create().JoinErrors(new List<Result>
             {
@@ -45,12 +25,12 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void JoinErrors_AnyFailure_ReturnsFailureAndAggregatesErrorMessages()
+        public void JoinErrors_AnyFailure_ReturnsFailureAndAggregatesErrorMessages_Test()
         {
             var failed = new Result { IsSuccess = false };
             failed.AddError("boom");
             failed.AddException(new Exception("explosion"));
-            failed.AddWarning("just-a-warning"); // must be filtered out
+            failed.AddWarning("just-a-warning");
 
             var succeeded = new Result { IsSuccess = true };
 
@@ -65,11 +45,8 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void JoinErrors_DoesNotInheritIsSuccessFromCaller()
+        public void JoinErrors_DoesNotInheritIsSuccessFromCaller_Test()
         {
-            // Regression: historically IsSuccess was copied from the caller (`this`),
-            // so a successful caller aggregating failures produced a "successful" result
-            // containing error messages. The fix derives IsSuccess from the input collection.
             var caller = Result<object>.Success();
             Assert.IsTrue(caller.IsSuccess);
 

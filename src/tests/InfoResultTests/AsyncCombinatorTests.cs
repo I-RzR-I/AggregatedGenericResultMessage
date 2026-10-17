@@ -1,21 +1,3 @@
-// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2026-04-22 00:04
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2026-04-22 00:04
-// ***********************************************************************
-//  <copyright file="AsyncCombinatorTests.cs" company="RzR SOFT & TECH">
-//   Copyright © RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-#region U S A G E S
-
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,15 +5,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RzR.ResultMessage;
 using RzR.ResultMessage.Extensions.Result;
 
-#endregion
-
 namespace InfoResultTests
 {
     [TestClass]
     public class AsyncCombinatorTests
     {
         [TestMethod]
-        public async Task MapAsync_OnResult_AsyncSelector_ProjectsOnSuccess()
+        public async Task MapAsync_OnResult_AsyncSelector_ProjectsOnSuccess_Test()
         {
             var source = Result<string>.Success("hello");
 
@@ -46,7 +26,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task MapAsync_OnResult_OnFailure_PropagatesAndDoesNotInvokeSelector()
+        public async Task MapAsync_OnResult_OnFailure_PropagatesAndDoesNotInvokeSelector_Test()
         {
             var invoked = false;
             var source = Result<string>.Failure("boom");
@@ -64,7 +44,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task MapAsync_OnTask_SyncSelector_Projects()
+        public async Task MapAsync_OnTask_SyncSelector_Projects_Test()
         {
             var source = Task.FromResult(Result<int>.Success(4));
 
@@ -75,7 +55,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task MapAsync_OnTask_AsyncSelector_Projects()
+        public async Task MapAsync_OnTask_AsyncSelector_Projects_Test()
         {
             var source = Task.FromResult(Result<int>.Success(2));
 
@@ -90,7 +70,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task MapAsync_NullArgs_Throw()
+        public async Task MapAsync_NullArgs_Throw_Test()
         {
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(() =>
                 ((Result<int>)null).MapAsync(x => Task.FromResult(x)));
@@ -100,7 +80,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task BindAsync_OnResult_AsyncBinder_OnSuccess_ReturnsBound()
+        public async Task BindAsync_OnResult_AsyncBinder_OnSuccess_ReturnsBound_Test()
         {
             var source = Result<int>.Success(7);
 
@@ -115,7 +95,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task BindAsync_OnResult_OnFailure_PropagatesAndDoesNotInvokeBinder()
+        public async Task BindAsync_OnResult_OnFailure_PropagatesAndDoesNotInvokeBinder_Test()
         {
             var invoked = false;
             var source = Result<int>.Failure("nope");
@@ -133,7 +113,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task BindAsync_OnResult_BinderReturnsNull_Throws()
+        public async Task BindAsync_OnResult_BinderReturnsNull_Throws_Test()
         {
             var source = Result<int>.Success(1);
 
@@ -142,7 +122,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task BindAsync_OnTask_SyncBinder_Binds()
+        public async Task BindAsync_OnTask_SyncBinder_Binds_Test()
         {
             var source = Task.FromResult(Result<int>.Success(3));
 
@@ -153,7 +133,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task BindAsync_OnTask_AsyncBinder_Binds()
+        public async Task BindAsync_OnTask_AsyncBinder_Binds_Test()
         {
             var source = Task.FromResult(Result<int>.Success(5));
 
@@ -168,7 +148,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task Tap_OnTask_OnSuccess_RunsActionAndReturnsSameResult()
+        public async Task Tap_OnTask_OnSuccess_RunsActionAndReturnsSameResult_Test()
         {
             var seen = 0;
             var inner = Result<int>.Success(11);
@@ -181,7 +161,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task TapAsync_OnResult_AsyncAction_RunsOnlyOnSuccess()
+        public async Task TapAsync_OnResult_AsyncAction_RunsOnlyOnSuccess_Test()
         {
             var seen = 0;
             var success = Result<int>.Success(8);
@@ -204,7 +184,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task TapAsync_OnTask_AsyncAction_Composes()
+        public async Task TapAsync_OnTask_AsyncAction_Composes_Test()
         {
             var seen = 0;
             var source = Task.FromResult(Result<int>.Success(2));
@@ -220,7 +200,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task TapAsync_NullArgs_Throw()
+        public async Task TapAsync_NullArgs_Throw_Test()
         {
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(() =>
                 ((Result<int>)null).TapAsync(_ => Task.CompletedTask));
@@ -228,7 +208,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task FullAsyncPipeline_MapAsync_BindAsync_TapAsync_Composes()
+        public async Task FullAsyncPipeline_MapAsync_BindAsync_TapAsync_Composes_Test()
         {
             var sideEffect = 0;
 
@@ -237,17 +217,17 @@ namespace InfoResultTests
                 {
                     await Task.Yield();
                     return x * 5;
-                }) // 10
+                })
                 .TapAsync(async x =>
                 {
                     await Task.Yield();
                     sideEffect = x;
-                }) // sideEffect = 10
+                })
                 .BindAsync(async x =>
                 {
                     await Task.Yield();
                     return Result<string>.Success("n=" + x);
-                }); // "n=10"
+                });
 
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual("n=10", result.Response);

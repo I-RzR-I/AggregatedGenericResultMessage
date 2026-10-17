@@ -1,21 +1,3 @@
-// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2026-04-22 02:04
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2026-04-22 08:24
-// ***********************************************************************
-//  <copyright file="ValidationExtensionsTests.cs" company="RzR SOFT & TECH">
-//   Copyright (c) RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-#region U S A G E S
-
 using InfoResultTests.Dtos;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RzR.ResultMessage;
@@ -25,15 +7,13 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-#endregion
-
 namespace InfoResultTests
 {
     [TestClass]
     public class ValidationExtensionsTests
     {
         [TestMethod]
-        public void Validate_AllPredicatesPass_KeepsResultSuccessful()
+        public void Validate_AllPredicatesPass_KeepsResultSuccessful_Test()
         {
             var order = new OrderDto() { ItemCount = 3, Total = 50m, Customer = "Alice" };
 
@@ -47,7 +27,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Validate_OnePredicateFails_FlipsToFailureAndAddsError()
+        public void Validate_OnePredicateFails_FlipsToFailureAndAddsError_Test()
         {
             var order = new OrderDto() { ItemCount = 0, Total = 50m, Customer = "Alice" };
 
@@ -61,7 +41,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Validate_AccumulatesMultipleErrors()
+        public void Validate_AccumulatesMultipleErrors_Test()
         {
             var order = new OrderDto() { ItemCount = 0, Total = -5m, Customer = null };
 
@@ -78,7 +58,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Validate_WithKey_AppendsKeyedError()
+        public void Validate_WithCode_AppendsCodedError_Test()
         {
             var order = new OrderDto() { ItemCount = 0 };
 
@@ -86,12 +66,12 @@ namespace InfoResultTests
                 .Validate(o => o.ItemCount > 0, "Order.Items", "items required");
 
             Assert.IsFalse(result.IsSuccess);
-            Assert.AreEqual("Order.Items", result.Messages.First().Key);
+            Assert.AreEqual("Order.Items", result.Messages.First().Code);
             Assert.AreEqual("items required", result.Messages.First().Message.Info);
         }
 
         [TestMethod]
-        public void Validate_WithMessageDataModel_PreservesDetails()
+        public void Validate_WithMessageDataModel_PreservesDetails_Test()
         {
             var order = new OrderDto() { Total = 0m };
             var error = new MessageDataModel("total invalid", "must be > 0");
@@ -106,7 +86,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Validate_NullArgs_Throw()
+        public void Validate_NullArgs_Throw_Test()
         {
             var result = Result<int>.Success(1);
 
@@ -116,10 +96,8 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Validate_FailingResult_StillRunsPredicateAndAccumulatesError()
+        public void Validate_FailingResult_StillRunsPredicateAndAccumulatesError_Test()
         {
-            // The whole point of accumulating Validate is that a previous failure does not stop
-            // additional violations from being recorded.
             var result = Result<int>.Failure("upstream failure")
                 .Validate(_ => false, "downstream violation");
 
@@ -130,7 +108,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Ensure_OnSuccess_RunsPredicate()
+        public void Ensure_OnSuccess_RunsPredicate_Test()
         {
             var result = Result<int>.Success(5)
                 .Ensure(x => x > 10, "must be > 10");
@@ -140,7 +118,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Ensure_OnFailure_SkipsPredicate()
+        public void Ensure_OnFailure_SkipsPredicate_Test()
         {
             var invoked = false;
             var result = Result<string>.Failure("upstream")
@@ -152,11 +130,11 @@ namespace InfoResultTests
 
             Assert.IsFalse(invoked);
             Assert.IsFalse(result.IsSuccess);
-            Assert.AreEqual(1, result.Messages.Count); // upstream only
+            Assert.AreEqual(1, result.Messages.Count);
         }
 
         [TestMethod]
-        public void Ensure_AfterFirstFailure_SkipsRest()
+        public void Ensure_AfterFirstFailure_SkipsRest_Test()
         {
             var second = false;
             var result = Result<int>.Success(1)
@@ -174,7 +152,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task ValidateAsync_OnResult_AsyncPredicate_AccumulatesError()
+        public async Task ValidateAsync_OnResult_AsyncPredicate_AccumulatesError_Test()
         {
             var result = await Result<int>.Success(2)
                 .ValidateAsync(async x =>
@@ -188,7 +166,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task ValidateAsync_OnTask_AsyncPredicate_Composes()
+        public async Task ValidateAsync_OnTask_AsyncPredicate_Composes_Test()
         {
             var result = await Task.FromResult(Result<int>.Success())
                 .ValidateAsync(x => x >= 0, "non-negative")
@@ -204,7 +182,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public async Task ValidateAsync_OnTask_NullArgs_Throw()
+        public async Task ValidateAsync_OnTask_NullArgs_Throw_Test()
         {
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(() =>
                 ((Task<Result<int>>)null).ValidateAsync(_ => true, "e"));
