@@ -24,18 +24,12 @@ using System;
 
 namespace RzR.ResultMessage
 {
-    /// -------------------------------------------------------------------------------------------------
-    /// <content>
-    ///     A result.
-    /// </content>
-    /// =================================================================================================
+    /// <content>A result.</content>
     public partial class Result<T> : IResult<T>
     {
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Projects the inner <see cref="Response" /> through <paramref name="selector" /> when the
-        ///     result is successful; otherwise propagates the failure (and its messages) unchanged.
-        /// 
+        ///     result is successful; otherwise propagates the failure (and its messages) unchanged. 
         /// </summary>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when <paramref name="selector" /> is <c>null</c>.
@@ -46,7 +40,6 @@ namespace RzR.ResultMessage
         ///     A new <see cref="Result{TOut}" /> carrying either the projected value or the propagated
         ///     failure.
         /// </returns>
-        /// =================================================================================================
         public virtual Result<TOut> Map<TOut>(Func<T, TOut> selector)
         {
             if (selector.IsNull()) 
@@ -62,11 +55,9 @@ namespace RzR.ResultMessage
             return mapped;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Flat-maps the inner <see cref="Response" /> through <paramref name="binder" /> when the
-        ///     result is successful; otherwise propagates the failure (and its messages) unchanged.
-        /// 
+        ///     result is successful; otherwise propagates the failure (and its messages) unchanged. 
         /// </summary>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when <paramref name="binder" /> is <c>null</c>.
@@ -80,7 +71,6 @@ namespace RzR.ResultMessage
         ///     The <see cref="Result{TOut}" /> produced by <paramref name="binder" />, or a propagated
         ///     failure.
         /// </returns>
-        /// =================================================================================================
         public virtual Result<TOut> Bind<TOut>(Func<T, Result<TOut>> binder)
         {
             if (binder.IsNull()) throw new ArgumentNullException(nameof(binder));
@@ -104,7 +94,6 @@ namespace RzR.ResultMessage
             return bound;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Folds the result into a single value by invoking <paramref name="onSuccess" /> when the
         ///     result is successful and <paramref name="onFailure" /> otherwise.
@@ -122,7 +111,6 @@ namespace RzR.ResultMessage
         /// <returns>
         ///     The value produced by the matching selector.
         /// </returns>
-        /// =================================================================================================
         public virtual TOut Match<TOut>(Func<T, TOut> onSuccess, Func<Result<T>, TOut> onFailure)
         {
             if (onSuccess.IsNull()) 
@@ -133,7 +121,6 @@ namespace RzR.ResultMessage
             return IsSuccess ? onSuccess(Response) : onFailure(this);
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Invokes a side-effecting <paramref name="action" /> on the inner <see cref="Response" />
         ///     only when the result is successful, then returns the same result instance.
@@ -145,7 +132,6 @@ namespace RzR.ResultMessage
         /// <returns>
         ///     The current <see cref="Result{T}" /> (for chaining).
         /// </returns>
-        /// =================================================================================================
         public virtual Result<T> Tap(Action<T> action)
         {
             if (action.IsNull()) 

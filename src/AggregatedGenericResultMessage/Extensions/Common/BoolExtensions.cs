@@ -22,29 +22,30 @@ using RzR.Core.CodeSource;
 
 namespace RzR.ResultMessage.Extensions.Common
 {
-    /// -------------------------------------------------------------------------------------------------
-    /// <summary>An extensions.</summary>
-    /// <remarks>31-Jan-24.</remarks>
-    /// =================================================================================================
+    /// <summary>
+    ///     An extensions.
+    /// </summary>
     internal static class BoolExtensions
     {
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>Check if source value is equals with true.</summary>
-        /// <remarks></remarks>
+        /// <summary>
+        ///     Check if source value is equals with true.
+        /// </summary>
         /// <param name="source">Source object to be checked.</param>
-        /// <returns>True if true, false if not.</returns>
-        /// =================================================================================================
-        [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR", "1.0")]
+        /// <returns>
+        ///     True if true, false if not.
+        /// </returns>
+        [CodeSource(SourceUrl = "https://github.com/I-RzR-I/DomainCommonExtensions", AuthorName = "RzR", Version = "1.0")]
         internal static bool IsTrue(this bool source)
             => source.IsNotNull() && source.Equals(true);
 
-        /// -------------------------------------------------------------------------------------------------
-        /// <summary>Check if source value is equals with false.</summary>
-        /// <remarks></remarks>
+        /// <summary>
+        ///     Check if source value is equals with false.
+        /// </summary>
         /// <param name="source">Source object to be checked.</param>
-        /// <returns>True if false, false if not.</returns>
-        /// =================================================================================================
-        [CodeSource("https://github.com/I-RzR-I/DomainCommonExtensions", "RzR", "1.0")]
+        /// <returns>
+        ///     True if false, false if not.
+        /// </returns>
+        [CodeSource(SourceUrl = "https://github.com/I-RzR-I/DomainCommonExtensions", AuthorName = "RzR", Version = "1.0")]
         internal static bool IsFalse(this bool source)
             => source.IsNull() || source.Equals(false);
     }

@@ -1,20 +1,4 @@
-﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2023-02-03 08:59
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2023-02-03 09:00
-// ***********************************************************************
-//  <copyright file="FluentConfigurationTests.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -30,7 +14,7 @@ namespace InfoResultTests
     public class FluentConfigurationTests
     {
         [TestMethod]
-        public void ResultHasMessageSuccess()
+        public void ResultHasMessageSuccess_Test()
         {
             var res = Result.Success()
                 .WithMessage("simple message")
@@ -49,35 +33,35 @@ namespace InfoResultTests
             Assert.IsTrue(res.IsSuccess);
             Assert.IsNull(res.Response);
             Assert.IsTrue(res.Messages.Count(x => x.Message.Info == "simple message"
-                                                  && x.Key.IsNullOrEmpty()
+                                                  && x.Code.IsNullOrEmpty()
                                                   && x.MessageType == MessageType.None) == 1);
-            Assert.IsTrue(res.Messages.Count(x => x.Key == "temp1_code"
+            Assert.IsTrue(res.Messages.Count(x => x.Code == "temp1_code"
                                                   && x.Message.Info.IsNullOrEmpty()
                                                   && x.MessageType == MessageType.None) == 1);
-            Assert.IsTrue(res.Messages.Count(x => x.Key == "WithCodeMessage_Code" 
+            Assert.IsTrue(res.Messages.Count(x => x.Code == "WithCodeMessage_Code" 
                                                   && x.Message.Info == "WithCodeMessage_Message" 
                                                   && x.MessageType == MessageType.None) == 1);
             Assert.IsTrue(res.Messages.Count(x => x.Message.Info == "simple_error_message"
-                                                  && x.Key.IsNullOrEmpty()
+                                                  && x.Code.IsNullOrEmpty()
                                                   && x.MessageType == MessageType.Error) == 1);
-            Assert.IsTrue(res.Messages.Count(x => x.Key == "simple_error_message_code"
+            Assert.IsTrue(res.Messages.Count(x => x.Code == "simple_error_message_code"
                                                   && x.Message.Info == "simple_error_message"
                                                   && x.MessageType == MessageType.Error) == 1);
-            Assert.IsTrue(res.Messages.Count(x => x.Key == "ResultError_code"
+            Assert.IsTrue(res.Messages.Count(x => x.Code == "ResultError_code"
                                                   && x.Message.Info == "ResultError_message"
                                                   && x.MessageType == MessageType.Error) == 1);
             Assert.IsTrue(res.Messages.Count(x => x.MessageType == MessageType.Exception 
                                                   && x.Message.Info.Contains("simple_exception")) == 1);
-            Assert.IsTrue(res.Messages.Count(x => x.Key == "list_key_1"
+            Assert.IsTrue(res.Messages.Count(x => x.Code == "list_key_1"
                                                   && x.Message.Info == "list_mess_1"
                                                   && x.MessageType == MessageType.Error) == 1);
-            Assert.IsTrue(res.Messages.Count(x => x.Key == "list_key_2"
+            Assert.IsTrue(res.Messages.Count(x => x.Code == "list_key_2"
                                                   && x.Message.Info == "list_mess_2"
                                                   && x.MessageType == MessageType.Error) == 1);
         }
 
         [TestMethod]
-        public void ResultOfTHasMessageSuccess()
+        public void ResultOfTHasMessageSuccess_Test()
         {
             var resOfT = Result<bool>
                 .Success(true)
@@ -99,33 +83,33 @@ namespace InfoResultTests
             Assert.IsTrue(resOfT.Response);
             Assert.IsTrue(resOfT.Messages.Count(x => x.Message.Info == "bool result" 
                                                      && x.MessageType == MessageType.None) == 1);
-            Assert.IsTrue(resOfT.Messages.Count(x => x.Key == "temp1_code"
+            Assert.IsTrue(resOfT.Messages.Count(x => x.Code == "temp1_code"
                                                      && x.Message.Info.IsNullOrEmpty()
                                                      && x.MessageType == MessageType.None) == 1);
-            Assert.IsTrue(resOfT.Messages.Count(x => x.Key == "WithCodeMessage_Code"
+            Assert.IsTrue(resOfT.Messages.Count(x => x.Code == "WithCodeMessage_Code"
                                                      && x.Message.Info == "WithCodeMessage_Message"
                                                      && x.MessageType == MessageType.None) == 1);
             Assert.IsTrue(resOfT.Messages.Count(x => x.Message.Info == "simple_error_message"
-                                                     && x.Key.IsNullOrEmpty()
+                                                     && x.Code.IsNullOrEmpty()
                                                      && x.MessageType == MessageType.Error) == 1);
-            Assert.IsTrue(resOfT.Messages.Count(x => x.Key == "simple_error_message_code"
+            Assert.IsTrue(resOfT.Messages.Count(x => x.Code == "simple_error_message_code"
                                                      && x.Message.Info == "simple_error_message"
                                                      && x.MessageType == MessageType.Error) == 1);
-            Assert.IsTrue(resOfT.Messages.Count(x => x.Key == "ResultError_code"
+            Assert.IsTrue(resOfT.Messages.Count(x => x.Code == "ResultError_code"
                                                      && x.Message.Info == "ResultError_message"
                                                      && x.MessageType == MessageType.Error) == 1);
             Assert.IsTrue(resOfT.Messages.Count(x => x.MessageType == MessageType.Exception
                                                      && x.Message.Info.Contains("simple_exception")) == 1);
-            Assert.IsTrue(resOfT.Messages.Count(x => x.Key == "list_key_1"
+            Assert.IsTrue(resOfT.Messages.Count(x => x.Code == "list_key_1"
                                                      && x.Message.Info == "list_mess_1"
                                                      && x.MessageType == MessageType.Error) == 1);
-            Assert.IsTrue(resOfT.Messages.Count(x => x.Key == "list_key_2"
+            Assert.IsTrue(resOfT.Messages.Count(x => x.Code == "list_key_2"
                                                      && x.Message.Info == "list_mess_2"
                                                      && x.MessageType == MessageType.Error) == 1);
         }
         
         [TestMethod]
-        public void ResultHasMessageFailure()
+        public void ResultHasMessageFailure_Test()
         {
             var res = Result.Failure()
                 .WithMessage("simple message")
@@ -145,35 +129,35 @@ namespace InfoResultTests
             Assert.IsFalse(res.IsSuccess);
             Assert.IsNull(res.Response);
             Assert.IsTrue(res.Messages.Count(x => x.Message.Info == "simple message"
-                                                  && x.Key.IsNullOrEmpty()
+                                                  && x.Code.IsNullOrEmpty()
                                                   && x.MessageType == MessageType.None) == 1);
-            Assert.IsTrue(res.Messages.Count(x => x.Key == "temp1_code"
+            Assert.IsTrue(res.Messages.Count(x => x.Code == "temp1_code"
                                                   && x.Message.Info.IsNullOrEmpty()
                                                   && x.MessageType == MessageType.None) == 1);
-            Assert.IsTrue(res.Messages.Count(x => x.Key == "WithCodeMessage_Code" 
+            Assert.IsTrue(res.Messages.Count(x => x.Code == "WithCodeMessage_Code" 
                                                   && x.Message.Info == "WithCodeMessage_Message" 
                                                   && x.MessageType == MessageType.None) == 1);
             Assert.IsTrue(res.Messages.Count(x => x.Message.Info == "simple_error_message"
-                                                  && x.Key.IsNullOrEmpty()
+                                                  && x.Code.IsNullOrEmpty()
                                                   && x.MessageType == MessageType.Error) == 1);
-            Assert.IsTrue(res.Messages.Count(x => x.Key == "simple_error_message_code"
+            Assert.IsTrue(res.Messages.Count(x => x.Code == "simple_error_message_code"
                                                   && x.Message.Info == "simple_error_message"
                                                   && x.MessageType == MessageType.Error) == 1);
-            Assert.IsTrue(res.Messages.Count(x => x.Key == "ResultError_code"
+            Assert.IsTrue(res.Messages.Count(x => x.Code == "ResultError_code"
                                                   && x.Message.Info == "ResultError_message"
                                                   && x.MessageType == MessageType.Error) == 1);
             Assert.IsTrue(res.Messages.Count(x => x.MessageType == MessageType.Exception 
                                                   && x.Message.Info.Contains("simple_exception")) == 1);
-            Assert.IsTrue(res.Messages.Count(x => x.Key == "list_key_1"
+            Assert.IsTrue(res.Messages.Count(x => x.Code == "list_key_1"
                                                   && x.Message.Info == "list_mess_1"
                                                   && x.MessageType == MessageType.Error) == 1);
-            Assert.IsTrue(res.Messages.Count(x => x.Key == "list_key_2"
+            Assert.IsTrue(res.Messages.Count(x => x.Code == "list_key_2"
                                                   && x.Message.Info == "list_mess_2"
                                                   && x.MessageType == MessageType.Error) == 1);
         }
         
         [TestMethod]
-        public void ResultOfTHasMessageFailure()
+        public void ResultOfTHasMessageFailure_Test()
         {
             var resOfT = Result<bool>
                 .Failure()
@@ -195,27 +179,27 @@ namespace InfoResultTests
             Assert.IsFalse(resOfT.Response);
             Assert.IsTrue(resOfT.Messages.Count(x => x.Message.Info == "bool result" 
                                                      && x.MessageType == MessageType.None) == 1);
-            Assert.IsTrue(resOfT.Messages.Count(x => x.Key == "temp1_code"
+            Assert.IsTrue(resOfT.Messages.Count(x => x.Code == "temp1_code"
                                                      && x.Message.Info.IsNullOrEmpty()
                                                      && x.MessageType == MessageType.None) == 1);
-            Assert.IsTrue(resOfT.Messages.Count(x => x.Key == "WithCodeMessage_Code"
+            Assert.IsTrue(resOfT.Messages.Count(x => x.Code == "WithCodeMessage_Code"
                                                      && x.Message.Info == "WithCodeMessage_Message"
                                                      && x.MessageType == MessageType.None) == 1);
             Assert.IsTrue(resOfT.Messages.Count(x => x.Message.Info == "simple_error_message"
-                                                     && x.Key.IsNullOrEmpty()
+                                                     && x.Code.IsNullOrEmpty()
                                                      && x.MessageType == MessageType.Error) == 1);
-            Assert.IsTrue(resOfT.Messages.Count(x => x.Key == "simple_error_message_code"
+            Assert.IsTrue(resOfT.Messages.Count(x => x.Code == "simple_error_message_code"
                                                      && x.Message.Info == "simple_error_message"
                                                      && x.MessageType == MessageType.Error) == 1);
-            Assert.IsTrue(resOfT.Messages.Count(x => x.Key == "ResultError_code"
+            Assert.IsTrue(resOfT.Messages.Count(x => x.Code == "ResultError_code"
                                                      && x.Message.Info == "ResultError_message"
                                                      && x.MessageType == MessageType.Error) == 1);
             Assert.IsTrue(resOfT.Messages.Count(x => x.MessageType == MessageType.Exception
                                                      && x.Message.Info.Contains("simple_exception")) == 1);
-            Assert.IsTrue(resOfT.Messages.Count(x => x.Key == "list_key_1"
+            Assert.IsTrue(resOfT.Messages.Count(x => x.Code == "list_key_1"
                                                      && x.Message.Info == "list_mess_1"
                                                      && x.MessageType == MessageType.Error) == 1);
-            Assert.IsTrue(resOfT.Messages.Count(x => x.Key == "list_key_2"
+            Assert.IsTrue(resOfT.Messages.Count(x => x.Code == "list_key_2"
                                                      && x.Message.Info == "list_mess_2"
                                                      && x.MessageType == MessageType.Error) == 1);
         }

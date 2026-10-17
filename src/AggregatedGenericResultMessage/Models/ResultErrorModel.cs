@@ -19,9 +19,17 @@
 using RzR.ResultMessage.Abstractions.Models;
 using RzR.ResultMessage.Enums;
 using RzR.ResultMessage.Extensions.Common;
+using RzR.ResultMessage.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
+
+#if !NETFRAMEWORK
+using System.Text.Json.Serialization;
+#endif
 
 // ReSharper disable ClassNeverInstantiated.Global
 
@@ -33,7 +41,17 @@ namespace RzR.ResultMessage.Models
     public class ResultErrorModel : IResultErrorModel
     {
         /// <inheritdoc />
-        public string Key { get; }
+        public string Code { get; }
+
+        /// <inheritdoc />
+        [Obsolete(ObsoleteMessages.KeyToCode)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [XmlIgnore]
+        [IgnoreDataMember]
+#if !NETFRAMEWORK
+        [JsonIgnore]
+#endif
+        public string Key => Code;
 
         /// <inheritdoc />
         public MessageDataModel Message { get; }
@@ -47,12 +65,12 @@ namespace RzR.ResultMessage.Models
         /// <summary>
         ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
-        /// <param name="key">Error key</param>
+        /// <param name="code">Error code</param>
         /// <param name="message">Error message</param>
         /// <remarks></remarks>
-        public ResultErrorModel(string key, string message)
+        public ResultErrorModel(string code, string message)
         {
-            Key = key;
+            Code = code;
             Message = new MessageDataModel(message);
             Exception = null;
         }
@@ -60,13 +78,13 @@ namespace RzR.ResultMessage.Models
         /// <summary>
         ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
-        /// <param name="key">Error key</param>
+        /// <param name="code">Error code</param>
         /// <param name="message">Error message</param>
         /// <param name="relatedObject">Related message object</param>
         /// <remarks></remarks>
-        public ResultErrorModel(string key, string message, RelatedObjectModel relatedObject = null)
+        public ResultErrorModel(string code, string message, RelatedObjectModel relatedObject = null)
         {
-            Key = key;
+            Code = code;
             Message = new MessageDataModel(message);
             Exception = default;
 
@@ -77,32 +95,34 @@ namespace RzR.ResultMessage.Models
         /// <summary>
         ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
-        /// <param name="key">Error key</param>
+        /// <param name="code">Error code</param>
         /// <param name="message">Error message</param>
         /// <param name="relatedObjects">Related message objects</param>
         /// <remarks></remarks>
-        public ResultErrorModel(string key, string message, params RelatedObjectModel[] relatedObjects)
+        public ResultErrorModel(string code, string message, params RelatedObjectModel[] relatedObjects)
         {
-            Key = key;
+            Code = code;
             Message = new MessageDataModel(message);
             Exception = default;
 
             if (relatedObjects.IsNotNull())
+            {
                 foreach (var obj in relatedObjects)
                 {
                     RelatedObjects?.Add(obj!);
                 }
+            }
         }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
-        /// <param name="key">Error key</param>
+        /// <param name="code">Error code</param>
         /// <param name="message">Error message</param>
         /// <remarks></remarks>
-        public ResultErrorModel(string key, MessageDataModel message)
+        public ResultErrorModel(string code, MessageDataModel message)
         {
-            Key = key;
+            Code = code;
             Message = message;
             Exception = default;
         }
@@ -110,13 +130,13 @@ namespace RzR.ResultMessage.Models
         /// <summary>
         ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
-        /// <param name="key">Error key</param>
+        /// <param name="code">Error code</param>
         /// <param name="message">Error message</param>
         /// <param name="relatedObject">Related message object</param>
         /// <remarks></remarks>
-        public ResultErrorModel(string key, MessageDataModel message, RelatedObjectModel relatedObject = null)
+        public ResultErrorModel(string code, MessageDataModel message, RelatedObjectModel relatedObject = null)
         {
-            Key = key;
+            Code = code;
             Message = message;
             Exception = default;
 
@@ -127,21 +147,23 @@ namespace RzR.ResultMessage.Models
         /// <summary>
         ///     Initializes a new instance of the <see cref="ResultErrorModel" /> class.
         /// </summary>
-        /// <param name="key">Error key</param>
+        /// <param name="code">Error code</param>
         /// <param name="message">Error message</param>
         /// <param name="relatedObjects">Related message objects</param>
         /// <remarks></remarks>
-        public ResultErrorModel(string key, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
+        public ResultErrorModel(string code, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
         {
-            Key = key;
+            Code = code;
             Message = message;
             Exception = default;
 
             if (relatedObjects.IsNotNull())
+            {
                 foreach (var obj in relatedObjects)
                 {
                     RelatedObjects?.Add(obj!);
                 }
+            }
         }
 
         /// <summary>
@@ -151,7 +173,7 @@ namespace RzR.ResultMessage.Models
         /// <remarks></remarks>
         public ResultErrorModel(Exception exception)
         {
-            Key = null;
+            Code = null;
             Message = new MessageDataModel();
             Exception = exception;
         }
@@ -164,7 +186,7 @@ namespace RzR.ResultMessage.Models
         /// <remarks></remarks>
         public ResultErrorModel(Exception exception, RelatedObjectModel relatedObject = null)
         {
-            Key = null;
+            Code = null;
             Message = new MessageDataModel();
             Exception = exception;
 
@@ -180,7 +202,7 @@ namespace RzR.ResultMessage.Models
         /// <remarks></remarks>
         public ResultErrorModel(Exception exception, params RelatedObjectModel[] relatedObjects)
         {
-            Key = null;
+            Code = null;
             Message = new MessageDataModel();
             Exception = exception;
 
@@ -200,6 +222,6 @@ namespace RzR.ResultMessage.Models
         /// <remarks></remarks>
         internal MessageModel MapToMessage() => Exception != default
             ? new MessageModel(null, Exception, RelatedObjects.ToArray())
-            : new MessageModel(Key, Message, MessageType.Error, RelatedObjects.ToArray());
+            : new MessageModel(Code, Message, MessageType.Error, RelatedObjects.ToArray());
     }
 }

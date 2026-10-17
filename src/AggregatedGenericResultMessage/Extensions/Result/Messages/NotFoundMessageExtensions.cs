@@ -111,65 +111,65 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         }
 
         /// <inheritdoc cref="INotFoundMessageResult{T}.AddNotFound(string, string)" />
-        public static IResult<T> AddNotFound<T>(this IResult<T> result, string key, string message)
+        public static IResult<T> AddNotFound<T>(this IResult<T> result, string code, string message)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(message), MessageType.NotFound));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(message), MessageType.NotFound));
 
             return result;
         }
 
         /// <inheritdoc cref="INotFoundMessageResult{T}.AddNotFound(string, string, RelatedObjectModel[])" />
-        public static IResult<T> AddNotFound<T>(this IResult<T> result, string key, string message, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddNotFound<T>(this IResult<T> result, string code, string message, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(message), MessageType.NotFound, relatedObjects));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(message), MessageType.NotFound, relatedObjects));
 
             return result;
         }
 
         /// <inheritdoc cref="INotFoundMessageResult{T}.AddNotFound(string, MessageDataModel)" />
-        public static IResult<T> AddNotFound<T>(this IResult<T> result, string key, MessageDataModel message)
+        public static IResult<T> AddNotFound<T>(this IResult<T> result, string code, MessageDataModel message)
         {
-            result.Messages?.Add(new MessageModel(key, message, MessageType.NotFound));
+            result.Messages?.Add(new MessageModel(code, message, MessageType.NotFound));
 
             return result;
         }
 
         /// <inheritdoc cref="INotFoundMessageResult{T}.AddNotFound(string, MessageDataModel, RelatedObjectModel[])" />
-        public static IResult<T> AddNotFound<T>(this IResult<T> result, string key, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddNotFound<T>(this IResult<T> result, string code, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, message, MessageType.NotFound, relatedObjects));
+            result.Messages?.Add(new MessageModel(code, message, MessageType.NotFound, relatedObjects));
 
             return result;
         }
 
         /// <inheritdoc cref="INotFoundMessageResult{T}.AddNotFound(string, string)" />
-        public static IResult<T> AddNotFound<T>(this Result<T> result, string key, string message)
+        public static IResult<T> AddNotFound<T>(this Result<T> result, string code, string message)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(message), MessageType.NotFound));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(message), MessageType.NotFound));
 
             return result;
         }
 
         /// <inheritdoc cref="INotFoundMessageResult{T}.AddNotFound(string, string, RelatedObjectModel[])" />
-        public static IResult<T> AddNotFound<T>(this Result<T> result, string key, string message, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddNotFound<T>(this Result<T> result, string code, string message, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, new MessageDataModel(message), MessageType.NotFound, relatedObjects));
+            result.Messages?.Add(new MessageModel(code, new MessageDataModel(message), MessageType.NotFound, relatedObjects));
 
             return result;
         }
 
         /// <inheritdoc cref="INotFoundMessageResult{T}.AddNotFound(string, MessageDataModel)" />
-        public static IResult<T> AddNotFound<T>(this Result<T> result, string key, MessageDataModel message)
+        public static IResult<T> AddNotFound<T>(this Result<T> result, string code, MessageDataModel message)
         {
-            result.Messages?.Add(new MessageModel(key, message, MessageType.NotFound));
+            result.Messages?.Add(new MessageModel(code, message, MessageType.NotFound));
 
             return result;
         }
 
         /// <inheritdoc cref="INotFoundMessageResult{T}.AddNotFound(string, MessageDataModel, RelatedObjectModel[])" />
-        public static IResult<T> AddNotFound<T>(this Result<T> result, string key, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
+        public static IResult<T> AddNotFound<T>(this Result<T> result, string code, MessageDataModel message, params RelatedObjectModel[] relatedObjects)
         {
-            result.Messages?.Add(new MessageModel(key, message, MessageType.NotFound, relatedObjects));
+            result.Messages?.Add(new MessageModel(code, message, MessageType.NotFound, relatedObjects));
 
             return result;
         }

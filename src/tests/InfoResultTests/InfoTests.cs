@@ -1,22 +1,4 @@
-﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2022-07-01 03:39
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2022-07-10 12:16
-// ***********************************************************************
-//  <copyright file="InfoTests.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-#region U S A G E S
-
-using System.Linq;
+﻿using System.Linq;
 using DomainCommonExtensions.CommonExtensions;
 using DomainCommonExtensions.DataTypeExtensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -27,15 +9,13 @@ using RzR.ResultMessage.Extensions.Result;
 using RzR.ResultMessage.Extensions.Result.Messages;
 using RzR.ResultMessage.Models;
 
-#endregion
-
 namespace InfoResultTests
 {
     [TestClass]
     public class InfoTests
     {
         [TestMethod]
-        public void AddInfoTest()
+        public void AddInfo_Test()
         {
             var res = new Result
             {
@@ -54,18 +34,18 @@ namespace InfoResultTests
             Assert.AreEqual("InfoMessage-1", res.GetFirstMessage());
             Assert.AreEqual("InfoMessage-1", res.GetFirstMessageWithDetails().Info);
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key.IsNullOrEmpty() && x.Message.Info == "InfoMessage-1" && x.MessageType == MessageType.Info));
+                x.Code.IsNullOrEmpty() && x.Message.Info == "InfoMessage-1" && x.MessageType == MessageType.Info));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == "key-01" && x.Message.Info == "InfoMessage-1" && x.MessageType == MessageType.Info));
+                x.Code == "key-01" && x.Message.Info == "InfoMessage-1" && x.MessageType == MessageType.Info));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key.IsNullOrEmpty() && x.Message.Info == "InfoMessage-Confirm-1" &&
+                x.Code.IsNullOrEmpty() && x.Message.Info == "InfoMessage-Confirm-1" &&
                 x.MessageType == MessageType.InfoConfirm));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == "key-Confirm-01" && x.Message.Info == "InfoMessage-1" && x.MessageType == MessageType.InfoConfirm));
+                x.Code == "key-Confirm-01" && x.Message.Info == "InfoMessage-1" && x.MessageType == MessageType.InfoConfirm));
         }
 
         [TestMethod]
-        public void AddInfoTest1()
+        public void AddInfo1_Test()
         {
             var res = new Result() { IsSuccess = true };
 
@@ -82,14 +62,14 @@ namespace InfoResultTests
             Assert.AreEqual("InfoMessage-1", res1.GetFirstMessage());
             Assert.AreEqual("InfoMessage-1", res1.GetFirstMessageWithDetails().Info);
             Assert.IsTrue(res1.Messages.Any(x =>
-                x.Key.IsNullOrEmpty() && x.Message.Info == "InfoMessage-1" && x.MessageType == MessageType.Info));
+                x.Code.IsNullOrEmpty() && x.Message.Info == "InfoMessage-1" && x.MessageType == MessageType.Info));
             Assert.IsTrue(res1.Messages.Any(x =>
-                x.Key == "key-01" && x.Message.Info == "InfoMessage-1" && x.MessageType == MessageType.Info));
+                x.Code == "key-01" && x.Message.Info == "InfoMessage-1" && x.MessageType == MessageType.Info));
             Assert.IsTrue(res1.Messages.Any(x =>
-                x.Key.IsNullOrEmpty() && x.Message.Info == "InfoMessage-Confirm-1" &&
+                x.Code.IsNullOrEmpty() && x.Message.Info == "InfoMessage-Confirm-1" &&
                 x.MessageType == MessageType.InfoConfirm));
             Assert.IsTrue(res1.Messages.Any(x =>
-                x.Key == "key-Confirm-01" && x.Message.Info == "InfoMessage-1" && x.MessageType == MessageType.InfoConfirm));
+                x.Code == "key-Confirm-01" && x.Message.Info == "InfoMessage-1" && x.MessageType == MessageType.InfoConfirm));
         }
 
         [TestMethod]

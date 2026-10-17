@@ -28,7 +28,6 @@ using System.Threading.Tasks;
 
 namespace RzR.ResultMessage.Extensions.Result.Functions
 {
-    /// -------------------------------------------------------------------------------------------------
     /// <summary>
     ///     Async function extensions for <see cref="IResult" />-based pipelines.
     /// </summary>
@@ -36,10 +35,8 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
     ///     All methods use <c>ConfigureAwait(false)</c> so they can be safely awaited from library
     ///     code without capturing a <see cref="System.Threading.SynchronizationContext" />.
     /// </remarks>
-    /// =================================================================================================
     public static class FunctionExtensionsAsync
     {
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Function on success (async).
         /// </summary>
@@ -53,11 +50,8 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// <returns>
         ///     A TResult.
         /// </returns>
-        /// =================================================================================================
-        public static async Task<TResult> FunctionOnSuccessAsync<TResult>(
-            this TResult result,
-            bool ignoreError = true,
-            CancellationToken cancellationToken = default,
+        public static async Task<TResult> FunctionOnSuccessAsync<TResult>(this TResult result,
+            bool ignoreError = true, CancellationToken cancellationToken = default,
             params Func<Task<TResult>>[] onSuccess) where TResult : IResult
         {
             if (result.IsSuccess.IsFalse())
@@ -77,7 +71,6 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Function on failure (async).
         /// </summary>
@@ -91,11 +84,8 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// <returns>
         ///     A TResult.
         /// </returns>
-        /// =================================================================================================
-        public static async Task<TResult> FunctionOnFailureAsync<TResult>(
-            this TResult result,
-            bool ignoreError = true,
-            CancellationToken cancellationToken = default,
+        public static async Task<TResult> FunctionOnFailureAsync<TResult>(this TResult result,
+            bool ignoreError = true, CancellationToken cancellationToken = default,
             params Func<Task<TResult>>[] onFailure) where TResult : IResult
         {
             if (result.IsSuccess)
@@ -115,7 +105,6 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Function on success or failure (async).
         /// </summary>
@@ -130,9 +119,7 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// <returns>
         ///     A TResult.
         /// </returns>
-        /// =================================================================================================
-        public static async Task<TResult> FunctionOnAsync<TResult>(
-            this TResult result, Func<Task<TResult>> onSuccess,
+        public static async Task<TResult> FunctionOnAsync<TResult>(this TResult result, Func<Task<TResult>> onSuccess,
             Func<Task<TResult>> onFailure, bool ignoreError = true,
             CancellationToken cancellationToken = default) where TResult : IResult
         {
@@ -160,7 +147,6 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Function on success or failure (async).
         /// </summary>
@@ -175,9 +161,7 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// <returns>
         ///     A TResult.
         /// </returns>
-        /// =================================================================================================
-        public static async Task<TResult> FunctionOnAsync<TResult>(
-            this TResult result, Func<Task<TResult>> onSuccess,
+        public static async Task<TResult> FunctionOnAsync<TResult>(this TResult result, Func<Task<TResult>> onSuccess,
             IEnumerable<Func<Task<TResult>>> onFailure, bool ignoreError = true,
             CancellationToken cancellationToken = default) where TResult : IResult
         {
@@ -208,7 +192,6 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Function on success or failure (async).
         /// </summary>
@@ -223,7 +206,6 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// <returns>
         ///     A TResult.
         /// </returns>
-        /// =================================================================================================
         public static async Task<TResult> FunctionOnAsync<TResult>(
             this TResult result, IEnumerable<Func<Task<TResult>>> onSuccess,
             Func<Task<TResult>> onFailure, bool ignoreError = true,
@@ -256,7 +238,6 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Function on success or failure (async).
         /// </summary>
@@ -271,7 +252,6 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// <returns>
         ///     A TResult.
         /// </returns>
-        /// =================================================================================================
         public static async Task<TResult> FunctionOnAsync<TResult>(
             this TResult result, IEnumerable<Func<Task<TResult>>> onSuccess,
             IEnumerable<Func<Task<TResult>>> onFailure, bool ignoreError = true,
@@ -307,7 +287,6 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Execute function (async).
         /// </summary>
@@ -330,7 +309,6 @@ namespace RzR.ResultMessage.Extensions.Result.Functions
         /// <returns>
         ///     A TResult.
         /// </returns>
-        /// =================================================================================================
         public static async Task<TResult> ExecuteFunctionAsync<TResult>(
             this TResult result,
             bool ignoreError = true,

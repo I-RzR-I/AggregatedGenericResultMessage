@@ -1,3 +1,9 @@
+### **v4.0.0.0** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 17-10-2026
+* [DEV] - (RzR) -> Rename `Key` to `Code` on `MessageModel`, `IMessageModel`, `ResultErrorModel` and `IResultErrorModel`. Custom implementations must add `Code` and recompile.
+* [DEV] - (RzR) -> Rename the `key` parameter to `code` on the `Add*` / `Validate` methods and the model constructors. Named `key:` arguments no longer compile.
+* [DEV] - (RzR) -> Wire format: JSON `"key"` / `"Key"` -> `"code"` / `"Code"`, XML `<Key>` -> `<Code>`. Old payloads read `Code` as `null`.
+* [DEV] - (RzR) -> `Key` -> use `Code`. Alias forwards to `Code` and is not serialized (except by System.Text.Json / JavaScriptSerializer on .NET Framework builds).
+
 ### **v3.0.0.6928** [[RzR](mailto:108324929+I-RzR-I@users.noreply.github.com)] 24-05-2026
 * [063f7e3] (RzR) -> Cleanup for obsolete methods.
 * [709b9b2] (RzR) -> Add `CancellationToken` support to all async pipeline methods from `FunctionExtensionsAsync`.

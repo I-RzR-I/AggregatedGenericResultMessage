@@ -66,36 +66,36 @@ namespace RzR.ResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add access denied message
         /// </summary>
-        /// <param name="key">Key</param>
+        /// <param name="code">Message code</param>
         /// <param name="message">Message</param>
         /// <returns></returns>
-        IResult<T> AddAccessDenied(string key, string message);
+        IResult<T> AddAccessDenied(string code, string message);
 
         /// <summary>
         ///     Add access denied message
         /// </summary>
-        /// <param name="key">Key</param>
+        /// <param name="code">Message code</param>
         /// <param name="message">Message</param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddAccessDenied(string key, string message, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddAccessDenied(string code, string message, params RelatedObjectModel[] relatedObjects);
 
 
         /// <summary>
         ///     Add access denied message
         /// </summary>
-        /// <param name="key">Key</param>
+        /// <param name="code">Message code</param>
         /// <param name="message">Message</param>
         /// <returns></returns>
-        IResult<T> AddAccessDenied(string key, MessageDataModel message);
+        IResult<T> AddAccessDenied(string code, MessageDataModel message);
 
         /// <summary>
         ///     Add access denied message
         /// </summary>
-        /// <param name="key">Key</param>
+        /// <param name="code">Message code</param>
         /// <param name="message">Message</param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddAccessDenied(string key, MessageDataModel message, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddAccessDenied(string code, MessageDataModel message, params RelatedObjectModel[] relatedObjects);
     }
 }

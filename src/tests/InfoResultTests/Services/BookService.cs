@@ -1,22 +1,4 @@
-﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2022-07-02 19:44
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2022-07-10 12:16
-// ***********************************************************************
-//  <copyright file="BookService.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-#region U S A G E S
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Bogus;
@@ -25,20 +7,14 @@ using RzR.ResultMessage;
 using RzR.ResultMessage.Abstractions;
 using RzR.ResultMessage.Extensions.Result;
 
-// ReSharper disable MemberCanBePrivate.Global
-
-#endregion
-
 namespace InfoResultTests.Services
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class BookService
     {
-#pragma warning disable IDE0090 // Use 'new(...)'
+#pragma warning disable IDE0090
         public static BookService Instance => new BookService();
-#pragma warning restore IDE0090 // Use 'new(...)'
+#pragma warning restore IDE0090
 
-        // ReSharper disable once MemberCanBeMadeStatic.Global
         public IQueryable<BookDto> GetBooks()
         {
             var faker = new Faker();

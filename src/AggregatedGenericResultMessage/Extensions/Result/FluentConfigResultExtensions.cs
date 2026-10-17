@@ -443,7 +443,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     A Result&lt;T&gt; extension method that returns automatic success or failure.
         /// </summary>
@@ -452,7 +451,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     The automatic success or failure.
         /// </returns>
-        /// =================================================================================================
         public static ResultMessage.Result ReturnAutoSuccessOrFailure<T>(this Result<T> result)
         {
             if (result.IsSuccess)
@@ -471,7 +469,6 @@ namespace RzR.ResultMessage.Extensions.Result
             }
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     A Result&lt;T&gt; extension method that returns automatic success or failure.
         /// </summary>
@@ -479,7 +476,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     The automatic success or failure.
         /// </returns>
-        /// =================================================================================================
         public static ResultMessage.Result ReturnAutoSuccessOrFailure(
             this ResultMessage.Result result)
         {
@@ -499,7 +495,6 @@ namespace RzR.ResultMessage.Extensions.Result
             }
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     A Result&lt;T&gt; extension method that returns automatic success or failure.
         /// </summary>
@@ -508,7 +503,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     The automatic success or failure.
         /// </returns>
-        /// =================================================================================================
         public static ResultMessage.Result ReturnAutoSuccessOrFailure<T>(this IResult<T> result)
         {
             if (result.IsSuccess)
@@ -527,7 +521,6 @@ namespace RzR.ResultMessage.Extensions.Result
             }
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     A Result&lt;T&gt; extension method that returns automatic success or failure.
         /// </summary>
@@ -535,7 +528,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     The automatic success or failure.
         /// </returns>
-        /// =================================================================================================
         public static ResultMessage.Result ReturnAutoSuccessOrFailure(this IResult result)
         {
             if (result.IsSuccess)

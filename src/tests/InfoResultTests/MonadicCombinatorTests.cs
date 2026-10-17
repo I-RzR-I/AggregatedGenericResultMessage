@@ -1,27 +1,7 @@
-// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2026-04-21 23:04
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2026-04-21 23:55
-// ***********************************************************************
-//  <copyright file="MonadicCombinatorTests.cs" company="RzR SOFT & TECH">
-//   Copyright © RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-#region U S A G E S
-
 using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RzR.ResultMessage;
-
-#endregion
 
 namespace InfoResultTests
 {
@@ -29,7 +9,7 @@ namespace InfoResultTests
     public class MonadicCombinatorTests
     {
         [TestMethod]
-        public void Map_OnSuccess_ProjectsResponse()
+        public void Map_OnSuccess_ProjectsResponse_Test()
         {
             var source = Result<string>.Success("hello");
 
@@ -40,7 +20,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Map_OnFailure_PropagatesFailureWithoutInvokingSelector()
+        public void Map_OnFailure_PropagatesFailureWithoutInvokingSelector_Test()
         {
             var invoked = false;
             var source = Result<string>.Failure("boom");
@@ -59,7 +39,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Map_NullSelector_Throws()
+        public void Map_NullSelector_Throws_Test()
         {
             var source = Result<int>.Success(1);
 
@@ -67,7 +47,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Bind_OnSuccess_InvokesBinderAndReturnsItsResult()
+        public void Bind_OnSuccess_InvokesBinderAndReturnsItsResult_Test()
         {
             var source = Result<int>.Success(7);
 
@@ -78,7 +58,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Bind_OnFailure_PropagatesAndDoesNotInvokeBinder()
+        public void Bind_OnFailure_PropagatesAndDoesNotInvokeBinder_Test()
         {
             var invoked = false;
             var source = Result<int>.Failure("nope");
@@ -95,7 +75,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Bind_BinderReturnsNull_Throws()
+        public void Bind_BinderReturnsNull_Throws_Test()
         {
             var source = Result<int>.Success(1);
 
@@ -103,7 +83,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Bind_NullBinder_Throws()
+        public void Bind_NullBinder_Throws_Test()
         {
             var source = Result<int>.Success(1);
 
@@ -111,7 +91,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Match_OnSuccess_InvokesOnSuccess()
+        public void Match_OnSuccess_InvokesOnSuccess_Test()
         {
             var source = Result<int>.Success(10);
 
@@ -123,7 +103,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Match_OnFailure_InvokesOnFailureWithCurrentResult()
+        public void Match_OnFailure_InvokesOnFailureWithCurrentResult_Test()
         {
             var source = Result<int>.Failure("bad");
 
@@ -135,7 +115,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Match_NullArgs_Throw()
+        public void Match_NullArgs_Throw_Test()
         {
             var source = Result<int>.Success(1);
 
@@ -144,7 +124,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Tap_OnSuccess_InvokesActionAndReturnsSameInstance()
+        public void Tap_OnSuccess_InvokesActionAndReturnsSameInstance_Test()
         {
             var source = Result<int>.Success(3);
             var seen = 0;
@@ -156,7 +136,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Tap_OnFailure_DoesNotInvokeAction()
+        public void Tap_OnFailure_DoesNotInvokeAction_Test()
         {
             var source = Result<int>.Failure("err");
             var invoked = false;
@@ -168,7 +148,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void Tap_NullAction_Throws()
+        public void Tap_NullAction_Throws_Test()
         {
             var source = Result<int>.Success(1);
 
@@ -176,14 +156,14 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void MapBindTap_Compose_AsExpected()
+        public void MapBindTap_Compose_AsExpected_Test()
         {
             var sideEffect = 0;
 
             var result = Result<int>.Success(2)
-                .Map(x => x * 5) // 10
-                .Tap(x => sideEffect = x) // sideEffect = 10
-                .Bind(x => Result<string>.Success("n=" + x)); // "n=10"
+                .Map(x => x * 5)
+                .Tap(x => sideEffect = x)
+                .Bind(x => Result<string>.Success("n=" + x));
 
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual("n=10", result.Response);

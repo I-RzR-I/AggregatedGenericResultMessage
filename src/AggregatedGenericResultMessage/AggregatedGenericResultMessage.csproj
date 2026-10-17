@@ -38,11 +38,22 @@
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<EmitCodeSource Condition="'$(EmitCodeSource)' == ''">false</EmitCodeSource>
+		<DefineConstants Condition="'$(EmitCodeSource)' == 'true'">$(DefineConstants);CODESOURCE</DefineConstants>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<Compile Include="..\shared\GeneralAssemblyInfo.cs" Link="Properties\GeneralAssemblyInfo.cs" />
 	</ItemGroup>
+
 	<ItemGroup>
-		<PackageReference Include="RzR.Core.CodeSource" Version="6.0.0.94" />
+		<PackageReference Include="RzR.Core.CodeSource" Version="7.0.0.8329">
+			<PrivateAssets Condition="'$(EmitCodeSource)' != 'true'">all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
 	</ItemGroup>
 

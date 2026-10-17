@@ -9,16 +9,11 @@ using WebApp.Models;
 
 namespace WebApp
 {
-    /// <summary>
-    ///     Summary description for srv1
-    /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [ToolboxItem(false)]
-    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-    // [System.Web.Script.Services.ScriptService]
 
-#pragma warning disable IDE0060 // Remove unused parameter
+#pragma warning disable IDE0060
     public class Srv1 : WebService
     {
         private readonly IEnumerable<Book> _list;

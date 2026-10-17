@@ -1,20 +1,4 @@
-﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.WebApplication
-//  Author           : RzR
-//  Created On       : 2022-12-09 11:06
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2022-12-09 11:06
-// ***********************************************************************
-//  <copyright file="LocalService.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-using System;
+﻿using System;
 using LocalSrv1;
 using DomainCommonExtensions.CommonExtensions;
 using RzR.ResultMessage;
@@ -24,9 +8,9 @@ namespace WebApplication.Services
     public class LocalService
     {
         private readonly Srv1SoapClient _service;
-#pragma warning disable IDE0090 // Use 'new(...)'
+#pragma warning disable IDE0090
         public static LocalService Instance => new LocalService();
-#pragma warning restore IDE0090 // Use 'new(...)'
+#pragma warning restore IDE0090
 
         private LocalService()
         {

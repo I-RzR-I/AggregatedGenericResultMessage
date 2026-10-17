@@ -1,28 +1,8 @@
-﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2023-04-02 17:47
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2023-04-02 17:47
-// ***********************************************************************
-//  <copyright file="ActionResultTests.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-#region U S A G E S
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RzR.ResultMessage;
 using RzR.ResultMessage.Abstractions;
 using RzR.ResultMessage.Extensions.Result;
 using RzR.ResultMessage.Extensions.Result.Actions;
-
-#endregion
 
 namespace InfoResultTests
 {
@@ -30,7 +10,7 @@ namespace InfoResultTests
     public class ActionResultTests
     {
         [TestMethod]
-        public void ActionOnSuccessTest()
+        public void ActionOnSuccess_Test()
         {
             var isSuccess = false;
             var isSuccess1 = false;
@@ -57,7 +37,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void ActionOnFailureTest()
+        public void ActionOnFailure_Test()
         {
             var isSuccess = true;
             var isSuccessOfT = true;
@@ -81,7 +61,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void ActionExecuteActionsTest()
+        public void ActionExecuteActions_Test()
         {
             var input = 0;
             var result = new Result() { IsSuccess = true }

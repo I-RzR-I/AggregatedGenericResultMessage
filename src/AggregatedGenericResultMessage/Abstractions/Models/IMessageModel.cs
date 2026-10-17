@@ -17,8 +17,11 @@
 #region U S A G E S
 
 using RzR.ResultMessage.Enums;
+using RzR.ResultMessage.Helpers;
 using RzR.ResultMessage.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 #if !NETFRAMEWORK
@@ -36,10 +39,23 @@ namespace RzR.ResultMessage.Abstractions.Models
     public interface IMessageModel
     {
         /// <summary>
-        ///     Gets or sets error code(key), localization key or Culture id/LCID or culture name like 'en-US', 'en'
+        ///     Gets or sets the message code: an error code, a localization key,
+        ///      or a culture id/LCID or culture name like 'en-US', 'en'.
         /// </summary>
 #if !NETFRAMEWORK
-        [JsonPropertyName("key")]
+        [JsonPropertyName("code")]
+#endif
+        string Code { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the message code. Obsolete alias of <see cref="Code"/>: reads and writes Code,
+        ///     and will be removed in a future major version. Excluded from System.Text.Json (netstandard targets),
+        ///     XmlSerializer, DataContractSerializer and Newtonsoft.Json output.
+        /// </summary>
+        [Obsolete(ObsoleteMessages.KeyToCode)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+#if !NETFRAMEWORK
+        [JsonIgnore]
 #endif
         string Key { get; set; }
 

@@ -1,20 +1,4 @@
-﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2023-11-28 21:52
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2023-11-28 21:52
-// ***********************************************************************
-//  <copyright file="ToSoapTests.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using DomainCommonExtensions.DataTypeExtensions;
@@ -29,7 +13,7 @@ namespace InfoResultTests
     public class ToSoapTests
     {
         [TestMethod]
-        public void ToFailSoapTest()
+        public void ToFailSoap_Test()
         {
             var soap = Result.Failure("Error message").ToSoapResult();
 
@@ -39,7 +23,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void ToFailSoapXmlTest()
+        public void ToFailSoapXml_Test()
         {
             var result = Result.Failure("ToFailSoapXmlTest-Code", "Error message-ToFailSoapXmlTest");
             result.AddError("error-key1", new MessageDataModel("error-message-info-1", new[]
@@ -59,7 +43,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void SoapResult_XmlRoundTrip_PreservesCoreState()
+        public void SoapResult_XmlRoundTrip_PreservesCoreState_Test()
         {
             var original = Result.Failure("RT-Code", "Round-trip error message");
             original.AddError("rt-key", new MessageDataModel("rt-info", new[] { "rt-detail-1", "rt-detail-2" }));
@@ -77,16 +61,16 @@ namespace InfoResultTests
             Assert.AreEqual(soap.Messages.Count, roundTripped.Messages.Count);
 
             var first = roundTripped.Messages.First();
-            Assert.AreEqual("RT-Code", first.Key);
+            Assert.AreEqual("RT-Code", first.Code);
             Assert.AreEqual("Round-trip error message", first.Message.Info);
 
-            var errorMsg = roundTripped.Messages.First(m => m.Key == "rt-key");
+            var errorMsg = roundTripped.Messages.First(m => m.Code == "rt-key");
             Assert.AreEqual("rt-info", errorMsg.Message.Info);
             CollectionAssert.AreEqual(new[] { "rt-detail-1", "rt-detail-2" }, errorMsg.Message.Details.ToArray());
         }
 
         [TestMethod]
-        public void ToSoapResult_OnSuccessWithoutResponse_ProducesEmptyResponse()
+        public void ToSoapResult_OnSuccessWithoutResponse_ProducesEmptyResponse_Test()
         {
             var soap = Result.Success().ToSoapResult();
 

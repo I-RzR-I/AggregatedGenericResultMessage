@@ -1,29 +1,9 @@
-﻿// ***********************************************************************
-//  Assembly         : RzR.Shared.ResultMessage.InfoResultTests
-//  Author           : RzR
-//  Created On       : 2022-07-02 15:09
-// 
-//  Last Modified By : RzR
-//  Last Modified On : 2022-07-10 12:16
-// ***********************************************************************
-//  <copyright file="WarnTests.cs" company="">
-//   Copyright (c) RzR. All rights reserved.
-//  </copyright>
-// 
-//  <summary>
-//  </summary>
-// ***********************************************************************
-
-#region U S A G E S
-
-using System.Linq;
+﻿using System.Linq;
 using DomainCommonExtensions.DataTypeExtensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RzR.ResultMessage;
 using RzR.ResultMessage.Enums;
 using RzR.ResultMessage.Extensions.Result.Messages;
-
-#endregion
 
 namespace InfoResultTests
 {
@@ -31,7 +11,7 @@ namespace InfoResultTests
     public class ErrorTests
     {
         [TestMethod]
-        public void AddErrorTest()
+        public void AddError_Test()
         {
             var res = new Result
             {
@@ -50,14 +30,14 @@ namespace InfoResultTests
             Assert.IsTrue(res.IsFailure);
             Assert.IsNull(res.Response);
             Assert.IsTrue(res.Messages.Any(x =>
-                 x.Key.IsNullOrEmpty() && x.Message.Info == "Error-01" && x.MessageType == MessageType.Error));
+                 x.Code.IsNullOrEmpty() && x.Message.Info == "Error-01" && x.MessageType == MessageType.Error));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == "error-01" && x.Message.Info == "ErrorMessage-01" && x.MessageType == MessageType.Error));
+                x.Code == "error-01" && x.Message.Info == "ErrorMessage-01" && x.MessageType == MessageType.Error));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key.IsNullOrEmpty() && x.Message.Info == "ErrorMessage-Confirm-01" &&
+                x.Code.IsNullOrEmpty() && x.Message.Info == "ErrorMessage-Confirm-01" &&
                 x.MessageType == MessageType.ErrorConfirm));
             Assert.IsTrue(res.Messages.Any(x =>
-                x.Key == "error-key-Confirm-01" && x.Message.Info == "ErrorMessage-01" &&
+                x.Code == "error-key-Confirm-01" && x.Message.Info == "ErrorMessage-01" &&
                 x.MessageType == MessageType.ErrorConfirm));
 
             Assert.IsTrue(res.HasAnyErrors());
@@ -66,7 +46,7 @@ namespace InfoResultTests
         }
 
         [TestMethod]
-        public void GetFirstErrorTest()
+        public void GetFirstError_Test()
         {
             var res = new Result();
             Assert.IsFalse(res.IsSuccess);

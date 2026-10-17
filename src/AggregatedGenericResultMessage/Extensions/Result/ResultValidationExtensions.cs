@@ -26,7 +26,6 @@ using System.Threading.Tasks;
 
 namespace RzR.ResultMessage.Extensions.Result
 {
-    /// -------------------------------------------------------------------------------------------------
     /// <summary>
     ///     Fluent validation extensions that accumulate errors on a <see cref="Result{T}" />.
     /// </summary>
@@ -35,8 +34,7 @@ namespace RzR.ResultMessage.Extensions.Result
     ///         <see cref="Validate{T}(Result{T}, Func{T,bool}, string)" /> always evaluates the
     ///         predicate and appends the error if the predicate returns <c>false</c>, flipping
     ///         <see cref="Result{T}.IsSuccess" /> to <c>false</c>. This enables chaining several
-    ///         validations
-    ///         in a row to collect every violation in one pass:
+    ///         validations in a row to collect every violation in one pass:
     ///     </para>
     ///     <code>
     ///         var result = Result&lt;Order&gt;.Success(order)
@@ -45,15 +43,13 @@ namespace RzR.ResultMessage.Extensions.Result
     ///             .Validate(o =&gt; o.Customer != null, "Order must have a customer");
     ///     </code>
     ///     <para>
-    ///         Use <see cref="Ensure{T}(Result{T}, Func{T,bool}, string)" /> instead when you want to
-    ///         short-circuit once the result is no longer successful (no further predicates
+    ///         Use <see cref="Ensure{T}(Result{T}, Func{T,bool}, string)" /> instead when you want
+    ///         to short-circuit once the result is no longer successful (no further predicates
     ///         evaluated).
     ///     </para>
     /// </remarks>
-    /// =================================================================================================
     public static class ResultValidationExtensions
     {
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Evaluates <paramref name="predicate" /> against <see cref="Result{T}.Response" /> and
         ///     appends an error message (and flips <see cref="Result{T}.IsSuccess" /> to <c>false</c>)
@@ -70,7 +66,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A Result&lt;T&gt;
         /// </returns>
-        /// =================================================================================================
         public static Result<T> Validate<T>(this Result<T> result, Func<T, bool> predicate, string error)
         {
             if (result.IsNull())
@@ -87,9 +82,8 @@ namespace RzR.ResultMessage.Extensions.Result
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
-        ///     Same as <see cref="Validate{T}(Result{T}, Func{T,bool}, string)" /> but using a key and
+        ///     Same as <see cref="Validate{T}(Result{T}, Func{T,bool}, string)" /> but using a code and
         ///     message string.
         /// </summary>
         /// <exception cref="ArgumentNullException">
@@ -98,13 +92,12 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <typeparam name="T">Generic type parameter.</typeparam>
         /// <param name="result">The result to act on.</param>
         /// <param name="predicate">The predicate.</param>
-        /// <param name="key">The key.</param>
+        /// <param name="code">Message code.</param>
         /// <param name="error">The error.</param>
         /// <returns>
         ///     A Result&lt;T&gt;
         /// </returns>
-        /// =================================================================================================
-        public static Result<T> Validate<T>(this Result<T> result, Func<T, bool> predicate, string key, string error)
+        public static Result<T> Validate<T>(this Result<T> result, Func<T, bool> predicate, string code, string error)
         {
             if (result.IsNull())
                 throw new ArgumentNullException(nameof(result));
@@ -113,14 +106,13 @@ namespace RzR.ResultMessage.Extensions.Result
 
             if (predicate(result.Response).IsFalse())
             {
-                result.AddError(key, error);
+                result.AddError(code, error);
                 result.IsSuccess = false;
             }
 
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Same as <see cref="Validate{T}(Result{T}, Func{T,bool}, string)" /> but using a
         ///     <see cref="MessageDataModel" /> for richer error info/details.
@@ -135,7 +127,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A Result&lt;T&gt;
         /// </returns>
-        /// =================================================================================================
         public static Result<T> Validate<T>(this Result<T> result, Func<T, bool> predicate, MessageDataModel error)
         {
             if (result.IsNull())
@@ -154,7 +145,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Evaluates <paramref name="predicate" /> only if the current result is successful. Once <see cref="Result{T}.IsSuccess" />
         ///     is <c>false</c>, subsequent <c>Ensure</c> calls are skipped.
@@ -169,7 +159,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A Result&lt;T&gt;
         /// </returns>
-        /// =================================================================================================
         public static Result<T> Ensure<T>(this Result<T> result, Func<T, bool> predicate, string error)
         {
             if (result.IsNull())
@@ -189,7 +178,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Async accumulating validation.
         /// </summary>
@@ -203,7 +191,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A Result&lt;T&gt;
         /// </returns>
-        /// =================================================================================================
         public static async Task<Result<T>> ValidateAsync<T>(
             this Result<T> result, Func<T, Task<bool>> predicate, string error)
         {
@@ -222,7 +209,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result;
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Awaits <paramref name="resultTask" />, then runs sync <see cref="Validate{T}(Result{T}, Func{T,bool}, string)" />
         ///     .
@@ -237,7 +223,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A Result&lt;T&gt;
         /// </returns>
-        /// =================================================================================================
         public static async Task<Result<T>> ValidateAsync<T>(
             this Task<Result<T>> resultTask, Func<T, bool> predicate, string error)
         {
@@ -251,7 +236,6 @@ namespace RzR.ResultMessage.Extensions.Result
             return result.Validate(predicate, error);
         }
 
-        /// -------------------------------------------------------------------------------------------------
         /// <summary>
         ///     Awaits <paramref name="resultTask" />, then runs async accumulating validation.
         /// </summary>
@@ -265,7 +249,6 @@ namespace RzR.ResultMessage.Extensions.Result
         /// <returns>
         ///     A Result&lt;T&gt;
         /// </returns>
-        /// =================================================================================================
         public static async Task<Result<T>> ValidateAsync<T>(
             this Task<Result<T>> resultTask, Func<T, Task<bool>> predicate, string error)
         {

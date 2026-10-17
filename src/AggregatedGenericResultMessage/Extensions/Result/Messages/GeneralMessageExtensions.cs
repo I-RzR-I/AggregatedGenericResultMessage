@@ -33,15 +33,15 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         ///     Add message
         /// </summary>
         /// <param name="result">Current result</param>
-        /// <param name="key">Optional. Message key. The default value is null.</param>
+        /// <param name="code">Optional. Message code. The default value is null.</param>
         /// <param name="message">Optional. Message. The default value is null.</param>
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static IResult<T> AddMessage<T>(this IResult<T> result, string key = null, string message = null,
+        public static IResult<T> AddMessage<T>(this IResult<T> result, string code = null, string message = null,
             MessageType type = MessageType.Error)
         {
-            result?.Messages?.Add(new MessageModel(key, new MessageDataModel(message), type));
+            result?.Messages?.Add(new MessageModel(code, new MessageDataModel(message), type));
 
             return result;
         }
@@ -50,16 +50,16 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         ///     Add message
         /// </summary>
         /// <param name="result">Current result</param>
-        /// <param name="key">Optional. Message key. The default value is null.</param>
+        /// <param name="code">Optional. Message code. The default value is null.</param>
         /// <param name="message">Optional. Message. The default value is null.</param>
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static IResult<T> AddMessage<T>(this IResult<T> result, string key = null, string message = null,
+        public static IResult<T> AddMessage<T>(this IResult<T> result, string code = null, string message = null,
             MessageType type = MessageType.Error, params RelatedObjectModel[] relatedObjects)
         {
-            result?.Messages?.Add(new MessageModel(key, new MessageDataModel(message), type, relatedObjects: relatedObjects));
+            result?.Messages?.Add(new MessageModel(code, new MessageDataModel(message), type, relatedObjects: relatedObjects));
 
             return result;
         }
@@ -68,15 +68,15 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         ///     Add message
         /// </summary>
         /// <param name="result">Current result</param>
-        /// <param name="key">Optional. Message key. The default value is null.</param>
+        /// <param name="code">Optional. Message code. The default value is null.</param>
         /// <param name="message">Optional. Message. The default value is null.</param>
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static IResult<T> AddMessage<T>(this IResult<T> result, string key = null, MessageDataModel message = null,
+        public static IResult<T> AddMessage<T>(this IResult<T> result, string code = null, MessageDataModel message = null,
             MessageType type = MessageType.Error)
         {
-            result?.Messages?.Add(new MessageModel(key, message, type));
+            result?.Messages?.Add(new MessageModel(code, message, type));
 
             return result;
         }
@@ -85,16 +85,16 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         ///     Add message
         /// </summary>
         /// <param name="result">Current result</param>
-        /// <param name="key">Optional. Message key. The default value is null.</param>
+        /// <param name="code">Optional. Message code. The default value is null.</param>
         /// <param name="message">Optional. Message. The default value is null.</param>
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static IResult<T> AddMessage<T>(this IResult<T> result, string key = null, MessageDataModel message = null,
+        public static IResult<T> AddMessage<T>(this IResult<T> result, string code = null, MessageDataModel message = null,
             MessageType type = MessageType.Error, params RelatedObjectModel[] relatedObjects)
         {
-            result?.Messages?.Add(new MessageModel(key, message, type, relatedObjects: relatedObjects));
+            result?.Messages?.Add(new MessageModel(code, message, type, relatedObjects: relatedObjects));
 
             return result;
         }
@@ -169,16 +169,16 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         ///     Add message
         /// </summary>
         /// <param name="result">Current result</param>
-        /// <param name="key">Optional. Message key. The default value is null.</param>
+        /// <param name="code">Optional. Message code. The default value is null.</param>
         /// <param name="message">Optional. Message. The default value is null.</param>
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static Result<T> AddMessage<T>(this Result<T> result, string key = null, string message = null,
+        public static Result<T> AddMessage<T>(this Result<T> result, string code = null, string message = null,
             MessageType type = MessageType.Error, params RelatedObjectModel[] relatedObjects)
         {
-            result?.Messages?.Add(new MessageModel(key, new MessageDataModel(message), type, relatedObjects: relatedObjects));
+            result?.Messages?.Add(new MessageModel(code, new MessageDataModel(message), type, relatedObjects: relatedObjects));
 
             return result;
         }
@@ -187,15 +187,15 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         ///     Add message
         /// </summary>
         /// <param name="result">Current result</param>
-        /// <param name="key">Optional. Message key. The default value is null.</param>
+        /// <param name="code">Optional. Message code. The default value is null.</param>
         /// <param name="message">Optional. Message. The default value is null.</param>
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static Result<T> AddMessage<T>(this Result<T> result, string key = null, string message = null,
+        public static Result<T> AddMessage<T>(this Result<T> result, string code = null, string message = null,
             MessageType type = MessageType.Error)
         {
-            result?.Messages?.Add(new MessageModel(key, new MessageDataModel(message), type));
+            result?.Messages?.Add(new MessageModel(code, new MessageDataModel(message), type));
 
             return result;
         }
@@ -204,15 +204,15 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         ///     Add message
         /// </summary>
         /// <param name="result">Current result</param>
-        /// <param name="key">Optional. Message key. The default value is null.</param>
+        /// <param name="code">Optional. Message code. The default value is null.</param>
         /// <param name="message">Optional. Message. The default value is null.</param>
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static Result<T> AddMessage<T>(this Result<T> result, string key = null, MessageDataModel message = null,
+        public static Result<T> AddMessage<T>(this Result<T> result, string code = null, MessageDataModel message = null,
             MessageType type = MessageType.Error)
         {
-            result?.Messages?.Add(new MessageModel(key, message, type));
+            result?.Messages?.Add(new MessageModel(code, message, type));
 
             return result;
         }
@@ -221,16 +221,16 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         ///     Add message
         /// </summary>
         /// <param name="result">Current result</param>
-        /// <param name="key">Optional. Message key. The default value is null.</param>
+        /// <param name="code">Optional. Message code. The default value is null.</param>
         /// <param name="message">Optional. Message. The default value is null.</param>
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static Result<T> AddMessage<T>(this Result<T> result, string key = null, MessageDataModel message = null,
+        public static Result<T> AddMessage<T>(this Result<T> result, string code = null, MessageDataModel message = null,
             MessageType type = MessageType.Error, params RelatedObjectModel[] relatedObjects)
         {
-            result?.Messages?.Add(new MessageModel(key, message, type, relatedObjects: relatedObjects));
+            result?.Messages?.Add(new MessageModel(code, message, type, relatedObjects: relatedObjects));
 
             return result;
         }
@@ -305,16 +305,16 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         ///     Add message
         /// </summary>
         /// <param name="result">Current result</param>
-        /// <param name="key">Optional. Message key. The default value is null.</param>
+        /// <param name="code">Optional. Message code. The default value is null.</param>
         /// <param name="message">Optional. Message. The default value is null.</param>
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <returns></returns>
         /// <remarks></remarks>
         public static ResultMessage.Result AddMessage(
-            this ResultMessage.Result result, string key = null, string message = null,
+            this ResultMessage.Result result, string code = null, string message = null,
             MessageType type = MessageType.Error)
         {
-            result?.Messages?.Add(new MessageModel(key, new MessageDataModel(message), type));
+            result?.Messages?.Add(new MessageModel(code, new MessageDataModel(message), type));
 
             return result;
         }
@@ -323,17 +323,17 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         ///     Add message
         /// </summary>
         /// <param name="result">Current result</param>
-        /// <param name="key">Optional. Message key. The default value is null.</param>
+        /// <param name="code">Optional. Message code. The default value is null.</param>
         /// <param name="message">Optional. Message. The default value is null.</param>
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         /// <remarks></remarks>
         public static ResultMessage.Result AddMessage(
-            this ResultMessage.Result result, string key = null, string message = null,
+            this ResultMessage.Result result, string code = null, string message = null,
             MessageType type = MessageType.Error, params RelatedObjectModel[] relatedObjects)
         {
-            result?.Messages?.Add(new MessageModel(key, new MessageDataModel(message), type, relatedObjects: relatedObjects));
+            result?.Messages?.Add(new MessageModel(code, new MessageDataModel(message), type, relatedObjects: relatedObjects));
 
             return result;
         }
@@ -342,16 +342,16 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         ///     Add message
         /// </summary>
         /// <param name="result">Current result</param>
-        /// <param name="key">Optional. Message key. The default value is null.</param>
+        /// <param name="code">Optional. Message code. The default value is null.</param>
         /// <param name="message">Optional. Message. The default value is null.</param>
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <returns></returns>
         /// <remarks></remarks>
         public static ResultMessage.Result AddMessage(
-            this ResultMessage.Result result, string key = null, MessageDataModel message = null,
+            this ResultMessage.Result result, string code = null, MessageDataModel message = null,
             MessageType type = MessageType.Error)
         {
-            result?.Messages?.Add(new MessageModel(key, message, type));
+            result?.Messages?.Add(new MessageModel(code, message, type));
 
             return result;
         }
@@ -360,17 +360,17 @@ namespace RzR.ResultMessage.Extensions.Result.Messages
         ///     Add message
         /// </summary>
         /// <param name="result">Current result</param>
-        /// <param name="key">Optional. Message key. The default value is null.</param>
+        /// <param name="code">Optional. Message code. The default value is null.</param>
         /// <param name="message">Optional. Message. The default value is null.</param>
         /// <param name="type">Optional. Message type. The default value is MessageType.Error.</param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
         /// <remarks></remarks>
         public static ResultMessage.Result AddMessage(
-            this ResultMessage.Result result, string key = null, MessageDataModel message = null,
+            this ResultMessage.Result result, string code = null, MessageDataModel message = null,
             MessageType type = MessageType.Error, params RelatedObjectModel[] relatedObjects)
         {
-            result?.Messages?.Add(new MessageModel(key, message, type, relatedObjects: relatedObjects));
+            result?.Messages?.Add(new MessageModel(code, message, type, relatedObjects: relatedObjects));
 
             return result;
         }

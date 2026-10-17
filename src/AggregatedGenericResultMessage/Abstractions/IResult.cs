@@ -47,7 +47,7 @@ namespace RzR.ResultMessage.Abstractions
         bool IsFailure { get; }
 
         /// <summary>
-        ///     This property will contain messages keys if any.
+        ///     Gets or sets the result messages.
         /// </summary>
         [XmlArray("Messages")]
         [XmlArrayItem("Message")]

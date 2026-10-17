@@ -58,36 +58,36 @@ namespace RzR.ResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add Info
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="info"></param>
         /// <returns></returns>
-        IResult<T> AddInfo(string key, string info);
+        IResult<T> AddInfo(string code, string info);
 
         /// <summary>
         ///     Add Info
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="info"></param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddInfo(string key, string info, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddInfo(string code, string info, params RelatedObjectModel[] relatedObjects);
 
         /// <summary>
         ///     Add Info
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="info"></param>
         /// <returns></returns>
-        IResult<T> AddInfo(string key, MessageDataModel info);
+        IResult<T> AddInfo(string code, MessageDataModel info);
 
         /// <summary>
         ///     Add Info
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="info"></param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddInfo(string key, MessageDataModel info, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddInfo(string code, MessageDataModel info, params RelatedObjectModel[] relatedObjects);
 
         /// <summary>
         ///     Add Info for confirmation result
@@ -122,35 +122,35 @@ namespace RzR.ResultMessage.Abstractions.MessageResults
         /// <summary>
         ///     Add Info for confirmation result
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="info"></param>
         /// <returns></returns>
-        IResult<T> AddInfoConfirm(string key, string info);
+        IResult<T> AddInfoConfirm(string code, string info);
 
         /// <summary>
         ///     Add Info for confirmation result
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="info"></param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddInfoConfirm(string key, string info, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddInfoConfirm(string code, string info, params RelatedObjectModel[] relatedObjects);
 
         /// <summary>
         ///     Add Info for confirmation result
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="info"></param>
         /// <returns></returns>
-        IResult<T> AddInfoConfirm(string key, MessageDataModel info);
+        IResult<T> AddInfoConfirm(string code, MessageDataModel info);
 
         /// <summary>
         ///     Add Info for confirmation result
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="code">Message code</param>
         /// <param name="info"></param>
         /// <param name="relatedObjects">Related objects</param>
         /// <returns></returns>
-        IResult<T> AddInfoConfirm(string key, MessageDataModel info, params RelatedObjectModel[] relatedObjects);
+        IResult<T> AddInfoConfirm(string code, MessageDataModel info, params RelatedObjectModel[] relatedObjects);
     }
 }
